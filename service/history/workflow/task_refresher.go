@@ -29,7 +29,7 @@ type (
 		// since the given minVersionedTransition (inclusive).
 		// If a sub state machine's lastUpdateVersionedTransition is not available,
 		// it will be treated the same as lastUpdateVersionedTransition equals to EmptyVersionedTransition.
-		// The provided minVersionedTransition should NOT be nil, and if equals to EmptyVersionedTransition,
+		// The provided minVersionedTransition should NOT be nil, and if equal to EmptyVersionedTransition,
 		// the behavior is equivalent to Refresh().
 		//
 		// PartialRefresh does not refresh tasks for CHASM components as they are smart enough to figure out
