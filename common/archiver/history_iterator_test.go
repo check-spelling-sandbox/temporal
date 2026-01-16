@@ -434,7 +434,7 @@ func (s *HistoryIteratorSuite) TestNext_Success_TenCallsToNext() {
 		pages = append(pages, p)
 	}
 	s.initMockExecutionManager(batchInfo, -1, true, pages...)
-	// set target blob size size such that every 10 persistence pages is one group of history batches
+	// set target blob size such that every 10 persistence pages is one group of history batches
 	itr := s.constructTestHistoryIterator(s.mockExecutionMgr, 20*10*testDefaultHistoryEventSize, nil)
 	expectedIteratorState := historyIteratorState{
 		FinishedIteration: false,
