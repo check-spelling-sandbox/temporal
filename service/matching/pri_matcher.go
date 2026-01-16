@@ -414,7 +414,7 @@ func (tm *priTaskMatcher) Offer(ctx context.Context, task *internalTask) (bool, 
 	if res.ctxErr != nil {
 		return false, res.ctxErr
 	}
-	if !softassert.That(tm.logger, res.poller != nil, "expeced poller from match") {
+	if !softassert.That(tm.logger, res.poller != nil, "expected poller from match") {
 		return false, nil
 	}
 
