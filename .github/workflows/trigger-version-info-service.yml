@@ -24,7 +24,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repositories: version-info-service
 
-      - name: Dispatch version-info-service Github Action
+      - name: Dispatch version-info-service GitHub Action
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
           VERSION: ${{ github.event.release.tag_name }}

@@ -52,7 +52,7 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Set up Github credentials
+      - name: Set up GitHub credentials
         run: |
           git config --local user.name 'Temporal Data'
           git config --local user.email 'commander-data@temporal.io'
@@ -196,7 +196,7 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
           ref: main
 
-      - name: Set up Github credentials
+      - name: Set up GitHub credentials
         run: |
           git config --local user.name 'Temporal Data'
           git config --local user.email 'commander-data@temporal.io'
