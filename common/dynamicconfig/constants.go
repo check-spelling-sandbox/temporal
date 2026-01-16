@@ -1573,7 +1573,7 @@ This feature is still under development and should NOT be enabled.`,
 	HistoryStartupMembershipJoinDelay = NewGlobalDurationSetting(
 		"history.startupMembershipJoinDelay",
 		0*time.Second,
-		`HistoryStartupMembershipJoinDelay is the duration a history instance waits
+		`HistoryStartupMembershipJoinDelay is the duration that a history instance waits
 before joining membership after starting.`,
 	)
 	HistoryAlignMembershipChange = NewGlobalDurationSetting(

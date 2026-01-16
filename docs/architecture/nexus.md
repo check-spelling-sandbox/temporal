@@ -210,7 +210,7 @@ The per-group rate limiter kicks in as soon as a task starts executing. The rate
 
 **Relevant metrics**:
 
-- `rate_limited_task_runnable_wait_time` - a histogram representing the time a task spends waiting for the rate limiter
+- `rate_limited_task_runnable_wait_time` - a histogram representing the time that a task spends waiting for the rate limiter
 
 #### Circuit Breaker
 

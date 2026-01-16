@@ -797,7 +797,7 @@ func (r *workflowResetterImpl) reapplyEventsFromBranch(
 		// 	for _, event := range lastEvents {
 		// 		if event.GetEventType() == enumspb.EVENT_TYPE_START_CHILD_WORKFLOW_EXECUTION_INITIATED {
 		// 			attr := event.GetStartChildWorkflowExecutionInitiatedEventAttributes()
-		// 			// TODO: there is a possibility the childIDs constructed this way may not be unique. But the probability of that is very low.
+		// 			// TODO: there is a possibility that childIDs constructed this way may not be unique. But the probability of that is very low.
 		// 			// Need to figure out a better way to track these child workflows.
 		// 			childID := fmt.Sprintf("%s:%s", attr.GetWorkflowType().Name, attr.GetWorkflowId())
 		// 			childrenInitializedAfterReset[childID] = &persistencespb.ResetChildInfo{
