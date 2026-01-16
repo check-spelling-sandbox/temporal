@@ -63,7 +63,7 @@ func TestValidateFairnessWeightUpdate(t *testing.T) {
 		}
 		unset := []string{}
 		err := validateFairnessWeightUpdate(set, unset, 10)
-		require.ErrorContains(t, err, "invalid fairness weight weight for key \"a\": must be greater than zero")
+		require.ErrorContains(t, err, "invalid fairness weight for key \"a\": must be greater than zero")
 	})
 
 	t.Run("reject overlap between `set` and `unset`", func(t *testing.T) {
