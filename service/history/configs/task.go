@@ -41,7 +41,7 @@ func ConvertDynamicConfigValueToWeights(
 	for key, value := range weightsFromDC {
 		priority, ok := tasks.PriorityValue[key]
 		if !ok {
-			logger.Error("Unknown key for task priority name, fallback to default weights", tag.Key(key), tag.Value(value))
+			logger.Error("Unknown key for task priority name, fall back to default weights", tag.Key(key), tag.Value(value))
 			return DefaultActiveTaskPriorityWeight
 		}
 
@@ -56,7 +56,7 @@ func ConvertDynamicConfigValueToWeights(
 		case int64:
 			intValue = int(value)
 		default:
-			logger.Error("Unknown type for task priority weight, fallback to default weights", tag.Key(key), tag.Value(value))
+			logger.Error("Unknown type for task priority weight, fall back to default weights", tag.Key(key), tag.Value(value))
 			return DefaultActiveTaskPriorityWeight
 		}
 		weights[priority] = intValue

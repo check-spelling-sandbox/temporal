@@ -237,7 +237,7 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 			ref.StateMachineRef.MachineLastUpdateVersionedTransition.TransitionCount == 0) ||
 		len(ms.GetExecutionInfo().TransitionHistory) == 0 {
 		// Transtion history was disabled when the ref is generated,
-		// fallback to the old validation logic.
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 
@@ -258,7 +258,7 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 
 	if node.InternalRepr().GetInitialVersionedTransition().TransitionCount == 0 {
 		// transition history was disabled after the ref was generated and mutable state got rebuilt.
-		// fallback to the old validation logic.
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 
@@ -279,7 +279,7 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 
 	if node.InternalRepr().GetLastUpdateVersionedTransition().GetTransitionCount() == 0 {
 		// transition history was disabled after the ref was generated.
-		// fallback to the old validation logic.
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 	if ref.Validate == nil {

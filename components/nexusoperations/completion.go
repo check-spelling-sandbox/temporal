@@ -178,7 +178,7 @@ func CompletionHandler(
 		// Try again without a run ID in case the original run was reset.
 		ref.WorkflowKey.RunID = ""
 		// VersionedTransition is for a specific run. After reset, the TransitionCount will
-		// start from 1 again. Reset the TransitionCount to 0 here to fallback to old ref
+		// start from 1 again. Reset the TransitionCount to 0 here to fall back to old ref
 		// validation logic.
 		ref.StateMachineRef.MutableStateVersionedTransition = nil
 		ref.StateMachineRef.MachineInitialVersionedTransition.TransitionCount = 0

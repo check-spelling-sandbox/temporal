@@ -1702,7 +1702,7 @@ func (pm *taskQueuePartitionManagerImpl) getPhysicalQueuesForAdd(
 	var versionSet string
 	switch dir := directive.GetBuildId().(type) {
 	case *taskqueuespb.TaskVersionDirective_UseAssignmentRules:
-		// Need to assign build ID. Assignment rules take precedence, fallback to version sets if no matching rule is found
+		// Need to assign build ID. Assignment rules take precedence, fall back to version sets if no matching rule is found
 		if len(data.GetAssignmentRules()) > 0 {
 			buildId = FindAssignmentBuildId(data.GetAssignmentRules(), runId)
 		}
