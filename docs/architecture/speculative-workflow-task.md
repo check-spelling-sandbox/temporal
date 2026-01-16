@@ -23,7 +23,7 @@ the response from the `RecordWorkflowTaskStarted` API. The worker does not know 
 transient, though. If the Workflow Task keeps failing, the attempt counter is increased in the
 mutable state, and transient Workflow Task events are created again - but no new failure event is
 written into the history again. When the Workflow Task finally completes, the `WorkflowTaskScheduled`
-and `WorkflowTaskStarted` events are written to the history, followed by the `WorklfowTaskCompleted`
+and `WorkflowTaskStarted` events are written to the history, followed by the `WorkflowTaskCompleted`
 event.
 
 > #### TODO

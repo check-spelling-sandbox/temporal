@@ -275,7 +275,7 @@ func (s *WorkflowFailuresTestSuite) TestWorkflowTaskFailed() {
 	}
 	s.Equal(12, signalCount)
 
-	// Make complete workflow workflow task
+	// Make complete workflow task
 	_, err = poller.PollAndProcessWorkflowTask(testcore.WithExpectedAttemptCount(3))
 	s.Logger.Info("PollAndProcessWorkflowTask", tag.Error(err))
 	s.NoError(err)
