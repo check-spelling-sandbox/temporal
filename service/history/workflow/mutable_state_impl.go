@@ -5017,7 +5017,7 @@ func (ms *MutableStateImpl) ApplyTimerStartedEvent(
 	timerID := attributes.GetTimerId()
 
 	startToFireTimeout := attributes.GetStartToFireTimeout().AsDuration()
-	// TODO: Time skew needs to be taken in to account.
+	// TODO: Time skew needs to be taken into account.
 	expiryTime := timestamp.TimeValue(event.GetEventTime()).Add(startToFireTimeout)
 
 	ti := &persistencespb.TimerInfo{

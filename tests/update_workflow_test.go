@@ -691,7 +691,7 @@ func (s *UpdateWorkflowSuite) TestRunningWorkflowTask_NewNotEmptySpeculativeWork
   5 ActivityTaskScheduled
   6 WorkflowTaskScheduled
   7 WorkflowTaskStarted
-  8 WorkflowTaskCompleted // Empty speculative WFT was written in to the history because it shipped events.
+  8 WorkflowTaskCompleted // Empty speculative WFT was written into the history because it shipped events.
   9 ActivityTaskStarted
  10 ActivityTaskCompleted
  11 WorkflowTaskScheduled
