@@ -1801,7 +1801,7 @@ func (s *WorkerDeploymentSuite) TestDeleteVersion_ServerDeleteMaxVersionsReached
 	s.ensureCreateVersionInDeployment(tv2)
 	pollerCancel2()
 
-	// Verify that the worker deployment only has one version in it's version summaries.
+	// Verify that the worker deployment only has one version in its version summaries.
 	s.EventuallyWithT(func(t *assert.CollectT) {
 		a := require.New(t)
 		resp, err := s.FrontendClient().DescribeWorkerDeployment(ctx, &workflowservice.DescribeWorkerDeploymentRequest{

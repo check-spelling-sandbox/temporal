@@ -1120,7 +1120,7 @@ func (ms *MutableStateImpl) GetStartVersion() (int64, error) {
 	// not have transition history enabled while they are running, so the first item in the transition history
 	// is not the actual start version.
 	//
-	// However, this assumes that if mutable state has event, it must also generate an event in it's first transition.
+	// However, this assumes that if mutable state has event, it must also generate an event in its first transition.
 	// That assumption is true today, but no necessarily true in the future. We should fix this if we ever
 	// have such a case.
 	if ms.transitionHistoryEnabled && len(ms.executionInfo.TransitionHistory) != 0 {
