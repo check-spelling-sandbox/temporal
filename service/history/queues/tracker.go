@@ -9,7 +9,7 @@ import (
 
 type (
 	// TODO: make task tracking a standalone component
-	// currently it's used as a implementation detail in SliceImpl
+	// currently it's used as an implementation detail in SliceImpl
 	executableTracker struct {
 		pendingExecutables map[tasks.Key]Executable
 		grouper            Grouper

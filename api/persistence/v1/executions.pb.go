@@ -242,7 +242,7 @@ type WorkflowExecutionInfo struct {
 	// for this execution. Assigned build ID is selected by matching based on Worker Versioning Assignment Rules
 	// when the first workflow task of the execution is scheduled. If the first workflow task fails and is scheduled
 	// again, the assigned build ID may change according to the latest versioning rules.
-	// Assigned build ID can also change in the middle of a execution if Compatible Redirect Rules are applied to
+	// Assigned build ID can also change in the middle of an execution if Compatible Redirect Rules are applied to
 	// this execution.
 	// Deprecated. Clean up with versioning-2. [cleanup-old-wv]
 	AssignedBuildId string `protobuf:"bytes,85,opt,name=assigned_build_id,json=assignedBuildId,proto3" json:"assigned_build_id,omitempty"`

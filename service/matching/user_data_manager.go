@@ -626,7 +626,7 @@ func (m *userDataManagerImpl) HandleGetUserDataRequest(
 			return nil, errRequestedVersionTooLarge
 		}
 		// For ephemeral data: A similar situation could happen when a partition moves, we might
-		// have older data than the child. Don't return a error in that case, just wait until we
+		// have older data than the child. Don't return an error in that case, just wait until we
 		// have newer data. Note that "version" is a timestamp.
 
 		if !req.WaitNewData {

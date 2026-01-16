@@ -538,7 +538,7 @@ func (p *executionRetryablePersistenceClient) ReadRawHistoryBranch(
 	return response, err
 }
 
-// ForkHistoryBranch forks a new branch from a old branch
+// ForkHistoryBranch forks a new branch from an old branch
 func (p *executionRetryablePersistenceClient) ForkHistoryBranch(
 	ctx context.Context,
 	request *ForkHistoryBranchRequest,

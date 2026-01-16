@@ -206,7 +206,7 @@ type (
 	// Logic outside the chasm package should only work with encoded paths.
 	NodePathEncoder interface {
 		Encode(node *Node, path []string) (string, error)
-		// TODO: Return a iterator on node name instead of []string,
+		// TODO: Return an iterator on node name instead of []string,
 		// so that we can get a node by encoded path without additional
 		// allocation for the decoded path.
 		Decode(encodedPath string) ([]string, error)

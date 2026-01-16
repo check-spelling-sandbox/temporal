@@ -190,7 +190,7 @@ type HistoryServiceClient interface {
 	// provided) or the latest Workflow Execution (when WorkflowExecution.run_id is not provided). If the Workflow
 	// Execution is Running, it will be terminated before deletion.
 	DeleteWorkflowExecution(ctx context.Context, in *DeleteWorkflowExecutionRequest, opts ...grpc.CallOption) (*DeleteWorkflowExecutionResponse, error)
-	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of a existing event batch
+	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of an existing event batch
 	// in the history and immediately terminating the current execution instance.
 	// After reset, the history will grow from nextFirstEventId.
 	ResetWorkflowExecution(ctx context.Context, in *ResetWorkflowExecutionRequest, opts ...grpc.CallOption) (*ResetWorkflowExecutionResponse, error)
@@ -1173,7 +1173,7 @@ type HistoryServiceServer interface {
 	// provided) or the latest Workflow Execution (when WorkflowExecution.run_id is not provided). If the Workflow
 	// Execution is Running, it will be terminated before deletion.
 	DeleteWorkflowExecution(context.Context, *DeleteWorkflowExecutionRequest) (*DeleteWorkflowExecutionResponse, error)
-	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of a existing event batch
+	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of an existing event batch
 	// in the history and immediately terminating the current execution instance.
 	// After reset, the history will grow from nextFirstEventId.
 	ResetWorkflowExecution(context.Context, *ResetWorkflowExecutionRequest) (*ResetWorkflowExecutionResponse, error)

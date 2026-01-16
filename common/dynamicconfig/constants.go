@@ -2361,7 +2361,7 @@ the number of children greater than or equal to this threshold`,
 	SkipReapplicationByNamespaceID = NewNamespaceIDBoolSetting(
 		"history.SkipReapplicationByNamespaceID",
 		false,
-		`SkipReapplicationByNamespaceID is whether skipping a event re-application for a namespace`,
+		`SkipReapplicationByNamespaceID is whether skipping an event re-application for a namespace`,
 	)
 	StandbyTaskReReplicationContextTimeout = NewNamespaceIDDurationSetting(
 		"history.standbyTaskReReplicationContextTimeout",

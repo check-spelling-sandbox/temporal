@@ -33,7 +33,7 @@ var (
 
 var _ ExecutionManager = (*executionManagerImpl)(nil)
 
-// ForkHistoryBranch forks a new branch from a old branch
+// ForkHistoryBranch forks a new branch from an old branch
 func (m *executionManagerImpl) ForkHistoryBranch(
 	ctx context.Context,
 	request *ForkHistoryBranchRequest,

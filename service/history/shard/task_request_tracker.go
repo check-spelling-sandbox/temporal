@@ -71,7 +71,7 @@ func (t *taskRequestTracker) track(
 		defer t.Unlock()
 
 		// Task key is not pending only when we get a definitive result from persistence.
-		// This result can be either a success or a error that guarantees the task with that key
+		// This result can be either a success or an error that guarantees the task with that key
 		// will not be persisted.
 		if writeErr == nil || !persistence.OperationPossiblySucceeded(writeErr) {
 			// we can only remove the task from the pending task list if we are sure it was inserted

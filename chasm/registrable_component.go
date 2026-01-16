@@ -47,7 +47,7 @@ func WithEphemeral() RegistrableComponentOption {
 	}
 }
 
-// Is there any use case where we don't want to replicate certain instances of a archetype?
+// Is there any use case where we don't want to replicate certain instances of an archetype?
 func WithSingleCluster() RegistrableComponentOption {
 	return func(rc *RegistrableComponent) {
 		rc.singleCluster = true

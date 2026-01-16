@@ -53,7 +53,7 @@ func (ac *DLQV1Service) ReadMessages(c *cli.Context) (err error) {
 	if c.IsSet(FlagLastMessageID) {
 		lastMessageID = c.Int64(FlagLastMessageID)
 	} else {
-		ac.prompter.Prompt("Are you sure to read all DLQ messages without a upper boundary?")
+		ac.prompter.Prompt("Are you sure to read all DLQ messages without an upper boundary?")
 		lastMessageID = common.EndMessageID
 	}
 
@@ -117,7 +117,7 @@ func (ac *DLQV1Service) PurgeMessages(c *cli.Context) error {
 	if c.IsSet(FlagLastMessageID) {
 		lastMessageID = c.Int64(FlagLastMessageID)
 	} else {
-		ac.prompter.Prompt("Are you sure to purge all DLQ messages without a upper boundary?")
+		ac.prompter.Prompt("Are you sure to purge all DLQ messages without an upper boundary?")
 	}
 
 	adminClient := ac.clientFactory.AdminClient(c)
@@ -149,7 +149,7 @@ func (ac *DLQV1Service) MergeMessages(c *cli.Context) error {
 	if c.IsSet(FlagLastMessageID) {
 		lastMessageID = c.Int64(FlagLastMessageID)
 	} else {
-		ac.prompter.Prompt("Are you sure to merge all DLQ messages without a upper boundary?")
+		ac.prompter.Prompt("Are you sure to merge all DLQ messages without an upper boundary?")
 	}
 
 	adminClient := ac.clientFactory.AdminClient(c)

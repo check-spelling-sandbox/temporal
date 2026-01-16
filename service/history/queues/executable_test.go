@@ -813,7 +813,7 @@ func (s *executableSuite) TestTaskAck_ValidTask_WithRetry() {
 	s.Equal(ctasks.TaskStatePending, executable.State())
 
 	// For retried tasks, they are not considered invalid even
-	// if their last attempt completed with a invalid task error.
+	// if their last attempt completed with an invalid task error.
 	_ = executable.HandleErr(context.DeadlineExceeded)
 	_ = executable.HandleErr(consts.ErrActivityNotFound)
 

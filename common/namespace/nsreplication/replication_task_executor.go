@@ -166,7 +166,7 @@ func (h *taskExecutorImpl) handleNamespaceCreationReplicationTask(
 	_, err = h.metadataManager.CreateNamespace(ctx, request)
 	if err != nil {
 		// SQL and Cassandra handle namespace UUID collision differently
-		// here, whenever seeing a error replicating a namespace
+		// here, whenever seeing an error replicating a namespace
 		// do a check if there is a name / UUID collision
 
 		recordExists := true

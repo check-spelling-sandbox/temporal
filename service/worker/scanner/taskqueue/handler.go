@@ -89,7 +89,7 @@ func (s *Scavenger) tryDeleteTaskQueue(key *p.TaskQueueKey, state *taskQueueStat
 	// usually, matching engine is the authoritative owner of a taskqueue
 	// and its incorrect for any other entity to mutate executorTask queues (including deleting it)
 	// the delete here is safe because of two reasons:
-	//   - we delete the executorTask queue only if the lastUpdated is > 48H. If a executorTask queue is idle for
+	//   - we delete the executorTask queue only if the lastUpdated is > 48H. If an executorTask queue is idle for
 	//     this amount of time, it will no longer be owned by any host in matching engine (because
 	//     of idle timeout). If any new host has to take ownership of this at this time, it can only
 	//     do so by updating the rangeID

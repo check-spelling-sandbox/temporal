@@ -12,7 +12,7 @@ const (
 	parentPtrInternalFieldName = "Internal"
 )
 
-// ParentPtr is a in-memory pointer to the parent component of a CHASM component.
+// ParentPtr is an in-memory pointer to the parent component of a CHASM component.
 //
 // CHASM map is not a component, so if a component is inside a map, its ParentPtr
 // will point to the nearest ancestor component that is not a map.

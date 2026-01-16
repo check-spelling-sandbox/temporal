@@ -367,7 +367,7 @@ func TestCommandProtocolMessage(t *testing.T) {
 
 		_, err = tc.handler.handleCommand(context.Background(), command, msgs)
 		require.NoError(t, err,
-			"delivering a acceptance message to an update in the sent state should succeed")
+			"delivering an acceptance message to an update in the sent state should succeed")
 		require.Nil(t, tc.handler.workflowTaskFailedCause)
 	})
 }
