@@ -232,7 +232,7 @@ message WorkflowExecutionInfo {
     // sanitized.
     repeated StateMachineTimerGroup state_machine_timers = 90;
 
-    // The shard clock's timestamp at the time the first valid task was created for this mutable state (either for a new
+    // The shard clock's timestamp when the first valid task was created for this mutable state (either for a new
     // mutable state or when rebuilding from events). The field should be updated whenever we refresh tasks, marking
     // older generation tasks obsolete.
     // This field is used for task staleness checks when mutable state is rebuilt.

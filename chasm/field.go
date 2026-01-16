@@ -45,7 +45,7 @@ func NewComponentField[C Component](
 }
 
 // ComponentPointerTo returns a CHASM field populated with a pointer to the given
-// component. Pointers are resolved at the time the transaction is closed, and the
+// component. Pointers are resolved when the transaction is closed, and the
 // transaction will fail if any pointers cannot be resolved.
 func ComponentPointerTo[C Component](
 	ctx MutableContext,
@@ -57,7 +57,7 @@ func ComponentPointerTo[C Component](
 }
 
 // DataPointerTo returns a CHASM field populated with a pointer to the given
-// message. Pointers are resolved at the time the transaction is closed, and the
+// message. Pointers are resolved when the transaction is closed, and the
 // transaction will fail if any pointers cannot be resolved.
 func DataPointerTo[D proto.Message](
 	ctx MutableContext,

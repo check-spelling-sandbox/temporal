@@ -296,7 +296,7 @@ type WorkflowExecutionInfo struct {
 	// NOTE: Task status is cluster specific information, so when replicating mutable state, this field needs to be
 	// sanitized.
 	StateMachineTimers []*StateMachineTimerGroup `protobuf:"bytes,90,rep,name=state_machine_timers,json=stateMachineTimers,proto3" json:"state_machine_timers,omitempty"`
-	// The shard clock's timestamp at the time the first valid task was created for this mutable state (either for a new
+	// The shard clock's timestamp when the first valid task was created for this mutable state (either for a new
 	// mutable state or when rebuilding from events). The field should be updated whenever we refresh tasks, marking
 	// older generation tasks obsolete.
 	// This field is used for task staleness checks when mutable state is rebuilt.
