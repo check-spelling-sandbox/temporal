@@ -100,7 +100,7 @@ var _ Partition = (*StickyPartition)(nil)
 var (
 	ErrNoParent      = errors.New("root task queue partition has no parent")
 	ErrInvalidDegree = errors.New("invalid task queue partition branching degree")
-	ErrNonZeroSticky = errors.New("only sticky partitions can not have non-zero partition ID")
+	ErrNonZeroSticky = errors.New("only sticky partitions cannot have non-zero partition ID")
 )
 
 // NewTaskQueueFamily takes a user-provided task queue name (aka family name) and returns a TaskQueueFamily. Returns an

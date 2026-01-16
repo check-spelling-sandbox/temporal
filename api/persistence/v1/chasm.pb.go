@@ -702,7 +702,7 @@ type ChasmComponentAttributes_Task struct {
 	// this task.
 	VersionedTransitionOffset int64 `protobuf:"varint,6,opt,name=versioned_transition_offset,json=versionedTransitionOffset,proto3" json:"versioned_transition_offset,omitempty"`
 	// If a physical task is created for this task in this cluster.
-	// NOTE: this is a cluster-specific field and can not be replicated.
+	// NOTE: this is a cluster-specific field and cannot be replicated.
 	// Changes to this field also doesn't require an increase in versioned transition.
 	PhysicalTaskStatus int32 `protobuf:"varint,7,opt,name=physical_task_status,json=physicalTaskStatus,proto3" json:"physical_task_status,omitempty"`
 	unknownFields      protoimpl.UnknownFields

@@ -5878,7 +5878,7 @@ func (wh *WorkflowHandler) cancelOutstandingPoll(
 			PollerId:      pollerID,
 		},
 	)
-	// We can not do much if this call fails.  Just log the error and move on.
+	// We cannot do much if this call fails.  Just log the error and move on.
 	if err != nil {
 		wh.logger.Warn("Failed to cancel outstanding poller.",
 			tag.WorkflowTaskQueueName(taskQueue.GetName()), tag.Error(err))

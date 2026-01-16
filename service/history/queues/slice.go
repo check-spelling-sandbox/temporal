@@ -427,7 +427,7 @@ func (s *SliceImpl) destroy() {
 
 func (s *SliceImpl) stateSanityCheck() {
 	if s.destroyed {
-		panic("Can not invoke method on destroyed queue slice")
+		panic("Cannot invoke method on destroyed queue slice")
 	}
 }
 

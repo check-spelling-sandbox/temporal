@@ -155,7 +155,7 @@ func (a *archivalConfig) ClusterConfiguredForArchival() bool {
 func (a *archivalConfig) GetClusterState() ArchivalState {
 	// Only check dynamic config when archival is enabled in static config.
 	// If archival is disabled in static config, there will be no provider section in the static config
-	// and the archiver provider can not create any archiver. Therefore, in that case,
+	// and the archiver provider cannot create any archiver. Therefore, in that case,
 	// even dynamic config says archival is enabled, we should ignore that.
 	// Only when archival is enabled in static config, should we check if there's any difference between static config and dynamic config.
 	if a.staticClusterState != ArchivalEnabled {

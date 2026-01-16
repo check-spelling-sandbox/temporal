@@ -131,7 +131,7 @@ func (p *queryParser) convertComparisonExpr(compExpr *sqlparser.ComparisonExpr, 
 			return fmt.Errorf("only operation = is support for %s", WorkflowTypeName)
 		}
 		if parsedQuery.workflowTypeName != nil {
-			return fmt.Errorf("can not query %s multiple times", WorkflowTypeName)
+			return fmt.Errorf("cannot query %s multiple times", WorkflowTypeName)
 		}
 		parsedQuery.workflowTypeName = util.Ptr(val)
 	case WorkflowID:
@@ -143,7 +143,7 @@ func (p *queryParser) convertComparisonExpr(compExpr *sqlparser.ComparisonExpr, 
 			return fmt.Errorf("only operation = is support for %s", WorkflowID)
 		}
 		if parsedQuery.workflowID != nil {
-			return fmt.Errorf("can not query %s multiple times", WorkflowID)
+			return fmt.Errorf("cannot query %s multiple times", WorkflowID)
 		}
 		parsedQuery.workflowID = util.Ptr(val)
 	case CloseTime:

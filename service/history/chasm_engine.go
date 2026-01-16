@@ -597,7 +597,7 @@ func (e *ChasmEngine) handleConflictPolicy(
 		//
 		// Today's state-based replication logic cannot handle this policy correctly
 		// (or any operation that close and starts a new run in one transaction).
-		// The termination and creation of new run can not be replicated transactionally.
+		// The termination and creation of new run cannot be replicated transactionally.
 		//
 		// The main blocker is that state-based replication works on the current state,
 		// and we may have a chain of runs all created via TerminateExisting policy, meaning

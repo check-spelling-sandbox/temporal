@@ -45,7 +45,7 @@ message ChasmComponentAttributes {
         // this task.
         int64 versioned_transition_offset = 6;
         // If a physical task is created for this task in this cluster.
-        // NOTE: this is a cluster-specific field and can not be replicated.
+        // NOTE: this is a cluster-specific field and cannot be replicated.
         // Changes to this field also doesn't require an increase in versioned transition. 
         int32 physical_task_status = 7;
     }

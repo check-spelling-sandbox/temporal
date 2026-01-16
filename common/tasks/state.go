@@ -12,6 +12,6 @@ const (
 	TaskStateCancelled
 	// TaskStateAcked is the state for a task if it has been successfully completed
 	TaskStateAcked
-	// TaskStateNacked is the state for a task if it can not be processed
+	// TaskStateNacked is the state for a task if it cannot be processed
 	TaskStateNacked
 )

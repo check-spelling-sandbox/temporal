@@ -3038,8 +3038,8 @@ func (s *UpdateWorkflowSuite) TestCompleteWorkflow_AbortUpdates() {
 			description: "update in stateAdmitted must get an error",
 			updateErr: map[string]string{
 				"workflow completed":                      update.AbortedByWorkflowClosingErr.Error(),
-				"workflow continued as new without runID": "workflow operation can not be applied because workflow is closing",
-				"workflow continued as new with runID":    "workflow operation can not be applied because workflow is closing",
+				"workflow continued as new without runID": "workflow operation cannot be applied because workflow is closing",
+				"workflow continued as new with runID":    "workflow operation cannot be applied because workflow is closing",
 				"workflow failed":                         update.AbortedByWorkflowClosingErr.Error(),
 			},
 			updateFailure: "",
@@ -4856,7 +4856,7 @@ func (s *UpdateWorkflowSuite) TestContinueAsNew_UpdateIsNotCarriedOver() {
 	s.Error(update2Response.err)
 	var resourceExhausted *serviceerror.ResourceExhausted
 	s.ErrorAs(update2Response.err, &resourceExhausted)
-	s.Equal("workflow operation can not be applied because workflow is closing", update2Response.err.Error())
+	s.Equal("workflow operation cannot be applied because workflow is closing", update2Response.err.Error())
 
 	s.EqualHistoryEvents(`
   1 WorkflowExecutionStarted
