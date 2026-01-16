@@ -251,7 +251,7 @@ Machine framework (docs TBD).
 
 The
 [Operation](https://github.com/temporalio/temporal/blob/a0fdea5319be5f1631d7e2b0f6f06c38dae3d413/components/nexusoperations/statemachine.go#L65)
-state machine manages the lifetime of an Operation the StartOperation request.
+state machine manages the lifetime of an Operation for the StartOperation request.
 
 The state machine transitions between these states (as defined in code):
 
