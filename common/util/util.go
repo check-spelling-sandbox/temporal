@@ -173,7 +173,7 @@ func Ptr[T any](v T) *T {
 }
 
 // InterruptibleSleep is like time.Sleep but can be interrupted by a context.
-// Returns context error if interrupted, otherwise nil.
+// Returns context error if interrupted; otherwise, nil.
 func InterruptibleSleep(ctx context.Context, timeout time.Duration) error {
 	timer := time.NewTimer(timeout)
 	defer timer.Stop()

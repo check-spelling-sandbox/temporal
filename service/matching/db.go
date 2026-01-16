@@ -54,7 +54,7 @@ type (
 	dbSubqueue struct {
 		persistencespb.SubqueueInfo
 		maxReadLevel int64
-		oldestTime   time.Time // time of oldest task if backlog, otherwise zero time
+		oldestTime   time.Time // time of oldest task if backlog; otherwise, zero time
 	}
 
 	taskQueueState struct {

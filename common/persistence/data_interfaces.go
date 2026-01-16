@@ -923,7 +923,7 @@ type (
 	CompleteForkBranchRequest struct {
 		// the new branch returned from ForkHistoryBranchRequest
 		BranchToken []byte
-		// true means the fork is success, will update the flag, otherwise will delete the new branch
+		// true means the fork is success, will update the flag; otherwise, will delete the new branch
 		Success bool
 		// The shard to update history branch data
 		ShardID *int

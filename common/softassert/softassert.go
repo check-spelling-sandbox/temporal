@@ -18,7 +18,7 @@ import (
 
 // That performs a soft assertion by logging an error if the given condition is false.
 // It is meant to indicate a condition is always expected to be true.
-// Returns true if the condition is met, otherwise false.
+// Returns true if the condition is met; otherwise, false.
 //
 // `staticMessage` is expected to be a static string to help with grouping and searching logs.
 // Dynamic information should be passed via `tags`.

@@ -79,9 +79,9 @@ func NewResendHandler(
 // ResendHistoryEvents is used to retrieve history events from remote and apply to current(passive) cluster. Mostly handle 3 cases:
 //
 //	1.For normal out-of-order delivery case i.e. passive has event from 1-10, got history replication task for event 20 to 25, then it should call this API with
-//		  (10, 20). In this case, event (10, 20) should not include any local generated events, otherwise it is data lose on passive side.
+//		  (10, 20). In this case, event (10, 20) should not include any local generated events; otherwise, it is data lose on passive side.
 //	2.For a special out-of-order delivery case(force replication of running workflow) i.e. passive side does not have any data for this workflow and gets history replication task for event 10
-//	  i. If the event 10 is local generated event, it should be handled by history_event_handler, no resend should be triggered, otherwise it is bug.
+//	  i. If the event 10 is local generated event, it should be handled by history_event_handler, no resend should be triggered; otherwise, it is bug.
 //	  ii.The only valid case for the resend portion includes local generated events is when i.e. passive does not have any events. Local generated events are [1,10], active side
 //		 has events [1,20](workflow made some progress on active side), then passive side get replication tasks for event 11 (any event from 11 to 20 is valid).
 //	 3.when processing passive tasks. In this case, (startEventId,endEventId) should not include any local generated events.

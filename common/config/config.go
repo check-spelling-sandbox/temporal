@@ -189,7 +189,7 @@ type (
 		KeyData      string   `yaml:"keyData"`
 		ClientCAData []string `yaml:"clientCaData"`
 
-		// Requires clients to authenticate with a certificate when connecting, otherwise known as mutual TLS.
+		// Requires clients to authenticate with a certificate when connecting; otherwise, known as mutual TLS.
 		RequireClientAuth bool `yaml:"requireClientAuth"`
 	}
 

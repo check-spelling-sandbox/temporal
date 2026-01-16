@@ -536,7 +536,7 @@ func (tm *TaskMatcher) isForwardingAllowed() bool {
 }
 
 // isBacklogNegligible returns true of the age of backlog is less than the threshold. Note that this relies on
-// MustOffer being called when there is a backlog, otherwise we'd not know.
+// MustOffer being called when there is a backlog; otherwise, we'd not know.
 func (tm *TaskMatcher) isBacklogNegligible() bool {
 	return tm.getBacklogAge() < tm.config.BacklogNegligibleAge()
 }

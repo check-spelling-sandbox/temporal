@@ -56,7 +56,7 @@ CREATE TABLE executions (
   };
 
 CREATE TABLE history_node (
-  tree_id           uuid, -- run_id if no reset, otherwise run_id of first run
+  tree_id           uuid, -- run_id if no reset; otherwise, run_id of first run
   branch_id         uuid, -- changes in case of reset workflow. Conflict resolution can also change branch id.
   node_id           bigint, -- == first eventID in a batch of events
   txn_id            bigint, -- in case of multiple transactions on same node, we utilize highest transaction ID. Unique.

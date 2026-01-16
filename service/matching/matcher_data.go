@@ -181,7 +181,7 @@ func (t *taskPQ) Pop() any {
 }
 
 // Calls pred on each task. If it returns true, call post on the task and remove it
-// from the queue, otherwise keep it.
+// from the queue; otherwise, keep it.
 // pred and post must not make any other calls on taskPQ until ForEachTask returns!
 func (t *taskPQ) ForEachTask(pred func(*internalTask) bool, post func(*internalTask)) {
 	t.heap = slices.DeleteFunc(t.heap, func(task *internalTask) bool {

@@ -35,7 +35,7 @@ var (
 	// then the method is not considered a long-running request and the number of concurrent
 	// requests will not be throttled. The Poll* methods here are long-running because they block
 	// until there is a task available. GetWorkflowExecutionHistory and DescribeActivityExecution
-	// methods are blocking only if WaitNewEvent/LongPollToken are set, otherwise they are not
+	// methods are blocking only if WaitNewEvent/LongPollToken are set; otherwise, they are not
 	// long-running. The QueryWorkflow and UpdateWorkflowExecution methods are long-running because
 	// they both block until a background WFT is complete.
 	ExecutionAPICountLimitOverride = map[string]int{

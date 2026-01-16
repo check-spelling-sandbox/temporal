@@ -221,7 +221,7 @@ type HistoryServiceClient interface {
 	RecordChildExecutionCompleted(ctx context.Context, in *RecordChildExecutionCompletedRequest, opts ...grpc.CallOption) (*RecordChildExecutionCompletedResponse, error)
 	// VerifyChildExecutionCompletionRecorded checks if child completion result is recorded in parent workflow.
 	// This is only used by standby transfer close execution logic to make sure parent workflow has the result
-	// recorded before completing the task, otherwise during namespace failover, it's possible that none of the
+	// recorded before completing the task; otherwise, during namespace failover, it's possible that none of the
 	// clusters will record the child result in parent workflow.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
 	// of how verification is done, we may unify them into one generic verfication API.
@@ -1204,7 +1204,7 @@ type HistoryServiceServer interface {
 	RecordChildExecutionCompleted(context.Context, *RecordChildExecutionCompletedRequest) (*RecordChildExecutionCompletedResponse, error)
 	// VerifyChildExecutionCompletionRecorded checks if child completion result is recorded in parent workflow.
 	// This is only used by standby transfer close execution logic to make sure parent workflow has the result
-	// recorded before completing the task, otherwise during namespace failover, it's possible that none of the
+	// recorded before completing the task; otherwise, during namespace failover, it's possible that none of the
 	// clusters will record the child result in parent workflow.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
 	// of how verification is done, we may unify them into one generic verfication API.

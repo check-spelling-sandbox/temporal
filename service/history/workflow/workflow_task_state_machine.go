@@ -325,7 +325,7 @@ func (m *workflowTaskStateMachine) AddWorkflowTaskScheduledEventAsHeartbeat(
 	createWorkflowTaskScheduledEvent := !m.ms.IsTransientWorkflowTask() && workflowTaskType != enumsspb.WORKFLOW_TASK_TYPE_SPECULATIVE
 
 	// If while scheduling a workflow task and new events has come, then this workflow task cannot be a transient/speculative.
-	// Flush any buffered events before creating the workflow task, otherwise it will result in invalid IDs for
+	// Flush any buffered events before creating the workflow task; otherwise, it will result in invalid IDs for
 	// transient/speculative workflow task and will cause in timeout processing to not work for transient workflow tasks.
 	if m.ms.HasBufferedEvents() {
 		m.ms.executionInfo.WorkflowTaskAttempt = 1

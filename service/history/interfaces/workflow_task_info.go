@@ -44,7 +44,7 @@ type WorkflowTaskInfo struct {
 
 	// These two fields are sent to workers in the WorkflowTaskStarted event. We need to save a
 	// copy in mutable state to know the last values we sent (which might have been in a
-	// transient event), otherwise a dynamic config change of the suggestion threshold could
+	// transient event); otherwise, a dynamic config change of the suggestion threshold could
 	// cause the WorkflowTaskStarted event that the worker used to not match the event we saved
 	// in history.
 	SuggestContinueAsNew        bool

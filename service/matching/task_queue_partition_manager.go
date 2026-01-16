@@ -476,7 +476,7 @@ func (pm *taskQueuePartitionManagerImpl) PollTask(
 				}
 			}
 
-			// use version set if found, otherwise assume user is using new API
+			// use version set if found; otherwise, assume user is using new API
 			if versionSet != "" {
 				versionSetUsed = true
 				dbq, err = pm.getVersionedQueue(ctx, versionSet, "", nil, true)

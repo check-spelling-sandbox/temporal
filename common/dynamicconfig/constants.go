@@ -583,7 +583,7 @@ is currently processing a task.
 		"frontend.httpAllowedHosts",
 		ConvertWildcardStringListToRegexp,
 		MatchAnythingRE,
-		`HTTP API Requests with a "Host" header matching the allowed hosts will be processed, otherwise rejected.
+		`HTTP API Requests with a "Host" header matching the allowed hosts will be processed; otherwise, rejected.
 Wildcards (*) are expanded to allow any substring. By default any Host header is allowed.
 Concrete type should be list of strings.`,
 	)
@@ -2095,7 +2095,7 @@ the outbound standby task failed to be processed due to missing events.`,
 		"history.visibilityProcessorEnableCloseWorkflowCleanup",
 		false,
 		`VisibilityProcessorEnableCloseWorkflowCleanup to clean up the mutable state after visibility
-close task has been processed. Must use Elasticsearch as visibility store, otherwise workflow
+close task has been processed. Must use Elasticsearch as visibility store; otherwise, workflow
 data (eg: search attributes) will be lost after workflow is closed.`,
 	)
 	VisibilityProcessorRelocateAttributesMinBlobSize = NewNamespaceIntSetting(

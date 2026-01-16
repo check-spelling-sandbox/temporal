@@ -303,7 +303,7 @@ func (r *registry) UnregisterStateChangeCallback(key any) {
 	r.stateChangeCallbacks.Delete(key)
 }
 
-// GetNamespace retrieves the information from the internal maps if it exists, otherwise retrieves the information from metadata
+// GetNamespace retrieves the information from the internal maps if it exists; otherwise, retrieves the information from metadata
 // store and update internal entries with an expiry before returning back
 func (r *registry) GetNamespace(name namespace.Name) (*namespace.Namespace, error) {
 	if name == "" {
@@ -323,7 +323,7 @@ func (r *registry) GetNamespaceWithOptions(name namespace.Name, opts namespace.G
 	return r.getOrReadthroughNamespace(name)
 }
 
-// GetNamespaceByID retrieves the information from the cache if it exists, otherwise retrieves the information from metadata
+// GetNamespaceByID retrieves the information from the cache if it exists; otherwise, retrieves the information from metadata
 // store and writes it to the cache with an expiry before returning back
 func (r *registry) GetNamespaceByID(id namespace.ID) (*namespace.Namespace, error) {
 	if id == "" {

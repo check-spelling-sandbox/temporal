@@ -34,7 +34,7 @@ type (
 	}
 
 	NamespaceChecker interface {
-		// Exists returns nil if the namespace exists, otherwise an error.
+		// Exists returns nil if the namespace exists; otherwise, an error.
 		Exists(name namespace.Name) error
 	}
 )

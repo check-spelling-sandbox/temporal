@@ -2894,7 +2894,7 @@ func (n *Node) ExecutePureTask(
 	}
 
 	// TODO - a task validator must succeed validation after a task executes
-	// successfully (without error), otherwise it will generate an infinite loop.
+	// successfully (without error); otherwise, it will generate an infinite loop.
 	// Check for this case by marking the in-memory task as having executed, which the
 	// CloseTransaction method will check against.
 	//

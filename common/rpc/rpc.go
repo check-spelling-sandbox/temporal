@@ -367,7 +367,7 @@ func (rt *roundTripper) RoundTrip(req *http.Request) (*http.Response, error) {
 }
 
 // serviceResolverFromGRPCURL returns a ServiceResolver if ustr corresponds to a
-// membership url, otherwise nil.
+// membership url; otherwise, nil.
 func serviceResolverFromGRPCURL(ustr string) membership.ServiceResolver {
 	u, err := url.Parse(ustr)
 	if err != nil {

@@ -177,7 +177,7 @@ func (h *historyEventsHandlerImpl) handleLocalGeneratedEvent(
 	switch err.(type) {
 	case nil:
 		_, err = versionhistory.FindFirstVersionHistoryIndexByVersionHistoryItem(mu.GetVersionHistories(), lastVersionHistoryItem)
-		// if mutable state is found, we expect it should have at least events to the last local generated event, otherwise it is a data lose
+		// if mutable state is found, we expect it should have at least events to the last local generated event; otherwise, it is a data lose
 		if err != nil {
 			return serviceerror.NewInvalidArgumentf("Encountered data lose issue when handling local generated events, expected event: %v, version : %v", lastVersionHistoryItem.EventId, lastVersionHistoryItem.Version)
 		}

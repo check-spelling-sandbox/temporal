@@ -2265,7 +2265,7 @@ func (s *VersioningIntegSuite) TestRedirectWithConcurrentActivities() {
 	run, err := s.SdkClient().ExecuteWorkflow(ctx, sdkclient.StartWorkflowOptions{TaskQueue: tq}, "wf")
 	s.NoError(err)
 
-	// Workflow should finish, otherwise it may mean we dropped some task without rescheduling them in the new build ID
+	// Workflow should finish; otherwise, it may mean we dropped some task without rescheduling them in the new build ID
 	var out string
 	s.NoError(run.Get(ctx, &out))
 	s.validateWorkflowBuildIds(ctx, run.GetID(), run.GetRunID(), versions[9], true, versions[9], "", versions[:9])
@@ -3929,7 +3929,7 @@ func (s *VersioningIntegSuite) validateBuildIdAfterReset(ctx context.Context, wf
 	})
 	s.NoError(err)
 
-	// if a build ID is inherited, we should keep using that, otherwise should use the latest rules
+	// if a build ID is inherited, we should keep using that; otherwise, should use the latest rules
 	expectedBuildId := v2
 	if inheritedBuildId != "" {
 		expectedBuildId = inheritedBuildId

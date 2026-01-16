@@ -337,7 +337,7 @@ func (e *executableImpl) Execute() (retErr error) {
 	}()
 
 	// A previous attempt has marked this executable as no longer retryable.
-	// Instead of executing it, we try to write to the DLQ if enabled, otherwise - drop it.
+	// Instead of executing it, we try to write to the DLQ if enabled; otherwise, - drop it.
 	if e.terminalFailureCause != nil {
 		if e.dlqEnabled() {
 			return e.writeToDLQ(ctx)
