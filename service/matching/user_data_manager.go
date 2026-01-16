@@ -58,7 +58,7 @@ type (
 
 	UserDataUpdateOptions struct {
 		TaskQueueLimitPerBuildId int
-		// Only perform the update if current version equals to supplied version.
+		// Only perform the update if current version equals supplied version.
 		// 0 is unset.
 		KnownVersion int64
 		Source       string // informative source for logging

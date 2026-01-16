@@ -28,7 +28,7 @@ type (
 		// PartialRefresh refresh tasks for all sub state machines that have been updated
 		// since the given minVersionedTransition (inclusive).
 		// If a sub state machine's lastUpdateVersionedTransition is not available,
-		// it will be treated the same as lastUpdateVersionedTransition equals to EmptyVersionedTransition.
+		// it will be treated the same as lastUpdateVersionedTransition equals EmptyVersionedTransition.
 		// The provided minVersionedTransition should NOT be nil, and if equal to EmptyVersionedTransition,
 		// the behavior is equivalent to Refresh().
 		//
