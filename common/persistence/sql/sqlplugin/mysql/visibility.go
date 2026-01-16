@@ -82,7 +82,7 @@ func buildOnDuplicateKeyUpdate(fields ...string) string {
 	return fmt.Sprintf("ON DUPLICATE KEY UPDATE %s", strings.Join(items, ", "))
 }
 
-// InsertIntoVisibility inserts a row into visibility table. If an row already exist,
+// InsertIntoVisibility inserts a row into visibility table. If a row already exist,
 // its left as such and no update will be made
 func (mdb *db) InsertIntoVisibility(
 	ctx context.Context,

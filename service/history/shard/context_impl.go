@@ -1769,7 +1769,7 @@ func (s *ContextImpl) updateHandoverNamespacePendingTaskID() {
 func (s *ContextImpl) notifyReplicationQueueProcessor(taskID int64) {
 	// Replication ack level won't exceed the max taskID it received via task notification.
 	// Since here we want it's ack level to advance to at least the input taskID, we need to
-	// trigger an fake notification.
+	// trigger a fake notification.
 
 	cancelledCtx, cancel := context.WithCancel(context.Background())
 	cancel()
@@ -2038,7 +2038,7 @@ func (s *ContextImpl) acquireShard() {
 	}
 	err := backoff.ThrottleRetry(op, policy, acquireShardRetryable)
 	if err != nil {
-		// We got an non-retryable error, e.g. ShardOwnershipLostError
+		// We got a non-retryable error, e.g. ShardOwnershipLostError
 		s.contextTaggedLogger.Error("Couldn't acquire shard", tag.Error(err))
 
 		reason := stopReasonUnspecified

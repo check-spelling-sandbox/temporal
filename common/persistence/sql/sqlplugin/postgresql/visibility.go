@@ -51,7 +51,7 @@ func buildOnDuplicateKeyUpdate(fields ...string) string {
 	)
 }
 
-// InsertIntoVisibility inserts a row into visibility table. If an row already exist,
+// InsertIntoVisibility inserts a row into visibility table. If a row already exist,
 // its left as such and no update will be made
 func (pdb *db) InsertIntoVisibility(
 	ctx context.Context,

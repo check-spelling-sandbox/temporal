@@ -257,7 +257,7 @@ func (t *timerQueueStandbyTaskExecutor) executeActivityTimeoutTask(
 	//
 	// activity heartbeat timer task cannot be handled in the way mentioned above.
 	// the reason is, there is no event driving the creation of new activity heartbeat timer.
-	// although there will be an task syncing activity from remote, the task is not an event,
+	// although there will be a task syncing activity from remote, the task is not an event,
 	// and cannot attempt to recreate a new activity timer task.
 	//
 	// the overall solution is to attempt to generate a new activity timer task whenever the

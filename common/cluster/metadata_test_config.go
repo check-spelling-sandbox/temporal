@@ -62,7 +62,7 @@ var (
 	}
 )
 
-// NewTestClusterMetadataConfig return an cluster metadata config
+// NewTestClusterMetadataConfig return a cluster metadata config
 func NewTestClusterMetadataConfig(enableGlobalNamespace bool, isMasterCluster bool) *Config {
 	masterClusterName := TestCurrentClusterName
 	if !isMasterCluster {

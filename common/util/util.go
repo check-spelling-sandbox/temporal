@@ -79,7 +79,7 @@ func InverseMap[M ~map[K]V, K, V comparable](m M) map[V]K {
 }
 
 // GetOrSetNew looks up k in m and returns the result. If it's not present, it uses `new` to
-// allocate an new value type and sets that in the map, then returns it.
+// allocate a new value type and sets that in the map, then returns it.
 func GetOrSetNew[M ~map[K]*V, K comparable, V any](m M, k K) *V {
 	if v, ok := m[k]; ok {
 		return v

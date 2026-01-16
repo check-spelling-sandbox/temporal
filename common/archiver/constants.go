@@ -6,10 +6,10 @@ import (
 
 const (
 	// ArchiveNonRetryableErrorMsg is the log message when the Archive() method encounters a non-retryable error
-	ArchiveNonRetryableErrorMsg = "Archive method encountered an non-retryable error."
+	ArchiveNonRetryableErrorMsg = "Archive method encountered a non-retryable error."
 	// ArchiveTransientErrorMsg is the log message when the Archive() method encounters a transient error
 	ArchiveTransientErrorMsg = "Archive method encountered a transient error."
-	// ArchiveSkippedInfoMsg is the log messsage when the Archive() method encounter an not found error
+	// ArchiveSkippedInfoMsg is the log messsage when the Archive() method encounter a not found error
 	ArchiveSkippedInfoMsg = "Archive method encountered not found error and skipped the archival"
 
 	// ErrReasonInvalidURI is the error reason for invalid URI
