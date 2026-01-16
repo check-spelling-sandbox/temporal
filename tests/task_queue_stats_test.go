@@ -701,7 +701,7 @@ func (s *TaskQueueStatsSuite) inactiveVersionDoesNotAbsorbUnversionedBacklog(num
 	s.EventuallyWithT(func(c *assert.CollectT) {
 		a := require.New(c)
 
-		// DescribeWorkerDeploymentVersion: current version should should show 100% of the unversioned backlog for this task queue
+		// DescribeWorkerDeploymentVersion: current version should show 100% of the unversioned backlog for this task queue
 		s.requireWDVTaskQueueStatsRelaxed(
 			ctx,
 			a,
