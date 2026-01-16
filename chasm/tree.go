@@ -1617,7 +1617,7 @@ func (n *Node) closeTransactionSerializeNodes() error {
 		n.mutation.UpdatedNodes[encodedPath] = node.serializedNode
 		// DeletedNodes map is populated when syncing tree structure. However, since we may sync tree structure
 		// multiple times in one transaction, if node at the same path was previously deleted, have structure synced,
-		// then get re-created, the same encoded path will exists in both UpdatedNodes and DeletedNodes maps.
+		// then get re-created, the same encoded path will exist in both UpdatedNodes and DeletedNodes maps.
 		//
 		// serializeNode only happens once at the end of a transaction, and here we know the node at this encoded path exists,
 		// remove it from the DeletedNodes map.
