@@ -71,7 +71,7 @@ func Propagate(ctx context.Context) context.Context {
 	return ctx
 }
 
-// HeaderGetter is an interface for getting a single header value from a case insensitive key.
+// HeaderGetter is an interface for getting a single header value from a case-insensitive key.
 type HeaderGetter interface {
 	Get(string) string
 }

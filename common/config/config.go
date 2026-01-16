@@ -168,7 +168,7 @@ type (
 
 		// PerHostOverrides contains per-hostname TLS settings that
 		// are used for external clients connecting to the Temporal Cluster on that
-		// specific hostname. Host names are case insensitive. Optional. If not present,
+		// specific hostname. Host names are case-insensitive. Optional. If not present,
 		// uses configuration supplied by Server field.
 		PerHostOverrides map[string]ServerTLS `yaml:"hostOverrides"`
 	}
