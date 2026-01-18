@@ -206,7 +206,7 @@ func lockTaskQueue(
 		return nil
 
 	case sql.ErrNoRows:
-		return &persistence.ConditionFailedError{Msg: "Task queue does not exists"}
+		return &persistence.ConditionFailedError{Msg: "Task queue doesn't exist"}
 
 	default:
 		return serviceerror.NewUnavailablef("Failed to lock task queue. Error: %v", err)

@@ -66,7 +66,7 @@ func (s *ConcurrentTxMapSuite) TestGetAndDo() {
 	s.Nil(interf, "GetAndDo should return nil when key not found")
 	s.Nil(err, "GetAndDo should return nil when function not applied")
 	s.False(ok, "GetAndDo should return false when key not found")
-	s.False(fnApplied, "GetAndDo should not apply function when key not exixts")
+	s.False(fnApplied, "GetAndDo should not apply function when key doesn't exist")
 
 	value = intType(1)
 	testMap.Put(key, &value)
@@ -99,7 +99,7 @@ func (s *ConcurrentTxMapSuite) TestPutOrDo() {
 	s.Equal(value, *valueRetuern)
 	s.Nil(err, "PutOrDo should return nil when function not applied")
 	s.False(ok, "PutOrDo should return false when function not applied")
-	s.False(fnApplied, "PutOrDo should not apply function when key not exixts")
+	s.False(fnApplied, "PutOrDo should not apply function when key doesn't exist")
 
 	anotherValue := intType(111)
 	interf, ok, err = testMap.PutOrDo(key, &anotherValue, func(key interface{}, value interface{}) error {

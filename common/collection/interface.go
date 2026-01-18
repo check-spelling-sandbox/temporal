@@ -41,7 +41,7 @@ type (
 		// GetAndDo returns the value corresponding to the key, and apply fn to key value before return value
 		// return (value, value exist or not, error when evaluation fn)
 		GetAndDo(key interface{}, fn ActionFunc) (interface{}, bool, error)
-		// PutOrDo put the key value in the map, if key does not exists, otherwise, call fn with existing key and value
+		// PutOrDo put the key value in the map, if key doesn't exist, otherwise, call fn with existing key and value
 		// return (value, fn evaluated or not, error when evaluation fn)
 		PutOrDo(key interface{}, value interface{}, fn ActionFunc) (interface{}, bool, error)
 		// RemoveIf deletes the given key from the map if fn return true
