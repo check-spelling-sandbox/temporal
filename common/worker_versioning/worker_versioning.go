@@ -248,7 +248,7 @@ func DeploymentIfValid(d *deploymentpb.Deployment) *deploymentpb.Deployment {
 
 // MakeDirectiveForWorkflowTask returns a versioning directive based on the following parameters:
 // - inheritedBuildId: build ID inherited from a past/previous wf execution (for Child WF or CaN)
-// - assignedBuildId: the build ID to which the WF is currently assigned (i.e. mutable state's AssginedBuildId)
+// - assignedBuildId: the build ID to which the WF is currently assigned (i.e. mutable state's assignedBuildId)
 // - stamp: the latest versioning stamp of the execution (only needed for old versioning)
 // - hasCompletedWorkflowTask: if the wf has completed any WFT
 // - behavior: workflow's effective behavior
