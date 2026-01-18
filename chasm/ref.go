@@ -42,7 +42,7 @@ type ComponentRef struct {
 	// From the componentType, we can find the registered component struct definition,
 	// then use reflection to find sub-components and understand if those sub-components
 	// need to be loaded or not.
-	// We only need to do this for sub-components, path for parent/ancenstor components
+	// We only need to do this for sub-components, path for parent/ancestor components
 	// can be inferred from the current component path and they always needs to be loaded.
 	//
 	// componentType string

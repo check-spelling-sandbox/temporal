@@ -1787,7 +1787,7 @@ BackfillLoop:
 				branchID = currentAncestor.GetBranchId()
 				if historyBlob.nodeID < currentAncestor.GetBeginNodeId() || historyBlob.nodeID >= currentAncestor.GetEndNodeId() {
 					return serviceerror.NewInternalf(
-						"The backfill history blob node id %d is not in acestoer range [%d, %d]",
+						"The backfill history blob node id %d is not in ancestor range [%d, %d]",
 						historyBlob.nodeID,
 						currentAncestor.GetBeginNodeId(),
 						currentAncestor.GetEndNodeId(),
