@@ -312,7 +312,7 @@ stateDiagram-v2
     Failed --> [*]
 ```
 
-Cancellations are continously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
+Cancellations are continuously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
 permanently fail, or the operation times out.
 
 ### Task Executors
@@ -350,7 +350,7 @@ retried or continues-as-new.
 Similarly to Nexus Operations, callbacks are implemented via a hierarchical state machine and a set of executors, which
 are located in [the components directory](../../components/callbacks).
 
-Callbacks are continously retried using a [configurable retry policy][callback-retry-policy] until they succeed,
+Callbacks are continuously retried using a [configurable retry policy][callback-retry-policy] until they succeed,
 permanently fail, or the workflow's retention period expires.
 
 The timeout for making a single callback HTTP call is configurable via: `component.callbacks.request.timeout`
