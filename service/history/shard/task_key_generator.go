@@ -71,7 +71,7 @@ func (a *taskKeyGenerator) setTaskKeys(
 				if isScheduledTask {
 					// Persistence might loss precision when saving to DB.
 					// Make the task scheduled time to have the same precision as DB here,
-					// so that if the comparsion in the next step passes, it's guaranteed
+					// so that if the comparison in the next step passes, it's guaranteed
 					// the task can be retrieved from DB by queue processor.
 					taskScheduledTime = task.GetVisibilityTime().
 						Add(common.ScheduledTaskMinPrecision).
