@@ -150,7 +150,7 @@ func (b *EventStore) FlushBufferToCurrentBatch() (map[int64]int64, map[string]in
 	b.dbBufferBatch = nil
 	b.memBufferBatch = nil
 
-	// 0th reorder events in case casandra reorder the buffered events
+	// 0th reorder events in case cassandra reorder the buffered events
 	// TODO eventually remove this ordering
 	bufferBatch = b.reorderBuffer(bufferBatch)
 
