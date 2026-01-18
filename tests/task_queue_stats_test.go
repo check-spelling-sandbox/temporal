@@ -166,7 +166,7 @@ func (s *TaskQueueStatsSuite) TestAddMultipleTasks_MultiplePartitions_ValidateSt
 	// Poll remaining activities.
 	s.pollActivities(total-2, tqName)
 
-	// Despite having polled all the workflows/activies; the stats won't have changed at all since they were cached.
+	// Despite having polled all the workflows/activities; the stats won't have changed at all since they were cached.
 	s.validateTaskQueueStatsByType(tqName, enumspb.TASK_QUEUE_TYPE_WORKFLOW, expectations, false)
 	s.validateTaskQueueStatsByType(tqName, enumspb.TASK_QUEUE_TYPE_ACTIVITY, expectations, false)
 }
@@ -248,14 +248,14 @@ func (s *TaskQueueStatsSuite) currentVersionAbsorbsUnversionedBacklogNoRamping(n
 	}, 10*time.Second, 200*time.Millisecond)
 
 	// The backlog count for the activity task queue should be equal to the number of activities scheduled since the activity task queue is part of the current version.
-	activitesToSchedule := 10 * numPartitions
-	s.completeWorkflowTasksAndScheduleActivities(tqName, deploymentName, currentBuildID, activitesToSchedule)
+	activitiesToSchedule := 10 * numPartitions
+	s.completeWorkflowTasksAndScheduleActivities(tqName, deploymentName, currentBuildID, activitiesToSchedule)
 
 	// Verify activity add rate
 	s.validateRates(tqName, enumspb.TASK_QUEUE_TYPE_ACTIVITY, true, false)
 
 	activityStatsExpectation := TaskQueueExpectations{
-		BacklogCount:  activitesToSchedule,
+		BacklogCount:  activitiesToSchedule,
 		MaxExtraTasks: 0,
 	}
 
