@@ -196,7 +196,7 @@ func TestCommandProtocolMessage(t *testing.T) {
 		_, err := tc.handler.handleCommand(context.Background(), command, newMsgList())
 		require.Error(t, err)
 
-		// Verify that the event is discarded anduser metadata is not attached to the event.
+		// Verify that the event is discarded and user metadata is not attached to the event.
 		require.Nil(t, event.UserMetadata)
 	})
 
