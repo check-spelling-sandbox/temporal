@@ -7945,7 +7945,7 @@ func (ms *MutableStateImpl) validateNoEventsAfterWorkflowFinish(
 			tag.WorkflowID(ms.executionInfo.WorkflowId),
 			tag.WorkflowRunID(ms.executionState.RunId),
 		)
-		return consts.ErrEventsAterWorkflowFinish
+		return consts.ErrEventsAfterWorkflowFinish
 	}
 }
 
