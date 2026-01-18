@@ -148,7 +148,7 @@ func (tc *nsCountLimitTestCase) run(t *testing.T) {
 	// Spawn a bunch of blocked requests in the background.
 	tc.spawnBlockedRequests(handler, interceptor)
 
-	// With all the blocked requests in flight, send the final request and verify whether it is rate limited or not.
+	// With all the blocked requests in flight, send the final request and verify whether or not it is rate limited.
 	_, err := interceptor.Intercept(context.Background(), tc.request, &grpc.UnaryServerInfo{
 		FullMethod: tc.methodName,
 	}, noopHandler)
