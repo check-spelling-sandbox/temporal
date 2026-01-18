@@ -2724,13 +2724,13 @@ func (s *mutableStateSuite) TestTotalEntitiesCount() {
 	s.NoError(err)
 
 	updateID := "random-updateId"
-	accptEvent, err := s.mutableState.AddWorkflowExecutionUpdateAcceptedEvent(
+	acceptEvent, err := s.mutableState.AddWorkflowExecutionUpdateAcceptedEvent(
 		updateID, "random", 0, nil)
 	s.NoError(err)
-	s.NotNil(accptEvent)
+	s.NotNil(acceptEvent)
 
 	completedEvent, err := s.mutableState.AddWorkflowExecutionUpdateCompletedEvent(
-		accptEvent.EventId, &updatepb.Response{Meta: &updatepb.Meta{UpdateId: updateID}})
+		acceptEvent.EventId, &updatepb.Response{Meta: &updatepb.Meta{UpdateId: updateID}})
 	s.NoError(err)
 	s.NotNil(completedEvent)
 
