@@ -528,7 +528,7 @@ func NewMutableStateFromDB(
 
 	if len(dbRecord.Checksum.GetValue()) > 0 {
 		switch {
-		case mutableState.shouldInvalidateCheckum():
+		case mutableState.shouldInvalidateChecksum():
 			mutableState.checksum = nil
 			metrics.MutableStateChecksumInvalidated.With(mutableState.metricsHandler).Record(1)
 		case mutableState.shouldVerifyChecksum():
@@ -8274,7 +8274,7 @@ func (ms *MutableStateImpl) shouldVerifyChecksum() bool {
 	return rand.Intn(100) < ms.config.MutableStateChecksumVerifyProbability(ms.namespaceEntry.Name().String())
 }
 
-func (ms *MutableStateImpl) shouldInvalidateCheckum() bool {
+func (ms *MutableStateImpl) shouldInvalidateChecksum() bool {
 	invalidateBeforeEpochSecs := int64(ms.config.MutableStateChecksumInvalidateBefore())
 	if invalidateBeforeEpochSecs > 0 {
 		invalidateBefore := time.Unix(invalidateBeforeEpochSecs, 0).UTC()

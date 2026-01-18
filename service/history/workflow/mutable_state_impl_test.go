@@ -1424,16 +1424,16 @@ func (s *mutableStateSuite) TestChecksumProbabilities() {
 
 func (s *mutableStateSuite) TestChecksumShouldInvalidate() {
 	s.mockConfig.MutableStateChecksumInvalidateBefore = func() float64 { return 0 }
-	s.False(s.mutableState.shouldInvalidateCheckum())
+	s.False(s.mutableState.shouldInvalidateChecksum())
 	s.mutableState.executionInfo.LastUpdateTime = timestamp.TimeNowPtrUtc()
 	s.mockConfig.MutableStateChecksumInvalidateBefore = func() float64 {
 		return float64((s.mutableState.executionInfo.LastUpdateTime.AsTime().UnixNano() / int64(time.Second)) + 1)
 	}
-	s.True(s.mutableState.shouldInvalidateCheckum())
+	s.True(s.mutableState.shouldInvalidateChecksum())
 	s.mockConfig.MutableStateChecksumInvalidateBefore = func() float64 {
 		return float64((s.mutableState.executionInfo.LastUpdateTime.AsTime().UnixNano() / int64(time.Second)) - 1)
 	}
-	s.False(s.mutableState.shouldInvalidateCheckum())
+	s.False(s.mutableState.shouldInvalidateChecksum())
 }
 
 func (s *mutableStateSuite) TestUpdateWorkflowStateStatus_Table() {
