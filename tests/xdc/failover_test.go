@@ -1744,9 +1744,9 @@ func (s *FunctionalClustersTestSuite) TestCronWorkflowCompleteAndFailover() {
 	client1 := s.clusters[1].FrontendClient() // standby
 
 	// start a workflow
-	id := "functional-cron-workflow-complete-andfailover-test"
-	wt := "functional-cron-workflow-complete-andfailover-test-type"
-	tl := "functional-cron-workflow-complete-andfailover-test-taskqueue"
+	id := "functional-cron-workflow-complete-and-failover-test"
+	wt := "functional-cron-workflow-complete-and-failover-test-type"
+	tl := "functional-cron-workflow-complete-and-failover-test-taskqueue"
 	identity := "worker1"
 	workflowType := &commonpb.WorkflowType{Name: wt}
 	taskQueue := &taskqueuepb.TaskQueue{Name: tl, Kind: enumspb.TASK_QUEUE_KIND_NORMAL}
