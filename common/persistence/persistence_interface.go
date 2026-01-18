@@ -509,7 +509,7 @@ type (
 		// and Data will be unset. *No* code outside of the ExecutionManager or Cassandra
 		// store should reference this field.
 		//
-		// As an optimization to avoid an extra encode/deocde step, the Cassandra version
+		// As an optimization to avoid an extra encode/decode step, the Cassandra version
 		// is encoded in a single blob up-front.
 		CassandraBlob *commonpb.DataBlob
 	}
