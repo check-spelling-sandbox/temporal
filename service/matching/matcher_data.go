@@ -414,7 +414,7 @@ func (d *matcherData) findMatch(allowForwarding bool) (*internalTask, *waitingPo
 				continue
 			} else if mp := poller.minPriority(); mp > 0 && task.effectivePriority > effectivePriorityFactor*mp {
 				// Note the ">" above: "min" priority is a numeric max.
-				// Also note: this condition will be false for draining tasks since we artifically boost
+				// Also note: this condition will be false for draining tasks since we artificially boost
 				// their priority above "1". that's inaccurate but it's just a temporary situation.
 				continue
 			}
