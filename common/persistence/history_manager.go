@@ -146,7 +146,7 @@ func (m *executionManagerImpl) DeleteHistoryBranch(
 		BeginNodeId: GetBeginNodeID(branch),
 	})
 
-	// Get the history tree containing the branch to be delelted,
+	// Get the history tree containing the branch to be deleted,
 	// so we know if any part of the target branch is referenced by other branches.
 	historyTreeResp, err := m.persistence.GetHistoryTreeContainingBranch(ctx, &InternalGetHistoryTreeContainingBranchRequest{
 		BranchToken: request.BranchToken,
