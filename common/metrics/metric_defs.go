@@ -413,9 +413,9 @@ const (
 	ShardInfoScope = "ShardInfo"
 	// WorkflowContextScope is the scope used by WorkflowContext component
 	WorkflowContextScope = "WorkflowContext"
-	// ExecutionStatsScope is the scope used for emiting workflow execution related stats
+	// ExecutionStatsScope is the scope used for emitting workflow execution related stats
 	ExecutionStatsScope = "ExecutionStats"
-	// SessionStatsScope is the scope used for emiting session update related stats
+	// SessionStatsScope is the scope used for emitting session update related stats
 	SessionStatsScope = "SessionStats"
 	// WorkflowCompletionStatsScope tracks workflow completion updates
 	WorkflowCompletionStatsScope = "CompletionStats"
