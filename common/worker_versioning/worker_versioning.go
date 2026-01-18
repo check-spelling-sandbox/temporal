@@ -52,7 +52,7 @@ const (
 	WorkerDeploymentVersionDelimiter        = ":"
 	WorkerDeploymentVersionWorkflowIDEscape = "|"
 
-	// Prefixes, Delimeters and Keys that are used in the internal entity workflows backing worker-versioning
+	// Prefixes, Delimiters and Keys that are used in the internal entity workflows backing worker-versioning
 	WorkerDeploymentWorkflowIDPrefix             = "temporal-sys-worker-deployment"
 	WorkerDeploymentVersionWorkflowIDPrefix      = "temporal-sys-worker-deployment-version"
 	WorkerDeploymentVersionWorkflowIDInitialSize = len(WorkerDeploymentVersionWorkflowIDPrefix) + len(WorkerDeploymentVersionDelimiter) // 39
@@ -484,7 +484,7 @@ func ValidateDeploymentVersionFields(fieldName string, field string, maxIDLength
 		return serviceerror.NewInvalidArgumentf("%v cannot be empty", fieldName)
 	}
 
-	// Length of each field should be: (MaxIDLengthLimit - (prefix + delimeter length)) / 2
+	// Length of each field should be: (MaxIDLengthLimit - (prefix + delimiter length)) / 2
 	// Note: Using the same initial size for both the fields since they are used together to generate the version workflow's ID
 	if len(field) > (maxIDLengthLimit-WorkerDeploymentVersionWorkflowIDInitialSize)/2 {
 		return serviceerror.NewInvalidArgumentf("size of %v larger than the maximum allowed", fieldName)
