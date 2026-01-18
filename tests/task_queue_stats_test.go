@@ -1645,7 +1645,7 @@ func validateTaskQueueStatsByPriority(
 ) {
 	a.Len(stats, maxPriority, "%s: stats should contain %d priorities", label, maxPriority)
 
-	// use an abgridged version when caching since the exact stats are difficult to predict
+	// use an abridged version when caching since the exact stats are difficult to predict
 	if taskQueueExpectation.CachedEnabled {
 		for i := int32(minPriority); i <= maxPriority; i++ {
 			if stats[i].ApproximateBacklogCount != 0 && stats[i].TasksDispatchRate > 0 || stats[i].TasksAddRate > 0 {
