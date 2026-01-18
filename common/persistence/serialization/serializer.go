@@ -18,7 +18,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// DefaultDecoder is here for convenience to skip the need to create a new Serializer when only decodig is needed.
+// DefaultDecoder is here for convenience to skip the need to create a new Serializer when only decoding is needed.
 // It does not need an encoding type; as it will use the one defined in the DataBlob.
 var r Serializer = &serializerImpl{encodingType: enumspb.ENCODING_TYPE_UNSPECIFIED}
 var DefaultDecoder Decoder = r
