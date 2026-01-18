@@ -1461,7 +1461,7 @@ func (s *matchingEngineSuite) TestConcurrentPublishConsumeActivitiesWithZeroDisp
 	// Set a short long poll expiration so that we don't have to wait too long for 0 throttling cases
 	s.matchingEngine.config.LongPollExpirationInterval = dynamicconfig.GetDurationPropertyFnFilteredByTaskQueue(20 * time.Millisecond)
 	dispatchLimitFn := func(wc int, tc int64) float64 {
-		if tc%50 == 0 && wc%5 == 0 { // Gets triggered atleast 20 times
+		if tc%50 == 0 && wc%5 == 0 { // Gets triggered at least 20 times
 			return 0
 		}
 		return defaultTaskDispatchRPS
@@ -1470,7 +1470,7 @@ func (s *matchingEngineSuite) TestConcurrentPublishConsumeActivitiesWithZeroDisp
 	const taskCount = 100
 	throttleCt := s.concurrentPublishConsumeActivities(workerCount, taskCount, dispatchLimitFn)
 	s.logger.Info("Number of tasks throttled", tag.Number(throttleCt))
-	// atleast once from 0 dispatch poll, and until TTL is hit at which time throttle limit is reset
+	// at least once from 0 dispatch poll, and until TTL is hit at which time throttle limit is reset
 	// hard to predict exactly how many times, since the atomic.Value load might not have updated.
 	s.GreaterOrEqual(throttleCt, 1)
 }
