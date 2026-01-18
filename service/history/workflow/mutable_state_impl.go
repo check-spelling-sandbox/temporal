@@ -7503,7 +7503,7 @@ func (ms *MutableStateImpl) closeTransactionGenerateChasmRetentionTask(
 		return nil
 	}
 
-	// Generate retention timer for chasm executions if it's currentely completed
+	// Generate retention timer for chasm executions if it's currently completed
 	// but state in DB is not completed, i.e. completing in this transaction.
 
 	if transactionPolicy == historyi.TransactionPolicyActive {
