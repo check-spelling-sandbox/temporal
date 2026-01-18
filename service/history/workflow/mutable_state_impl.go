@@ -2930,7 +2930,7 @@ func (ms *MutableStateImpl) ApplyWorkflowExecutionStartedEvent(
 		ms.GetEffectiveVersioningBehavior() != enumspb.VERSIONING_BEHAVIOR_UNSPECIFIED {
 		// TODO: [cleanup-old-wv]
 		limit := ms.config.SearchAttributesSizeOfValueLimit(string(ms.namespaceEntry.Name()))
-		// Passing nil for usedVersion because starting with pinned override does not add the version to used versions SA until the version is actaully used.
+		// Passing nil for usedVersion because starting with pinned override does not add the version to used versions SA until the version is actually used.
 		//nolint:staticcheck // SA1019
 		if _, err := ms.addBuildIDAndDeploymentInfoToSearchAttributesWithNoVisibilityTask(event.SourceVersionStamp, nil, limit); err != nil {
 			return err
