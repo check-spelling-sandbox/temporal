@@ -84,7 +84,7 @@ func SnakeCaseToPascalCase(s string) string {
 	var b strings.Builder
 	// Capitalize the first letter of each word split by underscore
 	for word := range strings.SplitSeq(s, "_") {
-		// Convert first rune to upper and the rest to lower case
+		// Convert first rune to upper and the rest to lowercase
 		b.WriteString(cases.Title(language.AmericanEnglish).String(strings.ToLower(word)))
 	}
 	// Join them back into a single string
