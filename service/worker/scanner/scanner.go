@@ -94,7 +94,7 @@ type (
 	}
 
 	// Scanner is the background sub-system that does full scans
-	// of database tables to cleanup resources, monitor anamolies
+	// of database tables to cleanup resources, monitor anomalies
 	// and emit stats for analytics
 	Scanner struct {
 		context         scannerContext
@@ -106,7 +106,7 @@ type (
 // New returns a new instance of scanner daemon
 // Scanner is the background sub-system that does full
 // scans of database tables in an attempt to cleanup
-// resources, monitor system anamolies and emit stats
+// resources, monitor system anomalies and emit stats
 // for analysis and alerting
 func New(
 	logger log.Logger,
