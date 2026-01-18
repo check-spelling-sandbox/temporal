@@ -427,7 +427,7 @@ const (
 )
 
 func createExecutions(
-	mockAdminCliednt *adminservicemock.MockAdminServiceClient,
+	mockAdminClient *adminservicemock.MockAdminServiceClient,
 	states []executionState,
 	nextIndex int,
 ) []*replicationspb.MigrationExecutionInfo {
@@ -441,7 +441,7 @@ Loop:
 	for i := nextIndex; i < len(states); i++ {
 		switch states[i] {
 		case executionFound:
-			mockAdminCliednt.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
+			mockAdminClient.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
 				Namespace: mockedNamespace,
 				Execution: &commonpb.WorkflowExecution{
 					WorkflowId: execution1.BusinessId,
@@ -451,7 +451,7 @@ Loop:
 				SkipForceReload: true,
 			})).Return(&adminservice.DescribeMutableStateResponse{}, nil).Times(1)
 		case executionNotfound:
-			mockAdminCliednt.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
+			mockAdminClient.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
 				Namespace: mockedNamespace,
 				Execution: &commonpb.WorkflowExecution{
 					WorkflowId: execution1.BusinessId,
@@ -462,7 +462,7 @@ Loop:
 			})).Return(nil, serviceerror.NewNotFound("")).Times(1)
 			break Loop
 		case executionErr:
-			mockAdminCliednt.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
+			mockAdminClient.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
 				Namespace: mockedNamespace,
 				Execution: &commonpb.WorkflowExecution{
 					WorkflowId: execution1.BusinessId,
