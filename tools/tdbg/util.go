@@ -130,7 +130,7 @@ func parseTimeRange(timeRange string, now time.Time) (time.Time, error) {
 		return time.Time{}, fmt.Errorf("cannot parse timeRange %s", timeRange)
 	}
 	if num >= 1e6 {
-		return time.Time{}, fmt.Errorf("invalid time-duation multiplier %d, allowed range is 0 < multiplier < 1000000", num)
+		return time.Time{}, fmt.Errorf("invalid time-duration multiplier %d, allowed range is 0 < multiplier < 1000000", num)
 	}
 
 	dur, err := parseTimeDuration(timeRange[idx[1]:])

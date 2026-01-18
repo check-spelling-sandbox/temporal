@@ -58,7 +58,7 @@ type DynamicRateLimitingParams struct {
 	// Enabled toggles whether dynamic rate limiting is enabled.
 	Enabled bool
 	// RefreshInterval is how often the rate limit and dynamic properties are refreshed. Should
-	// be a string duratoin e.g. 10s even if the rate limiter is disabled, this property will
+	// be a string duration e.g. 10s even if the rate limiter is disabled, this property will
 	// still determine how often the dynamic config is reevaluated.
 	RefreshInterval time.Duration
 	// LatencyThreshold is the maximum average latency in ms before the rate limiter should
