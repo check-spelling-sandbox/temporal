@@ -831,7 +831,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateNamespace() {
 	updatedState := enumspb.NAMESPACE_STATE_DEPRECATED
 	updatedDescription := "description-updated"
 	updatedOwner := "owner-updated"
-	// This will overriding the previous key-value pair
+	// This will override the previous key-value pair
 	updatedData := map[string]string{"k1": "v2"}
 	updatedRetention := timestamp.DurationFromDays(20)
 	updatedHistoryArchivalState := enumspb.ARCHIVAL_STATE_DISABLED
