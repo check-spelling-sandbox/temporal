@@ -22,7 +22,7 @@ type (
 )
 
 const (
-	// For more details on these reasons, check the comments in reasonStateMatrix bellow.
+	// For more details on these reasons, check the comments in reasonStateMatrix below.
 
 	AbortReasonRegistryCleared AbortReason = iota + 1
 	AbortReasonWorkflowCompleted

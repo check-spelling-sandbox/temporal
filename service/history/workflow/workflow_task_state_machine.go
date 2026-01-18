@@ -623,7 +623,7 @@ func (m *workflowTaskStateMachine) processBuildIdRedirectInfo(
 			m.ms.CurrentTaskQueue(),
 			durationpb.New(workflowTask.WorkflowTaskTimeout),
 			// Preserving the number of previous attempts. This value shows the number of attempts made on the last
-			// build ID + 1 (because it's being reset to 1 for the next build ID. See bellow.)
+			// build ID + 1 (because it's being reset to 1 for the next build ID. See below.)
 			workflowTask.Attempt,
 			workflowTask.ScheduledTime,
 		)

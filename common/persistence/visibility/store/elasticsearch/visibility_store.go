@@ -993,7 +993,7 @@ func (s *VisibilityStore) ParseESDoc(
 
 	var sourceMap map[string]interface{}
 	d := json.NewDecoder(bytes.NewReader(docSource))
-	// Very important line. See finishParseJSONValue bellow.
+	// Very important line. See finishParseJSONValue below.
 	d.UseNumber()
 	if err := d.Decode(&sourceMap); err != nil {
 		metrics.ElasticsearchDocumentParseFailuresCount.With(s.metricsHandler).Record(1)

@@ -282,7 +282,7 @@ func (handler *WorkflowTaskCompletedHandler) Invoke(
 		// Heartbeat duration is computed between now and OriginalScheduledTime, which is set when WT is scheduled and
 		// carried over to the consequence WTs if they are heartbeat WTs.
 		// After this timeout is expired, WT is timed out (although this specific WT doesn't)
-		// and new WT will be scheduled on non-sticky task queue (see ClearStickyTaskQueue call bellow).
+		// and new WT will be scheduled on non-sticky task queue (see ClearStickyTaskQueue call below).
 		wtHeartbeatTimeoutDuration := handler.config.WorkflowTaskHeartbeatTimeout(nsName)
 		if currentWorkflowTask.OriginalScheduledTime.UnixNano() > 0 &&
 			handler.timeSource.Now().After(currentWorkflowTask.OriginalScheduledTime.Add(wtHeartbeatTimeoutDuration)) {

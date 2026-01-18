@@ -74,7 +74,7 @@ func TimeoutWorkflow(
 	continuedRunID string,
 ) error {
 
-	// Check TerminateWorkflow comment bellow.
+	// Check TerminateWorkflow comment below.
 	eventBatchFirstEventID := mutableState.GetNextEventID()
 	if workflowTask := mutableState.GetStartedWorkflowTask(); workflowTask != nil {
 		wtFailedEvent, err := failWorkflowTask(
