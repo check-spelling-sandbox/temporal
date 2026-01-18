@@ -3185,7 +3185,7 @@ func (s *mutableStateSuite) TestRolloverAutoResetPointsWithExpiringTime() {
 func (s *mutableStateSuite) TestCloseTransactionUpdateTransition() {
 	namespaceEntry := tests.GlobalNamespaceEntry
 
-	completWorkflowTaskFn := func(ms historyi.MutableState) {
+	completeWorkflowTaskFn := func(ms historyi.MutableState) {
 		workflowTaskInfo := ms.GetStartedWorkflowTask()
 		_, err := ms.AddWorkflowTaskCompletedEvent(
 			workflowTaskInfo,
@@ -3207,7 +3207,7 @@ func (s *mutableStateSuite) TestCloseTransactionUpdateTransition() {
 				dbState.BufferedEvents = nil
 			},
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsMutation(context.Background(), historyi.TransactionPolicyActive)
 				if err != nil {
@@ -3348,7 +3348,7 @@ func (s *mutableStateSuite) TestCloseTransactionUpdateTransition() {
 				dbState.BufferedEvents = nil
 			},
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsSnapshot(context.Background(), historyi.TransactionPolicyActive)
 				if err != nil {
@@ -3366,7 +3366,7 @@ func (s *mutableStateSuite) TestCloseTransactionUpdateTransition() {
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
 				ms.GetExecutionInfo().PreviousTransitionHistory = ms.GetExecutionInfo().TransitionHistory
 				ms.GetExecutionInfo().TransitionHistory = nil
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsSnapshot(context.Background(), historyi.TransactionPolicyActive)
 				if err != nil {
@@ -3424,7 +3424,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 	err := s.mockShard.StateMachineRegistry().RegisterMachine(stateMachineDef)
 	s.NoError(err)
 
-	completWorkflowTaskFn := func(ms historyi.MutableState) *historypb.HistoryEvent {
+	completeWorkflowTaskFn := func(ms historyi.MutableState) *historypb.HistoryEvent {
 		workflowTaskInfo := ms.GetStartedWorkflowTask()
 		completedEvent, err := ms.AddWorkflowTaskCompletedEvent(
 			workflowTaskInfo,
@@ -3452,7 +3452,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "Activity",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				scheduledEvent, _, err := ms.AddActivityTaskScheduledEvent(
 					completedEvent.GetEventId(),
 					&commandpb.ScheduleActivityTaskCommandAttributes{},
@@ -3478,7 +3478,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "UserTimer",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				newTimerID := "new-timer-id"
 				_, _, err := ms.AddTimerStartedEvent(
 					completedEvent.GetEventId(),
@@ -3506,7 +3506,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "ChildExecution",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				initiatedEvent, _, err := ms.AddStartChildWorkflowExecutionInitiatedEvent(
 					completedEvent.GetEventId(),
 					&commandpb.StartChildWorkflowExecutionCommandAttributes{},
@@ -3532,7 +3532,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "RequestCancelExternal",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				initiatedEvent, _, err := ms.AddRequestCancelExternalWorkflowExecutionInitiatedEvent(
 					completedEvent.GetEventId(),
 					uuid.NewString(),
@@ -3559,7 +3559,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "SignalExternal",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				initiatedEvent, _, err := ms.AddSignalExternalWorkflowExecutionInitiatedEvent(
 					completedEvent.GetEventId(),
 					uuid.NewString(),
@@ -3623,7 +3623,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "WorkflowTask/Completed",
 			testFn: func(ms historyi.MutableState) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				_, _, err := ms.CloseTransactionAsMutation(context.Background(), historyi.TransactionPolicyActive)
 				s.NoError(err)
@@ -3635,7 +3635,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "WorkflowTask/Scheduled",
 			testFn: func(ms historyi.MutableState) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 				_, err := ms.AddWorkflowTaskScheduledEvent(false, enumsspb.WORKFLOW_TASK_TYPE_NORMAL)
 				s.NoError(err)
 
@@ -3649,7 +3649,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "Visibility",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				_, err := ms.AddUpsertWorkflowSearchAttributesEvent(
 					completedEvent.EventId,
 					&commandpb.UpsertWorkflowSearchAttributesCommandAttributes{},
@@ -3666,7 +3666,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "ExecutionState",
 			testFn: func(ms historyi.MutableState) {
-				completedEvent := completWorkflowTaskFn(ms)
+				completedEvent := completeWorkflowTaskFn(ms)
 				_, err := ms.AddCompletedWorkflowEvent(
 					completedEvent.EventId,
 					&commandpb.CompleteWorkflowExecutionCommandAttributes{},
@@ -3684,7 +3684,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "HSM/CloseAsMutation",
 			testFn: func(ms historyi.MutableState) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 				buildHSMFn(ms)
 
 				_, _, err := ms.CloseTransactionAsMutation(context.Background(), historyi.TransactionPolicyActive)
@@ -3705,7 +3705,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 		{
 			name: "HSM/CloseAsSnapshot",
 			testFn: func(ms historyi.MutableState) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 				buildHSMFn(ms)
 
 				_, _, err := ms.CloseTransactionAsSnapshot(context.Background(), historyi.TransactionPolicyActive)
@@ -3751,7 +3751,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackLastUpdateVersionedTransiti
 func (s *mutableStateSuite) TestCloseTransactionHandleUnknownVersionedTransition() {
 	namespaceEntry := tests.GlobalNamespaceEntry
 
-	completWorkflowTaskFn := func(ms historyi.MutableState) {
+	completeWorkflowTaskFn := func(ms historyi.MutableState) {
 		workflowTaskInfo := ms.GetStartedWorkflowTask()
 		_, err := ms.AddWorkflowTaskCompletedEvent(
 			workflowTaskInfo,
@@ -3775,7 +3775,7 @@ func (s *mutableStateSuite) TestCloseTransactionHandleUnknownVersionedTransition
 				dbState.BufferedEvents = nil
 			},
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsMutation(context.Background(), historyi.TransactionPolicyPassive)
 				if err != nil {
@@ -3790,7 +3790,7 @@ func (s *mutableStateSuite) TestCloseTransactionHandleUnknownVersionedTransition
 				dbState.BufferedEvents = nil
 			},
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsMutation(context.Background(), historyi.TransactionPolicyActive)
 				if err != nil {
@@ -3868,7 +3868,7 @@ func (s *mutableStateSuite) TestCloseTransactionHandleUnknownVersionedTransition
 				dbState.BufferedEvents = nil
 			},
 			txFunc: func(ms historyi.MutableState) (*persistencespb.WorkflowExecutionInfo, error) {
-				completWorkflowTaskFn(ms)
+				completeWorkflowTaskFn(ms)
 
 				mutation, _, err := ms.CloseTransactionAsSnapshot(context.Background(), historyi.TransactionPolicyActive)
 				if err != nil {
