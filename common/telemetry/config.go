@@ -119,7 +119,7 @@ type (
 	// doesn't happen until Start() is called. Without this wrapper the
 	// grpc.ClientConn (which can only be created via grpc.Dial or
 	// grpc.DialContext) would need to exist at _construction_ time, meaning
-	// that we would need to dial at construction rather then during the start
+	// that we would need to dial at construction rather than during the start
 	// phase.
 
 	sharedConnSpanExporter struct {
