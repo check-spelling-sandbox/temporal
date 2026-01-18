@@ -70,7 +70,7 @@ func (m *sqlExecutionStore) applyWorkflowMutationTx(
 		workflowMutation.DBRecordVersion,
 		shardID,
 	); err != nil {
-		return serviceerror.NewUnavailablef("applyWorkflowMutationTx failed. Failed to update executions row. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("applyWorkflowMutationTx failed. Failed to update executions row. Error: %v", err)
 	}
 
 	if err := applyTasks(ctx,
@@ -238,7 +238,7 @@ func (m *sqlExecutionStore) applyWorkflowSnapshotTxAsReset(
 		workflowSnapshot.DBRecordVersion,
 		shardID,
 	); err != nil {
-		return serviceerror.NewUnavailablef("applyWorkflowSnapshotTxAsReset failed. Failed to update executions row. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("applyWorkflowSnapshotTxAsReset failed. Failed to update executions row. Error: %v", err)
 	}
 
 	if err := applyTasks(ctx,
@@ -1153,11 +1153,11 @@ func (m *sqlExecutionStore) createExecution(
 				DBRecordVersion: 0,
 			}
 		}
-		return serviceerror.NewUnavailablef("createExecution failed. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("createExecution failed. Error: %v", err)
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return serviceerror.NewUnavailablef("createExecution failed. Failed to verify number of rows affected. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("createExecution failed. Failed to verify number of rows affected. Error: %v", err)
 	}
 	if rowsAffected != 1 {
 		return serviceerror.NewNotFoundf("createExecution failed. Affected %v rows updated instead of 1.", rowsAffected)
@@ -1193,11 +1193,11 @@ func (m *sqlExecutionStore) updateExecution(
 	}
 	result, err := tx.UpdateExecutions(ctx, row)
 	if err != nil {
-		return serviceerror.NewUnavailablef("updateExecution failed. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("updateExecution failed. Error: %v", err)
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return serviceerror.NewUnavailablef("updateExecution failed. Failed to verify number of rows affected. Erorr: %v", err)
+		return serviceerror.NewUnavailablef("updateExecution failed. Failed to verify number of rows affected. Error: %v", err)
 	}
 	if rowsAffected != 1 {
 		return serviceerror.NewNotFoundf("updateExecution failed. Affected %v rows updated instead of 1.", rowsAffected)
