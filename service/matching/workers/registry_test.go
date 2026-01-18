@@ -92,8 +92,8 @@ func TestRegistryImpl_RecordWorkerHeartbeat(t *testing.T) {
 			r.RecordWorkerHeartbeats(tt.nsID, namespace.Name(tt.nsID+"_name"), []*workerpb.WorkerHeartbeat{tt.workerHeartbeat})
 
 			// Check if namespace exists
-			nsBuket := r.getBucket(tt.nsID)
-			nsMap, exists := nsBuket.namespaces[tt.nsID]
+			nsBucket := r.getBucket(tt.nsID)
+			nsMap, exists := nsBucket.namespaces[tt.nsID]
 			assert.True(t, exists, "namespace should exist")
 			assert.Len(t, nsMap, tt.expectedWorkers, "unexpected number of workers")
 
