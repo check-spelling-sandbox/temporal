@@ -1060,7 +1060,7 @@ CheckHistoryLoopForCancelSent:
 
 		signalFailedEvent := historyEvents[len(historyEvents)-2]
 		if signalFailedEvent.GetEventType() != enumspb.EVENT_TYPE_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_FAILED {
-			s.Logger.Info("Cancellaton not cancelled yet")
+			s.Logger.Info("Cancellation not cancelled yet")
 			time.Sleep(100 * time.Millisecond) //nolint:forbidigo
 			continue CheckHistoryLoopForCancelSent
 		}
@@ -1182,7 +1182,7 @@ CheckHistoryLoopForCancelSent:
 
 		signalFailedEvent := historyEvents[len(historyEvents)-2]
 		if signalFailedEvent.GetEventType() != enumspb.EVENT_TYPE_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_FAILED {
-			s.Logger.Info("Cancellaton not cancelled yet")
+			s.Logger.Info("Cancellation not cancelled yet")
 			time.Sleep(100 * time.Millisecond) //nolint:forbidigo
 			continue CheckHistoryLoopForCancelSent
 		}
