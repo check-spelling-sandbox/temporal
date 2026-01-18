@@ -327,7 +327,7 @@ func (s *engineSuite) TestGetMutableStateLongPoll() {
 	// test long poll on next event ID change
 	waitGroup := &sync.WaitGroup{}
 	waitGroup.Add(1)
-	asycWorkflowUpdate := func(delay time.Duration) {
+	asyncWorkflowUpdate := func(delay time.Duration) {
 		tt := &tokenspb.Task{
 			Attempt:          1,
 			NamespaceId:      namespaceID.String(),
@@ -363,7 +363,7 @@ func (s *engineSuite) TestGetMutableStateLongPoll() {
 	s.Equal(int64(4), response.NextEventId)
 
 	// long poll, new event happen before long poll timeout
-	go asycWorkflowUpdate(time.Second)
+	go asyncWorkflowUpdate(time.Second)
 	start := time.Now().UTC()
 	pollResponse, err := s.historyEngine.PollMutableState(ctx, &historyservice.PollMutableStateRequest{
 		NamespaceId:         tests.NamespaceID.String(),
