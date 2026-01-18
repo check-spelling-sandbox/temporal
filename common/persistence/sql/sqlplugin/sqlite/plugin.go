@@ -109,7 +109,7 @@ func (p *plugin) createDBConnection(
 			_ = db.Close()
 			return nil, err
 		}
-	case cfg.ConnectAttributes["setup"] == "true": // file mode, optional setting to setup the schema
+	case cfg.ConnectAttributes["setup"] == "true": // file mode, optional setting to set up the schema
 		if err := p.setupSQLiteDatabase(cfg, db, logger); err != nil && !isTableExistsError(err) { // benign error indicating tables already exist
 			_ = db.Close()
 			return nil, err

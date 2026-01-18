@@ -5918,7 +5918,7 @@ func (s *mutableStateSuite) TestHasRequestID() {
 		s.Run(tc.name, func() {
 			s.SetupSubTest()
 
-			// Setup the mutable state
+			// Set up the mutable state
 			tc.setupFunc(s.mutableState)
 
 			// Test HasRequestID

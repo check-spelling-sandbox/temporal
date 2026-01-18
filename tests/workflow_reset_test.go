@@ -467,7 +467,7 @@ func (s *WorkflowResetSuite) assertResetWorkflowLink(ctx context.Context, workfl
 	s.Equal(expectedLinkRunID, baseMutableState.GetDatabaseMutableState().ExecutionInfo.ResetRunId)
 }
 
-// helper method to setup the test run in the required configuration. It creates a total of n runs. If isCurrentRunning is true then the last run is kept open.
+// helper method to set up the test run in the required configuration. It creates a total of n runs. If isCurrentRunning is true then the last run is kept open.
 func (s *WorkflowResetSuite) setupRuns(ctx context.Context, workflowID string, n int, isCurrentRunning bool, versioningConfig versioningConfig) []string {
 	taskQueueName := testcore.RandomizeStr(s.T().Name())
 
