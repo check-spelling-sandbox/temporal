@@ -1,4 +1,4 @@
-// Package historytest contains library test functions for [history.NewClient] that use ahistory task queue manager.
+// Package historytest contains library test functions for [history.NewClient] that use a history task queue manager.
 // These are not test functions themselves because we construct database clients in another package, which will in turn
 // call this function, but we don't want to put the testing logic there because it's not specific to any database, but
 // it is specific to the [history] package.
