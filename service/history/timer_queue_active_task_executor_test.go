@@ -2203,7 +2203,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestExecuteStateMachineTimerTask_Exe
 		Version:             2,
 	}
 
-	// change now to a value earilier than task's visibility timestamp to test the case where system wall clock go backwards.
+	// change now to a value earlier than task's visibility timestamp to test the case where system wall clock go backwards.
 	s.timeSource.Update(s.now.Add(-30 * time.Minute))
 
 	//nolint:revive // unchecked-type-assertion
