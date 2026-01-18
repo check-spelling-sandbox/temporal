@@ -312,7 +312,7 @@ stateDiagram-v2
     Failed --> [*]
 ```
 
-Cancelations are continously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
+Cancellations are continously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
 permanently fail, or the operation times out.
 
 ### Task Executors
