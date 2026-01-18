@@ -12,7 +12,7 @@ If more than one credentials location is given, then Temporal will resolve the c
 
 `GOOGLE_APPLICATION_CREDENTIALS > Temporal archival deployment.yaml > Google default credentials`
 
-Be sure that you have created your bucket first, and have enought rights in order to read/write over your bucket.
+Be sure that you have created your bucket first, and have enough rights in order to read/write over your bucket.
 
 ### Gcloud Archival example
 
