@@ -7999,7 +7999,7 @@ func (ms *MutableStateImpl) startTransactionHandleWorkflowTaskFailover() (bool, 
 		return false, serviceerror.NewInternalf("MutableStateImpl encountered mismatch version, workflow task: %v, last event version %v", workflowTask.Version, lastEventVersion)
 	}
 
-	// NOTE: if lastEventVersion is used here then the version transition history could decrecase
+	// NOTE: if lastEventVersion is used here then the version transition history could decrease
 	//
 	// TODO: Today's replication task processing logic won't flush buffered events when applying state only changes.
 	// As a result, when using lastWriteVersion, which takes state only change into account, here, we could still
