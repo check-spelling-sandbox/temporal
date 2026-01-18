@@ -70,8 +70,8 @@ func (s *monitorSuite) TestPendingTasksStats() {
 	s.Equal(Alert{
 		AlertType: AlertTypeQueuePendingTaskCount,
 		AlertAttributesQueuePendingTaskCount: &AlertAttributesQueuePendingTaskCount{
-			CurrentPendingTaskCount:   threshold * 2,
-			CiriticalPendingTaskCount: threshold,
+			CurrentPendingTaskCount:  threshold * 2,
+			CriticalPendingTaskCount: threshold,
 		},
 	}, *alert)
 
@@ -90,8 +90,8 @@ func (s *monitorSuite) TestPendingTasksStats() {
 	s.Equal(Alert{
 		AlertType: AlertTypeQueuePendingTaskCount,
 		AlertAttributesQueuePendingTaskCount: &AlertAttributesQueuePendingTaskCount{
-			CurrentPendingTaskCount:   threshold*2 + 1,
-			CiriticalPendingTaskCount: threshold,
+			CurrentPendingTaskCount:  threshold*2 + 1,
+			CriticalPendingTaskCount: threshold,
 		},
 	}, *alert)
 

@@ -50,7 +50,7 @@ func (a *actionQueuePendingTask) Name() string {
 
 func (a *actionQueuePendingTask) Run(readerGroup *ReaderGroup) bool {
 	// first check if the alert is still valid
-	if a.monitor.GetTotalPendingTaskCount() <= a.attributes.CiriticalPendingTaskCount {
+	if a.monitor.GetTotalPendingTaskCount() <= a.attributes.CriticalPendingTaskCount {
 		return false
 	}
 
@@ -64,7 +64,7 @@ func (a *actionQueuePendingTask) Run(readerGroup *ReaderGroup) bool {
 	a.init()
 	a.gatherStatistics(readers)
 	a.findSliceToClear(
-		int(float64(a.attributes.CiriticalPendingTaskCount) * targetLoadFactor),
+		int(float64(a.attributes.CriticalPendingTaskCount) * targetLoadFactor),
 	)
 	a.splitAndClearSlice(readers, readerGroup)
 	return true
@@ -76,7 +76,7 @@ func (a *actionQueuePendingTask) shrinkSliceLowTaskCount(
 	for _, reader := range readers {
 		reader.ShrinkSlices()
 	}
-	return a.monitor.GetTotalPendingTaskCount() <= a.attributes.CiriticalPendingTaskCount
+	return a.monitor.GetTotalPendingTaskCount() <= a.attributes.CriticalPendingTaskCount
 }
 
 func (a *actionQueuePendingTask) init() {
