@@ -696,7 +696,7 @@ func (s *registryWatchSuite) TestWatchDeleteNonExistentNamespace() {
 	s.waitForCallback(tracker.ch, "initial refresh")
 	s.Equal(int32(1), tracker.getCount())
 
-	// Send delete event for a non-existent namespace
+	// Send delete event for a nonexistent namespace
 	nonExistentID := namespace.NewID()
 	watchCh <- &persistence.NamespaceWatchEvent{
 		Type:        persistence.NamespaceWatchEventTypeDelete,
@@ -713,7 +713,7 @@ func (s *registryWatchSuite) TestWatchDeleteNonExistentNamespace() {
 
 	s.waitForCallback(tracker.ch, "create event")
 
-	// Should have 2 callbacks: initial + create (NOT the non-existent delete)
+	// Should have 2 callbacks: initial + create (NOT the nonexistent delete)
 	s.Equal(int32(2), tracker.getCount())
 
 	// Verify existing namespace is still accessible
@@ -733,7 +733,7 @@ func (s *registryWatchSuite) TestWatchDeleteNonExistentNamespace() {
 	s.Equal(nsID, events[0].ns.ID())
 	s.Equal(namespace.Name("existing-namespace"), events[0].ns.Name())
 	s.False(events[0].deleted)
-	// Create event (delete of non-existent did not trigger callback)
+	// Create event (delete of nonexistent did not trigger callback)
 	s.Equal(ns2ID, events[1].ns.ID())
 	s.Equal(namespace.Name("new-namespace"), events[1].ns.Name())
 	s.False(events[1].deleted)

@@ -5833,7 +5833,7 @@ func (s *mutableStateSuite) TestHasRequestID() {
 		},
 		{
 			name:      "request_id_not_found",
-			requestID: "non-existent-request-id",
+			requestID: "nonexistent-request-id",
 			setupFunc: func(ms *MutableStateImpl) {
 				// No setup needed
 			},

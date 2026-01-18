@@ -64,10 +64,10 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 
 		_, err := q.EnqueueMessage(ctx, &persistence.InternalEnqueueMessageRequest{
 			QueueType: queueType,
-			QueueName: "non-existent-queue",
+			QueueName: "nonexistent-queue",
 		})
 		assert.ErrorAs(t, err, new(*serviceerror.NotFound))
-		assert.ErrorContains(t, err, "non-existent-queue")
+		assert.ErrorContains(t, err, "nonexistent-queue")
 		assert.ErrorContains(t, err, strconv.Itoa(int(queueType)))
 	})
 	t.Run("TestCreateQueueTwice", func(t *testing.T) {

@@ -1241,7 +1241,7 @@ func (s *NexusWorkflowTestSuite) TestNexusOperationAsyncCompletionErrors() {
 	})
 
 	s.Run("NamespaceNotFound", func() {
-		// Generate a token with a non-existent namespace ID
+		// Generate a token with a nonexistent namespace ID
 		tokenWithBadNamespace, err := s.generateValidCallbackToken("namespace-doesnt-exist-id", testcore.RandomizeStr("workflow"), uuid.NewString())
 		s.NoError(err)
 
@@ -1252,7 +1252,7 @@ func (s *NexusWorkflowTestSuite) TestNexusOperationAsyncCompletionErrors() {
 	})
 
 	s.Run("NamespaceNotFoundNoIdentifier", func() {
-		// Generate a token with a non-existent namespace ID
+		// Generate a token with a nonexistent namespace ID
 		tokenWithBadNamespace, err := s.generateValidCallbackToken("namespace-doesnt-exist-id", testcore.RandomizeStr("workflow"), uuid.NewString())
 		s.NoError(err)
 

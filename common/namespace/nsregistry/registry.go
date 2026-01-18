@@ -16,7 +16,7 @@
 //
 // The registry also supports read-through caching: when a namespace is requested but not
 // found in the cache, it queries persistence directly and caches the result. A separate
-// not-found cache prevents repeated lookups for non-existent namespaces.
+// not-found cache prevents repeated lookups for nonexistent namespaces.
 //
 // State change callbacks can be registered to receive notifications when namespace state changes. If watches
 // are in use, callbacks are called immediately after a watch event is received. If polling is in use, callbacks

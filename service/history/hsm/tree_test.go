@@ -506,7 +506,7 @@ func TestNode_DeleteChild(t *testing.T) {
 	_, ok := opLog[0].(hsm.DeleteOperation)
 	require.True(t, ok)
 
-	// Cannot delete non-existent or already deleted nodes
+	// Cannot delete nonexistent or already deleted nodes
 	err = l1.DeleteChild(hsm.Key{Type: def1.Type(), ID: "nonexistent"})
 	require.ErrorIs(t, err, hsm.ErrStateMachineNotFound)
 

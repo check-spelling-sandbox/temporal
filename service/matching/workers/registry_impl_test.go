@@ -130,7 +130,7 @@ func TestShutdownStatusForNonExistentWorker(t *testing.T) {
 	})
 	defer m.Stop()
 
-	// Send shutdown for non-existent worker - should be a no-op
+	// Send shutdown for nonexistent worker - should be a no-op
 	hb := &workerpb.WorkerHeartbeat{WorkerInstanceKey: "unknown", Status: enumspb.WORKER_STATUS_SHUTDOWN}
 	m.upsertHeartbeats("ns1", []*workerpb.WorkerHeartbeat{hb})
 

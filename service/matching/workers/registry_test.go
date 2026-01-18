@@ -120,9 +120,9 @@ func TestRegistryImpl_ListWorkers(t *testing.T) {
 		expectError     bool
 	}{
 		{
-			name:            "list workers from non-existent namespace",
+			name:            "list workers from nonexistent namespace",
 			setup:           func(r *registryImpl) {},
-			nsID:            "non-existent",
+			nsID:            "nonexistent",
 			expectedCount:   0,
 			expectedWorkers: []string{},
 		},
@@ -195,7 +195,7 @@ func TestRegistryImpl_ListWorkers(t *testing.T) {
 
 			resp, err := r.ListWorkers(tt.nsID, ListWorkersParams{})
 			if tt.expectError {
-				require.Error(t, err, "expected an error for non-existent namespace")
+				require.Error(t, err, "expected an error for nonexistent namespace")
 				assert.Empty(t, resp.Workers, "result should be empty when an error occurs")
 				return
 			}
@@ -266,7 +266,7 @@ func TestRegistryImpl_ListWorkersWithQuery(t *testing.T) {
 				})
 			},
 			nsID:            "namespace1",
-			query:           "TaskQueue = 'non-existent-queue'",
+			query:           "TaskQueue = 'nonexistent-queue'",
 			expectedCount:   0,
 			expectedWorkers: []string{},
 		},
@@ -357,9 +357,9 @@ func TestRegistryImpl_DescribeWorker(t *testing.T) {
 		expectError       bool
 	}{
 		{
-			name:              "list workers from non-existent namespace",
+			name:              "list workers from nonexistent namespace",
 			setup:             func(r *registryImpl) {},
-			nsID:              "non-existent",
+			nsID:              "nonexistent",
 			workerInstanceKey: "worker",
 			expectError:       true,
 		},
@@ -435,7 +435,7 @@ func TestRegistryImpl_DescribeWorker(t *testing.T) {
 
 			result, err := r.DescribeWorker(tt.nsID, tt.workerInstanceKey)
 			if tt.expectError {
-				require.Error(t, err, "expected an error for non-existent namespace")
+				require.Error(t, err, "expected an error for nonexistent namespace")
 				assert.Nil(t, result, "result should be nil when an error occurs")
 				return
 			}
