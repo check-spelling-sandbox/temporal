@@ -1556,7 +1556,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestWorkflowRunTimeout_Fire() {
 
 	persistenceMutableState := s.createPersistenceMutableState(mutableState, completionEvent.GetEventId(), completionEvent.GetVersion())
 
-	for _, currrentTime := range []time.Time{
+	for _, currentTime := range []time.Time{
 		s.now.Add(expirationTime - 1*time.Second),
 		s.now.Add(expirationTime + 1*time.Second),
 	} {
@@ -1564,7 +1564,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestWorkflowRunTimeout_Fire() {
 		s.mockExecutionMgr.EXPECT().GetWorkflowExecution(gomock.Any(), gomock.Any()).Return(getWorkflowExecutionResponse, nil)
 		s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).Return(tests.UpdateWorkflowExecutionResponse, nil)
 
-		s.timeSource.Update(currrentTime)
+		s.timeSource.Update(currentTime)
 		resp := s.timerQueueActiveTaskExecutor.Execute(context.Background(), s.newTaskExecutable(timerTask))
 		s.NoError(resp.ExecutionErr)
 
