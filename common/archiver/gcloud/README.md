@@ -2,7 +2,7 @@
 ## Configuration
 See https://cloud.google.com/docs/authentication#service-accounts to understand how is made the authentication against google cloud storage
 
-Nowdays we support three different ways in order to let Temporal know where your google keyfile credentials are located
+Nowadays we support three different ways in order to let Temporal know where your google keyfile credentials are located
 
 * Temporal archival deployment.yaml configuration file
 * `GOOGLE_APPLICATION_CREDENTIALS` environment variable
