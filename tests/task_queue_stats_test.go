@@ -1371,7 +1371,7 @@ func (s *TaskQueueStatsSuite) enqueueActivitiesForEachWorkflow(sets int, tqName 
 									TaskQueue:             &taskqueuepb.TaskQueue{Name: tqName, Kind: enumspb.TASK_QUEUE_KIND_NORMAL},
 									StartToCloseTimeout:   durationpb.New(time.Minute),
 									RequestEagerExecution: false,
-									// Priority is inherted from the workflow
+									// Priority is inherited from the workflow
 								},
 							},
 						},
