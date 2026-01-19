@@ -156,7 +156,7 @@ The outbound queue reader can be disabled dynamically by setting `history.outbou
 
 ### Scheduler
 
-The outound queue processor uses the [`GroupByScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/group_by_scheduler.go#L49) to group tasks into a per source namespace and destination [`DynamicWorkerPoolScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/dynamic_worker_pool_scheduler.go#L47).
+The outbound queue processor uses the [`GroupByScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/group_by_scheduler.go#L49) to group tasks into a per source namespace and destination [`DynamicWorkerPoolScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/dynamic_worker_pool_scheduler.go#L47).
 
 Each task within its group goes through an in-memory buffer, a concurrency limiter, a rate limiter, and a circuit breaker.
 
