@@ -480,7 +480,7 @@ func (tm *priTaskMatcher) OfferQuery(ctx context.Context, task *internalTask) (*
 	return nil, err
 }
 
-// OfferNexusTask either matchs a task to a local poller or forwards it if no local pollers available.
+// OfferNexusTask either matches a task to a local poller or forwards it if no local pollers available.
 // Local match is always attempted before forwarding. If local match occurs response and error are both nil, if
 // forwarding occurs then response or error is returned.
 func (tm *priTaskMatcher) OfferNexusTask(ctx context.Context, task *internalTask) (*matchingservice.DispatchNexusTaskResponse, error) {
