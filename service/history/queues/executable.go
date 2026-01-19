@@ -681,7 +681,7 @@ func (e *executableImpl) Nack(err error) {
 	submitted := false
 	if e.shouldResubmitOnNack(err) {
 		// we do not need to know if there any error during submission
-		// as long as it's not submitted, the execuable should be add
+		// as long as it's not submitted, the executable should be add
 		// to the rescheduler
 		e.SetScheduledTime(e.timeSource.Now())
 		submitted = e.scheduler.TrySubmit(e)
