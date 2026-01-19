@@ -28,7 +28,7 @@ type (
 			configVersion int64,
 			failoverVersion int64,
 			isGlobalNamespace bool,
-			failoverHistoy []*persistencespb.FailoverStatus,
+			failoverHistory []*persistencespb.FailoverStatus,
 		) error
 	}
 
@@ -60,7 +60,7 @@ func (r *replicator) HandleTransmissionTask(
 	configVersion int64,
 	failoverVersion int64,
 	isGlobalNamespace bool,
-	failoverHistoy []*persistencespb.FailoverStatus,
+	failoverHistory []*persistencespb.FailoverStatus,
 ) error {
 
 	if !isGlobalNamespace {
@@ -101,7 +101,7 @@ func (r *replicator) HandleTransmissionTask(
 			},
 			ConfigVersion:   configVersion,
 			FailoverVersion: failoverVersion,
-			FailoverHistory: convertFailoverHistoryToReplicationProto(failoverHistoy),
+			FailoverHistory: convertFailoverHistoryToReplicationProto(failoverHistory),
 		},
 	}
 
@@ -124,10 +124,10 @@ func convertClusterReplicationConfigToProto(
 }
 
 func convertFailoverHistoryToReplicationProto(
-	failoverHistoy []*persistencespb.FailoverStatus,
+	failoverHistory []*persistencespb.FailoverStatus,
 ) []*replicationpb.FailoverStatus {
 	var replicationProto []*replicationpb.FailoverStatus
-	for _, failoverStatus := range failoverHistoy {
+	for _, failoverStatus := range failoverHistory {
 		replicationProto = append(replicationProto, &replicationpb.FailoverStatus{
 			FailoverTime:    failoverStatus.GetFailoverTime(),
 			FailoverVersion: failoverStatus.GetFailoverVersion(),
