@@ -909,8 +909,8 @@ func verifyPersistenceCompatibleVersion(
 type SpanExporterInputs struct {
 	fx.In
 	Lifecycle fx.Lifecycle
-	Logger     log.Logger
-	Config     *config.Config `optional:"true"`
+	Logger    log.Logger
+	Config    *config.Config `optional:"true"`
 }
 
 // TraceExportModule holds process-global telemetry fx state defining the set of
@@ -975,7 +975,7 @@ var TraceExportModule = fx.Options(
 //     default: resource.Default() augmented with the supplied serviceName
 //   - go.opentelemetry.io/otel/trace.TracerProvider
 //     default: otelnoop.NewTracerProvider()
-//   - go.opentelemetry.io/otel/ppropagation.TextMapPropagator
+//   - go.opentelemetry.io/otel/propagation.TextMapPropagator
 //     default: propagation.TraceContext{}
 //   - telemetry.ServerStatsHandler
 //   - telemetry.ClientStatsHandler
