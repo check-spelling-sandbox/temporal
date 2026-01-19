@@ -321,7 +321,7 @@ func (e *executableImpl) Execute() (retErr error) {
 
 		attemptLatency := e.timeSource.Now().Sub(startTime)
 		e.attemptNoUserLatency = attemptLatency - attemptUserLatency
-		// emit total attempt latency so that we know how much time a task will occpy a worker goroutine
+		// emit total attempt latency so that we know how much time a task will occupy a worker goroutine
 		metrics.TaskProcessingLatency.With(e.metricsHandler).Record(attemptLatency)
 
 		priorityTaggedProvider := e.metricsHandler.WithTags(metrics.TaskPriorityTag(e.priority.String()))
