@@ -469,7 +469,7 @@ func (p *visibilityManagerImpl) convertToWorkflowExecutionInfo(
 			WorkflowId: internalExecution.RootWorkflowID,
 			RunId:      internalExecution.RootRunID,
 		},
-		// TODO: poplulate FirstRunId once it has been added as a system search attribute.
+		// TODO: populate FirstRunId once it has been added as a system search attribute.
 	}
 
 	if internalExecution.ParentWorkflowID != "" {
