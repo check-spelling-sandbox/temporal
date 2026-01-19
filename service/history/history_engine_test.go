@@ -272,7 +272,7 @@ func (s *engineSuite) TestGetMutableStateSync() {
 	s.Equal(tests.RunID, response.GetFirstExecutionRunId())
 }
 
-func (s *engineSuite) TestGetMutableState_IntestRunID() {
+func (s *engineSuite) TestGetMutableState_InTestRunID() {
 	ctx := context.Background()
 
 	execution := commonpb.WorkflowExecution{
