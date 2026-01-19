@@ -4875,7 +4875,7 @@ func (wh *WorkflowHandler) GetWorkerTaskReachability(ctx context.Context, reques
 		}
 	}
 	if gotUnversionedRequest && len(request.GetTaskQueues()) == 0 {
-		return nil, serviceerror.NewInvalidArgument("Cannot get reachability of an unversioned worker without specifying at least one task queue (empty build ID is interpereted as unversioned)")
+		return nil, serviceerror.NewInvalidArgument("Cannot get reachability of an unversioned worker without specifying at least one task queue (empty build ID is interpreted as unversioned)")
 	}
 
 	for _, taskQueue := range request.GetTaskQueues() {
