@@ -3094,7 +3094,7 @@ func (s *engineSuite) TestRespondActivityTaskFailedIfGetExecutionFailed() {
 	s.EqualError(err, "FAILED")
 }
 
-func (s *engineSuite) TestRespondActivityTaskFailededIfNoAIdProvided() {
+func (s *engineSuite) TestRespondActivityTaskFailedIfNoAIdProvided() {
 	namespaceID := tests.NamespaceID
 	tt := &tokenspb.Task{
 		Attempt:          1,
@@ -3131,7 +3131,7 @@ func (s *engineSuite) TestRespondActivityTaskFailededIfNoAIdProvided() {
 	s.EqualError(err, "activityID cannot be empty")
 }
 
-func (s *engineSuite) TestRespondActivityTaskFailededIfNotFound() {
+func (s *engineSuite) TestRespondActivityTaskFailedIfNotFound() {
 	namespaceID := tests.NamespaceID
 	tt := &tokenspb.Task{
 		Attempt:          1,
