@@ -8,7 +8,7 @@ type (
 		// Equals recursively checks if the given Predicate has the same
 		// structure and value as the caller Predicate
 		// NOTE: the result will contain false negatives, meaning even if
-		// two predicates are mathmatically equivalent, Equals may still
+		// two predicates are mathematically equivalent, Equals may still
 		// return false.
 		Equals(Predicate[T]) bool
 
