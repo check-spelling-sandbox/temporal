@@ -595,7 +595,7 @@ func (e *ChasmEngine) handleConflictPolicy(
 	case chasm.BusinessIDConflictPolicyTerminateExisting:
 		// TODO: handle BusinessIDConflictPolicyTerminateExisting and update TestNewExecution_ConflictPolicy_TerminateExisting.
 		//
-		// Today's state-based replication logic can not existly handle this policy correctly
+		// Today's state-based replication logic cannot handle this policy correctly
 		// (or any operation that close and starts a new run in one transaction).
 		// The termination and creation of new run can not be replicated transactionally.
 		//
