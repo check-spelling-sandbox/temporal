@@ -2373,7 +2373,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 			// since every other task is expired, we expect half the tasks to be deleted
 			// after poll consumed 1/4th of what is available.
 			// however, the gc is best-effort and might not run exactly when we want it to.
-			// various thread interleavings between the two task reader threads and this one
+			// various threads interleaving between the two task reader threads and this one
 			// might leave the gc behind by up to 3 tasks, or ahead by up to 1.
 			delta := remaining - s.taskManager.getTaskCount(dbq)
 			s.Truef(-3 <= delta && delta <= 1, "remaining %d, getTaskCount %d", remaining, s.taskManager.getTaskCount(dbq))
