@@ -300,7 +300,7 @@ func updateNamespaceConfig(
 	configVersion := int64(-1)
 	s.EventuallyWithT(func(t *assert.CollectT) {
 		for _, r := range clusters[inClusterIndex].Host().NamespaceRegistries() {
-			// TODO(alex): here and everywere else in this file: instead of waiting for registry to be updated
+			// TODO(alex): here and everywhere else in this file: instead of waiting for registry to be updated
 			// r.RefreshNamespaceById() can be used. It will require to pass nsID everywhere.
 			resp, err := r.GetNamespace(namespace.Name(ns))
 			require.NoError(t, err)
