@@ -1777,7 +1777,7 @@ If value less or equal to 0, will fall back to HistoryPersistenceNamespaceMaxQPS
 	TaskSchedulerInactiveChannelDeletionDelay = NewGlobalDurationSetting(
 		"history.taskSchedulerInactiveChannelDeletionDelay",
 		time.Hour,
-		`TaskSchedulerInactiveChannelDeletionDelay the time delay before a namespace's' channel is removed from the scheduler`,
+		`TaskSchedulerInactiveChannelDeletionDelay the time delay before a namespace's channel is removed from the scheduler`,
 	)
 
 	TimerTaskBatchSize = NewGlobalIntSetting(
