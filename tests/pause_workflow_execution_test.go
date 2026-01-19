@@ -748,7 +748,7 @@ func (s *PauseWorkflowExecutionSuite) hasActivityPauseEntries(desc *workflowserv
 // - the workflow status is paused.
 // - the workflow has the correct pause info.
 // - the TemporalPauseInfo search attribute contains workflow pause entries.
-// - there is no workflow task scheduled event inbetween pause and unpause events.
+// - there is no workflow task scheduled event in between pause and unpause events.
 func (s *PauseWorkflowExecutionSuite) assertWorkflowIsPaused(ctx context.Context, t *assert.CollectT, workflowID string, runID string) {
 	desc, err := s.SdkClient().DescribeWorkflowExecution(ctx, workflowID, runID)
 	require.NoError(t, err)
