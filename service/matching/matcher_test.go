@@ -295,7 +295,7 @@ func (t *MatcherTestSuite) TestForwardingWhenBacklogIsYoung() {
 	wg.Add(1)
 	t.client.EXPECT().AddWorkflowTask(gomock.Any(), gomock.Any(), gomock.Any()).Do(
 		func(arg0 context.Context, arg1 *matchingservice.AddWorkflowTaskRequest, arg2 ...interface{}) {
-			// Offer forwarding has occured
+			// Offer forwarding has occurred
 			wg.Done()
 		},
 	).Return(&matchingservice.AddWorkflowTaskResponse{}, errMatchingHostThrottleTest)
@@ -420,19 +420,19 @@ func (t *MatcherTestSuite) TestBacklogAge() {
 
 	youngBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Second), nil)
 	go t.rootMatcher.MustOffer(ctx, youngBacklogTask, interruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                           //nolint:forbidigo
+	time.Sleep(time.Millisecond * 10)                             //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Second, float64(100*time.Millisecond))
 
 	middleBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Second), nil)
 	// offering a task with the exact creation to make sure of correct counting for each creation time
 	middleBacklogTask.event.Data.CreateTime = youngBacklogTask.event.Data.CreateTime
 	go t.rootMatcher.MustOffer(ctx, middleBacklogTask, interruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                            //nolint:forbidigo
+	time.Sleep(time.Millisecond * 10)                              //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Second, float64(100*time.Millisecond))
 
 	oldBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Minute), nil)
 	go t.rootMatcher.MustOffer(ctx, oldBacklogTask, interruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                         //nolint:forbidigo
+	time.Sleep(time.Millisecond * 10)                           //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Minute, float64(100*time.Millisecond))
 
 	task, _ := t.rootMatcher.Poll(ctx, &pollMetadata{})
