@@ -81,7 +81,7 @@ var (
 	// across multiple submissions to scheduler
 	reschedulePolicy                           = common.CreateTaskReschedulePolicy()
 	taskNotReadyReschedulePolicy               = common.CreateTaskNotReadyReschedulePolicy()
-	taskResourceExhuastedReschedulePolicy      = common.CreateTaskResourceExhaustedReschedulePolicy()
+	taskResourceExhaustedReschedulePolicy      = common.CreateTaskResourceExhaustedReschedulePolicy()
 	dependencyTaskNotCompletedReschedulePolicy = common.CreateDependencyTaskNotCompletedReschedulePolicy()
 )
 
@@ -797,7 +797,7 @@ func (e *executableImpl) backoffDuration(
 		// upon system resource exhausted error and pick the longer backoff duration
 		backoffDuration = max(
 			backoffDuration,
-			taskResourceExhuastedReschedulePolicy.ComputeNextDelay(0, e.resourceExhaustedCount, err),
+			taskResourceExhaustedReschedulePolicy.ComputeNextDelay(0, e.resourceExhaustedCount, err),
 		)
 	}
 
