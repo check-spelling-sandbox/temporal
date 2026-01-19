@@ -485,7 +485,7 @@ func (s *AdvancedVisibilitySuite) TestListWorkflow_KeywordQuery() {
 	s.NoError(err)
 	s.Len(resp.GetExecutions(), 0)
 
-	// Inordered match on Keyword (not supported)
+	// Unordered match on Keyword (not supported)
 	listRequest = &workflowservice.ListWorkflowExecutionsRequest{
 		Namespace: s.Namespace().String(),
 		PageSize:  testcore.DefaultPageSize,
@@ -573,7 +573,7 @@ func (s *AdvancedVisibilitySuite) TestListWorkflow_StringQuery() {
 	s.NoError(err)
 	s.Len(resp.GetExecutions(), 1)
 
-	// Inordered match on String (supported)
+	// Unordered match on String (supported)
 	listRequest = &workflowservice.ListWorkflowExecutionsRequest{
 		Namespace: s.Namespace().String(),
 		PageSize:  testcore.DefaultPageSize,
