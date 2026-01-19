@@ -22,7 +22,7 @@ import (
 )
 
 // This is mostly copied from ExecutableActivityStateTask
-// The 4 replication executable task implemenatations are quite similar
+// The 4 replication executable task implementations are quite similar
 // we may want to do some refactoring later.
 
 type (
