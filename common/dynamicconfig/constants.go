@@ -74,7 +74,7 @@ var (
 	VisibilityDisableOrderByClause = NewNamespaceBoolSetting(
 		"system.visibilityDisableOrderByClause",
 		true,
-		`VisibilityDisableOrderByClause is the config to disable ORDERY BY clause for Elasticsearch`,
+		`VisibilityDisableOrderByClause is the config to disable ORDER BY clause for Elasticsearch`,
 	)
 	VisibilityEnableManualPagination = NewNamespaceBoolSetting(
 		"system.visibilityEnableManualPagination",
