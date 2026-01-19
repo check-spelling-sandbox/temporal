@@ -1711,18 +1711,18 @@ func (s *nodeSuite) TestRef() {
 	subComponent11 := subComponent1.SubComponent11.Get(chasmContext)
 
 	testCases := []struct {
-		name             string
-		component        Component
-		expectErr        bool
-		expectedPath     []string
-		expectedInitalVT *persistencespb.VersionedTransition
+		name              string
+		component         Component
+		expectErr         bool
+		expectedPath      []string
+		expectedInitialVT *persistencespb.VersionedTransition
 	}{
 		{
 			name:         "root",
 			component:    testComponent,
 			expectErr:    false,
 			expectedPath: nil, // same as []string{}
-			expectedInitalVT: &persistencespb.VersionedTransition{
+			expectedInitialVT: &persistencespb.VersionedTransition{
 				NamespaceFailoverVersion: 1,
 				TransitionCount:          1,
 			},
@@ -1732,7 +1732,7 @@ func (s *nodeSuite) TestRef() {
 			component:    subComponent1,
 			expectErr:    false,
 			expectedPath: []string{"SubComponent1"},
-			expectedInitalVT: &persistencespb.VersionedTransition{
+			expectedInitialVT: &persistencespb.VersionedTransition{
 				NamespaceFailoverVersion: 1,
 				TransitionCount:          1,
 			},
@@ -1742,7 +1742,7 @@ func (s *nodeSuite) TestRef() {
 			component:    subComponent11,
 			expectErr:    false,
 			expectedPath: []string{"SubComponent1", "SubComponent11"},
-			expectedInitalVT: &persistencespb.VersionedTransition{
+			expectedInitialVT: &persistencespb.VersionedTransition{
 				NamespaceFailoverVersion: 1,
 				TransitionCount:          1,
 			},
@@ -1771,13 +1771,13 @@ func (s *nodeSuite) TestRef() {
 
 				// Proto fields are validated separately with ProtoEqual.
 				// executionLastUpdateVT: currentVT,
-				// componentInitialVT: tc.expectedInitalVT,
+				// componentInitialVT: tc.expectedInitialVT,
 			}
 
 			actualRef, err := DeserializeComponentRef(encodedRef)
 			s.NoError(err)
 			s.ProtoEqual(currentVT, actualRef.executionLastUpdateVT)
-			s.ProtoEqual(tc.expectedInitalVT, actualRef.componentInitialVT)
+			s.ProtoEqual(tc.expectedInitialVT, actualRef.componentInitialVT)
 
 			actualRef.executionLastUpdateVT = nil
 			actualRef.componentInitialVT = nil
