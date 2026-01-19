@@ -236,7 +236,7 @@ A Timer Task becomes available to be executed at the trigger time that is stored
 
 #### Visibility Task Queue
 
-Visibility tasks are also available to be executed immedidately, but they are for updating workflow metadata records in the visibility storage which could be a different database than the one hosting the primary workflow states and histories.
+Visibility tasks are also available to be executed immediately, but they are for updating workflow metadata records in the visibility storage which could be a different database than the one hosting the primary workflow states and histories.
 
 <details>
 <summary><i>Code entrypoints</i></summary>

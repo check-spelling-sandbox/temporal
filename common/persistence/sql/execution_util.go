@@ -699,26 +699,26 @@ func createImmediateTasks(
 	tx sqlplugin.Tx,
 	shardID int32,
 	categoryID int,
-	immedidateTasks []p.InternalHistoryTask,
+	immediateTasks []p.InternalHistoryTask,
 ) error {
 	// This is for backward compatibility.
 	// These task categories exist before the general history_immediate_tasks table is created,
 	// so they have their own tables.
 	switch categoryID {
 	case tasks.CategoryIDTransfer:
-		return createTransferTasks(ctx, tx, shardID, immedidateTasks)
+		return createTransferTasks(ctx, tx, shardID, immediateTasks)
 	case tasks.CategoryIDVisibility:
-		return createVisibilityTasks(ctx, tx, shardID, immedidateTasks)
+		return createVisibilityTasks(ctx, tx, shardID, immediateTasks)
 	case tasks.CategoryIDReplication:
-		return createReplicationTasks(ctx, tx, shardID, immedidateTasks)
+		return createReplicationTasks(ctx, tx, shardID, immediateTasks)
 	}
 
-	if len(immedidateTasks) == 0 {
+	if len(immediateTasks) == 0 {
 		return nil
 	}
 
-	immediateTasksRows := make([]sqlplugin.HistoryImmediateTasksRow, 0, len(immedidateTasks))
-	for _, task := range immedidateTasks {
+	immediateTasksRows := make([]sqlplugin.HistoryImmediateTasksRow, 0, len(immediateTasks))
+	for _, task := range immediateTasks {
 		immediateTasksRows = append(immediateTasksRows, sqlplugin.HistoryImmediateTasksRow{
 			ShardID:      shardID,
 			CategoryID:   int32(categoryID),

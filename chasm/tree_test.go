@@ -2656,7 +2656,7 @@ func (s *nodeSuite) TestExecuteImmediatePureTask() {
 	s.Len(mutations.UpdatedNodes, 2, "root and subcomponent1 should be updated")
 	s.Empty(mutations.DeletedNodes)
 
-	// immedidate pure tasks will be executed inline and no physical chasm pure task will be generated.
+	// immediate pure tasks will be executed inline and no physical chasm pure task will be generated.
 	s.Equal(tasks.MaximumKey.FireTime, s.nodeBackend.LastDeletePureTaskCall())
 }
 
