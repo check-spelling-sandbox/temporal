@@ -9,7 +9,7 @@ import (
 type Grouper interface {
 	// Key returns the group key for a given task.
 	Key(task tasks.Task) (key any)
-	// Predicate constructs a prdicate from a slice of keys.
+	// Predicate constructs a predicate from a slice of keys.
 	Predicate(keys []any) tasks.Predicate
 }
 

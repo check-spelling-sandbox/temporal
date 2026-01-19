@@ -168,7 +168,7 @@ func (rpo *monitor) Start() {
 		rpo.logger.Fatal("unable to set ringpop label", tag.Error(err), tag.Key(portKey))
 	}
 
-	// This label should be set last, it's used as the prediciate for finding members for rings.
+	// This label should be set last, it's used as the predicate for finding members for rings.
 	if err = labels.Set(roleKey, string(rpo.serviceName)); err != nil {
 		rpo.logger.Fatal("unable to set ringpop label", tag.Error(err), tag.Key(roleKey))
 	}

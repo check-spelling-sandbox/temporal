@@ -166,12 +166,12 @@ func (t *TypePredicate) Test(task Task) bool {
 }
 
 func (t *TypePredicate) Equals(predicate Predicate) bool {
-	typePrediate, ok := predicate.(*TypePredicate)
+	typePredicate, ok := predicate.(*TypePredicate)
 	if !ok {
 		return false
 	}
 
-	return maps.Equal(t.Types, typePrediate.Types)
+	return maps.Equal(t.Types, typePredicate.Types)
 }
 
 func (t *TypePredicate) Size() int {
