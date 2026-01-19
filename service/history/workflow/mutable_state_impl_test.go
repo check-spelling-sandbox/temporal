@@ -6009,7 +6009,7 @@ func (s *mutableStateSuite) TestDeleteCHASMPureTasks() {
 			expectedRemaining: 3,
 		},
 		{
-			name:              "paritial",
+			name:              "partial",
 			maxScheduledTime:  now.Add(2 * time.Minute),
 			expectedRemaining: 2,
 		},
