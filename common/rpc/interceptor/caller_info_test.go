@@ -231,7 +231,7 @@ func (s *callerInfoSuite) TestIntercept_CallOrigin() {
 			expectedCallOrigin: "",
 		},
 		{
-			// test context with matchcing call origin
+			// test context with matching call origin
 			setupIncomingCtx: func() context.Context {
 				return headers.SetOrigin(context.Background(), method)
 			},
