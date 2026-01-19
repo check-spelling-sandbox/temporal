@@ -49,11 +49,11 @@ type (
 		autoIncrementTaskID         int64
 		passiveClusterName          string
 
-		controller      *gomock.Controller
-		passtiveCluster *testcore.TestCluster
-		generator       test.Generator
-		serializer      serialization.Serializer
-		logger          log.Logger
+		controller     *gomock.Controller
+		passiveCluster *testcore.TestCluster
+		generator      test.Generator
+		serializer     serialization.Serializer
+		logger         log.Logger
 	}
 )
 
@@ -96,7 +96,7 @@ func (s *NDCReplicationTaskBatchingTestSuite) SetupSuite() {
 	passiveClusterConfig.ClusterMetadata.MasterClusterName = s.passiveClusterName
 	cluster, err := s.testClusterFactory.NewCluster(s.T(), passiveClusterConfig, log.With(s.logger, tag.ClusterName(clusterName[0])))
 	s.Require().NoError(err)
-	s.passtiveCluster = cluster
+	s.passiveCluster = cluster
 
 	s.registerNamespace()
 }
@@ -106,7 +106,7 @@ func (s *NDCReplicationTaskBatchingTestSuite) TearDownSuite() {
 		s.generator.Reset()
 	}
 	s.controller.Finish()
-	s.NoError(s.passtiveCluster.TearDownCluster())
+	s.NoError(s.passiveCluster.TearDownCluster())
 }
 
 func (s *NDCReplicationTaskBatchingTestSuite) SetupTest() {
@@ -166,7 +166,7 @@ func (s *NDCReplicationTaskBatchingTestSuite) assertHistoryEvents(
 	mockClientBean.
 		EXPECT().
 		GetRemoteAdminClient(s.passiveClusterName).
-		Return(s.passtiveCluster.AdminClient(), nil).
+		Return(s.passiveCluster.AdminClient(), nil).
 		AnyTimes()
 
 	passiveClusterFetcher := eventhandler.NewHistoryPaginatedFetcher(
@@ -193,7 +193,7 @@ func (s *NDCReplicationTaskBatchingTestSuite) assertHistoryEvents(
 
 func (s *NDCReplicationTaskBatchingTestSuite) registerNamespace() {
 	s.namespace = namespace.Name("test-simple-workflow-ndc-" + common.GenerateRandomString(5))
-	passiveFrontend := s.passtiveCluster.FrontendClient() //
+	passiveFrontend := s.passiveCluster.FrontendClient() //
 	replicationConfig := []*replicationpb.ClusterReplicationConfig{
 		{ClusterName: clusterName[0]},
 		{ClusterName: clusterName[1]},
