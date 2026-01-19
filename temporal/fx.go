@@ -908,7 +908,7 @@ func verifyPersistenceCompatibleVersion(
 
 type SpanExporterInputs struct {
 	fx.In
-	Lifecycyle fx.Lifecycle
+	Lifecycle fx.Lifecycle
 	Logger     log.Logger
 	Config     *config.Config `optional:"true"`
 }
@@ -952,7 +952,7 @@ var TraceExportModule = fx.Options(
 		exporters := expmaps.Values(exportersByType)
 
 		// Configure exporters' lifecycle hooks.
-		inputs.Lifecycyle.Append(fx.Hook{
+		inputs.Lifecycle.Append(fx.Hook{
 			OnStart: func(ctx context.Context) error {
 				err = startAll(exporters)(ctx)
 				tracingReady.Store(true)
