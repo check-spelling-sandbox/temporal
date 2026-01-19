@@ -30,11 +30,11 @@ func Test_Recordchildworkflowcompleted_WithForwards(t *testing.T) {
 
 	testNamespaceID := tests.NamespaceID
 	childWFID := uuid.NewString()
-	paretntWFID := uuid.NewString()
+	parentWFID := uuid.NewString()
 	oldParentRunID := uuid.NewString()
 	newParentRunID := uuid.NewString()
-	oldParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), paretntWFID, oldParentRunID)
-	newParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), paretntWFID, newParentRunID)
+	oldParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), parentWFID, oldParentRunID)
+	newParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), parentWFID, newParentRunID)
 	oldParentExecutionInfo := &persistencespb.WorkflowExecutionInfo{
 		ResetRunId: newParentRunID, // link the old parent to the new parent.
 	}
@@ -44,7 +44,7 @@ func Test_Recordchildworkflowcompleted_WithForwards(t *testing.T) {
 		NamespaceId: testNamespaceID.String(),
 		ParentExecution: &commonpb.WorkflowExecution{
 			RunId:      oldParentRunID,
-			WorkflowId: paretntWFID,
+			WorkflowId: parentWFID,
 		},
 		ChildExecution: &commonpb.WorkflowExecution{WorkflowId: childWFID},
 		CompletionEvent: &historypb.HistoryEvent{
@@ -112,9 +112,9 @@ func Test_Recordchildworkflowcompleted_WithInfiniteForwards(t *testing.T) {
 
 	testNamespaceID := tests.NamespaceID
 	childWFID := uuid.NewString()
-	paretntWFID := uuid.NewString()
+	parentWFID := uuid.NewString()
 	oldParentRunID := uuid.NewString()
-	oldParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), paretntWFID, oldParentRunID)
+	oldParentWFKey := definition.NewWorkflowKey(testNamespaceID.String(), parentWFID, oldParentRunID)
 	oldParentExecutionInfo := &persistencespb.WorkflowExecutionInfo{
 		ResetRunId: oldParentRunID, // link to self causing an infinite loop.
 	}
@@ -123,7 +123,7 @@ func Test_Recordchildworkflowcompleted_WithInfiniteForwards(t *testing.T) {
 		NamespaceId: testNamespaceID.String(),
 		ParentExecution: &commonpb.WorkflowExecution{
 			RunId:      oldParentRunID,
-			WorkflowId: paretntWFID,
+			WorkflowId: parentWFID,
 		},
 		ChildExecution: &commonpb.WorkflowExecution{WorkflowId: childWFID},
 		CompletionEvent: &historypb.HistoryEvent{
