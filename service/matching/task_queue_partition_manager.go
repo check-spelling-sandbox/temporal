@@ -40,7 +40,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-var errDefaultQueueNotInit = serviceerror.NewInternal("defaultQueue is not initializaed")
+var errDefaultQueueNotInit = serviceerror.NewInternal("defaultQueue is not initialized")
 
 const (
 	defaultTaskDispatchRPS    = 100000.0

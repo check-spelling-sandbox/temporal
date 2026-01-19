@@ -185,7 +185,7 @@ func (s *Scheduler) LifecycleState(ctx chasm.Context) chasm.LifecycleState {
 	return chasm.LifecycleStateRunning
 }
 
-// NewRangeBackfiller returns an intialized Backfiller component, which should
+// NewRangeBackfiller returns an initialized Backfiller component, which should
 // be parented under a Scheduler root node.
 func (s *Scheduler) NewRangeBackfiller(
 	ctx chasm.MutableContext,
@@ -198,7 +198,7 @@ func (s *Scheduler) NewRangeBackfiller(
 	return backfiller
 }
 
-// NewImmediateBackfiller returns an intialized Backfiller component, which should
+// NewImmediateBackfiller returns an initialized Backfiller component, which should
 // be parented under a Scheduler root node.
 func (s *Scheduler) NewImmediateBackfiller(
 	ctx chasm.MutableContext,
