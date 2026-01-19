@@ -55,7 +55,7 @@ type processBufferResult struct {
 	// Number of buffered starts dropped due to overlap policy during processing.
 	overlapSkipped int64
 
-	// Nunmber of buffered starts dropped from missing the catchup window.
+	// Number of buffered starts dropped from missing the catchup window.
 	missedCatchupWindow int64
 }
 
