@@ -65,7 +65,7 @@ it will search all records starting from `2020-01-21T00:00:00Z` to `2020-01-21T5
 ### Limitations
 
 - The only operator supported is `=`
-- Currently It's not possible to guarantee the resulSet order, specially if the pageSize it's fullfilled.  
+- Currently It's not possible to guarantee the resulSet order, specially if the pageSize it's fulfilled.  
 
 ### Example
 
