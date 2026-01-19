@@ -5399,7 +5399,7 @@ func (wh *WorkflowHandler) RespondNexusTaskCompleted(ctx context.Context, reques
 			operationToken = r.OperationId //nolint:staticcheck // SA1019 this field might be set by old clients.
 		}
 		if operationToken == "" {
-			return nil, serviceerror.NewInvalidArgument("missing opration token in response")
+			return nil, serviceerror.NewInvalidArgument("missing operation token in response")
 		}
 
 		tokenLimit := wh.config.MaxNexusOperationTokenLength(request.Namespace)

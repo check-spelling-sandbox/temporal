@@ -168,7 +168,7 @@ type OperationCompletionUnsuccessfulOptions struct {
 	FailureConverter nexus.FailureConverter
 	// OperationID is the unique ID for this operation. Used when a completion callback is received before a started response.
 	//
-	// Deprecated: Use OperatonToken instead.
+	// Deprecated: Use OperationToken instead.
 	OperationID string
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
