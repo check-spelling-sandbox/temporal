@@ -1073,7 +1073,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 			},
 		},
 	}
-	localVersionHistoryies := &historyspb.VersionHistories{
+	localVersionHistories := &historyspb.VersionHistories{
 		CurrentVersionHistoryIndex: 0,
 		Histories: []*historyspb.VersionHistory{
 			{
@@ -1119,7 +1119,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.NoError(err)
 	mockMutableState := historyi.NewMockMutableState(s.controller)
 	mockMutableState.EXPECT().GetExecutionInfo().Return(&persistencespb.WorkflowExecutionInfo{
-		VersionHistories: localVersionHistoryies,
+		VersionHistories: localVersionHistories,
 		TransitionHistory: []*persistencespb.VersionedTransition{
 			{NamespaceFailoverVersion: 1, TransitionCount: 10},
 			{NamespaceFailoverVersion: 2, TransitionCount: 13},
@@ -1201,7 +1201,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.mockExecutionManager.EXPECT().AppendRawHistoryNodes(gomock.Any(), &persistence.AppendRawHistoryNodesRequest{
 		ShardID:           mockShard.GetShardID(),
 		IsNewBranch:       false,
-		BranchToken:       localVersionHistoryies.Histories[0].BranchToken,
+		BranchToken:       localVersionHistories.Histories[0].BranchToken,
 		History:           gapBlobs,
 		PrevTransactionID: 0,
 		TransactionID:     taskId1,
@@ -1211,7 +1211,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.mockExecutionManager.EXPECT().AppendRawHistoryNodes(gomock.Any(), &persistence.AppendRawHistoryNodesRequest{
 		ShardID:           mockShard.GetShardID(),
 		IsNewBranch:       false,
-		BranchToken:       localVersionHistoryies.Histories[0].BranchToken,
+		BranchToken:       localVersionHistories.Histories[0].BranchToken,
 		History:           blobs,
 		PrevTransactionID: taskId1,
 		TransactionID:     taskId2,
@@ -1221,7 +1221,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.mockExecutionManager.EXPECT().AppendRawHistoryNodes(gomock.Any(), &persistence.AppendRawHistoryNodesRequest{
 		ShardID:           mockShard.GetShardID(),
 		IsNewBranch:       false,
-		BranchToken:       localVersionHistoryies.Histories[0].BranchToken,
+		BranchToken:       localVersionHistories.Histories[0].BranchToken,
 		History:           tailBlobs,
 		PrevTransactionID: taskId2,
 		TransactionID:     taskId3,
@@ -1426,7 +1426,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 			},
 		},
 	}
-	localVersionHistoryies := &historyspb.VersionHistories{
+	localVersionHistories := &historyspb.VersionHistories{
 		CurrentVersionHistoryIndex: 0,
 		Histories: []*historyspb.VersionHistory{
 			{
@@ -1472,7 +1472,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.NoError(err)
 	mockMutableState := historyi.NewMockMutableState(s.controller)
 	mockMutableState.EXPECT().GetExecutionInfo().Return(&persistencespb.WorkflowExecutionInfo{
-		VersionHistories: localVersionHistoryies,
+		VersionHistories: localVersionHistories,
 		TransitionHistory: []*persistencespb.VersionedTransition{
 			{NamespaceFailoverVersion: 1, TransitionCount: 10},
 			{NamespaceFailoverVersion: 2, TransitionCount: 13},
@@ -1552,7 +1552,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.mockExecutionManager.EXPECT().AppendRawHistoryNodes(gomock.Any(), &persistence.AppendRawHistoryNodesRequest{
 		ShardID:           mockShard.GetShardID(),
 		IsNewBranch:       false,
-		BranchToken:       localVersionHistoryies.Histories[0].BranchToken,
+		BranchToken:       localVersionHistories.Histories[0].BranchToken,
 		History:           gapBlobs,
 		PrevTransactionID: 0,
 		TransactionID:     taskId1,
@@ -1562,7 +1562,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_W
 	s.mockExecutionManager.EXPECT().AppendRawHistoryNodes(gomock.Any(), &persistence.AppendRawHistoryNodesRequest{
 		ShardID:           mockShard.GetShardID(),
 		IsNewBranch:       false,
-		BranchToken:       localVersionHistoryies.Histories[0].BranchToken,
+		BranchToken:       localVersionHistories.Histories[0].BranchToken,
 		History:           blobs,
 		PrevTransactionID: taskId1,
 		TransactionID:     taskId2,
@@ -1850,7 +1850,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_C
 			},
 		},
 	}
-	localVersionHistoryies := &historyspb.VersionHistories{
+	localVersionHistories := &historyspb.VersionHistories{
 		CurrentVersionHistoryIndex: 0,
 		Histories: []*historyspb.VersionHistory{
 			{
@@ -1878,7 +1878,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_C
 	mockMutableState.EXPECT().GetExecutionInfo().Return(&persistencespb.WorkflowExecutionInfo{
 		NamespaceId:      namespaceID,
 		WorkflowId:       s.workflowID,
-		VersionHistories: localVersionHistoryies,
+		VersionHistories: localVersionHistories,
 		TransitionHistory: []*persistencespb.VersionedTransition{
 			{NamespaceFailoverVersion: 1, TransitionCount: 10},
 			{NamespaceFailoverVersion: 2, TransitionCount: 13},
@@ -1896,7 +1896,7 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_C
 	s.mockNamespaceCache.EXPECT().GetNamespaceName(namespace.ID(namespaceID)).Return(namespace.Name("test-namespace"), nil).AnyTimes()
 	forkedBranchToken := []byte("forked-branchToken")
 	s.mockExecutionManager.EXPECT().ForkHistoryBranch(gomock.Any(), &persistence.ForkHistoryBranchRequest{
-		ForkBranchToken: localVersionHistoryies.Histories[0].BranchToken,
+		ForkBranchToken: localVersionHistories.Histories[0].BranchToken,
 		ForkNodeID:      31,
 		NamespaceID:     namespaceID,
 		Info:            persistence.BuildHistoryGarbageCleanupInfo(namespaceID, s.workflowID, s.runID),
@@ -1919,8 +1919,8 @@ func (s *workflowReplicatorSuite) Test_bringLocalEventsUpToSourceCurrentBranch_C
 		false)
 	s.NoError(err)
 
-	s.Equal(forkedBranchToken, localVersionHistoryies.Histories[2].BranchToken)
-	s.Equal(int32(2), localVersionHistoryies.CurrentVersionHistoryIndex)
+	s.Equal(forkedBranchToken, localVersionHistories.Histories[2].BranchToken)
+	s.Equal(int32(2), localVersionHistories.CurrentVersionHistoryIndex)
 	s.NotNil(newRunBranch)
 }
 
