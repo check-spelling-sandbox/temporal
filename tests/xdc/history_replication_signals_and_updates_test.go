@@ -38,7 +38,7 @@ import (
 )
 
 // This suite contains tests of scenarios in which conflicting histories arise during history replication. To do that we
-// need to create "split-brain" sitauations in which both clusters believe they are active, and to do that, we need to
+// need to create "split-brain" situations in which both clusters believe they are active, and to do that, we need to
 // control when history and namespace event replication tasks are executed. This is achieved using injection approaches
 // based on those in tests/xdc/history_replication_dlq_test.go.
 
