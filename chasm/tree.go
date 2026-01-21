@@ -2761,7 +2761,7 @@ func deserializeTask(
 		return taskValue, nil
 	}
 
-	// TODO: consider pre-calculating the proto field num when registring the task type.
+	// TODO: consider pre-calculating the proto field num when registering the task type.
 
 	protoMessageFound := false
 	for i := 0; i < taskGoType.NumField(); i++ {
@@ -2812,7 +2812,7 @@ func serializeTask(
 		}, nil
 	}
 
-	// TODO: consider pre-calculating the proto field num when registring the task type.
+	// TODO: consider pre-calculating the proto field num when registering the task type.
 
 	var blob *commonpb.DataBlob
 	protoMessageFound := false
