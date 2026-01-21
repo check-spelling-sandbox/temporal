@@ -95,8 +95,8 @@ func (s *ConcurrentTxMapSuite) TestPutOrDo() {
 		fnApplied = true
 		return errors.New("some err")
 	})
-	valueRetuern := interf.(*intType)
-	s.Equal(value, *valueRetuern)
+	valueReturn := interf.(*intType)
+	s.Equal(value, *valueReturn)
 	s.Nil(err, "PutOrDo should return nil when function not applied")
 	s.False(ok, "PutOrDo should return false when function not applied")
 	s.False(fnApplied, "PutOrDo should not apply function when key doesn't exist")
@@ -108,8 +108,8 @@ func (s *ConcurrentTxMapSuite) TestPutOrDo() {
 		*intValue++
 		return errors.New("some err")
 	})
-	valueRetuern = interf.(*intType)
-	s.Equal(value, *valueRetuern)
+	valueReturn = interf.(*intType)
+	s.Equal(value, *valueReturn)
 	s.NotNil(err, "PutOrDo should return non nil when function applied")
 	s.True(ok, "PutOrDo should return true when function applied")
 	s.True(fnApplied, "PutOrDo should apply function when key exists")
