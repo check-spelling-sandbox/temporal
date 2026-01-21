@@ -54,7 +54,7 @@ var (
 // - NeedSyncStructure: Value is deserialized, neither data nor tree structure is synced.
 //
 // For simplicity, for a dirty component node, the logic always sync structure (potentially multiple times within a transaction) first,
-// and the serializes the data at the very end of a transaction. So there will never base a case where value is synced with serializedNode,
+// and then serializes the data at the very end of a transaction. So there will never base a case where value is synced with serializedNode,
 // but not with children.
 //
 // To update this field, ALWAYS use setValueState() method.
