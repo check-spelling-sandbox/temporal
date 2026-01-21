@@ -317,7 +317,7 @@ func newTreeInitSearchAttributesAndMemo(
 		return err
 	}
 
-	// Theoritically we should check if the root node has a Visibility component or not.
+	// Theoretically we should check if the root node has a Visibility component or not.
 	// But that doesn't really matter. Even if it doesn't have one, currentSearchAttributes
 	// and currentMemo will just never be used.
 

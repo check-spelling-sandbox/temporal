@@ -88,7 +88,7 @@ func (a *taskKeyGenerator) setTaskKeys(
 							tag.CursorTimestamp(a.taskMinScheduledTime),
 							tag.ValueShardAllocateTimerBeforeRead,
 						)
-						// Theoritically we don't need to add the extra 1ms.
+						// Theoretically we don't need to add the extra 1ms.
 						// Guess it's just to be extra safe here.
 						taskScheduledTime = a.taskMinScheduledTime.Add(common.ScheduledTaskMinPrecision)
 					}
