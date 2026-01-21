@@ -17,7 +17,7 @@ import (
 )
 
 type (
-	rescheudulerSuite struct {
+	reschedulerSuite struct {
 		suite.Suite
 		*require.Assertions
 
@@ -30,12 +30,12 @@ type (
 	}
 )
 
-func TestReschdulerSuite(t *testing.T) {
-	s := new(rescheudulerSuite)
+func TestReschedulerSuite(t *testing.T) {
+	s := new(reschedulerSuite)
 	suite.Run(t, s)
 }
 
-func (s *rescheudulerSuite) SetupTest() {
+func (s *reschedulerSuite) SetupTest() {
 	s.Assertions = require.New(s.T())
 
 	s.controller = gomock.NewController(s.T())
@@ -54,11 +54,11 @@ func (s *rescheudulerSuite) SetupTest() {
 	)
 }
 
-func (s *rescheudulerSuite) TearDownTest() {
+func (s *reschedulerSuite) TearDownTest() {
 	s.controller.Finish()
 }
 
-func (s *rescheudulerSuite) TestStartStop() {
+func (s *reschedulerSuite) TestStartStop() {
 	timeSource := clock.NewRealTimeSource()
 	rescheduler := NewRescheduler(
 		s.mockScheduler,
@@ -94,7 +94,7 @@ func (s *rescheudulerSuite) TestStartStop() {
 	s.Equal(0, rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestDrain() {
+func (s *reschedulerSuite) TestDrain() {
 	timeSource := clock.NewRealTimeSource()
 	rescheduler := NewRescheduler(
 		s.mockScheduler,
@@ -116,7 +116,7 @@ func (s *rescheudulerSuite) TestDrain() {
 	s.Equal(0, rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestReschedule_NoRescheduleLimit() {
+func (s *reschedulerSuite) TestReschedule_NoRescheduleLimit() {
 	now := time.Now()
 	s.timeSource.Update(now)
 	rescheduleInterval := time.Minute
@@ -145,7 +145,7 @@ func (s *rescheudulerSuite) TestReschedule_NoRescheduleLimit() {
 	s.Equal(numExecutable/2, s.rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestReschedule_TaskChanFull() {
+func (s *reschedulerSuite) TestReschedule_TaskChanFull() {
 	now := time.Now()
 	s.timeSource.Update(now)
 	rescheduleInterval := time.Minute
@@ -178,7 +178,7 @@ func (s *rescheudulerSuite) TestReschedule_TaskChanFull() {
 	s.Equal(numExecutable-numSubmitted, s.rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestReschedule_DropCancelled() {
+func (s *reschedulerSuite) TestReschedule_DropCancelled() {
 	now := time.Now()
 	s.timeSource.Update(now)
 	rescheduleInterval := time.Minute
@@ -197,7 +197,7 @@ func (s *rescheudulerSuite) TestReschedule_DropCancelled() {
 	s.Equal(0, s.rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestForceReschedule_ImmediateTask() {
+func (s *reschedulerSuite) TestForceReschedule_ImmediateTask() {
 	now := time.Now()
 	s.timeSource.Update(now)
 	namespaceID := s.mockScheduler.TaskChannelKeyFn()(nil).NamespaceID
@@ -229,7 +229,7 @@ func (s *rescheudulerSuite) TestForceReschedule_ImmediateTask() {
 	s.Equal(0, s.rescheduler.Len())
 }
 
-func (s *rescheudulerSuite) TestForceReschedule_ScheduledTask() {
+func (s *reschedulerSuite) TestForceReschedule_ScheduledTask() {
 	now := time.Now()
 	s.timeSource.Update(now)
 	namespaceID := s.mockScheduler.TaskChannelKeyFn()(nil).NamespaceID
