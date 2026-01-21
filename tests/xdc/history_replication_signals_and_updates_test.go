@@ -1101,7 +1101,7 @@ func joinHandlers[T any](handlers ...func(task *workflowservice.PollWorkflowTask
 }
 
 // TestConflictResolutionGetResult creates a split-brain scenario in which both clusters believe they are active.
-// The test confirms that the workflow result can be retrievved if conflict resolution happens (CurrentBranchChange).
+// The test confirms that the workflow result can be retrieved if conflict resolution happens (CurrentBranchChange).
 func (s *hrsuTestSuite) TestConflictResolutionGetResult() {
 	t, ctx, cancel := s.startHrsuTest()
 	defer cancel()
