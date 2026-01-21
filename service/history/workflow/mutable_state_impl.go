@@ -1153,7 +1153,7 @@ func (ms *MutableStateImpl) GetCloseVersion() (int64, error) {
 		return lastEventVersion, nil
 	}
 
-	// We check version history first to prevserve the existing behavior of workflow to minimize risk.
+	// We check version history first to preserve the existing behavior of workflow to minimize risk.
 	// However, this assumes that if mutable state has event, it must also generate an event upon closing.
 	// That assumption is true today, but no necessarily true in the future. We should fix this if we ever
 	// have such a case.
