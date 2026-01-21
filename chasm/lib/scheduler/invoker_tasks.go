@@ -70,7 +70,7 @@ type (
 	}
 
 	rateLimitedError struct {
-		// The requested interval to delay processing by rescheduilng.
+		// The requested interval to delay processing by rescheduling.
 		delay time.Duration
 	}
 )
