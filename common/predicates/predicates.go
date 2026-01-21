@@ -2,7 +2,7 @@ package predicates
 
 type (
 	Predicate[T any] interface {
-		// Test checks if the given entity statisfy the predicate or not
+		// Test checks if the given entity satisfy the predicate or not
 		Test(T) bool
 
 		// Equals recursively checks if the given Predicate has the same
