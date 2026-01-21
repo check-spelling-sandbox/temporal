@@ -55,7 +55,7 @@ func (a *actionSliceCount) Run(readerGroup *ReaderGroup) (actionTaken bool) {
 
 	isDefaultReader := func(readerID int64) bool { return readerID == DefaultReaderId }
 	isNotDefaultReader := func(readerID int64) bool { return !isDefaultReader(readerID) }
-	isUniversalPredicate := func(s Slice) bool { return tasks.IsUniverisalPredicate(s.Scope().Predicate) }
+	isUniversalPredicate := func(s Slice) bool { return tasks.IsUniversalPredicate(s.Scope().Predicate) }
 	isNotUniversalPredicate := func(s Slice) bool { return !isUniversalPredicate(s) }
 
 	// perform compaction in four stages:
@@ -69,7 +69,7 @@ func (a *actionSliceCount) Run(readerGroup *ReaderGroup) (actionTaken bool) {
 	// one slice with universal predicate may "infect" all other slices and result in
 	// a very large slice with universal predicate and upon shard reload, all tasks
 	// in the slice needs to be reprocessed.
-	// So compact slices with non-univerisal predicate first to minimize the impact
+	// So compact slices with non-universal predicate first to minimize the impact
 	// on other namespaces upon shard reload.
 
 	actionTaken = true

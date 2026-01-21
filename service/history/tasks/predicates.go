@@ -412,7 +412,7 @@ func OrPredicates(a Predicate, b Predicate) Predicate {
 	return predicates.Or(a, b)
 }
 
-func IsUniverisalPredicate(p Predicate) bool {
+func IsUniversalPredicate(p Predicate) bool {
 	_, ok := p.(*predicates.UniversalImpl[Task])
 	return ok
 }
