@@ -61,7 +61,7 @@ Speculative Workflow Task was introduced to make it possible for Workflow Update
 for when it is rejected. This is why it doesn't persist any events or the mutable state.
 
 > #### TODO
-> The task processig for Queries could be replaced by using speculative Workflow Tasks under the hood.
+> The task processing for Queries could be replaced by using speculative Workflow Tasks under the hood.
 
 ## Scheduling of Speculative Workflow Task
 As of today, speculative Workflow Tasks are only used for Workflow Update, i.e. in the 
