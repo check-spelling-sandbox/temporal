@@ -180,7 +180,7 @@ type stateMachineEnvironment struct {
 }
 
 // loadAndValidateMutableState loads mutable state and validates it.
-// Propagages errors returned from validate.
+// Propagates errors returned from validate.
 // Does **not** reload mutable state if validate reports it is stale. Not meant to be called directly, call
 // [loadAndValidateMutableState] instead.
 func (e *stateMachineEnvironment) loadAndValidateMutableStateNoReload(
@@ -198,7 +198,7 @@ func (e *stateMachineEnvironment) loadAndValidateMutableStateNoReload(
 }
 
 // loadAndValidateMutableState loads mutable state and validates it.
-// Propagages errors returned from validate.
+// Propagates errors returned from validate.
 // Reloads mutable state and retries if validator returns a [queues.StaleStateError].
 func (e *stateMachineEnvironment) loadAndValidateMutableState(
 	ctx context.Context,
