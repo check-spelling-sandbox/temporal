@@ -1650,7 +1650,7 @@ func (s *WorkerDeploymentSuite) TestSetCurrentVersion_Batching() {
 	setCurrentUpdateTime := timestamppb.Now()
 	s.setCurrentVersion(ctx, tv, true, "")
 
-	// verify the current version has propogated to all the registered task-queues userData
+	// verify the current version has propagated to all the registered task-queues userData
 	for i := 0; i < taskQueues; i++ {
 		s.verifyTaskQueueVersioningInfo(ctx, tv.WithTaskQueueNumber(i).TaskQueue(), tv.DeploymentVersionString(), "", 0)
 	}
