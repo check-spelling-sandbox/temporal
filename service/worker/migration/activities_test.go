@@ -770,7 +770,7 @@ func (s *activitiesSuite) TestGenerateReplicationTasks_Failed() {
 	s.Greater(len(iceptor.generateReplicationRecordedHeartbeats), 0)
 	lastIdx := len(iceptor.generateReplicationRecordedHeartbeats) - 1
 	lastHeartBeat := iceptor.generateReplicationRecordedHeartbeats[lastIdx]
-	// Only the generation of 1st execution suceeded.
+	// Only the generation of 1st execution succeeded.
 	s.Equal(0, lastHeartBeat)
 }
 
