@@ -395,7 +395,7 @@ func executionStatusFromFailure(failure *failurepb.Failure) enumspb.WorkflowExec
 }
 
 // HandleNexusCompletion allows Scheduler to record workflow completions from
-// worfklows started by the same scheduler tree's Invoker.
+// workflows started by the same scheduler tree's Invoker.
 func (s *Scheduler) HandleNexusCompletion(
 	ctx chasm.MutableContext,
 	info *persistencespb.ChasmNexusCompletion,
