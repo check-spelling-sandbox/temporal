@@ -39,7 +39,7 @@ var (
 		"GetOrCreateShard": 1,
 		"UpdateShard":      1,
 
-		// This is a preprequisite for checkpointing queue process progress
+		// This is a prerequisite for checkpointing queue process progress
 		p.ConstructHistoryTaskAPI("RangeCompleteHistoryTasks", tasks.CategoryTransfer):   1,
 		p.ConstructHistoryTaskAPI("RangeCompleteHistoryTasks", tasks.CategoryTimer):      1,
 		p.ConstructHistoryTaskAPI("RangeCompleteHistoryTasks", tasks.CategoryVisibility): 1,
