@@ -803,7 +803,7 @@ var (
 	)
 	TaskLatency = NewTimerDef(
 		"task_latency",
-		WithDescription("Latency for processing and completing a history task. This latency is across all attempts but excludes any latencies related to workflow lock or user qutoa limit."),
+		WithDescription("Latency for processing and completing a history task. This latency is across all attempts but excludes any latencies related to workflow lock or user quota limit."),
 	)
 	TaskQueueLatency = NewTimerDef(
 		"task_latency_queue",
