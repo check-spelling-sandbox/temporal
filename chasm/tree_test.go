@@ -1943,7 +1943,7 @@ func (s *nodeSuite) TestCloseTransaction_ForceUpdateVisibility_RootLifecycleChan
 		return true, nil
 	}
 
-	// Init visiblity component
+	// Init visibility component
 	testComponent.(*TestComponent).Visibility = NewComponentField(chasmCtx, NewVisibility(chasmCtx))
 	mutation, err := node.CloseTransaction()
 	s.NoError(err)
@@ -1997,7 +1997,7 @@ func (s *nodeSuite) TestCloseTransaction_ForceUpdateVisibility_RootSAMemoChanged
 		return nextTransitionCount
 	}
 
-	// Init visiblity component
+	// Init visibility component
 	testComponent.(*TestComponent).Visibility = NewComponentField(chasmCtx, NewVisibility(chasmCtx))
 	s.nodeBackend.HandleUpdateWorkflowStateStatus = func(state enumsspb.WorkflowExecutionState, status enumspb.WorkflowExecutionStatus) (bool, error) {
 		return true, nil

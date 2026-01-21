@@ -1033,7 +1033,7 @@ func (s *scheduleFunctionalSuiteBase) TestListSchedulesReturnsWorkflowStatus() {
 	})
 	s.NoError(err)
 
-	// now wait for second recent action to land in visbility
+	// now wait for second recent action to land in visibility
 	listResp = s.getScheduleEntryFromVisibility(sid, func(listResp *schedulepb.ScheduleListEntry) bool {
 		return len(listResp.Info.RecentActions) >= 2
 	})

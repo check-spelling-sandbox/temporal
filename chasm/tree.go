@@ -1582,7 +1582,7 @@ func (n *Node) closeTransactionForceUpdateVisibility(
 	visibility.generateTask(mutableContext)
 	visibilityNode.setValueState(valueStateNeedSerialize)
 
-	// We don't need to sync tree structure here for the visiblity node because we only generated a task without
+	// We don't need to sync tree structure here for the visibility node because we only generated a task without
 	// changing any component fields.
 	return nil
 }
