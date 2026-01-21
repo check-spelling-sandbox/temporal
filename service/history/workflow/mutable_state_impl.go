@@ -1147,7 +1147,7 @@ func (ms *MutableStateImpl) GetCloseVersion() (int64, error) {
 		return common.EmptyVersion, serviceerror.NewInternalf("workflow still running, current state: %v", ms.executionState.State.String())
 	}
 
-	// if workflow is closing in the current transation,
+	// if workflow is closing in the current transaction,
 	// then the last event is closed event and the event version is the close version
 	if lastEventVersion, ok := ms.hBuilder.LastEventVersion(); ok {
 		return lastEventVersion, nil
