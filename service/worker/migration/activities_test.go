@@ -187,7 +187,7 @@ func (s *activitiesSuite) TestVerifyReplicationTasks_Success() {
 	})).Return(&adminservice.DescribeMutableStateResponse{}, nil).Times(1)
 
 	// Slowly replicated
-	replicationSlowReponses := []struct {
+	replicationSlowResponses := []struct {
 		resp *adminservice.DescribeMutableStateResponse
 		err  error
 	}{
@@ -196,7 +196,7 @@ func (s *activitiesSuite) TestVerifyReplicationTasks_Success() {
 		{&adminservice.DescribeMutableStateResponse{}, nil},
 	}
 
-	for _, r := range replicationSlowReponses {
+	for _, r := range replicationSlowResponses {
 		s.mockRemoteAdminClient.EXPECT().DescribeMutableState(gomock.Any(), protomock.Eq(&adminservice.DescribeMutableStateRequest{
 			Namespace: mockedNamespace,
 			Execution: &commonpb.WorkflowExecution{
