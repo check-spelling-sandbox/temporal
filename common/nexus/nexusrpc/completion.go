@@ -264,7 +264,7 @@ type CompletionHandler interface {
 type CompletionHandlerOptions struct {
 	// Handler for completion requests.
 	Handler CompletionHandler
-	// A stuctured logging handler.
+	// A structured logging handler.
 	// Defaults to slog.Default().
 	Logger *slog.Logger
 	// A [Serializer] to customize handler serialization behavior.
