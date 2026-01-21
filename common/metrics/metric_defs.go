@@ -525,7 +525,7 @@ const (
 	HistoryReplicationTaskScope = "HistoryReplicationTask"
 	// HistoryMetadataReplicationTaskScope is the scope used by history metadata task replication processing
 	HistoryMetadataReplicationTaskScope = "HistoryMetadataReplicationTask"
-	// SyncShardTaskScope is the scope used by sync shrad information processing
+	// SyncShardTaskScope is the scope used by sync shard information processing
 	SyncShardTaskScope = "SyncShardTask"
 	// SyncActivityTaskScope is the scope used by sync activity
 	SyncActivityTaskScope = "SyncActivityTask"
