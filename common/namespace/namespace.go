@@ -255,7 +255,7 @@ func (ns *Namespace) ReplicationPolicy() ReplicationPolicy {
 	return ReplicationPolicyOneCluster
 }
 
-// GetReplicationResolver return the replication resolover
+// GetReplicationResolver return the replication resolver
 func (ns *Namespace) GetReplicationResolver() ReplicationResolver {
 	return ns.replicationResolver
 }
