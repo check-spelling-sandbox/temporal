@@ -4777,8 +4777,8 @@ func (s *mutableStateSuite) TestCloseTransactionTrackTombstones() {
 			s.NoError(err)
 
 			currentVersionedTransition := mutableState.CurrentVersionedTransition()
-			newVersionedTranstion := common.CloneProto(currentVersionedTransition)
-			newVersionedTranstion.TransitionCount += 1
+			newVersionedTransition := common.CloneProto(currentVersionedTransition)
+			newVersionedTransition.TransitionCount += 1
 
 			_, err = mutableState.StartTransaction(s.namespaceEntry)
 			s.NoError(err)
@@ -4792,7 +4792,7 @@ func (s *mutableStateSuite) TestCloseTransactionTrackTombstones() {
 			tombstoneBatches := mutableState.GetExecutionInfo().SubStateMachineTombstoneBatches
 			s.Len(tombstoneBatches, 1)
 			tombstoneBatch := tombstoneBatches[0]
-			protorequire.ProtoEqual(s.T(), newVersionedTranstion, tombstoneBatch.VersionedTransition)
+			protorequire.ProtoEqual(s.T(), newVersionedTransition, tombstoneBatch.VersionedTransition)
 			s.True(tombstoneExists(tombstoneBatch.StateMachineTombstones, expectedTombstone))
 		})
 	}
@@ -4825,8 +4825,8 @@ func (s *mutableStateSuite) TestCloseTransactionTrackTombstones_CapIfLargerThanL
 	}
 
 	currentVersionedTransition := mutableState.CurrentVersionedTransition()
-	newVersionedTranstion := common.CloneProto(currentVersionedTransition)
-	newVersionedTranstion.TransitionCount += 1
+	newVersionedTransition := common.CloneProto(currentVersionedTransition)
+	newVersionedTransition.TransitionCount += 1
 	signalMap := mutableState.GetPendingSignalExternalInfos()
 	for i := 0; i < s.mockConfig.MutableStateTombstoneCountLimit(); i++ {
 		signalMap[int64(76+i)] = &persistencespb.SignalInfo{
@@ -4876,8 +4876,8 @@ func (s *mutableStateSuite) TestCloseTransactionTrackTombstones_OnlyTrackFirstEm
 	}
 
 	currentVersionedTransition := mutableState.CurrentVersionedTransition()
-	newVersionedTranstion := common.CloneProto(currentVersionedTransition)
-	newVersionedTranstion.TransitionCount += 1
+	newVersionedTransition := common.CloneProto(currentVersionedTransition)
+	newVersionedTransition.TransitionCount += 1
 
 	_, err = mutableState.StartTransaction(s.namespaceEntry)
 	s.NoError(err)
