@@ -316,7 +316,7 @@ func processActivityWorkflowRules(
 		// this shouldn't happen. For now log an error
 		shardContext.GetLogger().Error(
 			fmt.Sprintf(
-				"Activity is paused, but new task was schedulled. Activity ID: %v, Stamp: %v, event ID: %v",
+				"Activity is paused, but new task was scheduled. Activity ID: %v, Stamp: %v, event ID: %v",
 				ai.ActivityId, request.Stamp, ai.StartedEventId),
 		)
 	}
