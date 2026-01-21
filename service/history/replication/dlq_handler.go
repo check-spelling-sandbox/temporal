@@ -290,7 +290,7 @@ func (r *dlqHandlerImpl) readMessagesWithAckLevel(
 				TaskId:      task.TaskID,
 			})
 		default:
-			panic(fmt.Sprintf("Unknown repication task type: %v", task))
+			panic(fmt.Sprintf("Unknown replication task type: %v", task))
 		}
 	}
 

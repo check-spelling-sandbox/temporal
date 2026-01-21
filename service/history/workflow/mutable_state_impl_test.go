@@ -4256,10 +4256,10 @@ func (s *mutableStateSuite) TestCloseTransactionPrepareReplicationTasks_HistoryT
 				if err != nil {
 					s.Fail("closeTransactionPrepareReplicationTasks failed", err)
 				}
-				repicationTasks := ms.InsertTasks[tasks.CategoryReplication]
-				s.Equal(len(tc.tasks), len(repicationTasks))
+				replicationTasks := ms.InsertTasks[tasks.CategoryReplication]
+				s.Equal(len(tc.tasks), len(replicationTasks))
 				for i, task := range tc.tasks {
-					s.Equal(task, repicationTasks[i])
+					s.Equal(task, replicationTasks[i])
 				}
 			},
 		)
@@ -4521,13 +4521,13 @@ func (s *mutableStateSuite) TestCloseTransactionPrepareReplicationTasks_SyncHSMT
 				err := s.mutableState.closeTransactionPrepareReplicationTasks(historyi.TransactionPolicyActive, tc.eventBatches, tc.clearBufferEvents)
 				s.NoError(err)
 
-				repicationTasks := s.mutableState.PopTasks()[tasks.CategoryReplication]
+				replicationTasks := s.mutableState.PopTasks()[tasks.CategoryReplication]
 
 				if tc.expectedReplicationTask != nil {
-					s.Len(repicationTasks, 1)
-					s.Equal(tc.expectedReplicationTask, repicationTasks[0])
+					s.Len(replicationTasks, 1)
+					s.Equal(tc.expectedReplicationTask, replicationTasks[0])
 				} else {
-					s.Empty(repicationTasks)
+					s.Empty(replicationTasks)
 				}
 			},
 		)
@@ -4586,13 +4586,13 @@ func (s *mutableStateSuite) TestCloseTransactionPrepareReplicationTasks_SyncActi
 
 			ms.UpdateActivityProgress(ms.pendingActivityInfoIDs[100], &workflowservice.RecordActivityTaskHeartbeatRequest{})
 
-			repicationTasks := ms.syncActivityToReplicationTask(historyi.TransactionPolicyActive)
-			s.Len(repicationTasks, len(tc.expectedReplicationTask))
-			sort.Slice(repicationTasks, func(i, j int) bool {
-				return repicationTasks[i].(*tasks.SyncActivityTask).ScheduledEventID < repicationTasks[j].(*tasks.SyncActivityTask).ScheduledEventID
+			replicationTasks := ms.syncActivityToReplicationTask(historyi.TransactionPolicyActive)
+			s.Len(replicationTasks, len(tc.expectedReplicationTask))
+			sort.Slice(replicationTasks, func(i, j int) bool {
+				return replicationTasks[i].(*tasks.SyncActivityTask).ScheduledEventID < replicationTasks[j].(*tasks.SyncActivityTask).ScheduledEventID
 			})
 			for i, task := range tc.expectedReplicationTask {
-				s.Equal(task.ScheduledEventID, repicationTasks[i].(*tasks.SyncActivityTask).ScheduledEventID)
+				s.Equal(task.ScheduledEventID, replicationTasks[i].(*tasks.SyncActivityTask).ScheduledEventID)
 			}
 		})
 	}

@@ -14,7 +14,7 @@ import (
 	reflect "reflect"
 
 	historyservice "go.temporal.io/server/api/historyservice/v1"
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	chasm "go.temporal.io/server/chasm"
 	gomock "go.uber.org/mock/gomock"
 )
@@ -44,7 +44,7 @@ func (m *MockWorkflowStateReplicator) EXPECT() *MockWorkflowStateReplicatorMockR
 }
 
 // ReplicateVersionedTransition mocks base method.
-func (m *MockWorkflowStateReplicator) ReplicateVersionedTransition(ctx context.Context, archetypeID chasm.ArchetypeID, versionedTransition *repication.VersionedTransitionArtifact, sourceClusterName string) error {
+func (m *MockWorkflowStateReplicator) ReplicateVersionedTransition(ctx context.Context, archetypeID chasm.ArchetypeID, versionedTransition *replication.VersionedTransitionArtifact, sourceClusterName string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReplicateVersionedTransition", ctx, archetypeID, versionedTransition, sourceClusterName)
 	ret0, _ := ret[0].(error)

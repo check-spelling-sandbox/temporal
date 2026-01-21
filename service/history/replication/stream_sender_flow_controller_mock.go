@@ -14,7 +14,7 @@ import (
 	reflect "reflect"
 
 	enums "go.temporal.io/server/api/enums/v1"
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -43,7 +43,7 @@ func (m *MockSenderFlowController) EXPECT() *MockSenderFlowControllerMockRecorde
 }
 
 // RefreshReceiverFlowControlInfo mocks base method.
-func (m *MockSenderFlowController) RefreshReceiverFlowControlInfo(syncState *repication.SyncReplicationState) {
+func (m *MockSenderFlowController) RefreshReceiverFlowControlInfo(syncState *replication.SyncReplicationState) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "RefreshReceiverFlowControlInfo", syncState)
 }

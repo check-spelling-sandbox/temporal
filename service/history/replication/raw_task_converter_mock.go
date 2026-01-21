@@ -13,7 +13,7 @@ import (
 	reflect "reflect"
 
 	enums "go.temporal.io/server/api/enums/v1"
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	tasks "go.temporal.io/server/service/history/tasks"
 	gomock "go.uber.org/mock/gomock"
 )
@@ -43,10 +43,10 @@ func (m *MockSourceTaskConverter) EXPECT() *MockSourceTaskConverterMockRecorder 
 }
 
 // Convert mocks base method.
-func (m *MockSourceTaskConverter) Convert(task tasks.Task, targetClusterID int32, priority enums.TaskPriority) (*repication.ReplicationTask, error) {
+func (m *MockSourceTaskConverter) Convert(task tasks.Task, targetClusterID int32, priority enums.TaskPriority) (*replication.ReplicationTask, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Convert", task, targetClusterID, priority)
-	ret0, _ := ret[0].(*repication.ReplicationTask)
+	ret0, _ := ret[0].(*replication.ReplicationTask)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

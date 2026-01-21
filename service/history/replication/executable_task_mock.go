@@ -15,7 +15,7 @@ import (
 	time "time"
 
 	enums "go.temporal.io/server/api/enums/v1"
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	backoff "go.temporal.io/server/common/backoff"
 	definition "go.temporal.io/server/common/definition"
 	serviceerror "go.temporal.io/server/common/serviceerror"
@@ -234,10 +234,10 @@ func (mr *MockExecutableTaskMockRecorder) NamespaceName() *gomock.Call {
 }
 
 // ReplicationTask mocks base method.
-func (m *MockExecutableTask) ReplicationTask() *repication.ReplicationTask {
+func (m *MockExecutableTask) ReplicationTask() *replication.ReplicationTask {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReplicationTask")
-	ret0, _ := ret[0].(*repication.ReplicationTask)
+	ret0, _ := ret[0].(*replication.ReplicationTask)
 	return ret0
 }
 

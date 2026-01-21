@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package temporal.server.api.replication.v1;
 
-option go_package = "go.temporal.io/server/api/replication/v1;repication";
+option go_package = "go.temporal.io/server/api/replication/v1;replication";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";

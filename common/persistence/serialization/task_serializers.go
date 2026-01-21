@@ -336,7 +336,7 @@ func (t *serializerImpl) SerializeReplicationTask(task tasks.Task) (*persistence
 	case *tasks.SyncVersionedTransitionTask:
 		return replicationSyncVersionedTransitionTaskToProto(task, t)
 	default:
-		return nil, serviceerror.NewInternalf("Unknown repication task type: %v", task)
+		return nil, serviceerror.NewInternalf("Unknown replication task type: %v", task)
 	}
 }
 
