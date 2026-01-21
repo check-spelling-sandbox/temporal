@@ -324,9 +324,9 @@ func (s *engine2Suite) TestRecordWorkflowTaskStartedSuccessStickyEnabled() {
 		Name: executionInfo.TaskQueue,
 		Kind: enumspb.TASK_QUEUE_KIND_NORMAL,
 	}
-	currentBranchTokken, err := ms.GetCurrentBranchToken()
+	currentBranchToken, err := ms.GetCurrentBranchToken()
 	s.NoError(err)
-	expectedResponse.BranchToken = currentBranchTokken
+	expectedResponse.BranchToken = currentBranchToken
 	expectedResponse.History = &historypb.History{Events: fakeHistory}
 	expectedResponse.NextPageToken = nil
 
@@ -434,9 +434,9 @@ func (s *engine2Suite) TestRecordWorkflowTaskStartedSuccessStickyEnabled_WithInt
 		Name: executionInfo.TaskQueue,
 		Kind: enumspb.TASK_QUEUE_KIND_NORMAL,
 	}
-	currentBranchTokken, err := ms.GetCurrentBranchToken()
+	currentBranchToken, err := ms.GetCurrentBranchToken()
 	s.NoError(err)
-	expectedResponse.BranchToken = currentBranchTokken
+	expectedResponse.BranchToken = currentBranchToken
 	expectedResponse.RawHistory = [][]byte{historyBlob.Data}
 	expectedResponse.NextPageToken = nil
 
