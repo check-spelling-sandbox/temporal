@@ -108,8 +108,8 @@ func (s *basicRedirectorSuite) TestUnavailableError() {
 			return serviceerror.NewUnavailable("unavail")
 		},
 		func(err error) {
-			unavil := &serviceerror.Unavailable{}
-			s.ErrorAs(err, &unavil)
+			unavail := &serviceerror.Unavailable{}
+			s.ErrorAs(err, &unavail)
 		})
 }
 
