@@ -396,7 +396,7 @@ type (
 	CassandraConsistencySettings struct {
 		// Consistency sets the default consistency level. Values identical to gocql Consistency values. (defaults to LOCAL_QUORUM if not set).
 		Consistency string `yaml:"consistency"`
-		// SerialConsistency sets the consistency for the serial prtion of queries. Values identical to gocql SerialConsistency values. (defaults to LOCAL_SERIAL if not set)
+		// SerialConsistency sets the consistency for the serial portion of queries. Values identical to gocql SerialConsistency values. (defaults to LOCAL_SERIAL if not set)
 		SerialConsistency string `yaml:"serialConsistency"`
 	}
 
