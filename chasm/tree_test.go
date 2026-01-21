@@ -3025,14 +3025,14 @@ func (s *nodeSuite) TestExecuteSideEffectTask() {
 	ctx := NewEngineContext(context.Background(), mockEngine)
 
 	chasmContext := NewMutableContext(ctx, root)
-	var backendValidtionFnCalled bool
+	var backendValidationFnCalled bool
 	// This won't be called until access time.
 	dummyValidationFn := func(_ NodeBackend, _ Context, _ Component) error {
-		backendValidtionFnCalled = true
+		backendValidationFnCalled = true
 		return nil
 	}
 	expectValidate := func(valid bool, validationErr error) {
-		backendValidtionFnCalled = false
+		backendValidationFnCalled = false
 		s.testLibrary.mockSideEffectTaskValidator.EXPECT().Validate(
 			gomock.Any(),
 			gomock.Any(),
@@ -3068,7 +3068,7 @@ func (s *nodeSuite) TestExecuteSideEffectTask() {
 	expectExecute(nil)
 	err = root.ExecuteSideEffectTask(ctx, s.registry, executionKey, chasmTask, dummyValidationFn)
 	s.NoError(err)
-	s.True(backendValidtionFnCalled)
+	s.True(backendValidationFnCalled)
 	s.True(chasmTask.DeserializedTask.IsValid())
 
 	// Invalid task.
@@ -3093,7 +3093,7 @@ func (s *nodeSuite) TestExecuteSideEffectTask() {
 	expectExecute(executionErr)
 	err = root.ExecuteSideEffectTask(ctx, s.registry, executionKey, chasmTask, dummyValidationFn)
 	s.ErrorIs(executionErr, err)
-	s.True(backendValidtionFnCalled)
+	s.True(backendValidationFnCalled)
 	s.False(chasmTask.DeserializedTask.IsValid())
 }
 
