@@ -191,7 +191,7 @@ func (s *ESVisibilitySuite) TestGetListFieldSorter() {
 	s.Equal(defaultSorter, sorter)
 
 	// test passing non-empty fieldSorts
-	testFieldSorts := []elastic.Sorter{elastic.NewFieldSort("_test"), elastic.NewFieldSort("_second_tes")}
+	testFieldSorts := []elastic.Sorter{elastic.NewFieldSort("_test"), elastic.NewFieldSort("_second_test")}
 	sorter, err = s.visibilityStore.GetListFieldSorter(testFieldSorts[:])
 	expectedSorter := make([]elastic.Sorter, len(testFieldSorts)+1)
 	expectedSorter[0] = testFieldSorts[0]
