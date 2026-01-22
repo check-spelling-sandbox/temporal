@@ -41,7 +41,7 @@ type (
 	}
 )
 
-// NewClient return a Temporal gcloudstorage.Client based on default google service account creadentials (ScopeFullControl required).
+// NewClient return a Temporal gcloudstorage.Client based on default google service account credentials (ScopeFullControl required).
 // Bucket must be created by Iaas scripts, in other words, this library doesn't create the required Bucket.
 // Optionaly you can set your credential path throught "GOOGLE_APPLICATION_CREDENTIALS" environment variable or through temporal config file.
 // You can find more info about "Google Setting Up Authentication for Server to Server Production Applications" under the following link
