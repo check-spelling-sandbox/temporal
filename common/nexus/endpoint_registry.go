@@ -231,7 +231,7 @@ func (r *EndpointRegistryImpl) refreshEndpointsLoop(ctx context.Context, dataRea
 			r.dataLock.Unlock()
 
 			// Endpoints have previously been loaded, so just keep them up to date with long poll requests to
-			// matching, without fallback to persistence. Ignoring long poll errors since we will just retry
+			// matching, without falling back to persistence. Ignoring long poll errors since we will just retry
 			// on next loop iteration.
 			_ = backoff.ThrottleRetryContext(ctx, r.refreshEndpoints, r.config.refreshRetryPolicy, nil)
 
