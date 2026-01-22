@@ -311,11 +311,11 @@ func getNamespaceID(c *cli.Context, clientFactory ClientFactory, nsName namespac
 
 func getArchetypeWithDefault(
 	c *cli.Context,
-	defaultAchetype chasm.Archetype,
+	defaultArchetype chasm.Archetype,
 ) chasm.Archetype {
 	archetype := c.String(FlagArchetype)
 	if archetype != "" {
 		return archetype
 	}
-	return defaultAchetype
+	return defaultArchetype
 }
