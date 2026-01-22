@@ -2310,7 +2310,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 	s.matchingEngine.config.MaxTaskDeleteBatchSize = dynamicconfig.GetIntPropertyFnFilteredByTaskQueue(2)
 
 	testCases := []struct {
-		maxTimeBtwnDeletes time.Duration
+		maxTimeBetweenDeletes time.Duration
 	}{
 		{time.Minute},     // test taskGC deleting due to size threshold
 		{time.Nanosecond}, // test taskGC deleting due to time condition
@@ -2351,7 +2351,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 		// ensure the 1/4 of tasks with small ScheduleToStartTimeout will be expired when they come out of the buffer
 		time.Sleep(300 * time.Millisecond)
 
-		maxTimeBetweenTaskDeletes = tc.maxTimeBtwnDeletes
+		maxTimeBetweenTaskDeletes = tc.maxTimeBetweenDeletes
 
 		s.setupRecordActivityTaskStartedMock(tl)
 
