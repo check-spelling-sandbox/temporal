@@ -215,7 +215,7 @@ func (r *EndpointRegistryImpl) refreshEndpointsLoop(ctx context.Context, dataRea
 		start := time.Now()
 		enforceMinWait := true
 		if !hasLoadedEndpointData {
-			// Loading endpoints for the first time after being (re)enabled, so load with fallback to persistence
+			// Loading endpoints for the first time after being (re)enabled, so load with a fallback to persistence
 			// and unblock any threads waiting on r.dataReady if successful.
 			err := backoff.ThrottleRetryContext(ctx, r.loadEndpoints, r.config.refreshRetryPolicy, nil)
 			if err == nil {
