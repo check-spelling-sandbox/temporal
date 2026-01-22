@@ -15,7 +15,7 @@ import (
 const (
 	// Default escape char is set explicitly to '!' for two reasons:
 	// 1. SQLite doesn't have a default escape char;
-	// 2. MySQL requires to escape the backslack char unlike SQLite and PostgreSQL.
+	// 2. MySQL requires to escape the backslash char unlike SQLite and PostgreSQL.
 	// Thus, in order to avoid having specific code for each DB, it's better to
 	// set the escape char to a simpler char that doesn't require escaping.
 	defaultLikeEscapeChar = '!'
