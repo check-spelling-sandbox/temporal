@@ -701,7 +701,7 @@ func (s *ClientMiscTestSuite) TestInvalidCommandAttribute() {
 		info := workflow.GetInfo(ctx)
 
 		// Simply record time.Now() and check if the difference between the recorded time
-		// is higher than the workflow task timeout will not work, because there is a delay
+		// is greater than the workflow task timeout will not work, because there is a delay
 		// between server starts the workflow task and this code is executed.
 
 		var currentAttemptStartedTime time.Time

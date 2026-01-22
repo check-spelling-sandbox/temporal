@@ -420,7 +420,7 @@ WorkflowType, ActivityType, SignalName, MarkerName, ErrorReason/FailureReason/Ca
 		255,
 		`WorkerBuildIdSizeLimit is the byte length limit for a worker build id as used in the rpc methods for updating
 the version sets for a task queue.
-Do not set this to a value higher than 255 for clusters using SQL based persistence due to predefined VARCHAR
+Do not set this to a value greater than 255 for clusters using SQL based persistence due to predefined VARCHAR
 column width.`,
 	)
 	VersionCompatibleSetLimitPerQueue = NewNamespaceIntSetting(
