@@ -283,7 +283,7 @@ rules), or there MAY be open workflows or backlogged activities assigned to it.
 - **CLOSED_WORKFLOWS_ONLY:** Build ID does not have open workflows and is not reachable
 by new workflows, but MAY have closed workflows within the namespace retention period. 
 Not applicable to activity-only task queues.
-- **UNREACHABLE:** Build ID is not used for new executions, nor it has been used by 
+- **UNREACHABLE:** Build ID is not used for new executions, nor has it been used by
 any existing execution within the retention period.
 - **UNSPECIFIED:** Task reachability is not reported
 
