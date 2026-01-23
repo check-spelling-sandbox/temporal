@@ -3121,7 +3121,7 @@ func (s *WorkflowHandlerSuite) TestListBatchOperations() {
 	s.Equal(enumspb.BATCH_OPERATION_STATE_FAILED, resp.OperationInfo[0].GetState())
 }
 
-func (s *WorkflowHandlerSuite) TestListBatchOperations_InvalidRerquest() {
+func (s *WorkflowHandlerSuite) TestListBatchOperations_InvalidRequest() {
 	config := s.newConfig()
 	wh := s.getWorkflowHandler(config)
 
