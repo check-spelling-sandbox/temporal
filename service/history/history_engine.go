@@ -606,7 +606,7 @@ func (e *historyEngineImpl) RespondActivityTaskCanceled(
 	return respondactivitytaskcanceled.Invoke(ctx, req, e.shardContext, e.workflowConsistencyChecker)
 }
 
-// RecordActivityTaskHeartbeat records a hearbeat for a task.
+// RecordActivityTaskHeartbeat records a heartbeat for a task.
 // This method can be used for two purposes.
 // - For reporting liveness of the activity.
 // - For reporting progress of the activity, this can be done even if the liveness is not configured.
