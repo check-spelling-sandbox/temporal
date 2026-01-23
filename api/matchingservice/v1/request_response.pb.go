@@ -2589,7 +2589,7 @@ type SyncDeploymentUserDataResponse struct {
 	// New task queue user data version. Can be used to wait for propagation.
 	Version int64 `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
 	// If the routing config changed after applying this operation. Compared base on revision number.
-	// Deprecated. using this is not totaly safe in case of retries.
+	// Deprecated. using this is not totally safe in case of retries.
 	//
 	// Deprecated: Marked as deprecated in temporal/server/api/matchingservice/v1/request_response.proto.
 	RoutingConfigChanged bool `protobuf:"varint,2,opt,name=routing_config_changed,json=routingConfigChanged,proto3" json:"routing_config_changed,omitempty"`
