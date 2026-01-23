@@ -282,7 +282,7 @@ type WorkflowExecutionInfo struct {
 	// To maintain backward compatibility, we need to track if the execution timer task is created
 	// for a workflow chain since later workflows in the chain also need to create the execution
 	// timer task if it is not created yet.
-	// NOTE: Task status is clsuter specific information, so when replicating mutable state, this
+	// NOTE: Task status is cluster specific information, so when replicating mutable state, this
 	// field need to be sanitized.
 	WorkflowExecutionTimerTaskStatus int32 `protobuf:"varint,82,opt,name=workflow_execution_timer_task_status,json=workflowExecutionTimerTaskStatus,proto3" json:"workflow_execution_timer_task_status,omitempty"`
 	// The root workflow execution is defined as follows:
