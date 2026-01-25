@@ -145,7 +145,7 @@ func testHappyPath(
 		NextPageToken: nil,
 	})
 	require.NoError(t, err)
-	require.Equal(t, 0, len(response.Messages))
+	require.Empty(t, response.Messages)
 
 	encodingType := enumspb.ENCODING_TYPE_JSON
 	_, err = persistencetest.EnqueueMessage(ctx, queue, queueType, queueName)
