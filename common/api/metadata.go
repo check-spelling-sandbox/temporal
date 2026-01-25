@@ -3,24 +3,24 @@ package api
 import "strings"
 
 type (
-	// Describes the scope of a method (whole cluster or individual namespace).
+	// Scope describes the scope of a method (whole cluster or individual namespace).
 	Scope int32
 
-	// Describes what level of access is needed for a method. Note that this field is
+	// Access describes what level of access is needed for a method. Note that this field is
 	// completely advisory. Any authorizer implementation may implement whatever logic it
 	// chooses, including ignoring this field. It is used by the "default" authorizer to check
 	// against roles in claims.
 	Access int32
 
-	// Describes if the method supports long-polled requests.
+	// Polling describes if the method supports long-polled requests.
 	Polling int32
 
 	MethodMetadata struct {
-		// Describes the scope of a method (whole cluster or individual namespace).
+		// Scope describes the scope of a method (whole cluster or individual namespace).
 		Scope Scope
-		// Describes what level of access is needed for a method (advisory).
+		// Access describes what level of access is needed for a method (advisory).
 		Access Access
-		// Describes if long polling is supported by the method.
+		// Polling describes if long polling is supported by the method.
 		Polling Polling
 	}
 )
