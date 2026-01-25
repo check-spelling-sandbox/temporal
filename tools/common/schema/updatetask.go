@@ -8,6 +8,7 @@ import (
 	"crypto/md5" // #nosec
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/fs"
@@ -281,7 +282,7 @@ func readManifest(fsys fs.FS, dirPath string) (*manifest, error) {
 
 	currVer, err := normalizeVersionString(manifest.CurrVersion)
 	if err != nil {
-		return nil, fmt.Errorf("invalid CurrVersion in manifest")
+		return nil, errors.New("invalid CurrVersion in manifest")
 	}
 	manifest.CurrVersion = currVer
 
@@ -290,12 +291,12 @@ func readManifest(fsys fs.FS, dirPath string) (*manifest, error) {
 		return nil, err
 	}
 	if len(manifest.MinCompatibleVersion) == 0 {
-		return nil, fmt.Errorf("invalid MinCompatibleVersion in manifest")
+		return nil, errors.New("invalid MinCompatibleVersion in manifest")
 	}
 	manifest.MinCompatibleVersion = minVer
 
 	if len(manifest.SchemaUpdateCqlFiles) == 0 && !manifest.AllowNoCqlFiles {
-		return nil, fmt.Errorf("manifest missing SchemaUpdateCqlFiles")
+		return nil, errors.New("manifest missing SchemaUpdateCqlFiles")
 	}
 
 	// See comment above. This is an appropriate usage of md5.

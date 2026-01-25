@@ -1,7 +1,7 @@
 package timestamp
 
 import (
-	"fmt"
+	"errors"
 	"time"
 
 	"google.golang.org/protobuf/types/known/durationpb"
@@ -12,8 +12,8 @@ import (
 const maxAllowedDuration = 100 * 365 * 24 * time.Hour
 
 var (
-	errNegativeDuration = fmt.Errorf("negative duration")
-	errMismatchedSigns  = fmt.Errorf("duration has seconds and nanos with different signs")
+	errNegativeDuration = errors.New("negative duration")
+	errMismatchedSigns  = errors.New("duration has seconds and nanos with different signs")
 
 	maxSeconds = maxAllowedDuration.Nanoseconds() / 1e9
 )

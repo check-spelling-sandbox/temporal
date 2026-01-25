@@ -1,6 +1,7 @@
 package tdbg
 
 import (
+	"errors"
 	"fmt"
 	"io"
 
@@ -131,7 +132,7 @@ func (ac *DLQV1Service) PurgeMessages(c *cli.Context) error {
 		ShardId:               int32(shardID),
 		InclusiveEndMessageId: lastMessageID,
 	}); err != nil {
-		return fmt.Errorf("failed to purge DLQ")
+		return errors.New("failed to purge DLQ")
 	}
 	fmt.Fprintln(c.App.Writer, "Successfully purged DLQ Messages.")
 	return nil

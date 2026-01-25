@@ -2,6 +2,7 @@ package log
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -91,7 +92,7 @@ func TestDefaultLogger(t *testing.T) {
 
 	logger := NewZapLogger(zap.NewExample())
 	preCaller := caller(1)
-	logger.With(tag.Error(fmt.Errorf("test error"))).Info("test info", tag.WorkflowActionWorkflowStarted)
+	logger.With(tag.Error(errors.New("test error"))).Info("test info", tag.WorkflowActionWorkflowStarted)
 
 	// Test tags with duplicate keys are replaced
 	withLogger := With(logger,
@@ -131,7 +132,7 @@ func TestThrottleLogger(t *testing.T) {
 	logger := NewThrottledLogger(NewZapLogger(zap.NewExample()),
 		func() float64 { return 1 })
 	preCaller := caller(1)
-	With(With(logger, tag.Error(fmt.Errorf("test error"))), tag.ComponentShardContext).Info("test info", tag.WorkflowActionWorkflowStarted)
+	With(With(logger, tag.Error(errors.New("test error"))), tag.ComponentShardContext).Info("test info", tag.WorkflowActionWorkflowStarted)
 
 	// back to normal state
 	require.Nil(t, w.Close())
@@ -160,7 +161,7 @@ func TestEmptyMsg(t *testing.T) {
 
 	logger := NewZapLogger(zap.NewExample())
 	preCaller := caller(1)
-	logger.With(tag.Error(fmt.Errorf("test error"))).Info("", tag.WorkflowActionWorkflowStarted)
+	logger.With(tag.Error(errors.New("test error"))).Info("", tag.WorkflowActionWorkflowStarted)
 
 	// back to normal state
 	require.Nil(t, w.Close())

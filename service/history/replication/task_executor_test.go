@@ -2,7 +2,7 @@ package replication
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"math/rand"
 	"testing"
 	"time"
@@ -145,7 +145,7 @@ func (s *taskExecutorSuite) TestFilterTask_Error() {
 	namespaceID := namespace.ID(uuid.NewString())
 	s.mockNamespaceCache.EXPECT().
 		GetNamespaceByID(namespaceID).
-		Return(nil, fmt.Errorf("random error"))
+		Return(nil, errors.New("random error"))
 	ok, err := s.replicationTaskExecutor.filterTask(namespaceID, "test-workflow-id", false)
 	s.Error(err)
 	s.False(ok)

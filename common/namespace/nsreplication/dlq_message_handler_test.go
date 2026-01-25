@@ -2,7 +2,7 @@ package nsreplication
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 
 	"github.com/google/uuid"
@@ -92,7 +92,7 @@ func (s *dlqMessageHandlerSuite) TestReadMessages_ThrowErrorOnGetDLQAckLevel() {
 			SourceTaskId: 1,
 		},
 	}
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	s.mockReplicationQueue.EXPECT().GetDLQAckLevel(gomock.Any()).Return(int64(-1), testError)
 	s.mockReplicationQueue.EXPECT().GetMessagesFromDLQ(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).
 		Return(tasks, nil, nil).Times(0)
@@ -108,7 +108,7 @@ func (s *dlqMessageHandlerSuite) TestReadMessages_ThrowErrorOnReadMessages() {
 	pageSize := 100
 	pageToken := []byte{}
 
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	s.mockReplicationQueue.EXPECT().GetDLQAckLevel(gomock.Any()).Return(ackLevel, nil)
 	s.mockReplicationQueue.EXPECT().GetMessagesFromDLQ(gomock.Any(), ackLevel, lastMessageID, pageSize, pageToken).
 		Return(nil, nil, testError)
@@ -132,7 +132,7 @@ func (s *dlqMessageHandlerSuite) TestPurgeMessages() {
 
 func (s *dlqMessageHandlerSuite) TestPurgeMessages_ThrowErrorOnGetDLQAckLevel() {
 	lastMessageID := int64(20)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 
 	s.mockReplicationQueue.EXPECT().GetDLQAckLevel(gomock.Any()).Return(int64(-1), testError)
 	s.mockReplicationQueue.EXPECT().RangeDeleteMessagesFromDLQ(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Times(0)
@@ -145,7 +145,7 @@ func (s *dlqMessageHandlerSuite) TestPurgeMessages_ThrowErrorOnGetDLQAckLevel() 
 func (s *dlqMessageHandlerSuite) TestPurgeMessages_ThrowErrorOnPurgeMessages() {
 	ackLevel := int64(10)
 	lastMessageID := int64(20)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 
 	s.mockReplicationQueue.EXPECT().GetDLQAckLevel(gomock.Any()).Return(ackLevel, nil)
 	s.mockReplicationQueue.EXPECT().RangeDeleteMessagesFromDLQ(gomock.Any(), ackLevel, lastMessageID).Return(testError)
@@ -192,7 +192,7 @@ func (s *dlqMessageHandlerSuite) TestMergeMessages_ThrowErrorOnGetDLQAckLevel() 
 	pageSize := 100
 	pageToken := []byte{}
 	messageID := int64(11)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	namespaceAttribute := &replicationspb.NamespaceTaskAttributes{
 		Id: uuid.NewString(),
 	}
@@ -223,7 +223,7 @@ func (s *dlqMessageHandlerSuite) TestMergeMessages_ThrowErrorOnGetDLQMessages() 
 	lastMessageID := int64(20)
 	pageSize := 100
 	pageToken := []byte{}
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 
 	s.mockReplicationQueue.EXPECT().GetDLQAckLevel(gomock.Any()).Return(ackLevel, nil)
 	s.mockReplicationQueue.EXPECT().GetMessagesFromDLQ(gomock.Any(), ackLevel, lastMessageID, pageSize, pageToken).
@@ -244,7 +244,7 @@ func (s *dlqMessageHandlerSuite) TestMergeMessages_ThrowErrorOnHandleReceivingTa
 	pageToken := []byte{}
 	messageID1 := int64(11)
 	messageID2 := int64(12)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	namespaceAttribute1 := &replicationspb.NamespaceTaskAttributes{
 		Id: uuid.NewString(),
 	}
@@ -285,7 +285,7 @@ func (s *dlqMessageHandlerSuite) TestMergeMessages_ThrowErrorOnDeleteMessages() 
 	pageToken := []byte{}
 	messageID1 := int64(11)
 	messageID2 := int64(12)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	namespaceAttribute1 := &replicationspb.NamespaceTaskAttributes{
 		Id: uuid.NewString(),
 	}
@@ -326,7 +326,7 @@ func (s *dlqMessageHandlerSuite) TestMergeMessages_IgnoreErrorOnUpdateDLQAckLeve
 	pageSize := 100
 	pageToken := []byte{}
 	messageID := int64(11)
-	testError := fmt.Errorf("test")
+	testError := errors.New("test")
 	namespaceAttribute := &replicationspb.NamespaceTaskAttributes{
 		Id: uuid.NewString(),
 	}

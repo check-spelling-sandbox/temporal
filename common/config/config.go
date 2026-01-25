@@ -2,6 +2,7 @@ package config
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"math"
 	"strings"
@@ -657,7 +658,7 @@ func (c *Config) Validate() error {
 
 	_, hasIFE := c.Services[string(primitives.InternalFrontendService)]
 	if hasIFE && (c.PublicClient.HostPort != "" || c.PublicClient.ForceTLSConfig != "" || c.PublicClient.HTTPHostPort != "") {
-		return fmt.Errorf("when using internal-frontend, publicClient must be empty")
+		return errors.New("when using internal-frontend, publicClient must be empty")
 	}
 
 	switch c.PublicClient.ForceTLSConfig {

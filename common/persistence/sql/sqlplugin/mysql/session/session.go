@@ -193,7 +193,7 @@ func registerTLSConfig(cfg *config.SQL) error {
 			return fmt.Errorf("failed to load CA files: %v", err)
 		}
 		if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-			return fmt.Errorf("failed to append CA file")
+			return errors.New("failed to append CA file")
 		}
 		tlsConfig.RootCAs = rootCertPool
 	}

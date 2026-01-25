@@ -256,7 +256,7 @@ func (n *Node) Path() []Key {
 // This method must be called on the root node only.
 func (n *Node) OpLog() (OperationLog, error) {
 	if n.Parent != nil {
-		return nil, fmt.Errorf("can only be called from root node")
+		return nil, errors.New("can only be called from root node")
 	}
 
 	compacted := n.opLog.compact()

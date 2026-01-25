@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strings"
 	"sync"
 	"testing"
@@ -5912,7 +5911,7 @@ func (s *engineSuite) Test_GetWorkflowExecutionRawHistoryV2_FailedOnNamespaceCac
 
 	ctx := context.Background()
 	namespaceID := namespace.ID(uuid.NewString())
-	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, fmt.Errorf("test"))
+	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, errors.New("test"))
 	_, err = engine.GetWorkflowExecutionRawHistoryV2(ctx,
 		&historyservice.GetWorkflowExecutionRawHistoryV2Request{
 			NamespaceId: namespaceID.String(),
@@ -6125,7 +6124,7 @@ func (s *engineSuite) Test_GetWorkflowExecutionRawHistory_FailedOnNamespaceCache
 
 	ctx := context.Background()
 	namespaceID := namespace.ID(uuid.NewString())
-	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, fmt.Errorf("test"))
+	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, errors.New("test"))
 	_, err = engine.GetWorkflowExecutionRawHistory(ctx,
 		&historyservice.GetWorkflowExecutionRawHistoryRequest{
 			NamespaceId: namespaceID.String(),

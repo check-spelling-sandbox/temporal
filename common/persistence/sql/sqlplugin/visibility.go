@@ -318,7 +318,7 @@ func GenerateSelectQuery(
 			*filter.PageSize,
 		)
 	default:
-		return fmt.Errorf("invalid query filter")
+		return errors.New("invalid query filter")
 	}
 
 	filter.Query = fmt.Sprintf(

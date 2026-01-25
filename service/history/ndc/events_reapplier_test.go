@@ -2,7 +2,7 @@ package ndc
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 
 	"github.com/google/uuid"
@@ -359,7 +359,7 @@ func (s *nDCEventReapplicationSuite) TestReapplyEvents_Error() {
 		attr.GetIdentity(),
 		attr.GetHeader(),
 		event.Links,
-	).Return(nil, fmt.Errorf("test"))
+	).Return(nil, errors.New("test"))
 	dedupResource := definition.NewEventReappliedID(runID, event.GetEventId(), event.GetVersion())
 	msCurrent.EXPECT().IsResourceDuplicated(dedupResource).Return(false)
 	msCurrent.EXPECT().HSM().Return(s.hsmNode).AnyTimes()

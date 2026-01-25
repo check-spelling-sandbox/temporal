@@ -2,7 +2,7 @@ package replicator
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -20,7 +20,7 @@ func TestCleanupAckedMessages_GetAckLevelsError(t *testing.T) {
 		clusterMetadata:           clusterMetadata,
 	}
 
-	nsQueue.EXPECT().GetAckLevels(gomock.Any()).Return(nil, fmt.Errorf("test"))
+	nsQueue.EXPECT().GetAckLevels(gomock.Any()).Return(nil, errors.New("test"))
 	nsQueue.EXPECT().DeleteMessagesBefore(gomock.Any(), gomock.Any()).Times(0)
 	_, err := replicator.cleanupAckedMessages(context.Background(), 1)
 

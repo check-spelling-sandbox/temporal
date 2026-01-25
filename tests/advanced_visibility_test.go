@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -2112,7 +2113,7 @@ func (s *AdvancedVisibilitySuite) Test_BuildIdIndexedOnRetry() {
 	buildIdv1 := s.T().Name() + "-v1"
 
 	wf := func(ctx workflow.Context) error {
-		return fmt.Errorf("fail")
+		return errors.New("fail")
 	}
 
 	// Declare v1

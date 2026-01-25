@@ -4,6 +4,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/rsa"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -109,7 +110,7 @@ func (a *defaultTokenKeyProvider) timerCallback() {
 
 func (a *defaultTokenKeyProvider) updateKeys() error {
 	if !a.config.HasSourceURIsConfigured() {
-		return fmt.Errorf("no URIs configured for retrieving token keys")
+		return errors.New("no URIs configured for retrieving token keys")
 	}
 
 	rsaKeys := make(map[string]*rsa.PublicKey)

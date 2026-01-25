@@ -5,6 +5,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/rsa"
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
@@ -390,7 +391,7 @@ func (tg *tokenGenerator) generateToken(alg keyAlgorithm, subject string, permis
 	case ECDSA:
 		token = jwt.NewWithClaims(jwt.SigningMethodES256, claims)
 	default:
-		return "", fmt.Errorf("unsupported algorithm")
+		return "", errors.New("unsupported algorithm")
 	}
 
 	if options&errorTestOptionNoKID == 0 {
@@ -406,7 +407,7 @@ func (tg *tokenGenerator) generateToken(alg keyAlgorithm, subject string, permis
 	case ECDSA:
 		return token.SignedString(tg.ecdsaPrivateKey)
 	}
-	return "", fmt.Errorf("unexpected condition")
+	return "", errors.New("unexpected condition")
 }
 
 func (tg *tokenGenerator) EcdsaKey(alg string, kid string) (*ecdsa.PublicKey, error) {

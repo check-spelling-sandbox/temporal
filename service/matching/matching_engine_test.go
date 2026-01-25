@@ -4955,7 +4955,7 @@ func (m *testTaskManager) ListTaskQueue(
 	_ context.Context,
 	_ *persistence.ListTaskQueueRequest,
 ) (*persistence.ListTaskQueueResponse, error) {
-	return nil, fmt.Errorf("unsupported operation")
+	return nil, errors.New("unsupported operation")
 }
 
 func (m *testTaskManager) DeleteTaskQueue(

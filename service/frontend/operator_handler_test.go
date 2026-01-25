@@ -1156,7 +1156,7 @@ func (s *operatorHandlerSuite) Test_RemoveRemoteCluster_Error() {
 	s.mockResource.ClusterMetadataMgr.EXPECT().DeleteClusterMetadata(
 		gomock.Any(),
 		&persistence.DeleteClusterMetadataRequest{ClusterName: clusterName},
-	).Return(fmt.Errorf("test error"))
+	).Return(errors.New("test error"))
 
 	_, err := s.handler.RemoveRemoteCluster(context.Background(), &operatorservice.RemoveRemoteClusterRequest{ClusterName: clusterName})
 	s.Error(err)
@@ -1420,7 +1420,7 @@ func (s *operatorHandlerSuite) Test_AddOrUpdateRemoteCluster_DescribeCluster_Err
 	)
 	s.mockResource.RemoteAdminClient.EXPECT().DescribeCluster(gomock.Any(), &adminservice.DescribeClusterRequest{}).Return(
 		nil,
-		fmt.Errorf("test error"),
+		errors.New("test error"),
 	)
 	_, err := s.handler.AddOrUpdateRemoteCluster(context.Background(), &operatorservice.AddOrUpdateRemoteClusterRequest{FrontendAddress: rpcAddress})
 	s.Error(err)
@@ -1447,7 +1447,7 @@ func (s *operatorHandlerSuite) Test_AddOrUpdateRemoteCluster_GetClusterMetadata_
 		}, nil)
 	s.mockResource.ClusterMetadataMgr.EXPECT().GetClusterMetadata(gomock.Any(), &persistence.GetClusterMetadataRequest{ClusterName: clusterName}).Return(
 		nil,
-		fmt.Errorf("test error"),
+		errors.New("test error"),
 	)
 	_, err := s.handler.AddOrUpdateRemoteCluster(context.Background(), &operatorservice.AddOrUpdateRemoteClusterRequest{FrontendAddress: rpcAddress})
 	s.Error(err)
@@ -1490,7 +1490,7 @@ func (s *operatorHandlerSuite) Test_AddOrUpdateRemoteCluster_SaveClusterMetadata
 			IsGlobalNamespaceEnabled: true,
 		},
 		Version: 0,
-	}).Return(false, fmt.Errorf("test error"))
+	}).Return(false, errors.New("test error"))
 	_, err := s.handler.AddOrUpdateRemoteCluster(context.Background(), &operatorservice.AddOrUpdateRemoteClusterRequest{
 		FrontendAddress: rpcAddress,
 	})

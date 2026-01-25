@@ -2,7 +2,7 @@ package history
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 	"time"
 
@@ -313,7 +313,7 @@ func TestAccess(t *testing.T) {
 			workflowState:       enumsspb.WORKFLOW_EXECUTION_STATE_COMPLETED,
 			expectedSetRequests: 0,
 			accessor: func(n *hsm.Node) error {
-				return fmt.Errorf("test read error")
+				return errors.New("test read error")
 			},
 			assertOutcome: func(t *testing.T, err error) {
 				require.ErrorContains(t, err, "test read error")
@@ -337,7 +337,7 @@ func TestAccess(t *testing.T) {
 			workflowState:       enumsspb.WORKFLOW_EXECUTION_STATE_COMPLETED,
 			expectedSetRequests: 0,
 			accessor: func(n *hsm.Node) error {
-				return fmt.Errorf("test write error")
+				return errors.New("test write error")
 			},
 			assertOutcome: func(t *testing.T, err error) {
 				require.ErrorContains(t, err, "test write error")
@@ -349,7 +349,7 @@ func TestAccess(t *testing.T) {
 			workflowState:       enumsspb.WORKFLOW_EXECUTION_STATE_ZOMBIE,
 			expectedSetRequests: 0,
 			accessor: func(n *hsm.Node) error {
-				return fmt.Errorf("accessor should not be called")
+				return errors.New("accessor should not be called")
 			},
 			assertOutcome: func(t *testing.T, err error) {
 				require.ErrorIs(t, err, consts.ErrWorkflowZombie)

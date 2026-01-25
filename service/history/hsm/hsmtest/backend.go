@@ -2,7 +2,7 @@ package hsmtest
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"slices"
 
 	enumspb "go.temporal.io/api/enums/v1"
@@ -49,7 +49,7 @@ func (n *NodeBackend) LoadHistoryEvent(ctx context.Context, tokenBytes []byte) (
 	})
 
 	if idx < 0 {
-		return nil, fmt.Errorf("event not found")
+		return nil, errors.New("event not found")
 	}
 
 	return n.Events[idx], nil

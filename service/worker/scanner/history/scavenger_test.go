@@ -2,7 +2,7 @@ package history
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 	"time"
 
@@ -559,7 +559,7 @@ func (s *ScavengerTestSuite) TestMixesTwoPages() {
 	s.mockExecutionManager.EXPECT().DeleteHistoryBranch(gomock.Any(), protomock.Eq(&persistence.DeleteHistoryBranchRequest{
 		BranchToken: branchToken4,
 		ShardID:     common.WorkflowIDToHistoryShard("namespaceID4", "workflowID4", s.numShards),
-	})).Return(fmt.Errorf("failed to delete history"))
+	})).Return(errors.New("failed to delete history"))
 
 	hbd, err := s.scavenger.Run(context.Background())
 	s.Nil(err)

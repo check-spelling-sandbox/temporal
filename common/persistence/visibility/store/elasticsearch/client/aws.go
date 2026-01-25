@@ -1,6 +1,7 @@
 package client
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -20,7 +21,7 @@ func NewAwsHttpClient(config ESAWSRequestSigningConfig) (*http.Client, error) {
 	if config.Region == "" {
 		config.Region = os.Getenv("AWS_REGION")
 		if config.Region == "" {
-			return nil, fmt.Errorf("unable to resolve AWS region for obtaining AWS Elastic signing credentials")
+			return nil, errors.New("unable to resolve AWS region for obtaining AWS Elastic signing credentials")
 		}
 	}
 

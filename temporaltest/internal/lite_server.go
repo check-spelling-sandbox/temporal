@@ -5,6 +5,7 @@ package temporalite
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"math/rand"
 	"os"
@@ -191,10 +192,10 @@ func (cfg *LiteServerConfig) validate() error {
 	}
 
 	if cfg.Ephemeral && cfg.DatabaseFilePath != "" {
-		return fmt.Errorf("config option DatabaseFilePath is not supported in ephemeral mode")
+		return errors.New("config option DatabaseFilePath is not supported in ephemeral mode")
 	}
 	if !cfg.Ephemeral && cfg.DatabaseFilePath == "" {
-		return fmt.Errorf("config option DatabaseFilePath is required when ephemeral mode disabled")
+		return errors.New("config option DatabaseFilePath is required when ephemeral mode disabled")
 	}
 
 	return nil
@@ -280,7 +281,7 @@ func NewLiteServer(liteConfig *LiteServerConfig, opts ...temporal.ServerOption) 
 		// To prevent having to code fall-through semantics right now, we currently
 		// eagerly fail if dynamic config is being configured in two ways
 		if liteConfig.BaseConfig.DynamicConfigClient != nil {
-			return nil, fmt.Errorf("unable to have file-based dynamic config and individual dynamic config values")
+			return nil, errors.New("unable to have file-based dynamic config and individual dynamic config values")
 		}
 		serverOpts = append(serverOpts, temporal.WithDynamicConfigClient(liteConfig.DynamicConfig))
 	}

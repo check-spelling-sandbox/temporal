@@ -1,7 +1,7 @@
 package hsmtest
 
 import (
-	"fmt"
+	"errors"
 	"strings"
 	"time"
 
@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	errInvalidStateType = fmt.Errorf("invalid state type")
+	errInvalidStateType = errors.New("invalid state type")
 )
 
 type State string

@@ -2,6 +2,7 @@ package hsm_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"slices"
 	"sort"
@@ -411,7 +412,7 @@ func TestMachineTransition(t *testing.T) {
 	err = hsm.MachineTransition(root, func(d *hsmtest.Data) (hsm.TransitionOutput, error) {
 		// Mutate state and make sure the cache is marked stale.
 		d.SetState(hsmtest.State2)
-		return hsm.TransitionOutput{}, fmt.Errorf("test")
+		return hsm.TransitionOutput{}, errors.New("test")
 	})
 	require.ErrorContains(t, err, "test")
 	require.Equal(t, int64(0), root.InternalRepr().TransitionCount)

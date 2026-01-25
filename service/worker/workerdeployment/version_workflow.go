@@ -140,7 +140,7 @@ func (d *VersionWorkflowRunner) listenToSignals(ctx workflow.Context) {
 
 func (d *VersionWorkflowRunner) run(ctx workflow.Context) error {
 	if d.GetVersionState().Version == nil {
-		return fmt.Errorf("version cannot be nil on start")
+		return errors.New("version cannot be nil on start")
 	}
 	if d.VersionState.GetCreateTime() == nil {
 		d.VersionState.CreateTime = timestamppb.New(workflow.Now(ctx))

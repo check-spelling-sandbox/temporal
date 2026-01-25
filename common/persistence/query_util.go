@@ -74,7 +74,7 @@ func LoadAndSplitQueryFromReaders(
 
 				case sqlRightParenthesis:
 					if len(st) == 0 || st[len(st)-1] != sqlLeftParenthesis {
-						return nil, fmt.Errorf("error reading contents: unmatched right parenthesis")
+						return nil, errors.New("error reading contents: unmatched right parenthesis")
 					}
 					st = st[:len(st)-1]
 
@@ -115,7 +115,7 @@ func LoadAndSplitQueryFromReaders(
 						j++
 					}
 					if j == n {
-						return nil, fmt.Errorf("error reading contents: unmatched quotes")
+						return nil, errors.New("error reading contents: unmatched quotes")
 					}
 
 				case sqlLineComment[0]:
@@ -135,9 +135,9 @@ func LoadAndSplitQueryFromReaders(
 			if len(st) > 0 {
 				switch st[len(st)-1] {
 				case sqlLeftParenthesis:
-					return nil, fmt.Errorf("error reading contents: unmatched left parenthesis")
+					return nil, errors.New("error reading contents: unmatched left parenthesis")
 				case sqlBeginKeyword[0]:
-					return nil, fmt.Errorf("error reading contents: unmatched `BEGIN` keyword")
+					return nil, errors.New("error reading contents: unmatched `BEGIN` keyword")
 				default:
 					// should never enter here
 					return nil, fmt.Errorf("error reading contents: unmatched `%c`", st[len(st)-1])
