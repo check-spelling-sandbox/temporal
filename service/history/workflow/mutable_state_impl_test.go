@@ -4257,7 +4257,7 @@ func (s *mutableStateSuite) TestCloseTransactionPrepareReplicationTasks_HistoryT
 					s.Fail("closeTransactionPrepareReplicationTasks failed", err)
 				}
 				replicationTasks := ms.InsertTasks[tasks.CategoryReplication]
-				s.Equal(len(tc.tasks), len(replicationTasks))
+				s.Len(replicationTasks, len(tc.tasks))
 				for i, task := range tc.tasks {
 					s.Equal(task, replicationTasks[i])
 				}
