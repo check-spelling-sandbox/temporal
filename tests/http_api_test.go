@@ -95,7 +95,7 @@ func (s *HttpApiTestSuite) runHTTPAPIBasicsTest(
 	}
 	s.Require().NoError(json.Unmarshal(respBody, &startResp))
 
-	// Check that there is a an HTTP call metric with the proper tags/value. We
+	// Check that there is an HTTP call metric with the proper tags/value. We
 	// can't test overall counts because the metrics handler is shared across
 	// concurrently executing tests.
 	var found bool

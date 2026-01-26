@@ -46,13 +46,13 @@ import (
 type (
 	historyReplicationDLQSuite struct {
 		xdcBaseSuite
-		// This test is parameterized on whether to use streaming for replication or not. Previously, replication was
+		// This test is parameterized on whether or not to use streaming for replication. Previously, replication was
 		// based on a pull-based architecture with standby clusters polling the active cluster for a given namespace
 		// whenever they wanted to process tasks. There's now a push-based, or "streaming", option based on a dynamic
 		// config flag. We want to test both code paths, so we run the test suite twice, once with streaming enabled and
 		// once with it disabled.
 		enableReplicationStream bool
-		// We also parameterize on whether we should use the new queue implementation or not. See more details about
+		// We also parameterize on whether or not we should use the new queue implementation. See more details about
 		// this migration in [persistence.QueueV2].
 		enableQueueV2 bool
 

@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -42,11 +42,11 @@ func (m *MockDLQHandler) EXPECT() *MockDLQHandlerMockRecorder {
 }
 
 // GetMessages mocks base method.
-func (m *MockDLQHandler) GetMessages(ctx context.Context, sourceCluster string, lastMessageID int64, pageSize int, pageToken []byte) ([]*repication.ReplicationTask, []*repication.ReplicationTaskInfo, []byte, error) {
+func (m *MockDLQHandler) GetMessages(ctx context.Context, sourceCluster string, lastMessageID int64, pageSize int, pageToken []byte) ([]*replication.ReplicationTask, []*replication.ReplicationTaskInfo, []byte, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMessages", ctx, sourceCluster, lastMessageID, pageSize, pageToken)
-	ret0, _ := ret[0].([]*repication.ReplicationTask)
-	ret1, _ := ret[1].([]*repication.ReplicationTaskInfo)
+	ret0, _ := ret[0].([]*replication.ReplicationTask)
+	ret1, _ := ret[1].([]*replication.ReplicationTaskInfo)
 	ret2, _ := ret[2].([]byte)
 	ret3, _ := ret[3].(error)
 	return ret0, ret1, ret2, ret3

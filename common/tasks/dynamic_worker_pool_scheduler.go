@@ -142,7 +142,7 @@ func (pool *DynamicWorkerPoolScheduler) dequeueLocked() (task Runnable, ok bool)
 }
 
 // tryEnqueueLocked enqueues a task into the pool's buffer if it is under capacity.
-// Returns true if the task was enqueued, otherwise returns false.
+// Returns true if the task was enqueued; otherwise, returns false.
 // Must be called while holding the lock.
 func (pool *DynamicWorkerPoolScheduler) tryEnqueueLocked(task Runnable) bool {
 	if pool.buffer.Len() < pool.limiter.BufferSize() {

@@ -26,7 +26,7 @@ import (
 // Low Cardinality Keyword Fields: used for categorical data that support GROUP BY aggregations. Values must be limited to a small number of dimensions.
 //
 // Each root component can only use a predefined search attribute field once. Developers should not reassign aliases to different fields.
-// Reassiging aliases to different fields will result in incorrect visibility query results.
+// Reassigning aliases to different fields will result in incorrect visibility query results.
 //
 // To register these search attributes with the CHASM Registry, use the WithSearchAttributes() option when creating the component in the library.
 // eg.

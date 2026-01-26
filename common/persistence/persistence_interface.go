@@ -154,7 +154,7 @@ type (
 		DeleteHistoryNodes(ctx context.Context, request *InternalDeleteHistoryNodesRequest) error
 		// ReadHistoryBranch returns history node data for a branch
 		ReadHistoryBranch(ctx context.Context, request *InternalReadHistoryBranchRequest) (*InternalReadHistoryBranchResponse, error)
-		// ForkHistoryBranch forks a new branch from a old branch
+		// ForkHistoryBranch forks a new branch from an old branch
 		ForkHistoryBranch(ctx context.Context, request *InternalForkHistoryBranchRequest) error
 		// DeleteHistoryBranch removes a branch
 		DeleteHistoryBranch(ctx context.Context, request *InternalDeleteHistoryBranchRequest) error
@@ -376,7 +376,7 @@ type (
 
 		ArchetypeID chasm.ArchetypeID
 
-		// workflow to be resetted
+		// workflow to be reset
 		ResetWorkflowSnapshot        InternalWorkflowSnapshot
 		ResetWorkflowEventsNewEvents []*InternalAppendHistoryNodesRequest `json:",omitempty"`
 		// maybe new workflow
@@ -509,7 +509,7 @@ type (
 		// and Data will be unset. *No* code outside of the ExecutionManager or Cassandra
 		// store should reference this field.
 		//
-		// As an optimization to avoid an extra encode/deocde step, the Cassandra version
+		// As an optimization to avoid an extra encode/decode step, the Cassandra version
 		// is encoded in a single blob up-front.
 		CassandraBlob *commonpb.DataBlob
 	}

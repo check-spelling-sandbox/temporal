@@ -18,7 +18,7 @@ import (
 	history "go.temporal.io/api/history/v1"
 	history0 "go.temporal.io/server/api/history/v1"
 	historyservice "go.temporal.io/server/api/historyservice/v1"
-	repication "go.temporal.io/server/api/replication/v1"
+	replication "go.temporal.io/server/api/replication/v1"
 	workflow "go.temporal.io/server/api/workflow/v1"
 	chasm "go.temporal.io/server/chasm"
 	collection "go.temporal.io/server/common/collection"
@@ -85,10 +85,10 @@ func (mr *MockEngineMockRecorder) BackfillHistoryEvents(ctx, request any) *gomoc
 }
 
 // ConvertReplicationTask mocks base method.
-func (m *MockEngine) ConvertReplicationTask(ctx context.Context, task tasks.Task, clusterID int32) (*repication.ReplicationTask, error) {
+func (m *MockEngine) ConvertReplicationTask(ctx context.Context, task tasks.Task, clusterID int32) (*replication.ReplicationTask, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ConvertReplicationTask", ctx, task, clusterID)
-	ret0, _ := ret[0].(*repication.ReplicationTask)
+	ret0, _ := ret[0].(*replication.ReplicationTask)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -190,10 +190,10 @@ func (mr *MockEngineMockRecorder) GetDLQMessages(ctx, messagesRequest any) *gomo
 }
 
 // GetDLQReplicationMessages mocks base method.
-func (m *MockEngine) GetDLQReplicationMessages(ctx context.Context, taskInfos []*repication.ReplicationTaskInfo) ([]*repication.ReplicationTask, error) {
+func (m *MockEngine) GetDLQReplicationMessages(ctx context.Context, taskInfos []*replication.ReplicationTaskInfo) ([]*replication.ReplicationTask, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDLQReplicationMessages", ctx, taskInfos)
-	ret0, _ := ret[0].([]*repication.ReplicationTask)
+	ret0, _ := ret[0].([]*replication.ReplicationTask)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -235,10 +235,10 @@ func (mr *MockEngineMockRecorder) GetMutableState(ctx, request any) *gomock.Call
 }
 
 // GetReplicationMessages mocks base method.
-func (m *MockEngine) GetReplicationMessages(ctx context.Context, pollingCluster string, ackMessageID int64, ackTimestamp time.Time, queryMessageID int64) (*repication.ReplicationMessages, error) {
+func (m *MockEngine) GetReplicationMessages(ctx context.Context, pollingCluster string, ackMessageID int64, ackTimestamp time.Time, queryMessageID int64) (*replication.ReplicationMessages, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetReplicationMessages", ctx, pollingCluster, ackMessageID, ackTimestamp, queryMessageID)
-	ret0, _ := ret[0].(*repication.ReplicationMessages)
+	ret0, _ := ret[0].(*replication.ReplicationMessages)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -686,7 +686,7 @@ func (mr *MockEngineMockRecorder) ReplicateHistoryEvents(ctx, workflowKey, baseE
 }
 
 // ReplicateVersionedTransition mocks base method.
-func (m *MockEngine) ReplicateVersionedTransition(ctx context.Context, archetypeID chasm.ArchetypeID, artifact *repication.VersionedTransitionArtifact, sourceClusterName string) error {
+func (m *MockEngine) ReplicateVersionedTransition(ctx context.Context, archetypeID chasm.ArchetypeID, artifact *replication.VersionedTransitionArtifact, sourceClusterName string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReplicateVersionedTransition", ctx, archetypeID, artifact, sourceClusterName)
 	ret0, _ := ret[0].(error)

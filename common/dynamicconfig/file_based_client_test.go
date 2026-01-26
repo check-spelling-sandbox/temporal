@@ -72,7 +72,7 @@ func (s *fileBasedClientSuite) TestGetValue_NonExistKey() {
 	s.Equal(defaultValue, v)
 }
 
-func (s *fileBasedClientSuite) TestGetValue_CaseInsensitie() {
+func (s *fileBasedClientSuite) TestGetValue_CaseInsensitive() {
 	cvs := s.client.GetValue(dynamicconfig.MakeKey(testCaseInsensitivePropertyKey))
 	s.Equal(1, len(cvs))
 

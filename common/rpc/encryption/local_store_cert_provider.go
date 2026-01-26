@@ -262,7 +262,7 @@ func (s *localStoreCertProvider) fetchCertificate(
 	}
 
 	if certFile != "" && certData != "" {
-		return nil, errors.New("only one of certFile or certData properties should be spcified")
+		return nil, errors.New("only one of certFile or certData properties should be specified")
 	}
 
 	var certBytes []byte
@@ -481,7 +481,7 @@ func parseCert(bytes []byte) (*x509.Certificate, error) {
 	}
 
 	if len(certBytes) == 0 || len(certBytes[0]) == 0 {
-		return nil, fmt.Errorf("failed to decode PEM certificate data")
+		return nil, errors.New("failed to decode PEM certificate data")
 	}
 	return x509.ParseCertificate(certBytes[0])
 }

@@ -6,7 +6,7 @@ import (
 
 type (
 	OrImpl[T any] struct {
-		// TODO: see if we can somehow order arbitrary predicats and store a sorted list
+		// TODO: see if we can somehow order arbitrary predicates and store a sorted list
 		Predicates []Predicate[T]
 	}
 )

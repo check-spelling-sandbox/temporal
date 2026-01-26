@@ -74,7 +74,7 @@ var (
 	VisibilityDisableOrderByClause = NewNamespaceBoolSetting(
 		"system.visibilityDisableOrderByClause",
 		true,
-		`VisibilityDisableOrderByClause is the config to disable ORDERY BY clause for Elasticsearch`,
+		`VisibilityDisableOrderByClause is the config to disable ORDER BY clause for Elasticsearch`,
 	)
 	VisibilityEnableManualPagination = NewNamespaceBoolSetting(
 		"system.visibilityEnableManualPagination",
@@ -420,7 +420,7 @@ WorkflowType, ActivityType, SignalName, MarkerName, ErrorReason/FailureReason/Ca
 		255,
 		`WorkerBuildIdSizeLimit is the byte length limit for a worker build id as used in the rpc methods for updating
 the version sets for a task queue.
-Do not set this to a value higher than 255 for clusters using SQL based persistence due to predefined VARCHAR
+Do not set this to a value greater than 255 for clusters using SQL based persistence due to predefined VARCHAR
 column width.`,
 	)
 	VersionCompatibleSetLimitPerQueue = NewNamespaceIntSetting(
@@ -583,7 +583,7 @@ is currently processing a task.
 		"frontend.httpAllowedHosts",
 		ConvertWildcardStringListToRegexp,
 		MatchAnythingRE,
-		`HTTP API Requests with a "Host" header matching the allowed hosts will be processed, otherwise rejected.
+		`HTTP API Requests with a "Host" header matching the allowed hosts will be processed; otherwise, rejected.
 Wildcards (*) are expanded to allow any substring. By default any Host header is allowed.
 Concrete type should be list of strings.`,
 	)
@@ -1318,7 +1318,7 @@ these log lines can be noisy, we want to be able to turn on and sample selective
 	MatchingMaxTaskQueuesInDeployment = NewNamespaceIntSetting(
 		"matching.maxTaskQueuesInDeployment",
 		1000,
-		`MatchingMaxTaskQueuesInDeployment represents the maximum number of task-queues that can be registed in a single deployment`,
+		`MatchingMaxTaskQueuesInDeployment represents the maximum number of task-queues that can be registered in a single deployment`,
 	)
 	MatchingMaxDeployments = NewNamespaceIntSetting(
 		"matching.maxDeployments",
@@ -1573,7 +1573,7 @@ This feature is still under development and should NOT be enabled.`,
 	HistoryStartupMembershipJoinDelay = NewGlobalDurationSetting(
 		"history.startupMembershipJoinDelay",
 		0*time.Second,
-		`HistoryStartupMembershipJoinDelay is the duration a history instance waits
+		`HistoryStartupMembershipJoinDelay is the duration that a history instance waits
 before joining membership after starting.`,
 	)
 	HistoryAlignMembershipChange = NewGlobalDurationSetting(
@@ -1777,7 +1777,7 @@ If value less or equal to 0, will fall back to HistoryPersistenceNamespaceMaxQPS
 	TaskSchedulerInactiveChannelDeletionDelay = NewGlobalDurationSetting(
 		"history.taskSchedulerInactiveChannelDeletionDelay",
 		time.Hour,
-		`TaskSchedulerInactiveChannelDeletionDelay the time delay before a namespace's' channel is removed from the scheduler`,
+		`TaskSchedulerInactiveChannelDeletionDelay the time delay before a namespace's channel is removed from the scheduler`,
 	)
 
 	TimerTaskBatchSize = NewGlobalIntSetting(
@@ -2095,7 +2095,7 @@ the outbound standby task failed to be processed due to missing events.`,
 		"history.visibilityProcessorEnableCloseWorkflowCleanup",
 		false,
 		`VisibilityProcessorEnableCloseWorkflowCleanup to clean up the mutable state after visibility
-close task has been processed. Must use Elasticsearch as visibility store, otherwise workflow
+close task has been processed. Must use Elasticsearch as visibility store; otherwise, workflow
 data (eg: search attributes) will be lost after workflow is closed.`,
 	)
 	VisibilityProcessorRelocateAttributesMinBlobSize = NewNamespaceIntSetting(
@@ -2361,7 +2361,7 @@ the number of children greater than or equal to this threshold`,
 	SkipReapplicationByNamespaceID = NewNamespaceIDBoolSetting(
 		"history.SkipReapplicationByNamespaceID",
 		false,
-		`SkipReapplicationByNamespaceID is whether skipping a event re-application for a namespace`,
+		`SkipReapplicationByNamespaceID is whether skipping an event re-application for a namespace`,
 	)
 	StandbyTaskReReplicationContextTimeout = NewNamespaceIDDurationSetting(
 		"history.standbyTaskReReplicationContextTimeout",

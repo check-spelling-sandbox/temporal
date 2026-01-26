@@ -559,7 +559,7 @@ func (s *scheduler) fillNextTimeCacheV2(start time.Time) {
 				cache.Completed = true
 				break
 			}
-			// Only include this if it's not equal to Next, otherwise default to Next
+			// Only include this if it's not equal to Next; otherwise, default to Next
 			if !next.Nominal.Equal(next.Next) {
 				cache.NominalTimes = cache.NominalTimes[0:len(cache.NextTimes)]
 				cache.NominalTimes = append(cache.NominalTimes, int64(next.Nominal.Sub(start)))
@@ -930,7 +930,7 @@ func (s *scheduler) processUpdate(req *schedulespb.FullUpdateRequest) {
 		// We need to start re-processing from the last event, so that we catch actions whose
 		// nominal time is before now but actual time (with jitter) is after now. Logic in
 		// processTimeRange will discard actions before the UpdateTime.
-		// Note: get last event time before updating s.Info.UpdateTime, otherwise it'll always be now.
+		// Note: get last event time before updating s.Info.UpdateTime; otherwise, it'll always be now.
 		// After version UseLastAction, this is effectively done in the main loop for all
 		// wakeups, not just updates, so we don't need to do it here.
 		s.State.LastProcessedTime = timestamppb.New(s.getLastEvent())
@@ -1095,7 +1095,7 @@ func (s *scheduler) updateCustomSearchAttributes(searchAttributes *commonpb.Sear
 	for key, valuePayload := range searchAttributes.GetIndexedFields() {
 		var value any
 		if err := payload.Decode(valuePayload, &value); err != nil {
-			s.logger.Error("error updating search attributes of the scheule", "error", err)
+			s.logger.Error("error updating search attributes of the schedule", "error", err)
 			return
 		}
 		upsertMap[key] = value
@@ -1125,7 +1125,7 @@ func (s *scheduler) updateCustomSearchAttributes(searchAttributes *commonpb.Sear
 	}
 	//nolint:staticcheck // SA1019 The untyped function here is more convenient.
 	if err := workflow.UpsertSearchAttributes(s.ctx, upsertMap); err != nil {
-		s.logger.Error("error updating search attributes of the scheule", "error", err)
+		s.logger.Error("error updating search attributes of the schedule", "error", err)
 	}
 }
 
@@ -1399,7 +1399,7 @@ func (s *scheduler) startWorkflow(
 		}
 
 		if !start.Manual {
-			// record metric only for _scheduled_ actions, not trigger/backfill, otherwise it's not meaningful
+			// record metric only for _scheduled_ actions, not trigger/backfill; otherwise, it's not meaningful
 			desiredTime := cmp.Or(start.DesiredTime, start.ActualTime)
 			s.metrics.Timer(metrics.ScheduleActionDelay.Name()).Record(res.RealStartTime.AsTime().Sub(desiredTime.AsTime()))
 		}

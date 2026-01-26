@@ -40,7 +40,7 @@ func NewFixedAddressTranslatorPlugin() TranslatorPlugin {
 // For the case if the nodes are behind the proxy, service resolver would translate just the publicly
 // visible hostname which a user put into configuration so driver can connect to it, but that is not enough,
 // IP addresses behind a proxy are not reachable from client's perspective. These are not translatable
-// with service resolver so client can not connect to them directly - that is what gocql address
+// with service resolver so client cannot connect to them directly - that is what gocql address
 // translator is exactly for.
 //
 // The implementation of fixed address translator plugin is fed the internal IP address from the system.peers table,

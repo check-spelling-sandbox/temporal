@@ -539,7 +539,7 @@ func (s *historyArchiverSuite) TestGet_Fail_KeyNotExist() {
 		PageSize:             testPageSize,
 		CloseFailoverVersion: &testCloseFailoverVersion,
 	}
-	URI, err := archiver.NewURI("s3://test-bucket/non-existent")
+	URI, err := archiver.NewURI("s3://test-bucket/nonexistent")
 	s.NoError(err)
 	response, err := historyArchiver.Get(context.Background(), URI, request)
 	s.Nil(response)

@@ -201,7 +201,7 @@ func TestIsServiceClientTransientError_ResourceExhausted(t *testing.T) {
 		&serviceerror.ResourceExhausted{
 			Cause:   enumspb.RESOURCE_EXHAUSTED_CAUSE_CONCURRENT_LIMIT,
 			Scope:   enumspb.RESOURCE_EXHAUSTED_SCOPE_NAMESPACE,
-			Message: "Max number of conconcurrent pollers/updates/batch operation reached.",
+			Message: "Max number of concurrent pollers/updates/batch operation reached.",
 		},
 	))
 	require.False(t, IsServiceClientTransientError(

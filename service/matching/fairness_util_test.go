@@ -13,7 +13,7 @@ func TestMergeFairnessWeightOverrides(t *testing.T) {
 			"a": 3.0, // update
 			"c": 4.0, // insert
 		}
-		unset := []string{"b", "x"} // delete existing b and non-existent x (no-op)
+		unset := []string{"b", "x"} // delete existing b and nonexistent x (no-op)
 
 		out, err := mergeFairnessWeightOverrides(existing, set, unset, 10)
 		require.NoError(t, err)
@@ -33,7 +33,7 @@ func TestMergeFairnessWeightOverrides(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, existing, out)
 
-		// non-existent key in unset
+		// nonexistent key in unset
 		existing = fairnessWeightOverrides{"a": 1.2, "b": 3.4}
 		out, err = mergeFairnessWeightOverrides(existing, fairnessWeightOverrides{}, []string{"does-not-exist"}, 2)
 		require.NoError(t, err)

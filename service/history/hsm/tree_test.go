@@ -2,6 +2,7 @@ package hsm_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"slices"
 	"sort"
@@ -411,7 +412,7 @@ func TestMachineTransition(t *testing.T) {
 	err = hsm.MachineTransition(root, func(d *hsmtest.Data) (hsm.TransitionOutput, error) {
 		// Mutate state and make sure the cache is marked stale.
 		d.SetState(hsmtest.State2)
-		return hsm.TransitionOutput{}, fmt.Errorf("test")
+		return hsm.TransitionOutput{}, errors.New("test")
 	})
 	require.ErrorContains(t, err, "test")
 	require.Equal(t, int64(0), root.InternalRepr().TransitionCount)
@@ -506,7 +507,7 @@ func TestNode_DeleteChild(t *testing.T) {
 	_, ok := opLog[0].(hsm.DeleteOperation)
 	require.True(t, ok)
 
-	// Cannot delete non-existent or already deleted nodes
+	// Cannot delete nonexistent or already deleted nodes
 	err = l1.DeleteChild(hsm.Key{Type: def1.Type(), ID: "nonexistent"})
 	require.ErrorIs(t, err, hsm.ErrStateMachineNotFound)
 

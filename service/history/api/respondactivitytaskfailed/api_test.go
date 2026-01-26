@@ -2,7 +2,7 @@ package respondactivitytaskfailed
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -261,7 +261,7 @@ func (s *workflowSuite) Test_LastHeartBeatDetailsExist_UpdatesMutableState() {
 }
 
 func (s *workflowSuite) Test_RetryActivityFailsWithAnError_WillReturnTheError() {
-	retryError := fmt.Errorf("bizzare error")
+	retryError := errors.New("bizarre error")
 	uc := newUseCase(UsecaseConfig{
 		attempt:             int32(1),
 		startedEventId:      int64(40),
@@ -316,7 +316,7 @@ func (s *workflowSuite) Test_NoMoreRetriesAndMutableStateHasNoPendingTasks_WillR
 }
 
 func (s *workflowSuite) Test_AttemptToAddActivityTaskFailedEventFails_ReturnError() {
-	addTaskError := fmt.Errorf("can't add task")
+	addTaskError := errors.New("can't add task")
 	uc := newUseCase(UsecaseConfig{
 		attempt:             int32(1),
 		startedEventId:      int64(40),

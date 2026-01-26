@@ -120,7 +120,7 @@ func (e *outboundQueueStandbyTaskExecutor) executeStateMachineTask(
 	}
 
 	err = e.Access(ctx, ref, hsm.AccessRead, func(node *hsm.Node) error {
-		// If we managed to access the machine the task is still valid.
+		// If we managed to access the machine, then the task is still valid.
 		// The logic below will either discard it or retry.
 		return nil
 	})

@@ -103,7 +103,7 @@ ListClosedLoop:
 		s.NoError(err3)
 		closedCount = len(resp.Executions)
 		if closedCount == 0 {
-			s.Logger.Info("Closed WorkflowExecution is not yet visibile")
+			s.Logger.Info("Closed WorkflowExecution is not yet visible")
 			time.Sleep(1000 * time.Millisecond) //nolint:forbidigo
 			continue ListClosedLoop
 		}
@@ -275,7 +275,7 @@ func (s *WorkflowFailuresTestSuite) TestWorkflowTaskFailed() {
 	}
 	s.Equal(12, signalCount)
 
-	// Make complete workflow workflow task
+	// Make complete workflow task
 	_, err = poller.PollAndProcessWorkflowTask(testcore.WithExpectedAttemptCount(3))
 	s.Logger.Info("PollAndProcessWorkflowTask", tag.Error(err))
 	s.NoError(err)

@@ -257,7 +257,7 @@ func (t *timerQueueStandbyTaskExecutor) executeActivityTimeoutTask(
 	//
 	// activity heartbeat timer task cannot be handled in the way mentioned above.
 	// the reason is, there is no event driving the creation of new activity heartbeat timer.
-	// although there will be an task syncing activity from remote, the task is not an event,
+	// although there will be a task syncing activity from remote, the task is not an event,
 	// and cannot attempt to recreate a new activity timer task.
 	//
 	// the overall solution is to attempt to generate a new activity timer task whenever the
@@ -437,7 +437,7 @@ func (t *timerQueueStandbyTaskExecutor) executeWorkflowTaskTimeoutTask(
 		// We could check if workflow task is started state (since the timeout type here is START_TO_CLOSE)
 		// but that's unnecessary.
 		//
-		// Ifthe  workflow task is in scheduled state, it must have a higher attempt
+		// If the workflow task is in scheduled state, it must have a higher attempt
 		// count and will be captured by the attempt check above.
 
 		return &struct{}{}, nil
@@ -551,7 +551,7 @@ func (t *timerQueueStandbyTaskExecutor) executeWorkflowExecutionTimeoutTask(
 		// The standby logic should continue to wait for the workflow timeout event to be replicated from the active side.
 		//
 		// Return non-nil post action info to indicate that verification is not done yet.
-		// The returned post action info can be used to resend history fron active side.
+		// The returned post action info can be used to resend history from active side.
 
 		return newExecutionTimerPostActionInfo(mutableState)
 	}

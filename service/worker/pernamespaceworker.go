@@ -299,7 +299,7 @@ func (w *perNamespaceWorker) update(ns *namespace.Namespace, nsDeleted bool, new
 	if ns != nil {
 		w.ns = ns
 		// The name inside of *ns, which was used to initialize the logger, can change, but
-		// don't update w.logger here, otherwise we'd have to hold w.lock just to log.
+		// don't update w.logger here; otherwise, we'd have to hold w.lock just to log.
 	}
 	if newCount != nil {
 		w.count = *newCount

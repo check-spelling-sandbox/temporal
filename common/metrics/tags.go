@@ -312,7 +312,7 @@ func WorkerPluginNameTag(value string) Tag {
 	return Tag{Key: WorkerPluginNameTagName, Value: value}
 }
 
-// VersionedTag represents whether a loaded task queue manager represents a specific version set or build ID or not.
+// VersionedTag represents whether or not a loaded task queue manager represents a specific version set or build ID.
 func VersionedTag(versioned string) Tag {
 	return Tag{Key: versionedTagName, Value: versioned}
 }

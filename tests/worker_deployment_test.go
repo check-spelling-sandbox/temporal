@@ -1196,7 +1196,7 @@ func (s *WorkerDeploymentSuite) TestSetWorkerDeploymentRampingVersion_WithCurren
 	s.setAndVerifyRampingVersion(ctx, rampingVersionVars, false, 50, true, "") // set version as ramping
 
 	setCurrentUpdateTime := timestamppb.Now()
-	s.setCurrentVersion(ctx, currentVersionVars, true, "") // set version as curent
+	s.setCurrentVersion(ctx, currentVersionVars, true, "") // set version as current
 
 	resp, err := s.FrontendClient().DescribeWorkerDeployment(ctx, &workflowservice.DescribeWorkerDeploymentRequest{
 		Namespace:      s.Namespace().String(),
@@ -1650,7 +1650,7 @@ func (s *WorkerDeploymentSuite) TestSetCurrentVersion_Batching() {
 	setCurrentUpdateTime := timestamppb.Now()
 	s.setCurrentVersion(ctx, tv, true, "")
 
-	// verify the current version has propogated to all the registered task-queues userData
+	// verify the current version has propagated to all the registered task-queues userData
 	for i := 0; i < taskQueues; i++ {
 		s.verifyTaskQueueVersioningInfo(ctx, tv.WithTaskQueueNumber(i).TaskQueue(), tv.DeploymentVersionString(), "", 0)
 	}
@@ -1801,7 +1801,7 @@ func (s *WorkerDeploymentSuite) TestDeleteVersion_ServerDeleteMaxVersionsReached
 	s.ensureCreateVersionInDeployment(tv2)
 	pollerCancel2()
 
-	// Verify that the worker deployment only has one version in it's version summaries.
+	// Verify that the worker deployment only has one version in its version summaries.
 	s.EventuallyWithT(func(t *assert.CollectT) {
 		a := require.New(t)
 		resp, err := s.FrontendClient().DescribeWorkerDeployment(ctx, &workflowservice.DescribeWorkerDeploymentRequest{
@@ -2555,7 +2555,7 @@ func (s *WorkerDeploymentSuite) verifyTaskQueueVersioningInfo(ctx context.Contex
 // which shall further drain this current version.
 // Note: This test reproduces a bug we saw in production where the drainage status was not being properly cleared when a draining version
 // is reactivated and then re-deactivated
-func (s *WorkerDeploymentSuite) TestDrainRollbackedVersion() {
+func (s *WorkerDeploymentSuite) TestDrainRolledBackVersion() {
 	s.OverrideDynamicConfig(dynamicconfig.PollerHistoryTTL, 500*time.Millisecond)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)

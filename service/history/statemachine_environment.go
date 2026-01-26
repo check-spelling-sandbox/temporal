@@ -180,7 +180,7 @@ type stateMachineEnvironment struct {
 }
 
 // loadAndValidateMutableState loads mutable state and validates it.
-// Propagages errors returned from validate.
+// Propagates errors returned from validate.
 // Does **not** reload mutable state if validate reports it is stale. Not meant to be called directly, call
 // [loadAndValidateMutableState] instead.
 func (e *stateMachineEnvironment) loadAndValidateMutableStateNoReload(
@@ -198,7 +198,7 @@ func (e *stateMachineEnvironment) loadAndValidateMutableStateNoReload(
 }
 
 // loadAndValidateMutableState loads mutable state and validates it.
-// Propagages errors returned from validate.
+// Propagates errors returned from validate.
 // Reloads mutable state and retries if validator returns a [queues.StaleStateError].
 func (e *stateMachineEnvironment) loadAndValidateMutableState(
 	ctx context.Context,
@@ -236,8 +236,8 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 		(ref.StateMachineRef.MachineLastUpdateVersionedTransition != nil &&
 			ref.StateMachineRef.MachineLastUpdateVersionedTransition.TransitionCount == 0) ||
 		len(ms.GetExecutionInfo().TransitionHistory) == 0 {
-		// Transtion history was disabled when the ref is generated,
-		// fallback to the old validation logic.
+		// Transition history was disabled when the ref is generated,
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 
@@ -258,7 +258,7 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 
 	if node.InternalRepr().GetInitialVersionedTransition().TransitionCount == 0 {
 		// transition history was disabled after the ref was generated and mutable state got rebuilt.
-		// fallback to the old validation logic.
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 
@@ -279,7 +279,7 @@ func (e *stateMachineEnvironment) validateStateMachineRef(
 
 	if node.InternalRepr().GetLastUpdateVersionedTransition().GetTransitionCount() == 0 {
 		// transition history was disabled after the ref was generated.
-		// fallback to the old validation logic.
+		// fall back to the old validation logic.
 		return e.validateStateMachineRefWithoutTransitionHistory(ms, ref, potentialStaleState)
 	}
 	if ref.Validate == nil {

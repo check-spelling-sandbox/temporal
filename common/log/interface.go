@@ -26,7 +26,7 @@ type (
 	}
 
 	// Implement WithLogger interface with With method which should return new instance of logger with prepended tags.
-	// If WithLogger is not implemented on logger, internal (not very efficient) preppender is used.
+	// If WithLogger is not implemented on logger, internal (not very efficient) prepender is used.
 	// Create prepended logger example:
 	//  logger = log.With(
 	//          logger,

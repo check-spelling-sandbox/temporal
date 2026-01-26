@@ -222,7 +222,7 @@ func TestJUnitXMLWellFormed(t *testing.T) {
 				require.NoError(t, os.Remove(out.Name()))
 			}()
 
-			// Setup the report
+			// Set up the report
 			j := tt.setup()
 			j.path = out.Name()
 

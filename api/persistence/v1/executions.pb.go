@@ -242,7 +242,7 @@ type WorkflowExecutionInfo struct {
 	// for this execution. Assigned build ID is selected by matching based on Worker Versioning Assignment Rules
 	// when the first workflow task of the execution is scheduled. If the first workflow task fails and is scheduled
 	// again, the assigned build ID may change according to the latest versioning rules.
-	// Assigned build ID can also change in the middle of a execution if Compatible Redirect Rules are applied to
+	// Assigned build ID can also change in the middle of an execution if Compatible Redirect Rules are applied to
 	// this execution.
 	// Deprecated. Clean up with versioning-2. [cleanup-old-wv]
 	AssignedBuildId string `protobuf:"bytes,85,opt,name=assigned_build_id,json=assignedBuildId,proto3" json:"assigned_build_id,omitempty"`
@@ -282,7 +282,7 @@ type WorkflowExecutionInfo struct {
 	// To maintain backward compatibility, we need to track if the execution timer task is created
 	// for a workflow chain since later workflows in the chain also need to create the execution
 	// timer task if it is not created yet.
-	// NOTE: Task status is clsuter specific information, so when replicating mutable state, this
+	// NOTE: Task status is cluster specific information, so when replicating mutable state, this
 	// field need to be sanitized.
 	WorkflowExecutionTimerTaskStatus int32 `protobuf:"varint,82,opt,name=workflow_execution_timer_task_status,json=workflowExecutionTimerTaskStatus,proto3" json:"workflow_execution_timer_task_status,omitempty"`
 	// The root workflow execution is defined as follows:
@@ -296,7 +296,7 @@ type WorkflowExecutionInfo struct {
 	// NOTE: Task status is cluster specific information, so when replicating mutable state, this field needs to be
 	// sanitized.
 	StateMachineTimers []*StateMachineTimerGroup `protobuf:"bytes,90,rep,name=state_machine_timers,json=stateMachineTimers,proto3" json:"state_machine_timers,omitempty"`
-	// The shard clock's timestamp at the time the first valid task was created for this mutable state (either for a new
+	// The shard clock's timestamp when the first valid task was created for this mutable state (either for a new
 	// mutable state or when rebuilding from events). The field should be updated whenever we refresh tasks, marking
 	// older generation tasks obsolete.
 	// This field is used for task staleness checks when mutable state is rebuilt.

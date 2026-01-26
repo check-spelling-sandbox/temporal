@@ -297,7 +297,7 @@ func (p *ackMgrImpl) getTasks(
 
 	replicationTasks := make([]*replicationspb.ReplicationTask, 0, p.pageSize())
 	skippedTaskCount := 0
-	lastTaskID := maxTaskID // If no tasks are returned, then it means there are no tasks bellow maxTaskID.
+	lastTaskID := maxTaskID // If no tasks are returned, then it means there are no tasks below maxTaskID.
 	iter := collection.NewPagingIterator(p.getReplicationTasksFn(ctx, minTaskID, maxTaskID, p.pageSize()))
 	// iter.HasNext() should be the last check to avoid extra page read in case if replicationTasks is already full.
 	for len(replicationTasks) < p.pageSize() && skippedTaskCount <= p.maxSkipTaskCount() && iter.HasNext() {

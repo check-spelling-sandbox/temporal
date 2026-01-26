@@ -108,7 +108,7 @@ services:
 			errorContains: "yaml",
 		},
 		{
-			name:          "non-existent directory returns error",
+			name:          "nonexistent directory returns error",
 			configContent: "",
 			loadOptions: func(configPath string) []loadOption {
 				return []loadOption{WithConfigDir("/nonexistent/path")}
@@ -117,7 +117,7 @@ services:
 			errorContains: "no config files found",
 		},
 		{
-			name:          "non-existent file path returns error",
+			name:          "nonexistent file path returns error",
 			configContent: "",
 			loadOptions: func(configPath string) []loadOption {
 				return []loadOption{WithConfigFile("/nonexistent/path/config.yaml")}

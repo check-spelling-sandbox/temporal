@@ -1418,7 +1418,7 @@ func (s *ActivityTestSuite) TestActivityTaskCompleteForceCompletion() {
 	err = s.SdkClient().CompleteActivityByID(ctx, s.Namespace().String(), run.GetID(), run.GetRunID(), ai.ActivityID, nil, nil)
 	s.NoError(err)
 
-	// Ensure the activity is completed and the workflow is unblcked.
+	// Ensure the activity is completed and the workflow is unblocked.
 	s.NoError(run.Get(ctx, nil))
 }
 

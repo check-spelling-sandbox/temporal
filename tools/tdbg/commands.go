@@ -49,7 +49,7 @@ func AdminShowWorkflow(c *cli.Context, clientFactory ClientFactory) error {
 	rid := c.String(FlagRunID)
 	startEventId := c.Int64(FlagMinEventID)
 	endEventId := c.Int64(FlagMaxEventID)
-	startEventVerion := int64(c.Int(FlagMinEventVersion))
+	startEventVersion := int64(c.Int(FlagMinEventVersion))
 	endEventVersion := int64(c.Int(FlagMaxEventVersion))
 	outputFileName := c.String(FlagOutputFilename)
 
@@ -75,7 +75,7 @@ func AdminShowWorkflow(c *cli.Context, clientFactory ClientFactory) error {
 			},
 			StartEventId:      startEventId,
 			EndEventId:        endEventId,
-			StartEventVersion: startEventVerion,
+			StartEventVersion: startEventVersion,
 			EndEventVersion:   endEventVersion,
 			MaximumPageSize:   100,
 			NextPageToken:     token,
@@ -414,7 +414,7 @@ func AdminGetShardID(c *cli.Context) error {
 	numberOfShards := int32(c.Int(FlagNumberOfShards))
 
 	if numberOfShards <= 0 {
-		return fmt.Errorf("missing required parameter number of Shards")
+		return errors.New("missing required parameter number of Shards")
 	}
 	shardID := common.WorkflowIDToHistoryShard(namespaceID, wid, numberOfShards)
 	// nolint:errcheck // assuming that write will succeed.
@@ -645,7 +645,7 @@ func AdminDescribeHistoryHost(c *cli.Context, clientFactory ClientFactory) error
 		flagsCount++
 	}
 	if flagsCount != 1 {
-		return fmt.Errorf("missing required parameter either Shard Id, Namespace, Workflow Id or Host address")
+		return errors.New("missing required parameter either Shard Id, Namespace, Workflow Id or Host address")
 	}
 
 	ctx, cancel := newContext(c)

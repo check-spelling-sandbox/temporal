@@ -997,7 +997,7 @@ func (s *executableTaskSuite) TestGetNamespaceInfo_NamespaceFailoverNotSync_Sync
 	s.True(toProcess)
 }
 
-func (s *executableTaskSuite) TestGetNamespaceInfo_NamespaceFailoverBehind_StillBehandAfterSyncFromRemote() {
+func (s *executableTaskSuite) TestGetNamespaceInfo_NamespaceFailoverBehind_StillBehindAfterSyncFromRemote() {
 	namespaceID := uuid.NewString()
 	namespaceName := uuid.NewString()
 	now := time.Now()

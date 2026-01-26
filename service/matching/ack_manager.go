@@ -81,7 +81,7 @@ func (m *ackManager) getAckLevel() int64 {
 	return m.ackLevel
 }
 
-// Moves ack level to the new level if it is higher than the current one.
+// Moves ack level to the new level if it is greater than the current one.
 // Also updates the read level if it is lower than the ackLevel.
 func (m *ackManager) setAckLevel(ackLevel int64) {
 	m.Lock()

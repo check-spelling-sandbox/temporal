@@ -36,7 +36,7 @@ import (
 type NexusHTTPHandler struct {
 	logger                               log.Logger
 	nexusHandler                         http.Handler
-	enpointRegistry                      commonnexus.EndpointRegistry
+	endpointRegistry                     commonnexus.EndpointRegistry
 	namespaceRegistry                    namespace.Registry
 	preprocessErrorCounter               metrics.CounterFunc
 	auth                                 *authorization.Interceptor
@@ -61,19 +61,19 @@ func NewNexusHTTPHandler(
 	redirectionInterceptor *interceptor.Redirection,
 	namespaceValidationInterceptor *interceptor.NamespaceValidatorInterceptor,
 	namespaceRateLimitInterceptor interceptor.NamespaceRateLimitInterceptor,
-	namespaceConcurrencyLimitIntercptor *interceptor.ConcurrentRequestLimitInterceptor,
+	namespaceConcurrencyLimitInterceptor *interceptor.ConcurrentRequestLimitInterceptor,
 	rateLimitInterceptor *interceptor.RateLimitInterceptor,
 	logger log.Logger,
 	httpTraceProvider commonnexus.HTTPClientTraceProvider,
 ) *NexusHTTPHandler {
 	return &NexusHTTPHandler{
 		logger:                               logger,
-		enpointRegistry:                      endpointRegistry,
+		endpointRegistry:                     endpointRegistry,
 		namespaceRegistry:                    namespaceRegistry,
 		auth:                                 authInterceptor,
 		namespaceValidationInterceptor:       namespaceValidationInterceptor,
 		namespaceRateLimitInterceptor:        namespaceRateLimitInterceptor,
-		namespaceConcurrencyLimitInterceptor: namespaceConcurrencyLimitIntercptor,
+		namespaceConcurrencyLimitInterceptor: namespaceConcurrencyLimitInterceptor,
 		rateLimitInterceptor:                 rateLimitInterceptor,
 		enabled:                              serviceConfig.EnableNexusAPIs,
 		preprocessErrorCounter:               metricsHandler.Counter(metrics.NexusRequestPreProcessErrors.Name()).Record,
@@ -191,7 +191,7 @@ func (h *NexusHTTPHandler) dispatchNexusTaskByEndpoint(w http.ResponseWriter, r 
 		h.writeNexusFailure(w, http.StatusBadRequest, &nexus.Failure{Message: "invalid URL"})
 		return
 	}
-	endpointEntry, err := h.enpointRegistry.GetByID(r.Context(), endpointID)
+	endpointEntry, err := h.endpointRegistry.GetByID(r.Context(), endpointID)
 	if err != nil {
 		h.logger.Error("invalid Nexus endpoint ID", tag.Error(err))
 		s, ok := status.FromError(err)

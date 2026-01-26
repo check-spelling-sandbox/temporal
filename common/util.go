@@ -135,7 +135,7 @@ func AwaitWaitGroup(wg *sync.WaitGroup, timeout time.Duration) bool {
 }
 
 // BlockWithTimeout invokes fn and waits for it to complete until the timeout.
-// Returns true if the call completed before the timeout, otherwise returns false.
+// Returns true if the call completed before the timeout; otherwise, returns false.
 // fn is expected to be a blocking call and will continue to occupy a goroutine until it finally completes.
 func BlockWithTimeout(fn func(), timeout time.Duration) bool {
 	doneC := make(chan struct{})

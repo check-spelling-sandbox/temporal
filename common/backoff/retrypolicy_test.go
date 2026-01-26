@@ -225,8 +225,8 @@ func (s *RetryPolicySuite) TestUnbounded() {
 
 // Validate that ErrorDependentRetryPolicy returns the expected delay for a given error, with and without jitter
 func (s *RetryPolicySuite) TestErrorDependentPolicy() {
-	var twoSecondError = fmt.Errorf("two seconds")
-	var threeSecondError = fmt.Errorf("two seconds")
+	var twoSecondError = errors.New("two seconds")
+	var threeSecondError = errors.New("two seconds")
 
 	delayForError := func(err error) time.Duration {
 		switch {
@@ -242,7 +242,7 @@ func (s *RetryPolicySuite) TestErrorDependentPolicy() {
 	policy := NewErrorDependentRetryPolicy(delayForError).WithMaximumAttempts(4)
 	retrier, ts := createRetrier(policy)
 
-	delay := retrier.NextBackOff(fmt.Errorf("other error"))
+	delay := retrier.NextBackOff(errors.New("other error"))
 	s.Equal(1*time.Second, delay)
 	ts.Advance(delay)
 
@@ -261,7 +261,7 @@ func (s *RetryPolicySuite) TestErrorDependentPolicy() {
 	policy = NewErrorDependentRetryPolicy(delayForError).WithMaximumAttempts(4).WithJitter(0.1)
 	retrier, _ = createRetrier(policy)
 
-	delay = retrier.NextBackOff(fmt.Errorf("other error"))
+	delay = retrier.NextBackOff(errors.New("other error"))
 	s.True(delay >= 1*time.Second)
 	s.True(delay < 1500*time.Millisecond)
 }

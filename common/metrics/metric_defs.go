@@ -413,9 +413,9 @@ const (
 	ShardInfoScope = "ShardInfo"
 	// WorkflowContextScope is the scope used by WorkflowContext component
 	WorkflowContextScope = "WorkflowContext"
-	// ExecutionStatsScope is the scope used for emiting workflow execution related stats
+	// ExecutionStatsScope is the scope used for emitting workflow execution related stats
 	ExecutionStatsScope = "ExecutionStats"
-	// SessionStatsScope is the scope used for emiting session update related stats
+	// SessionStatsScope is the scope used for emitting session update related stats
 	SessionStatsScope = "SessionStats"
 	// WorkflowCompletionStatsScope tracks workflow completion updates
 	WorkflowCompletionStatsScope = "CompletionStats"
@@ -525,7 +525,7 @@ const (
 	HistoryReplicationTaskScope = "HistoryReplicationTask"
 	// HistoryMetadataReplicationTaskScope is the scope used by history metadata task replication processing
 	HistoryMetadataReplicationTaskScope = "HistoryMetadataReplicationTask"
-	// SyncShardTaskScope is the scope used by sync shrad information processing
+	// SyncShardTaskScope is the scope used by sync shard information processing
 	SyncShardTaskScope = "SyncShardTask"
 	// SyncActivityTaskScope is the scope used by sync activity
 	SyncActivityTaskScope = "SyncActivityTask"
@@ -803,7 +803,7 @@ var (
 	)
 	TaskLatency = NewTimerDef(
 		"task_latency",
-		WithDescription("Latency for procsssing and completing a history task. This latency is across all attempts but excludes any latencies related to workflow lock or user qutoa limit."),
+		WithDescription("Latency for processing and completing a history task. This latency is across all attempts but excludes any latencies related to workflow lock or user quota limit."),
 	)
 	TaskQueueLatency = NewTimerDef(
 		"task_latency_queue",
@@ -1255,32 +1255,32 @@ var (
 		"batcher_processor_requests",
 		WithDescription("The number of individual workflow execution tasks successfully processed by the batch request processor"),
 	)
-	BatcherProcessorFailures                          = NewCounterDef("batcher_processor_errors")
-	BatcherOperationFailures                          = NewCounterDef("batcher_operation_errors")
-	ElasticsearchBulkProcessorRequests                = NewCounterDef("elasticsearch_bulk_processor_requests")
-	ElasticsearchBulkProcessorQueuedRequests          = NewDimensionlessHistogramDef("elasticsearch_bulk_processor_queued_requests")
-	ElasticsearchBulkProcessorFailures                = NewCounterDef("elasticsearch_bulk_processor_errors")
-	ElasticsearchBulkProcessorCorruptedData           = NewCounterDef("elasticsearch_bulk_processor_corrupted_data")
-	ElasticsearchBulkProcessorDuplicateRequest        = NewCounterDef("elasticsearch_bulk_processor_duplicate_request")
-	ElasticsearchBulkProcessorRequestLatency          = NewTimerDef("elasticsearch_bulk_processor_request_latency")
-	ElasticsearchBulkProcessorCommitLatency           = NewTimerDef("elasticsearch_bulk_processor_commit_latency")
-	ElasticsearchBulkProcessorWaitAddLatency          = NewTimerDef("elasticsearch_bulk_processor_wait_add_latency")
-	ElasticsearchBulkProcessorWaitStartLatency        = NewTimerDef("elasticsearch_bulk_processor_wait_start_latency")
-	ElasticsearchBulkProcessorBulkSize                = NewDimensionlessHistogramDef("elasticsearch_bulk_processor_bulk_size")
-	ElasticsearchBulkProcessorBulkResquestTookLatency = NewTimerDef("elasticsearch_bulk_processor_bulk_request_took_latency")
-	ElasticsearchDocumentParseFailuresCount           = NewCounterDef("elasticsearch_document_parse_failures_counter")
-	ElasticsearchDocumentGenerateFailuresCount        = NewCounterDef("elasticsearch_document_generate_failures_counter")
-	ElasticsearchCustomOrderByClauseCount             = NewCounterDef("elasticsearch_custom_order_by_clause_counter")
-	CatchUpReadyShardCountGauge                       = NewGaugeDef("catchup_ready_shard_count")
-	HandoverReadyShardCountGauge                      = NewGaugeDef("handover_ready_shard_count")
-	ReplicatorMessages                                = NewCounterDef("replicator_messages")
-	ReplicatorFailures                                = NewCounterDef("replicator_errors")
-	ReplicatorLatency                                 = NewTimerDef("replicator_latency")
-	ReplicatorDLQFailures                             = NewCounterDef("replicator_dlq_enqueue_fails")
-	NamespaceReplicationEnqueueDLQCount               = NewCounterDef("namespace_replication_dlq_enqueue_requests")
-	ParentClosePolicyProcessorSuccess                 = NewCounterDef("parent_close_policy_processor_requests")
-	ParentClosePolicyProcessorFailures                = NewCounterDef("parent_close_policy_processor_errors")
-	ScheduleMissedCatchupWindow                       = NewCounterDef(
+	BatcherProcessorFailures                         = NewCounterDef("batcher_processor_errors")
+	BatcherOperationFailures                         = NewCounterDef("batcher_operation_errors")
+	ElasticsearchBulkProcessorRequests               = NewCounterDef("elasticsearch_bulk_processor_requests")
+	ElasticsearchBulkProcessorQueuedRequests         = NewDimensionlessHistogramDef("elasticsearch_bulk_processor_queued_requests")
+	ElasticsearchBulkProcessorFailures               = NewCounterDef("elasticsearch_bulk_processor_errors")
+	ElasticsearchBulkProcessorCorruptedData          = NewCounterDef("elasticsearch_bulk_processor_corrupted_data")
+	ElasticsearchBulkProcessorDuplicateRequest       = NewCounterDef("elasticsearch_bulk_processor_duplicate_request")
+	ElasticsearchBulkProcessorRequestLatency         = NewTimerDef("elasticsearch_bulk_processor_request_latency")
+	ElasticsearchBulkProcessorCommitLatency          = NewTimerDef("elasticsearch_bulk_processor_commit_latency")
+	ElasticsearchBulkProcessorWaitAddLatency         = NewTimerDef("elasticsearch_bulk_processor_wait_add_latency")
+	ElasticsearchBulkProcessorWaitStartLatency       = NewTimerDef("elasticsearch_bulk_processor_wait_start_latency")
+	ElasticsearchBulkProcessorBulkSize               = NewDimensionlessHistogramDef("elasticsearch_bulk_processor_bulk_size")
+	ElasticsearchBulkProcessorBulkRequestTookLatency = NewTimerDef("elasticsearch_bulk_processor_bulk_request_took_latency")
+	ElasticsearchDocumentParseFailuresCount          = NewCounterDef("elasticsearch_document_parse_failures_counter")
+	ElasticsearchDocumentGenerateFailuresCount       = NewCounterDef("elasticsearch_document_generate_failures_counter")
+	ElasticsearchCustomOrderByClauseCount            = NewCounterDef("elasticsearch_custom_order_by_clause_counter")
+	CatchUpReadyShardCountGauge                      = NewGaugeDef("catchup_ready_shard_count")
+	HandoverReadyShardCountGauge                     = NewGaugeDef("handover_ready_shard_count")
+	ReplicatorMessages                               = NewCounterDef("replicator_messages")
+	ReplicatorFailures                               = NewCounterDef("replicator_errors")
+	ReplicatorLatency                                = NewTimerDef("replicator_latency")
+	ReplicatorDLQFailures                            = NewCounterDef("replicator_dlq_enqueue_fails")
+	NamespaceReplicationEnqueueDLQCount              = NewCounterDef("namespace_replication_dlq_enqueue_requests")
+	ParentClosePolicyProcessorSuccess                = NewCounterDef("parent_close_policy_processor_requests")
+	ParentClosePolicyProcessorFailures               = NewCounterDef("parent_close_policy_processor_errors")
+	ScheduleMissedCatchupWindow                      = NewCounterDef(
 		"schedule_missed_catchup_window",
 		WithDescription("The number of times a schedule missed an action due to the configured catchup window"),
 	)

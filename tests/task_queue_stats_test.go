@@ -166,7 +166,7 @@ func (s *TaskQueueStatsSuite) TestAddMultipleTasks_MultiplePartitions_ValidateSt
 	// Poll remaining activities.
 	s.pollActivities(total-2, tqName)
 
-	// Despite having polled all the workflows/activies; the stats won't have changed at all since they were cached.
+	// Despite having polled all the workflows/activities; the stats won't have changed at all since they were cached.
 	s.validateTaskQueueStatsByType(tqName, enumspb.TASK_QUEUE_TYPE_WORKFLOW, expectations, false)
 	s.validateTaskQueueStatsByType(tqName, enumspb.TASK_QUEUE_TYPE_ACTIVITY, expectations, false)
 }
@@ -248,14 +248,14 @@ func (s *TaskQueueStatsSuite) currentVersionAbsorbsUnversionedBacklogNoRamping(n
 	}, 10*time.Second, 200*time.Millisecond)
 
 	// The backlog count for the activity task queue should be equal to the number of activities scheduled since the activity task queue is part of the current version.
-	activitesToSchedule := 10 * numPartitions
-	s.completeWorkflowTasksAndScheduleActivities(tqName, deploymentName, currentBuildID, activitesToSchedule)
+	activitiesToSchedule := 10 * numPartitions
+	s.completeWorkflowTasksAndScheduleActivities(tqName, deploymentName, currentBuildID, activitiesToSchedule)
 
 	// Verify activity add rate
 	s.validateRates(tqName, enumspb.TASK_QUEUE_TYPE_ACTIVITY, true, false)
 
 	activityStatsExpectation := TaskQueueExpectations{
-		BacklogCount:  activitesToSchedule,
+		BacklogCount:  activitiesToSchedule,
 		MaxExtraTasks: 0,
 	}
 
@@ -701,7 +701,7 @@ func (s *TaskQueueStatsSuite) inactiveVersionDoesNotAbsorbUnversionedBacklog(num
 	s.EventuallyWithT(func(c *assert.CollectT) {
 		a := require.New(c)
 
-		// DescribeWorkerDeploymentVersion: current version should should show 100% of the unversioned backlog for this task queue
+		// DescribeWorkerDeploymentVersion: current version should show 100% of the unversioned backlog for this task queue
 		s.requireWDVTaskQueueStatsRelaxed(
 			ctx,
 			a,
@@ -1371,7 +1371,7 @@ func (s *TaskQueueStatsSuite) enqueueActivitiesForEachWorkflow(sets int, tqName 
 									TaskQueue:             &taskqueuepb.TaskQueue{Name: tqName, Kind: enumspb.TASK_QUEUE_KIND_NORMAL},
 									StartToCloseTimeout:   durationpb.New(time.Minute),
 									RequestEagerExecution: false,
-									// Priority is inherted from the workflow
+									// Priority is inherited from the workflow
 								},
 							},
 						},
@@ -1645,7 +1645,7 @@ func validateTaskQueueStatsByPriority(
 ) {
 	a.Len(stats, maxPriority, "%s: stats should contain %d priorities", label, maxPriority)
 
-	// use an abgridged version when caching since the exact stats are difficult to predict
+	// use an abridged version when caching since the exact stats are difficult to predict
 	if taskQueueExpectation.CachedEnabled {
 		for i := int32(minPriority); i <= maxPriority; i++ {
 			if stats[i].ApproximateBacklogCount != 0 && stats[i].TasksDispatchRate > 0 || stats[i].TasksAddRate > 0 {

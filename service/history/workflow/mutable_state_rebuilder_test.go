@@ -143,18 +143,18 @@ func (s *stateBuilderSuite) TearDownTest() {
 	s.mockShard.StopForTest()
 }
 
-func (s *stateBuilderSuite) mockUpdateVersion(events ...*historypb.HistoryEvent) {
-	for _, event := range events {
+func (s *stateBuilderSuite) mockUpdateVersion(historyevents ...*historypb.HistoryEvent) {
+	for _, event := range historyevents {
 		s.mockMutableState.EXPECT().UpdateCurrentVersion(event.GetVersion(), true)
 	}
 	s.mockTaskGenerator.EXPECT().GenerateActivityTimerTasks().Return(nil)
 	s.mockTaskGenerator.EXPECT().GenerateUserTimerTasks().Return(nil)
 	s.mockTaskGenerator.EXPECT().GenerateDirtySubStateMachineTasks(s.stateMachineRegistry).Return(nil).AnyTimes()
-	s.mockMutableState.EXPECT().SetHistoryBuilder(historybuilder.NewImmutable(events))
+	s.mockMutableState.EXPECT().SetHistoryBuilder(historybuilder.NewImmutable(historyevents))
 }
 
-func (s *stateBuilderSuite) toHistory(eventss ...*historypb.HistoryEvent) [][]*historypb.HistoryEvent {
-	return [][]*historypb.HistoryEvent{eventss}
+func (s *stateBuilderSuite) toHistory(historyevents ...*historypb.HistoryEvent) [][]*historypb.HistoryEvent {
+	return [][]*historypb.HistoryEvent{historyevents}
 }
 
 // workflow operations

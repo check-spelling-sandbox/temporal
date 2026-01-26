@@ -25,7 +25,7 @@ func RegisterPlugin(pluginName string, plugin sqlplugin.Plugin) {
 	supportedPlugins[pluginName] = plugin
 }
 
-// NewSQLDB creates a returns a reference to a logical connection to the
+// NewSQLDB creates and returns a reference to a logical connection to the
 // underlying SQL database. The returned object is tied to a single
 // SQL database and the object can be used to perform CRUD operations on
 // the tables in the database.

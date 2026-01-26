@@ -254,7 +254,7 @@ func (s *PrioritySuite) TestStickyInteraction_SinglePartition() {
 		})
 	}
 
-	// poll sticky queue once, otherwise it won't be used
+	// poll sticky queue once; otherwise, it won't be used
 	s.T().Log("polling sticky to load")
 	stickyPoller := s.TaskPoller().PollWorkflowTask(&workflowservice.PollWorkflowTaskQueueRequest{
 		TaskQueue: &taskqueuepb.TaskQueue{

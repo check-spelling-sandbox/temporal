@@ -54,7 +54,7 @@ var (
 // - NeedSyncStructure: Value is deserialized, neither data nor tree structure is synced.
 //
 // For simplicity, for a dirty component node, the logic always sync structure (potentially multiple times within a transaction) first,
-// and the serialize the data at the very end of a transaction. So there will never base a case where value is synced with seralizedNode,
+// and then serializes the data at the very end of a transaction. So there will never base a case where value is synced with serializedNode,
 // but not with children.
 //
 // To update this field, ALWAYS use setValueState() method.
@@ -206,7 +206,7 @@ type (
 	// Logic outside the chasm package should only work with encoded paths.
 	NodePathEncoder interface {
 		Encode(node *Node, path []string) (string, error)
-		// TODO: Return a iterator on node name instead of []string,
+		// TODO: Return an iterator on node name instead of []string,
 		// so that we can get a node by encoded path without additional
 		// allocation for the decoded path.
 		Decode(encodedPath string) ([]string, error)
@@ -317,7 +317,7 @@ func newTreeInitSearchAttributesAndMemo(
 		return err
 	}
 
-	// Theoritically we should check if the root node has a Visibility component or not.
+	// Theoretically we should check if the root node has a Visibility component or not.
 	// But that doesn't really matter. Even if it doesn't have one, currentSearchAttributes
 	// and currentMemo will just never be used.
 
@@ -1582,7 +1582,7 @@ func (n *Node) closeTransactionForceUpdateVisibility(
 	visibility.generateTask(mutableContext)
 	visibilityNode.setValueState(valueStateNeedSerialize)
 
-	// We don't need to sync tree structure here for the visiblity node because we only generated a task without
+	// We don't need to sync tree structure here for the visibility node because we only generated a task without
 	// changing any component fields.
 	return nil
 }
@@ -1617,7 +1617,7 @@ func (n *Node) closeTransactionSerializeNodes() error {
 		n.mutation.UpdatedNodes[encodedPath] = node.serializedNode
 		// DeletedNodes map is populated when syncing tree structure. However, since we may sync tree structure
 		// multiple times in one transaction, if node at the same path was previously deleted, have structure synced,
-		// then get re-created, the same encoded path will exists in both UpdatedNodes and DeletedNodes maps.
+		// then get re-created, the same encoded path will exist in both UpdatedNodes and DeletedNodes maps.
 		//
 		// serializeNode only happens once at the end of a transaction, and here we know the node at this encoded path exists,
 		// remove it from the DeletedNodes map.
@@ -2761,7 +2761,7 @@ func deserializeTask(
 		return taskValue, nil
 	}
 
-	// TODO: consider pre-calculating the proto field num when registring the task type.
+	// TODO: consider pre-calculating the proto field num when registering the task type.
 
 	protoMessageFound := false
 	for i := 0; i < taskGoType.NumField(); i++ {
@@ -2812,7 +2812,7 @@ func serializeTask(
 		}, nil
 	}
 
-	// TODO: consider pre-calculating the proto field num when registring the task type.
+	// TODO: consider pre-calculating the proto field num when registering the task type.
 
 	var blob *commonpb.DataBlob
 	protoMessageFound := false
@@ -2894,7 +2894,7 @@ func (n *Node) ExecutePureTask(
 	}
 
 	// TODO - a task validator must succeed validation after a task executes
-	// successfully (without error), otherwise it will generate an infinite loop.
+	// successfully (without error); otherwise, it will generate an infinite loop.
 	// Check for this case by marking the in-memory task as having executed, which the
 	// CloseTransaction method will check against.
 	//

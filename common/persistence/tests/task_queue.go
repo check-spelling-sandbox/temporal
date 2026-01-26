@@ -227,7 +227,7 @@ func (s *TaskQueueSuite) TestDelete_Conflict() {
 	s.assertEqualWithDB(rangeID, taskQueue)
 }
 
-func (s *TaskQueueSuite) TesList() {
+func (s *TaskQueueSuite) TestList() {
 	// TODO there exists a SQL impl, but no cassandra impl ...
 }
 

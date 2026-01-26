@@ -79,7 +79,7 @@ type outboundQueueFactory struct {
 }
 
 func NewOutboundQueueFactory(params outboundQueueFactoryParams) QueueFactory {
-	metricsHandler := getOutbountQueueProcessorMetricsHandler(params.MetricsHandler)
+	metricsHandler := getOutboundQueueProcessorMetricsHandler(params.MetricsHandler)
 
 	rateLimiterPool := collection.NewOnceMap(
 		func(key tasks.TaskGroupNamespaceIDAndDestination) quotas.RateLimiter {
@@ -194,7 +194,7 @@ func (f *outboundQueueFactory) CreateQueue(
 	shardContext historyi.ShardContext,
 ) queues.Queue {
 	logger := log.With(shardContext.GetLogger(), tag.ComponentOutboundQueue)
-	metricsHandler := getOutbountQueueProcessorMetricsHandler(f.MetricsHandler)
+	metricsHandler := getOutboundQueueProcessorMetricsHandler(f.MetricsHandler)
 
 	currentClusterName := f.ClusterMetadata.GetCurrentClusterName()
 
@@ -304,7 +304,7 @@ func (f *outboundQueueFactory) CreateQueue(
 	)
 }
 
-func getOutbountQueueProcessorMetricsHandler(handler metrics.Handler) metrics.Handler {
+func getOutboundQueueProcessorMetricsHandler(handler metrics.Handler) metrics.Handler {
 	return handler.WithTags(metrics.OperationTag(metrics.OperationOutboundQueueProcessorScope))
 }
 

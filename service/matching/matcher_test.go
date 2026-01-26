@@ -207,13 +207,13 @@ func (t *MatcherTestSuite) testRemoteSyncMatch(taskSource enumsspb.TaskSource) {
 //nolint:errcheck
 func (t *MatcherTestSuite) TestRejectSyncMatchWhenBacklog() {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	intruptC := make(chan struct{})
+	interruptC := make(chan struct{})
 
 	// task waits for a local poller
 	oldBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Minute), nil)
 
 	go func() {
-		t.rootMatcher.MustOffer(ctx, oldBacklogTask, intruptC) //nolint:revive
+		t.rootMatcher.MustOffer(ctx, oldBacklogTask, interruptC) //nolint:revive
 	}()
 
 	// Wait for the task to be added to the map
@@ -258,7 +258,7 @@ func (t *MatcherTestSuite) TestForwardingWhenBacklogIsYoung() {
 	historyTask := newInternalTaskForSyncMatch(randomTaskInfo().Data, nil, 0, nil)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
-	intruptC := make(chan struct{})
+	interruptC := make(chan struct{})
 
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -285,7 +285,7 @@ func (t *MatcherTestSuite) TestForwardingWhenBacklogIsYoung() {
 	time.Sleep(2 * time.Millisecond)
 
 	// task is not forwarded because there is a local poller waiting
-	err := t.childMatcher.MustOffer(ctx, historyTask, intruptC)
+	err := t.childMatcher.MustOffer(ctx, historyTask, interruptC)
 	t.Nil(err)
 	cancel()
 
@@ -295,12 +295,12 @@ func (t *MatcherTestSuite) TestForwardingWhenBacklogIsYoung() {
 	wg.Add(1)
 	t.client.EXPECT().AddWorkflowTask(gomock.Any(), gomock.Any(), gomock.Any()).Do(
 		func(arg0 context.Context, arg1 *matchingservice.AddWorkflowTaskRequest, arg2 ...interface{}) {
-			// Offer forwarding has occured
+			// Offer forwarding has occurred
 			wg.Done()
 		},
 	).Return(&matchingservice.AddWorkflowTaskResponse{}, errMatchingHostThrottleTest)
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	go t.childMatcher.MustOffer(ctx, youngBacklogTask, intruptC) //nolint:errcheck
+	go t.childMatcher.MustOffer(ctx, youngBacklogTask, interruptC) //nolint:errcheck
 	wg.Wait()
 	time.Sleep(time.Millisecond)
 	cancel()
@@ -415,24 +415,24 @@ func (t *MatcherTestSuite) TestAvoidForwardingWhenBacklogIsOldButReconsider() {
 func (t *MatcherTestSuite) TestBacklogAge() {
 	t.Equal(emptyBacklogAge, t.rootMatcher.getBacklogAge())
 
-	intruptC := make(chan struct{})
+	interruptC := make(chan struct{})
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 
 	youngBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Second), nil)
-	go t.rootMatcher.MustOffer(ctx, youngBacklogTask, intruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                           //nolint:forbidigo
+	go t.rootMatcher.MustOffer(ctx, youngBacklogTask, interruptC) //nolint:errcheck
+	time.Sleep(time.Millisecond * 10)                             //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Second, float64(100*time.Millisecond))
 
 	middleBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Second), nil)
 	// offering a task with the exact creation to make sure of correct counting for each creation time
 	middleBacklogTask.event.Data.CreateTime = youngBacklogTask.event.Data.CreateTime
-	go t.rootMatcher.MustOffer(ctx, middleBacklogTask, intruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                            //nolint:forbidigo
+	go t.rootMatcher.MustOffer(ctx, middleBacklogTask, interruptC) //nolint:errcheck
+	time.Sleep(time.Millisecond * 10)                              //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Second, float64(100*time.Millisecond))
 
 	oldBacklogTask := newInternalTaskFromBacklog(randomTaskInfoWithAge(time.Minute), nil)
-	go t.rootMatcher.MustOffer(ctx, oldBacklogTask, intruptC) //nolint:errcheck
-	time.Sleep(time.Millisecond * 10)                         //nolint:forbidigo
+	go t.rootMatcher.MustOffer(ctx, oldBacklogTask, interruptC) //nolint:errcheck
+	time.Sleep(time.Millisecond * 10)                           //nolint:forbidigo
 	t.InDelta(t.rootMatcher.getBacklogAge(), time.Minute, float64(100*time.Millisecond))
 
 	task, _ := t.rootMatcher.Poll(ctx, &pollMetadata{})

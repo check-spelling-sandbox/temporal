@@ -281,7 +281,7 @@ func (r *ReaderImpl) AppendSlices(incomingSlices ...Slice) {
 		firstIncomingRange := incomingSlices[0].Scope().Range
 		if lastSliceRange.ExclusiveMax.CompareTo(firstIncomingRange.InclusiveMin) > 0 {
 			panic(fmt.Sprintf(
-				"Can not append slice to existing list of slices, incoming slice range: %v, existing slice range: %v ",
+				"Cannot append slice to existing list of slices, incoming slice range: %v, existing slice range: %v ",
 				firstIncomingRange,
 				lastSliceRange,
 			))

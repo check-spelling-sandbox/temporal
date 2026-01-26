@@ -217,7 +217,7 @@ func GetOrPollWorkflowMutableState(
 				if err != nil {
 					return nil, err
 				}
-				// It is possible the notifier sends an out of date event, we can ignore this event.
+				// It is possible the notifier sends an out-of-date event, we can ignore this event.
 				if versionhistory.CompareVersionHistoryItem(notifiedEventVersionItem, request.VersionHistoryItem) < 0 {
 					continue
 				}

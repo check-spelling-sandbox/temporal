@@ -1461,7 +1461,7 @@ func (s *matchingEngineSuite) TestConcurrentPublishConsumeActivitiesWithZeroDisp
 	// Set a short long poll expiration so that we don't have to wait too long for 0 throttling cases
 	s.matchingEngine.config.LongPollExpirationInterval = dynamicconfig.GetDurationPropertyFnFilteredByTaskQueue(20 * time.Millisecond)
 	dispatchLimitFn := func(wc int, tc int64) float64 {
-		if tc%50 == 0 && wc%5 == 0 { // Gets triggered atleast 20 times
+		if tc%50 == 0 && wc%5 == 0 { // Gets triggered at least 20 times
 			return 0
 		}
 		return defaultTaskDispatchRPS
@@ -1470,7 +1470,7 @@ func (s *matchingEngineSuite) TestConcurrentPublishConsumeActivitiesWithZeroDisp
 	const taskCount = 100
 	throttleCt := s.concurrentPublishConsumeActivities(workerCount, taskCount, dispatchLimitFn)
 	s.logger.Info("Number of tasks throttled", tag.Number(throttleCt))
-	// atleast once from 0 dispatch poll, and until TTL is hit at which time throttle limit is reset
+	// at least once from 0 dispatch poll, and until TTL is hit at which time throttle limit is reset
 	// hard to predict exactly how many times, since the atomic.Value load might not have updated.
 	s.GreaterOrEqual(throttleCt, 1)
 }
@@ -2310,7 +2310,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 	s.matchingEngine.config.MaxTaskDeleteBatchSize = dynamicconfig.GetIntPropertyFnFilteredByTaskQueue(2)
 
 	testCases := []struct {
-		maxTimeBtwnDeletes time.Duration
+		maxTimeBetweenDeletes time.Duration
 	}{
 		{time.Minute},     // test taskGC deleting due to size threshold
 		{time.Nanosecond}, // test taskGC deleting due to time condition
@@ -2351,7 +2351,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 		// ensure the 1/4 of tasks with small ScheduleToStartTimeout will be expired when they come out of the buffer
 		time.Sleep(300 * time.Millisecond)
 
-		maxTimeBetweenTaskDeletes = tc.maxTimeBtwnDeletes
+		maxTimeBetweenTaskDeletes = tc.maxTimeBetweenDeletes
 
 		s.setupRecordActivityTaskStartedMock(tl)
 
@@ -2373,7 +2373,7 @@ func (s *matchingEngineSuite) TestTaskExpiryAndCompletion() {
 			// since every other task is expired, we expect half the tasks to be deleted
 			// after poll consumed 1/4th of what is available.
 			// however, the gc is best-effort and might not run exactly when we want it to.
-			// various thread interleavings between the two task reader threads and this one
+			// various threads interleaving between the two task reader threads and this one
 			// might leave the gc behind by up to 3 tasks, or ahead by up to 1.
 			delta := remaining - s.taskManager.getTaskCount(dbq)
 			s.Truef(-3 <= delta && delta <= 1, "remaining %d, getTaskCount %d", remaining, s.taskManager.getTaskCount(dbq))
@@ -4955,7 +4955,7 @@ func (m *testTaskManager) ListTaskQueue(
 	_ context.Context,
 	_ *persistence.ListTaskQueueRequest,
 ) (*persistence.ListTaskQueueResponse, error) {
-	return nil, fmt.Errorf("unsupported operation")
+	return nil, errors.New("unsupported operation")
 }
 
 func (m *testTaskManager) DeleteTaskQueue(

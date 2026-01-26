@@ -85,7 +85,7 @@ func (iter *PagingIteratorImpl[V]) Next() (V, error) {
 		return iter.pageItems[index], nil
 	}
 
-	panic("HistoryEventIterator Next() should return either a history event or a err")
+	panic("HistoryEventIterator Next() should return either a history event or an err")
 }
 
 func (iter *PagingIteratorImpl[V]) getNextPage() {

@@ -95,7 +95,7 @@ func (so *serverOptions) loadAndValidate() error {
 func (so *serverOptions) loadConfig() error {
 	if so.configFilePath != "" {
 		if so.env != "" || so.configDir != "" || so.zone != "" {
-			return errors.New("env, config, zone can not be set if configFilePath is set")
+			return errors.New("env, config, zone cannot be set if configFilePath is set")
 		}
 		cfg, err := config.Load(
 			config.WithConfigFile(so.configFilePath),

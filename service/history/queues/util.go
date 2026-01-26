@@ -19,7 +19,7 @@ func IsTaskAcked(
 		for _, scope := range scopes {
 			if taskKey.CompareTo(scope.Range.InclusiveMin) < 0 {
 				// scopes are ordered for each reader, so if task is less the current
-				// range's min, it can not be contained by this or later scopes of this
+				// range's min, it cannot be contained by this or later scopes of this
 				// reader.
 				break
 			}

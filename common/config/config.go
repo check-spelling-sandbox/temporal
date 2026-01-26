@@ -2,6 +2,7 @@ package config
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"math"
 	"strings"
@@ -65,7 +66,7 @@ type (
 	PProf struct {
 		// Port is the port on which the PProf will bind to
 		Port int `yaml:"port"`
-		// Host defaults to `localhost` but can be overriden
+		// Host defaults to `localhost` but can be overridden
 		// for instance in the case of dual stack IPv4/IPv6
 		Host string `yaml:"host"`
 	}
@@ -168,7 +169,7 @@ type (
 
 		// PerHostOverrides contains per-hostname TLS settings that
 		// are used for external clients connecting to the Temporal Cluster on that
-		// specific hostname. Host names are case insensitive. Optional. If not present,
+		// specific hostname. Host names are case-insensitive. Optional. If not present,
 		// uses configuration supplied by Server field.
 		PerHostOverrides map[string]ServerTLS `yaml:"hostOverrides"`
 	}
@@ -189,7 +190,7 @@ type (
 		KeyData      string   `yaml:"keyData"`
 		ClientCAData []string `yaml:"clientCaData"`
 
-		// Requires clients to authenticate with a certificate when connecting, otherwise known as mutual TLS.
+		// Requires clients to authenticate with a certificate when connecting; otherwise, known as mutual TLS.
 		RequireClientAuth bool `yaml:"requireClientAuth"`
 	}
 
@@ -396,7 +397,7 @@ type (
 	CassandraConsistencySettings struct {
 		// Consistency sets the default consistency level. Values identical to gocql Consistency values. (defaults to LOCAL_QUORUM if not set).
 		Consistency string `yaml:"consistency"`
-		// SerialConsistency sets the consistency for the serial prtion of queries. Values identical to gocql SerialConsistency values. (defaults to LOCAL_SERIAL if not set)
+		// SerialConsistency sets the consistency for the serial portion of queries. Values identical to gocql SerialConsistency values. (defaults to LOCAL_SERIAL if not set)
 		SerialConsistency string `yaml:"serialConsistency"`
 	}
 
@@ -657,7 +658,7 @@ func (c *Config) Validate() error {
 
 	_, hasIFE := c.Services[string(primitives.InternalFrontendService)]
 	if hasIFE && (c.PublicClient.HostPort != "" || c.PublicClient.ForceTLSConfig != "" || c.PublicClient.HTTPHostPort != "") {
-		return fmt.Errorf("when using internal-frontend, publicClient must be empty")
+		return errors.New("when using internal-frontend, publicClient must be empty")
 	}
 
 	switch c.PublicClient.ForceTLSConfig {

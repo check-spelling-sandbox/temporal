@@ -4875,7 +4875,7 @@ func (wh *WorkflowHandler) GetWorkerTaskReachability(ctx context.Context, reques
 		}
 	}
 	if gotUnversionedRequest && len(request.GetTaskQueues()) == 0 {
-		return nil, serviceerror.NewInvalidArgument("Cannot get reachability of an unversioned worker without specifying at least one task queue (empty build ID is interpereted as unversioned)")
+		return nil, serviceerror.NewInvalidArgument("Cannot get reachability of an unversioned worker without specifying at least one task queue (empty build ID is interpreted as unversioned)")
 	}
 
 	for _, taskQueue := range request.GetTaskQueues() {
@@ -5399,7 +5399,7 @@ func (wh *WorkflowHandler) RespondNexusTaskCompleted(ctx context.Context, reques
 			operationToken = r.OperationId //nolint:staticcheck // SA1019 this field might be set by old clients.
 		}
 		if operationToken == "" {
-			return nil, serviceerror.NewInvalidArgument("missing opration token in response")
+			return nil, serviceerror.NewInvalidArgument("missing operation token in response")
 		}
 
 		tokenLimit := wh.config.MaxNexusOperationTokenLength(request.Namespace)
@@ -5878,7 +5878,7 @@ func (wh *WorkflowHandler) cancelOutstandingPoll(
 			PollerId:      pollerID,
 		},
 	)
-	// We can not do much if this call fails.  Just log the error and move on.
+	// We cannot do much if this call fails.  Just log the error and move on.
 	if err != nil {
 		wh.logger.Warn("Failed to cancel outstanding poller.",
 			tag.WorkflowTaskQueueName(taskQueue.GetName()), tag.Error(err))

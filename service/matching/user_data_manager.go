@@ -58,7 +58,7 @@ type (
 
 	UserDataUpdateOptions struct {
 		TaskQueueLimitPerBuildId int
-		// Only perform the update if current version equals to supplied version.
+		// Only perform the update if current version equals supplied version.
 		// 0 is unset.
 		KnownVersion int64
 		Source       string // informative source for logging
@@ -365,7 +365,7 @@ func (m *userDataManagerImpl) fetchUserData(ctx context.Context) error {
 			if fastResponseCounter >= maxFastUserDataFetches {
 				// maxFastUserDataFetches or more consecutive fast responses, let's throttle!
 				util.InterruptibleSleep(ctx, minWaitTime-elapsed)
-				// Don't let this get near our call timeout, otherwise we can't tell the difference
+				// Don't let this get near our call timeout; otherwise, we can't tell the difference
 				// between a fast reply and a timeout.
 				minWaitTime = min(minWaitTime*2, m.config.GetUserDataLongPollTimeout()/2)
 			} else {
@@ -407,7 +407,7 @@ func (m *userDataManagerImpl) loadUserDataFromDB(ctx context.Context) error {
 
 // Checks if data in db has not been modified since we loaded/modified it.
 func (m *userDataManagerImpl) refreshUserDataFromDB(ctx context.Context) error {
-	// Lock here to ensure we're not in the middle of an update, otherwise we may incorrectly
+	// Lock here to ensure we're not in the middle of an update; otherwise, we may incorrectly
 	// think the db has old data if we update between read and verify.
 	m.lock.Lock()
 	defer m.lock.Unlock()
@@ -626,7 +626,7 @@ func (m *userDataManagerImpl) HandleGetUserDataRequest(
 			return nil, errRequestedVersionTooLarge
 		}
 		// For ephemeral data: A similar situation could happen when a partition moves, we might
-		// have older data than the child. Don't return a error in that case, just wait until we
+		// have older data than the child. Don't return an error in that case, just wait until we
 		// have newer data. Note that "version" is a timestamp.
 
 		if !req.WaitNewData {

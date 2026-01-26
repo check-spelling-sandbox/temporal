@@ -52,7 +52,7 @@ func (p *plugin) CreateDB(
 	return db, nil
 }
 
-// CreateDBConnection creates a returns a reference to a logical connection to the
+// CreateDBConnection creates and returns a reference to a logical connection to the
 // underlying SQL database. The returned object is to tied to a single
 // SQL database and the object can be used to perform CRUD operations on
 // the tables in the database

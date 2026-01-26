@@ -79,7 +79,7 @@ func InverseMap[M ~map[K]V, K, V comparable](m M) map[V]K {
 }
 
 // GetOrSetNew looks up k in m and returns the result. If it's not present, it uses `new` to
-// allocate an new value type and sets that in the map, then returns it.
+// allocate a new value type and sets that in the map, then returns it.
 func GetOrSetNew[M ~map[K]*V, K comparable, V any](m M, k K) *V {
 	if v, ok := m[k]; ok {
 		return v
@@ -173,7 +173,7 @@ func Ptr[T any](v T) *T {
 }
 
 // InterruptibleSleep is like time.Sleep but can be interrupted by a context.
-// Returns context error if interrupted, otherwise nil.
+// Returns context error if interrupted; otherwise, nil.
 func InterruptibleSleep(ctx context.Context, timeout time.Duration) error {
 	timer := time.NewTimer(timeout)
 	defer timer.Stop()

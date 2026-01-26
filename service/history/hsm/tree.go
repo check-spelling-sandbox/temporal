@@ -256,7 +256,7 @@ func (n *Node) Path() []Key {
 // This method must be called on the root node only.
 func (n *Node) OpLog() (OperationLog, error) {
 	if n.Parent != nil {
-		return nil, fmt.Errorf("can only be called from root node")
+		return nil, errors.New("can only be called from root node")
 	}
 
 	compacted := n.opLog.compact()
@@ -362,7 +362,7 @@ func (n *Node) AddChild(key Key, data any) (*Node, error) {
 	nextVersionedTransition := &persistencespb.VersionedTransition{
 		NamespaceFailoverVersion: n.backend.GetCurrentVersion(),
 		// The transition count for the backend is only incremented when closing the current transaction,
-		// but any change to state machine node is a state transtion,
+		// but any change to state machine node is a state transition,
 		// so we can safely using next transition count here is safe.
 		TransitionCount: n.backend.NextTransitionCount(),
 	}
@@ -584,7 +584,7 @@ func MachineTransition[T any](n *Node, transitionFn func(T) (TransitionOutput, e
 	n.persistence.LastUpdateVersionedTransition = &persistencespb.VersionedTransition{
 		NamespaceFailoverVersion: n.backend.GetCurrentVersion(),
 		// The transition count for the backend is only incremented when closing the current transaction,
-		// but any change to state machine node is a state transtion,
+		// but any change to state machine node is a state transition,
 		// so we can safely using next transition count here.
 		TransitionCount: n.backend.NextTransitionCount(),
 	}

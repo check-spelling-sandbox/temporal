@@ -58,7 +58,7 @@ type DynamicRateLimitingParams struct {
 	// Enabled toggles whether dynamic rate limiting is enabled.
 	Enabled bool
 	// RefreshInterval is how often the rate limit and dynamic properties are refreshed. Should
-	// be a string duratoin e.g. 10s even if the rate limiter is disabled, this property will
+	// be a string duration e.g. 10s even if the rate limiter is disabled, this property will
 	// still determine how often the dynamic config is reevaluated.
 	RefreshInterval time.Duration
 	// LatencyThreshold is the maximum average latency in ms before the rate limiter should
@@ -67,15 +67,15 @@ type DynamicRateLimitingParams struct {
 	// ErrorThreshold is the maximum ratio of errors:total_requests before the rate limiter
 	// Should backoff. Should be between 0 and 1.
 	ErrorThreshold float64
-	// RateBackoffStepSize is the amount the rate limit multiplier is reduced when backing off.
+	// RateBackoffStepSize is the amount by which the rate limit multiplier is reduced when backing off.
 	// Should be between 0 and 1
 	RateBackoffStepSize float64
-	// RateIncreaseStepSize is the amount the rate limit multiplier is increased when the
+	// RateIncreaseStepSize is the amount by which the rate limit multiplier is increased when the
 	// system is healthy and current rate < max rate. Should be between 0 and 1.
 	RateIncreaseStepSize float64
-	// RateMultiMin is the minimum the rate limit multiplier can be reduced to.
+	// RateMultiMin is the minimum to which the rate limit multiplier can be reduced.
 	RateMultiMin float64
-	// RateMultiMax is the maximum the rate limit multiplier can be increased to.
+	// RateMultiMax is the maximum to which the rate limit multiplier can be increased.
 	RateMultiMax float64
 }
 

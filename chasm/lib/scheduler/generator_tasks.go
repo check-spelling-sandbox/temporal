@@ -117,7 +117,7 @@ func (g *GeneratorTaskExecutor) Execute(
 	idleExpiration, isIdle := scheduler.getIdleExpiration(ctx, idleTimeTotal, result.NextWakeupTime)
 	if isIdle {
 		// Schedule is complete, no need for another buffer task. We keep the schedule's
-		// backing mutable state explicitly open for a the idle period, during which the
+		// backing mutable state explicitly open for the idle period, during which the
 		// customer can describe/modify/restart the schedule.
 		//
 		// Once the idle timer expires, we close the component.

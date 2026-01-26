@@ -128,7 +128,7 @@ func (d *matchingTaskStoreV1) GetTasks(
 		return nil, serviceerror.NewInternal("invalid GetTasks request on queue: InclusiveMinPass is not supported")
 	}
 
-	// Reading taskqueue tasks need to be quorum level consistent, otherwise we could lose tasks
+	// Reading taskqueue tasks need to be quorum level consistent; otherwise, we could lose tasks
 	query := d.Session.Query(templateGetTasksQuery,
 		request.NamespaceID,
 		request.TaskQueue,

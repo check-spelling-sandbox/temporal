@@ -516,7 +516,7 @@ type HistoryEventRef struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Event ID.
 	EventId int64 `protobuf:"varint,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
-	// Event batch ID - the first event ID in the batch the event was stored in.
+	// Event batch ID - the first event ID in the batch containing the event.
 	EventBatchId  int64 `protobuf:"varint,2,opt,name=event_batch_id,json=eventBatchId,proto3" json:"event_batch_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

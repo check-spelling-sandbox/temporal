@@ -29,12 +29,12 @@ func (p *testPredicate) Test(x int) bool {
 }
 
 func (p *testPredicate) Equals(predicate Predicate[int]) bool {
-	testPrediate, ok := predicate.(*testPredicate)
+	testPredicate, ok := predicate.(*testPredicate)
 	if !ok {
 		return false
 	}
 
-	return maps.Equal(p.nums, testPrediate.nums)
+	return maps.Equal(p.nums, testPredicate.nums)
 }
 
 func (p *testPredicate) Size() int {

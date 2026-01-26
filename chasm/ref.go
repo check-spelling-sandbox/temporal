@@ -28,8 +28,8 @@ type ComponentRef struct {
 	// It is used to find and validate the loaded execution has the right archetype, especially when runID
 	// is not specified in the ExecutionKey.
 	archetypeID ArchetypeID
-	// executionGoType is used for determining the ComponetRef's archetype.
-	// When CHASM deverloper needs to create a ComponentRef, they will only provide the component type,
+	// executionGoType is used for determining the ComponentRef's archetype.
+	// When CHASM developer needs to create a ComponentRef, they will only provide the component type,
 	// and leave the work of determining archetypeID to the CHASM framework.
 	executionGoType reflect.Type
 
@@ -42,7 +42,7 @@ type ComponentRef struct {
 	// From the componentType, we can find the registered component struct definition,
 	// then use reflection to find sub-components and understand if those sub-components
 	// need to be loaded or not.
-	// We only need to do this for sub-components, path for parent/ancenstor components
+	// We only need to do this for sub-components, path for parent/ancestor components
 	// can be inferred from the current component path and they always needs to be loaded.
 	//
 	// componentType string

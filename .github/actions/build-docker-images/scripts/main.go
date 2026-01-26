@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -61,13 +62,13 @@ func setImageTags() error {
 	// Get GITHUB_REF from environment
 	ref := os.Getenv("GITHUB_REF")
 	if ref == "" {
-		return fmt.Errorf("GITHUB_REF environment variable not set")
+		return errors.New("GITHUB_REF environment variable not set")
 	}
 
 	// Get GITHUB_SHA from environment
 	sha := os.Getenv("GITHUB_SHA")
 	if sha == "" {
-		return fmt.Errorf("GITHUB_SHA environment variable not set")
+		return errors.New("GITHUB_SHA environment variable not set")
 	}
 
 	// Remove refs/heads/ or refs/tags/ prefix
@@ -98,7 +99,7 @@ func setImageTags() error {
 	}
 
 	if safeTag == "" {
-		return fmt.Errorf("failed to generate valid Docker tag from branch name")
+		return errors.New("failed to generate valid Docker tag from branch name")
 	}
 
 	// Generate short SHA tag (first 7 characters with "sha-" prefix)
@@ -266,7 +267,7 @@ func organizeBinaries() error {
 	}
 
 	if len(availableArchs) == 0 {
-		return fmt.Errorf("❌ No binaries found for any architecture")
+		return errors.New("❌ No binaries found for any architecture")
 	}
 
 	fmt.Printf("Found binaries for architectures: %s\n", strings.Join(availableArchs, ", "))
@@ -290,7 +291,7 @@ func organizeBinaries() error {
 	}
 
 	if missingFiles {
-		return fmt.Errorf("❌ Binary validation failed")
+		return errors.New("❌ Binary validation failed")
 	}
 
 	fmt.Println("✓ All required binaries present for available architectures")
@@ -308,7 +309,7 @@ func downloadCLI() error {
 	// Get available architectures from environment or input
 	availableArchsStr := os.Getenv("AVAILABLE_ARCHS")
 	if availableArchsStr == "" {
-		return fmt.Errorf("AVAILABLE_ARCHS environment variable not set")
+		return errors.New("AVAILABLE_ARCHS environment variable not set")
 	}
 
 	availableArchs := strings.Split(availableArchsStr, ",")
@@ -416,7 +417,7 @@ func extractVersion() error {
 	}
 
 	if binaryPath == "" {
-		return fmt.Errorf("temporal-server binary not found in docker/build/{amd64,arm64}/")
+		return errors.New("temporal-server binary not found in docker/build/{amd64,arm64}/")
 	}
 
 	fmt.Printf("Extracting version from %s\n", binaryPath)
@@ -452,7 +453,7 @@ func extractVersion() error {
 func setOutput(name, value string) error {
 	outputFile := os.Getenv("GITHUB_OUTPUT")
 	if outputFile == "" {
-		return fmt.Errorf("GITHUB_OUTPUT environment variable not set")
+		return errors.New("GITHUB_OUTPUT environment variable not set")
 	}
 
 	f, err := os.OpenFile(outputFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)

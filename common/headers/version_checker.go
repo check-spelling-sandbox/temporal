@@ -21,7 +21,7 @@ const (
 	ClientNameUI            = "temporal-ui"
 	ClientNameNexusGoSDK    = "Nexus-go-sdk"
 
-	// ServerVersion value can be changed by the create-tag Github workflow.
+	// ServerVersion value can be changed by the create-tag GitHub workflow.
 	// If you change the var name or move it, be sure to update the workflow.
 	ServerVersion = "1.29.0"
 

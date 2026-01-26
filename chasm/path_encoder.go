@@ -24,7 +24,7 @@ var (
 )
 
 // The Encode method encodes node path in a way that the following uses cases can be
-// achieved by doing a simple a range query in DB based on prefixes of the encoded path:
+// achieved by doing a simple range query in DB based on prefixes of the encoded path:
 // 1. Getting all nodes for a chasm tree.
 // 2. Getting all nodes for a sub-tree.
 // 3. Getting all immediate children of a Collection node.

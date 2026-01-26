@@ -595,13 +595,13 @@ func (e *ChasmEngine) handleConflictPolicy(
 	case chasm.BusinessIDConflictPolicyTerminateExisting:
 		// TODO: handle BusinessIDConflictPolicyTerminateExisting and update TestNewExecution_ConflictPolicy_TerminateExisting.
 		//
-		// Today's state-based replication logic can not existly handle this policy correctly
+		// Today's state-based replication logic cannot handle this policy correctly
 		// (or any operation that close and starts a new run in one transaction).
-		// The termination and creation of new run can not be replicated transactionally.
+		// The termination and creation of new run cannot be replicated transactionally.
 		//
 		// The main blocker is that state-based replication works on the current state,
 		// and we may have a chain of runs all created via TerminateExisting policy, meaning
-		// replication has to replicated all of them transactionally.
+		// replication has to replicate all of them transactionally.
 		// We need a way to break this chain into consistent pieces and replicate them one by one.
 		return chasm.EngineNewExecutionResult{}, serviceerror.NewUnimplemented("ID Conflict Policy Terminate Existing is not yet supported")
 	case chasm.BusinessIDConflictPolicyUseExisting:

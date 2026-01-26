@@ -35,11 +35,11 @@ func (a *actionMoveGroup) Name() string {
 
 func (a *actionMoveGroup) Run(readerGroup *ReaderGroup) bool {
 
-	// Move task groups from reader x to x+1 if the # of pending tasks for a group is higher than
+	// Move task groups from reader x to x+1 if the # of pending tasks for a group is greater than
 	// a threshold. The threshold is calculated as:
 	//   moveGroupTaskCountBase * (moveGroupTaskCountMultiplier ^ x)
 	//
-	// If after moving a group to reader x+1, the # of pending tasks for that group becomes higher than
+	// If after moving a group to reader x+1, the # of pending tasks for that group becomes greater than
 	// the threshold for reader x+1, it will be moved to reader x+2 in the next iteration.
 
 	// TODO: instead of moving task groups down by just one reader, directly move it to the reader level

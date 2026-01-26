@@ -528,7 +528,7 @@ func NewMutableStateFromDB(
 
 	if len(dbRecord.Checksum.GetValue()) > 0 {
 		switch {
-		case mutableState.shouldInvalidateCheckum():
+		case mutableState.shouldInvalidateChecksum():
 			mutableState.checksum = nil
 			metrics.MutableStateChecksumInvalidated.With(mutableState.metricsHandler).Record(1)
 		case mutableState.shouldVerifyChecksum():
@@ -1120,7 +1120,7 @@ func (ms *MutableStateImpl) GetStartVersion() (int64, error) {
 	// not have transition history enabled while they are running, so the first item in the transition history
 	// is not the actual start version.
 	//
-	// However, this assumes that if mutable state has event, it must also generate an event in it's first transition.
+	// However, this assumes that if mutable state has event, it must also generate an event in its first transition.
 	// That assumption is true today, but no necessarily true in the future. We should fix this if we ever
 	// have such a case.
 	if ms.transitionHistoryEnabled && len(ms.executionInfo.TransitionHistory) != 0 {
@@ -1147,13 +1147,13 @@ func (ms *MutableStateImpl) GetCloseVersion() (int64, error) {
 		return common.EmptyVersion, serviceerror.NewInternalf("workflow still running, current state: %v", ms.executionState.State.String())
 	}
 
-	// if workflow is closing in the current transation,
+	// if workflow is closing in the current transaction,
 	// then the last event is closed event and the event version is the close version
 	if lastEventVersion, ok := ms.hBuilder.LastEventVersion(); ok {
 		return lastEventVersion, nil
 	}
 
-	// We check version history first to prevserve the existing behaior of workflow to minimize risk.
+	// We check version history first to preserve the existing behavior of workflow to minimize risk.
 	// However, this assumes that if mutable state has event, it must also generate an event upon closing.
 	// That assumption is true today, but no necessarily true in the future. We should fix this if we ever
 	// have such a case.
@@ -2930,7 +2930,7 @@ func (ms *MutableStateImpl) ApplyWorkflowExecutionStartedEvent(
 		ms.GetEffectiveVersioningBehavior() != enumspb.VERSIONING_BEHAVIOR_UNSPECIFIED {
 		// TODO: [cleanup-old-wv]
 		limit := ms.config.SearchAttributesSizeOfValueLimit(string(ms.namespaceEntry.Name()))
-		// Passing nil for usedVersion because starting with pinned override does not add the version to used versions SA until the version is actaully used.
+		// Passing nil for usedVersion because starting with pinned override does not add the version to used versions SA until the version is actually used.
 		//nolint:staticcheck // SA1019
 		if _, err := ms.addBuildIDAndDeploymentInfoToSearchAttributesWithNoVisibilityTask(event.SourceVersionStamp, nil, limit); err != nil {
 			return err
@@ -3443,7 +3443,7 @@ func (ms *MutableStateImpl) UpdateBuildIdAssignment(buildId string) error {
 // effective version of the workflow (aka, the override version if override is set).
 //
 // If deprecated Deployment-based APIs are in use and the workflow is pinned, `pinned:<deployment_series_name>:<deployment_build_id>`
-// will be appended to the BuilIds list if it is not already present. The deployment will be
+// will be appended to the BuildIds list if it is not already present. The deployment will be
 // the effective deployment of the workflow (aka the override deployment_series and build_id if set).
 //
 // For all other workflows (ms.GetEffectiveVersioningBehavior() != PINNED), this will append a tag  to BuildIds
@@ -5017,7 +5017,7 @@ func (ms *MutableStateImpl) ApplyTimerStartedEvent(
 	timerID := attributes.GetTimerId()
 
 	startToFireTimeout := attributes.GetStartToFireTimeout().AsDuration()
-	// TODO: Time skew needs to be taken in to account.
+	// TODO: Time skew needs to be taken into account.
 	expiryTime := timestamp.TimeValue(event.GetEventTime()).Add(startToFireTimeout)
 
 	ti := &persistencespb.TimerInfo{
@@ -7503,7 +7503,7 @@ func (ms *MutableStateImpl) closeTransactionGenerateChasmRetentionTask(
 		return nil
 	}
 
-	// Generate retention timer for chasm executions if it's currentely completed
+	// Generate retention timer for chasm executions if it's currently completed
 	// but state in DB is not completed, i.e. completing in this transaction.
 
 	if transactionPolicy == historyi.TransactionPolicyActive {
@@ -7945,7 +7945,7 @@ func (ms *MutableStateImpl) validateNoEventsAfterWorkflowFinish(
 			tag.WorkflowID(ms.executionInfo.WorkflowId),
 			tag.WorkflowRunID(ms.executionState.RunId),
 		)
-		return consts.ErrEventsAterWorkflowFinish
+		return consts.ErrEventsAfterWorkflowFinish
 	}
 }
 
@@ -7999,7 +7999,7 @@ func (ms *MutableStateImpl) startTransactionHandleWorkflowTaskFailover() (bool, 
 		return false, serviceerror.NewInternalf("MutableStateImpl encountered mismatch version, workflow task: %v, last event version %v", workflowTask.Version, lastEventVersion)
 	}
 
-	// NOTE: if lastEventVersion is used here then the version transition history could decrecase
+	// NOTE: if lastEventVersion is used here then the version transition history could decrease
 	//
 	// TODO: Today's replication task processing logic won't flush buffered events when applying state only changes.
 	// As a result, when using lastWriteVersion, which takes state only change into account, here, we could still
@@ -8274,7 +8274,7 @@ func (ms *MutableStateImpl) shouldVerifyChecksum() bool {
 	return rand.Intn(100) < ms.config.MutableStateChecksumVerifyProbability(ms.namespaceEntry.Name().String())
 }
 
-func (ms *MutableStateImpl) shouldInvalidateCheckum() bool {
+func (ms *MutableStateImpl) shouldInvalidateChecksum() bool {
 	invalidateBeforeEpochSecs := int64(ms.config.MutableStateChecksumInvalidateBefore())
 	if invalidateBeforeEpochSecs > 0 {
 		invalidateBefore := time.Unix(invalidateBeforeEpochSecs, 0).UTC()

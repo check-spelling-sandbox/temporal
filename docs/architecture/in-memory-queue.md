@@ -12,7 +12,7 @@ task that is executed next.
 The in-memory queue only supports `WorkflowTaskTimeoutTask`, and enforces the
 `SCHEDULE_TO_START` and `START_TO_CLOSE` timeouts.
 
-Note that while the in-memory queue's executor of `WorkflowTaskTimeoutTask` is the same as for
+Note that while the in-memory queue's executor of `WorkflowTaskTimeoutTask` is the same as
 the normal timer queue, it does one extra check for speculative Workflow Tasks:
 `CheckSpeculativeWorkflowTaskTimeoutTask` checks if a task being executed is still the *same* task
 that's stored in mutable state. This is important since the mutable state can lose and create a *new*

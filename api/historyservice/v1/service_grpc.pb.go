@@ -118,12 +118,12 @@ type HistoryServiceClient interface {
 	// 1. StickyTaskQueue
 	// 2. StickyScheduleToStartTimeout
 	ResetStickyTaskQueue(ctx context.Context, in *ResetStickyTaskQueueRequest, opts ...grpc.CallOption) (*ResetStickyTaskQueueResponse, error)
-	// RecordWorkflowTaskStarted is called by the Matchingservice before it hands a workflow task to the application worker in response to
-	// a PollWorkflowTaskQueue call. It records in the history the event that the workflow task has started. It will return 'TaskAlreadyStartedError',
+	// RecordWorkflowTaskStarted is called by the MatchingService before it hands a workflow task to the application worker in response to
+	// a PollWorkflowTaskQueue call. It records the event, that the workflow task has started, in the history. It will return 'TaskAlreadyStartedError',
 	// if the workflow's execution history already includes a record of the event starting.
 	RecordWorkflowTaskStarted(ctx context.Context, in *RecordWorkflowTaskStartedRequest, opts ...grpc.CallOption) (*RecordWorkflowTaskStartedResponse, error)
-	// RecordActivityTaskStarted is called by the Matchingservice before it hands a workflow task to the application worker in response to
-	// a PollActivityTaskQueue call. It records in the history the event that the workflow task has started. It will return 'TaskAlreadyStartedError',
+	// RecordActivityTaskStarted is called by the MatchingService before it hands a workflow task to the application worker in response to
+	// a PollActivityTaskQueue call. It records the event, that the workflow task has started, in the history. It will return 'TaskAlreadyStartedError',
 	// if the workflow's execution history already includes a record of the event starting.
 	RecordActivityTaskStarted(ctx context.Context, in *RecordActivityTaskStartedRequest, opts ...grpc.CallOption) (*RecordActivityTaskStartedResponse, error)
 	// RespondWorkflowTaskCompleted is called by application worker to complete a WorkflowTask handed as a result of
@@ -190,7 +190,7 @@ type HistoryServiceClient interface {
 	// provided) or the latest Workflow Execution (when WorkflowExecution.run_id is not provided). If the Workflow
 	// Execution is Running, it will be terminated before deletion.
 	DeleteWorkflowExecution(ctx context.Context, in *DeleteWorkflowExecutionRequest, opts ...grpc.CallOption) (*DeleteWorkflowExecutionResponse, error)
-	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of a existing event batch
+	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of an existing event batch
 	// in the history and immediately terminating the current execution instance.
 	// After reset, the history will grow from nextFirstEventId.
 	ResetWorkflowExecution(ctx context.Context, in *ResetWorkflowExecutionRequest, opts ...grpc.CallOption) (*ResetWorkflowExecutionResponse, error)
@@ -214,17 +214,17 @@ type HistoryServiceClient interface {
 	// scheduled first workflow task in child after recording child started in its mutable state; otherwise,
 	// during namespace failover, it's possible that none of the clusters will schedule the first workflow task.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
-	// of how verification is done, we may unify them into one generic verfication API.
+	// of how verification is done, we may unify them into one generic verification API.
 	VerifyFirstWorkflowTaskScheduled(ctx context.Context, in *VerifyFirstWorkflowTaskScheduledRequest, opts ...grpc.CallOption) (*VerifyFirstWorkflowTaskScheduledResponse, error)
 	// RecordChildExecutionCompleted is used for reporting the completion of child workflow execution to parent.
 	// This is mainly called by transfer queue processor during the processing of DeleteExecution task.
 	RecordChildExecutionCompleted(ctx context.Context, in *RecordChildExecutionCompletedRequest, opts ...grpc.CallOption) (*RecordChildExecutionCompletedResponse, error)
 	// VerifyChildExecutionCompletionRecorded checks if child completion result is recorded in parent workflow.
 	// This is only used by standby transfer close execution logic to make sure parent workflow has the result
-	// recorded before completing the task, otherwise during namespace failover, it's possible that none of the
+	// recorded before completing the task; otherwise, during namespace failover, it's possible that none of the
 	// clusters will record the child result in parent workflow.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
-	// of how verification is done, we may unify them into one generic verfication API.
+	// of how verification is done, we may unify them into one generic verification API.
 	VerifyChildExecutionCompletionRecorded(ctx context.Context, in *VerifyChildExecutionCompletionRecordedRequest, opts ...grpc.CallOption) (*VerifyChildExecutionCompletionRecordedResponse, error)
 	// DescribeWorkflowExecution returns information about the specified workflow execution.
 	DescribeWorkflowExecution(ctx context.Context, in *DescribeWorkflowExecutionRequest, opts ...grpc.CallOption) (*DescribeWorkflowExecutionResponse, error)
@@ -1101,12 +1101,12 @@ type HistoryServiceServer interface {
 	// 1. StickyTaskQueue
 	// 2. StickyScheduleToStartTimeout
 	ResetStickyTaskQueue(context.Context, *ResetStickyTaskQueueRequest) (*ResetStickyTaskQueueResponse, error)
-	// RecordWorkflowTaskStarted is called by the Matchingservice before it hands a workflow task to the application worker in response to
-	// a PollWorkflowTaskQueue call. It records in the history the event that the workflow task has started. It will return 'TaskAlreadyStartedError',
+	// RecordWorkflowTaskStarted is called by the MatchingService before it hands a workflow task to the application worker in response to
+	// a PollWorkflowTaskQueue call. It records the event, that the workflow task has started, in the history. It will return 'TaskAlreadyStartedError',
 	// if the workflow's execution history already includes a record of the event starting.
 	RecordWorkflowTaskStarted(context.Context, *RecordWorkflowTaskStartedRequest) (*RecordWorkflowTaskStartedResponseWithRawHistory, error)
-	// RecordActivityTaskStarted is called by the Matchingservice before it hands a workflow task to the application worker in response to
-	// a PollActivityTaskQueue call. It records in the history the event that the workflow task has started. It will return 'TaskAlreadyStartedError',
+	// RecordActivityTaskStarted is called by the MatchingService before it hands a workflow task to the application worker in response to
+	// a PollActivityTaskQueue call. It records the event, that the workflow task has started, in the history. It will return 'TaskAlreadyStartedError',
 	// if the workflow's execution history already includes a record of the event starting.
 	RecordActivityTaskStarted(context.Context, *RecordActivityTaskStartedRequest) (*RecordActivityTaskStartedResponse, error)
 	// RespondWorkflowTaskCompleted is called by application worker to complete a WorkflowTask handed as a result of
@@ -1173,7 +1173,7 @@ type HistoryServiceServer interface {
 	// provided) or the latest Workflow Execution (when WorkflowExecution.run_id is not provided). If the Workflow
 	// Execution is Running, it will be terminated before deletion.
 	DeleteWorkflowExecution(context.Context, *DeleteWorkflowExecutionRequest) (*DeleteWorkflowExecutionResponse, error)
-	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of a existing event batch
+	// ResetWorkflowExecution reset an existing workflow execution by a firstEventId of an existing event batch
 	// in the history and immediately terminating the current execution instance.
 	// After reset, the history will grow from nextFirstEventId.
 	ResetWorkflowExecution(context.Context, *ResetWorkflowExecutionRequest) (*ResetWorkflowExecutionResponse, error)
@@ -1197,17 +1197,17 @@ type HistoryServiceServer interface {
 	// scheduled first workflow task in child after recording child started in its mutable state; otherwise,
 	// during namespace failover, it's possible that none of the clusters will schedule the first workflow task.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
-	// of how verification is done, we may unify them into one generic verfication API.
+	// of how verification is done, we may unify them into one generic verification API.
 	VerifyFirstWorkflowTaskScheduled(context.Context, *VerifyFirstWorkflowTaskScheduledRequest) (*VerifyFirstWorkflowTaskScheduledResponse, error)
 	// RecordChildExecutionCompleted is used for reporting the completion of child workflow execution to parent.
 	// This is mainly called by transfer queue processor during the processing of DeleteExecution task.
 	RecordChildExecutionCompleted(context.Context, *RecordChildExecutionCompletedRequest) (*RecordChildExecutionCompletedResponse, error)
 	// VerifyChildExecutionCompletionRecorded checks if child completion result is recorded in parent workflow.
 	// This is only used by standby transfer close execution logic to make sure parent workflow has the result
-	// recorded before completing the task, otherwise during namespace failover, it's possible that none of the
+	// recorded before completing the task; otherwise, during namespace failover, it's possible that none of the
 	// clusters will record the child result in parent workflow.
 	// NOTE: This is an experimental API. If later we found there are more verification API and there's a clear pattern
-	// of how verification is done, we may unify them into one generic verfication API.
+	// of how verification is done, we may unify them into one generic verification API.
 	VerifyChildExecutionCompletionRecorded(context.Context, *VerifyChildExecutionCompletionRecordedRequest) (*VerifyChildExecutionCompletionRecordedResponse, error)
 	// DescribeWorkflowExecution returns information about the specified workflow execution.
 	DescribeWorkflowExecution(context.Context, *DescribeWorkflowExecutionRequest) (*DescribeWorkflowExecutionResponse, error)

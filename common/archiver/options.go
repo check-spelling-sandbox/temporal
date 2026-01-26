@@ -19,7 +19,7 @@ type (
 		NonRetryableError NonRetryableError
 	}
 
-	// NonRetryableError returns an error indicating archiver has encountered an non-retryable error
+	// NonRetryableError returns an error indicating archiver has encountered a non-retryable error
 	NonRetryableError func() error
 
 	// ProgressManager is used to record and load archive progress
@@ -67,7 +67,7 @@ func (h *heartbeatProgressManager) HasProgress(ctx context.Context) bool {
 }
 
 // GetNonRetryableErrorOption returns an ArchiveOption so that archiver knows what should
-// be returned when an non-retryable error is encountered.
+// be returned when a non-retryable error is encountered.
 func GetNonRetryableErrorOption(nonRetryableErr error) ArchiveOption {
 	return func(catalog *ArchiveFeatureCatalog) {
 		catalog.NonRetryableError = func() error {

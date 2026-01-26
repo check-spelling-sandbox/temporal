@@ -191,7 +191,7 @@ func (s *ESVisibilitySuite) TestGetListFieldSorter() {
 	s.Equal(defaultSorter, sorter)
 
 	// test passing non-empty fieldSorts
-	testFieldSorts := []elastic.Sorter{elastic.NewFieldSort("_test"), elastic.NewFieldSort("_second_tes")}
+	testFieldSorts := []elastic.Sorter{elastic.NewFieldSort("_test"), elastic.NewFieldSort("_second_test")}
 	sorter, err = s.visibilityStore.GetListFieldSorter(testFieldSorts[:])
 	expectedSorter := make([]elastic.Sorter, len(testFieldSorts)+1)
 	expectedSorter[0] = testFieldSorts[0]
@@ -1862,7 +1862,7 @@ func (s *ESVisibilitySuite) Test_parsePageTokenValue() {
 			value: "123",
 			tp:    enumspb.INDEXED_VALUE_TYPE_INT,
 			res:   nil,
-			err:   serviceerror.NewInvalidArgument("invalid page token: expected interger type, got \"123\""),
+			err:   serviceerror.NewInvalidArgument("invalid page token: expected integer type, got \"123\""),
 		},
 		{
 			name:  "DoubleFieldError",

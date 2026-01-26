@@ -21,7 +21,7 @@ type (
 		Start()
 		Stop()
 		// InitialShardsAcquired blocks until initial shard acquisition is complete, context timeout,
-		// or Stop is called. Returns nil if shards are acquired, otherwise context error (on Stop,
+		// or Stop is called. Returns nil if shards are acquired; otherwise, context error (on Stop,
 		// returns context.Canceled).
 		InitialShardsAcquired(context.Context) error
 	}

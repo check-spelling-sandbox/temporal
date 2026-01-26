@@ -2,7 +2,7 @@ package hsmtest
 
 import (
 	"encoding/json"
-	"fmt"
+	"errors"
 	"time"
 
 	persistencespb "go.temporal.io/server/api/persistence/v1"
@@ -12,7 +12,7 @@ import (
 const TaskType = "test-task-type-name"
 
 var (
-	errInvalidTaskType = fmt.Errorf("invalid task type")
+	errInvalidTaskType = errors.New("invalid task type")
 )
 
 type Task struct {

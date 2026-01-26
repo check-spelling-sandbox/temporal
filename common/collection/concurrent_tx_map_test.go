@@ -66,7 +66,7 @@ func (s *ConcurrentTxMapSuite) TestGetAndDo() {
 	s.Nil(interf, "GetAndDo should return nil when key not found")
 	s.Nil(err, "GetAndDo should return nil when function not applied")
 	s.False(ok, "GetAndDo should return false when key not found")
-	s.False(fnApplied, "GetAndDo should not apply function when key not exixts")
+	s.False(fnApplied, "GetAndDo should not apply function when key doesn't exist")
 
 	value = intType(1)
 	testMap.Put(key, &value)
@@ -81,7 +81,7 @@ func (s *ConcurrentTxMapSuite) TestGetAndDo() {
 	s.Equal(*(value1), intType(2))
 	s.NotNil(err, "GetAndDo should return non nil when function applied")
 	s.True(ok, "GetAndDo should return true when key found")
-	s.True(fnApplied, "GetAndDo should apply function when key exixts")
+	s.True(fnApplied, "GetAndDo should apply function when key exists")
 }
 
 func (s *ConcurrentTxMapSuite) TestPutOrDo() {
@@ -95,11 +95,11 @@ func (s *ConcurrentTxMapSuite) TestPutOrDo() {
 		fnApplied = true
 		return errors.New("some err")
 	})
-	valueRetuern := interf.(*intType)
-	s.Equal(value, *valueRetuern)
+	valueReturn := interf.(*intType)
+	s.Equal(value, *valueReturn)
 	s.Nil(err, "PutOrDo should return nil when function not applied")
 	s.False(ok, "PutOrDo should return false when function not applied")
-	s.False(fnApplied, "PutOrDo should not apply function when key not exixts")
+	s.False(fnApplied, "PutOrDo should not apply function when key doesn't exist")
 
 	anotherValue := intType(111)
 	interf, ok, err = testMap.PutOrDo(key, &anotherValue, func(key interface{}, value interface{}) error {
@@ -108,11 +108,11 @@ func (s *ConcurrentTxMapSuite) TestPutOrDo() {
 		*intValue++
 		return errors.New("some err")
 	})
-	valueRetuern = interf.(*intType)
-	s.Equal(value, *valueRetuern)
+	valueReturn = interf.(*intType)
+	s.Equal(value, *valueReturn)
 	s.NotNil(err, "PutOrDo should return non nil when function applied")
 	s.True(ok, "PutOrDo should return true when function applied")
-	s.True(fnApplied, "PutOrDo should apply function when key exixts")
+	s.True(fnApplied, "PutOrDo should apply function when key exists")
 }
 
 func (s *ConcurrentTxMapSuite) TestRemoveIf() {

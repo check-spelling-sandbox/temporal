@@ -2,6 +2,7 @@ package resource
 
 import (
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"net"
 	"os"
@@ -463,7 +464,7 @@ func getFrontendConnectionDetails(
 	case config.ForceTLSConfigFrontend:
 		frontendTLSConfig, err = tlsConfigProvider.GetFrontendClientConfig()
 	default:
-		err = fmt.Errorf("invalid forceTLSConfig")
+		err = errors.New("invalid forceTLSConfig")
 	}
 	if err != nil {
 		return "", "", 0, nil, fmt.Errorf("unable to load TLS configuration: %w", err)

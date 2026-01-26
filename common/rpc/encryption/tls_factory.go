@@ -3,6 +3,7 @@ package encryption
 import (
 	"crypto/tls"
 	"crypto/x509"
+	"errors"
 	"fmt"
 	"strings"
 	"time"
@@ -95,7 +96,7 @@ func validateGroupTLS(cfg *config.GroupTLS) error {
 	for host, hostConfig := range cfg.PerHostOverrides {
 
 		if strings.TrimSpace(host) == "" {
-			return fmt.Errorf("host name cannot be empty string")
+			return errors.New("host name cannot be empty string")
 		}
 		if err := validateServerTLS(&hostConfig); err != nil {
 			return err
@@ -106,20 +107,20 @@ func validateGroupTLS(cfg *config.GroupTLS) error {
 
 func validateWorkerTLS(cfg *config.WorkerTLS) error {
 	if cfg.CertFile != "" && cfg.CertData != "" {
-		return fmt.Errorf("cannot specify CertFile and CertData at the same time")
+		return errors.New("cannot specify CertFile and CertData at the same time")
 	}
 	if cfg.KeyFile != "" && cfg.KeyData != "" {
-		return fmt.Errorf("cannot specify KeyFile and KeyData at the same time")
+		return errors.New("cannot specify KeyFile and KeyData at the same time")
 	}
 	return validateClientTLS(&cfg.Client)
 }
 
 func validateServerTLS(cfg *config.ServerTLS) error {
 	if cfg.CertFile != "" && cfg.CertData != "" {
-		return fmt.Errorf("cannot specify CertFile and CertData at the same time")
+		return errors.New("cannot specify CertFile and CertData at the same time")
 	}
 	if cfg.KeyFile != "" && cfg.KeyData != "" {
-		return fmt.Errorf("cannot specify KeyFile and KeyData at the same time")
+		return errors.New("cannot specify KeyFile and KeyData at the same time")
 	}
 	if err := validateCAs(cfg.ClientCAData); err != nil {
 		return fmt.Errorf("invalid ServerTLS.ClientCAData: %w", err)
@@ -128,7 +129,7 @@ func validateServerTLS(cfg *config.ServerTLS) error {
 		return fmt.Errorf("invalid ServerTLS.ClientCAFiles: %w", err)
 	}
 	if len(cfg.ClientCAFiles) > 0 && len(cfg.ClientCAData) > 0 {
-		return fmt.Errorf("cannot specify ClientCAFiles and ClientCAData at the same time")
+		return errors.New("cannot specify ClientCAFiles and ClientCAData at the same time")
 	}
 	return nil
 }
@@ -141,7 +142,7 @@ func validateClientTLS(cfg *config.ClientTLS) error {
 		return fmt.Errorf("invalid ClientTLS.RootCAFiles: %w", err)
 	}
 	if len(cfg.RootCAData) > 0 && len(cfg.RootCAFiles) > 0 {
-		return fmt.Errorf("cannot specify RootCAFiles and RootCAData at the same time")
+		return errors.New("cannot specify RootCAFiles and RootCAData at the same time")
 	}
 	return nil
 }
@@ -149,7 +150,7 @@ func validateClientTLS(cfg *config.ClientTLS) error {
 func validateCAs(cas []string) error {
 	for _, ca := range cas {
 		if strings.TrimSpace(ca) == "" {
-			return fmt.Errorf("CA cannot be empty string")
+			return errors.New("CA cannot be empty string")
 		}
 	}
 	return nil

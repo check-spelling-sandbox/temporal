@@ -3,7 +3,7 @@
 package workflow
 
 import (
-	"fmt"
+	"errors"
 	"time"
 
 	enumspb "go.temporal.io/api/enums/v1"
@@ -965,7 +965,7 @@ func generateSubStateMachineTask(
 	if task.Deadline() != hsm.Immediate {
 		if task.Destination() != "" {
 			// TODO: support outbound timer tasks.
-			return fmt.Errorf("task cannot have both a deadline and destination due to missing outbound timer queue implementation")
+			return errors.New("task cannot have both a deadline and destination due to missing outbound timer queue implementation")
 		}
 		TrackStateMachineTimer(mutableState, task.Deadline(), taskInfo)
 	} else if task.Destination() != "" {
@@ -978,7 +978,7 @@ func generateSubStateMachineTask(
 		})
 	} else {
 		// TODO: support "transfer" tasks - immediate without destination.
-		return fmt.Errorf("task has no deadline or destination")
+		return errors.New("task has no deadline or destination")
 	}
 
 	return nil

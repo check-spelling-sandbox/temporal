@@ -59,8 +59,8 @@ type (
 var (
 	taskQueueBatchSize       = 32             // maximum number of task queue we process concurrently
 	taskBatchSize            = 16             // number of tasks we read from persistence in one call
-	maxTasksPerJob           = 256            // maximum number of tasks we process for a executorTask queue as part of a single job
-	taskQueueGracePeriod     = 48 * time.Hour // amount of time a executorTask queue has to be idle before it becomes a candidate for deletion
+	maxTasksPerJob           = 256            // maximum number of tasks we process for an executorTask queue as part of a single job
+	taskQueueGracePeriod     = 48 * time.Hour // amount of time an executorTask queue has to be idle before it becomes a candidate for deletion
 	executorPollInterval     = time.Minute
 	executorMaxDeferredTasks = 10000
 )

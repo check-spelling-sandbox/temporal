@@ -404,7 +404,7 @@ func (r *workflowResetterImpl) persistToDB(
 		return err
 	}
 	resetRunVersion := resetWorkflow.GetMutableState().GetCurrentVersion()
-	currentRunVerson := currentWorkflow.GetMutableState().GetCurrentVersion()
+	currentRunVersion := currentWorkflow.GetMutableState().GetCurrentVersion()
 	if _, _, _, err := r.transaction.ConflictResolveWorkflowExecution(
 		ctx,
 		persistence.ConflictResolveWorkflowModeUpdateCurrent,
@@ -415,7 +415,7 @@ func (r *workflowResetterImpl) persistToDB(
 		&resetRunVersion,
 		resetWorkflowSnapshot,
 		resetWorkflowEventsSeq,
-		&currentRunVerson,
+		&currentRunVersion,
 		currentWorkflowMutation,
 		currentWorkflowEventsSeq,
 		currentWorkflow.GetMutableState().IsWorkflow(),
@@ -797,7 +797,7 @@ func (r *workflowResetterImpl) reapplyEventsFromBranch(
 		// 	for _, event := range lastEvents {
 		// 		if event.GetEventType() == enumspb.EVENT_TYPE_START_CHILD_WORKFLOW_EXECUTION_INITIATED {
 		// 			attr := event.GetStartChildWorkflowExecutionInitiatedEventAttributes()
-		// 			// TODO: there is a possibility the childIDs constructed this way may not be unique. But the probability of that is very low.
+		// 			// TODO: there is a possibility that childIDs constructed this way may not be unique. But the probability of that is very low.
 		// 			// Need to figure out a better way to track these child workflows.
 		// 			childID := fmt.Sprintf("%s:%s", attr.GetWorkflowType().Name, attr.GetWorkflowId())
 		// 			childrenInitializedAfterReset[childID] = &persistencespb.ResetChildInfo{
@@ -1157,7 +1157,7 @@ func IsTerminatedByResetter(event *historypb.HistoryEvent) bool {
 	return false
 }
 
-// shouldExcludeAllReapplyEvents returns true if the excludeTypes map contains all the elegible re-apply event types.
+// shouldExcludeAllReapplyEvents returns true if the excludeTypes map contains all the eligible re-apply event types.
 func (r *workflowResetterImpl) shouldExcludeAllReapplyEvents(excludeTypes map[enumspb.ResetReapplyExcludeType]struct{}) bool {
 	for key := range enumspb.ResetReapplyExcludeType_name {
 		eventType := enumspb.ResetReapplyExcludeType(key)

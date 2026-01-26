@@ -366,7 +366,7 @@ func (tr *priTaskReader) signalNewTasks(resp subqueueCreateTasksResponse) {
 	tr.lock.Lock()
 
 	// We have to be very careful not to increment the read level past an ID that will somehow
-	// end up in the database, otherwise we might lose a task. We do this by verifying that our
+	// end up in the database; otherwise, we might lose a task. We do this by verifying that our
 	// read level was equal to the previous max read level (i.e. we were at the end of the
 	// queue), and then we set it to the max read level as of CreateTasks.
 	// We also check that there's room in memory.
@@ -419,7 +419,7 @@ func (tr *priTaskReader) getLoadedTasks() int {
 
 func (tr *priTaskReader) ackTaskLocked(taskId int64) int64 {
 	wasAlreadyAcked, found := tr.outstandingTasks.Get(taskId)
-	if !softassert.That(tr.logger, found, "completed task not found in oustandingTasks") {
+	if !softassert.That(tr.logger, found, "completed task not found in outstandingTasks") {
 		return 0
 	}
 	if !softassert.That(tr.logger, !wasAlreadyAcked.(bool), "completed task was already acked") {

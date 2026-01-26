@@ -288,7 +288,7 @@ func (t *visibilityQueueTaskExecutor) processCloseExecution(
 	// Elasticsearch bulk processor doesn't respect context timeout
 	// because under heavy load bulk flush might take longer than taskTimeout.
 	// Therefore, ctx timeout might be already expired
-	// and parentCtx (which doesn't have timeout) must be used everywhere bellow.
+	// and parentCtx (which doesn't have timeout) must be used everywhere below.
 
 	if t.needRunCleanUp(requestBase) {
 		return t.cleanupExecutionInfo(parentCtx, task)

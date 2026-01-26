@@ -908,14 +908,14 @@ func verifyPersistenceCompatibleVersion(
 
 type SpanExporterInputs struct {
 	fx.In
-	Lifecycyle fx.Lifecycle
-	Logger     log.Logger
-	Config     *config.Config `optional:"true"`
+	Lifecycle fx.Lifecycle
+	Logger    log.Logger
+	Config    *config.Config `optional:"true"`
 }
 
 // TraceExportModule holds process-global telemetry fx state defining the set of
 // OTEL trace/span exporters used by tracing instrumentation. The following
-// types can be overriden/augmented with fx.Replace/fx.Decorate:
+// types can be overridden/augmented with fx.Replace/fx.Decorate:
 //
 // - []go.opentelemetry.io/otel/sdk/trace.SpanExporter
 var TraceExportModule = fx.Options(
@@ -952,7 +952,7 @@ var TraceExportModule = fx.Options(
 		exporters := expmaps.Values(exportersByType)
 
 		// Configure exporters' lifecycle hooks.
-		inputs.Lifecycyle.Append(fx.Hook{
+		inputs.Lifecycle.Append(fx.Hook{
 			OnStart: func(ctx context.Context) error {
 				err = startAll(exporters)(ctx)
 				tracingReady.Store(true)
@@ -965,7 +965,7 @@ var TraceExportModule = fx.Options(
 )
 
 // ServiceTracingModule holds per-service (i.e. frontend/history/matching/worker) fx
-// state. The following types can be overriden with fx.Replace/fx.Decorate:
+// state. The following types can be overridden with fx.Replace/fx.Decorate:
 //
 //   - []go.opentelemetry.io/otel/sdk/trace.BatchSpanProcessorOption
 //     default: empty slice
@@ -975,7 +975,7 @@ var TraceExportModule = fx.Options(
 //     default: resource.Default() augmented with the supplied serviceName
 //   - go.opentelemetry.io/otel/trace.TracerProvider
 //     default: otelnoop.NewTracerProvider()
-//   - go.opentelemetry.io/otel/ppropagation.TextMapPropagator
+//   - go.opentelemetry.io/otel/propagation.TextMapPropagator
 //     default: propagation.TraceContext{}
 //   - telemetry.ServerStatsHandler
 //   - telemetry.ClientStatsHandler

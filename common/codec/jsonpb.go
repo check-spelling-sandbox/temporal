@@ -13,7 +13,7 @@ import (
 
 type (
 	// JSONPBEncoder is JSON encoder/decoder for protobuf structs and slices of protobuf structs.
-	// This is an wrapper on top of jsonpb.Marshaler which supports not only single object serialization
+	// This is a wrapper on top of jsonpb.Marshaler which supports not only single object serialization
 	// but also slices of concrete objects.
 	JSONPBEncoder struct {
 		marshaler   protojson.MarshalOptions

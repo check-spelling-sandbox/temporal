@@ -427,7 +427,7 @@ func (s *SliceImpl) destroy() {
 
 func (s *SliceImpl) stateSanityCheck() {
 	if s.destroyed {
-		panic("Can not invoke method on destroyed queue slice")
+		panic("Cannot invoke method on destroyed queue slice")
 	}
 }
 
@@ -456,7 +456,7 @@ func (s *SliceImpl) ensurePredicateSizeLimit() {
 	// 0 == unlimited
 	if maxPredicateSize > 0 && s.scope.Predicate.Size() > maxPredicateSize {
 		// Due to the limitations in predicate merging logic, the predicate size can easily grow unbounded.
-		// The simplest mitigation is to stop merging and replace with the univeral predicate.
+		// The simplest mitigation is to stop merging and replace with the universal predicate.
 		s.scope.Predicate = predicates.Universal[tasks.Task]()
 	}
 }

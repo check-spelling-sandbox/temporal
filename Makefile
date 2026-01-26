@@ -55,7 +55,7 @@ TEST_TAG_FLAG := -tags $(ALL_TEST_TAGS)
 # 20 minutes is the upper bound defined for all tests. (Tests in CI take up to about 14:30 now)
 # If you change this, also change .github/workflows/run-tests.yml!
 # The timeout in the GH workflow must be larger than this to avoid GH timing out the action,
-# which causes the a job run to not produce any logs and hurts the debugging experience.
+# which causes the job run to not produce any logs and hurts the debugging experience.
 TEST_TIMEOUT ?= 35m
 
 # Number of retries for *-coverage targets.

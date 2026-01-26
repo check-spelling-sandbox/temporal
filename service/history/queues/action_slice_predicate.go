@@ -62,7 +62,7 @@ func (a *slicePredicateAction) Run(readerGroup *ReaderGroup) bool {
 	reader.WalkSlices(func(s Slice) {
 		pendingTasks += a.monitor.GetSlicePendingTaskCount(s)
 
-		if !tasks.IsUniverisalPredicate(s.Scope().Predicate) {
+		if !tasks.IsUniversalPredicate(s.Scope().Predicate) {
 			hasNonUniversalPredicate = true
 		}
 	})
@@ -77,7 +77,7 @@ func (a *slicePredicateAction) Run(readerGroup *ReaderGroup) bool {
 
 	var moveSlices []Slice
 	reader.SplitSlices(func(s Slice) (remaining []Slice, split bool) {
-		if tasks.IsUniverisalPredicate(s.Scope().Predicate) {
+		if tasks.IsUniversalPredicate(s.Scope().Predicate) {
 			return []Slice{s}, false
 		}
 

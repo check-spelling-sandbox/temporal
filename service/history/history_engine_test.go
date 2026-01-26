@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"strings"
 	"sync"
 	"testing"
@@ -272,7 +271,7 @@ func (s *engineSuite) TestGetMutableStateSync() {
 	s.Equal(tests.RunID, response.GetFirstExecutionRunId())
 }
 
-func (s *engineSuite) TestGetMutableState_IntestRunID() {
+func (s *engineSuite) TestGetMutableState_InTestRunID() {
 	ctx := context.Background()
 
 	execution := commonpb.WorkflowExecution{
@@ -327,7 +326,7 @@ func (s *engineSuite) TestGetMutableStateLongPoll() {
 	// test long poll on next event ID change
 	waitGroup := &sync.WaitGroup{}
 	waitGroup.Add(1)
-	asycWorkflowUpdate := func(delay time.Duration) {
+	asyncWorkflowUpdate := func(delay time.Duration) {
 		tt := &tokenspb.Task{
 			Attempt:          1,
 			NamespaceId:      namespaceID.String(),
@@ -363,7 +362,7 @@ func (s *engineSuite) TestGetMutableStateLongPoll() {
 	s.Equal(int64(4), response.NextEventId)
 
 	// long poll, new event happen before long poll timeout
-	go asycWorkflowUpdate(time.Second)
+	go asyncWorkflowUpdate(time.Second)
 	start := time.Now().UTC()
 	pollResponse, err := s.historyEngine.PollMutableState(ctx, &historyservice.PollMutableStateRequest{
 		NamespaceId:         tests.NamespaceID.String(),
@@ -3094,7 +3093,7 @@ func (s *engineSuite) TestRespondActivityTaskFailedIfGetExecutionFailed() {
 	s.EqualError(err, "FAILED")
 }
 
-func (s *engineSuite) TestRespondActivityTaskFailededIfNoAIdProvided() {
+func (s *engineSuite) TestRespondActivityTaskFailedIfNoAIdProvided() {
 	namespaceID := tests.NamespaceID
 	tt := &tokenspb.Task{
 		Attempt:          1,
@@ -3131,7 +3130,7 @@ func (s *engineSuite) TestRespondActivityTaskFailededIfNoAIdProvided() {
 	s.EqualError(err, "activityID cannot be empty")
 }
 
-func (s *engineSuite) TestRespondActivityTaskFailededIfNotFound() {
+func (s *engineSuite) TestRespondActivityTaskFailedIfNotFound() {
 	namespaceID := tests.NamespaceID
 	tt := &tokenspb.Task{
 		Attempt:          1,
@@ -3573,14 +3572,14 @@ func (s *engineSuite) TestRecordActivityTaskHeartBeatSuccess_NoTimer() {
 	s.mockExecutionMgr.EXPECT().GetWorkflowExecution(gomock.Any(), gomock.Any()).Return(gwmsResponse, nil)
 	s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).Return(tests.UpdateWorkflowExecutionResponse, nil)
 
-	detais := payloads.EncodeString("details")
+	details := payloads.EncodeString("details")
 
 	_, err := s.historyEngine.RecordActivityTaskHeartbeat(context.Background(), &historyservice.RecordActivityTaskHeartbeatRequest{
 		NamespaceId: tests.NamespaceID.String(),
 		HeartbeatRequest: &workflowservice.RecordActivityTaskHeartbeatRequest{
 			TaskToken: taskToken,
 			Identity:  identity,
-			Details:   detais,
+			Details:   details,
 		},
 	})
 	s.Nil(err)
@@ -3622,14 +3621,14 @@ func (s *engineSuite) TestRecordActivityTaskHeartBeatSuccess_TimerRunning() {
 	s.mockExecutionMgr.EXPECT().GetWorkflowExecution(gomock.Any(), gomock.Any()).Return(gwmsResponse, nil)
 	s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).Return(tests.UpdateWorkflowExecutionResponse, nil)
 
-	detais := payloads.EncodeString("details")
+	details := payloads.EncodeString("details")
 
 	_, err := s.historyEngine.RecordActivityTaskHeartbeat(context.Background(), &historyservice.RecordActivityTaskHeartbeatRequest{
 		NamespaceId: tests.NamespaceID.String(),
 		HeartbeatRequest: &workflowservice.RecordActivityTaskHeartbeatRequest{
 			TaskToken: taskToken,
 			Identity:  identity,
-			Details:   detais,
+			Details:   details,
 		},
 	})
 	s.Nil(err)
@@ -3676,14 +3675,14 @@ func (s *engineSuite) TestRecordActivityTaskHeartBeatByIDSuccess() {
 	s.mockExecutionMgr.EXPECT().GetWorkflowExecution(gomock.Any(), gomock.Any()).Return(gwmsResponse, nil)
 	s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).Return(tests.UpdateWorkflowExecutionResponse, nil)
 
-	detais := payloads.EncodeString("details")
+	details := payloads.EncodeString("details")
 
 	_, err := s.historyEngine.RecordActivityTaskHeartbeat(context.Background(), &historyservice.RecordActivityTaskHeartbeatRequest{
 		NamespaceId: tests.NamespaceID.String(),
 		HeartbeatRequest: &workflowservice.RecordActivityTaskHeartbeatRequest{
 			TaskToken: taskToken,
 			Identity:  identity,
-			Details:   detais,
+			Details:   details,
 		},
 	})
 	s.Nil(err)
@@ -5912,7 +5911,7 @@ func (s *engineSuite) Test_GetWorkflowExecutionRawHistoryV2_FailedOnNamespaceCac
 
 	ctx := context.Background()
 	namespaceID := namespace.ID(uuid.NewString())
-	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, fmt.Errorf("test"))
+	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, errors.New("test"))
 	_, err = engine.GetWorkflowExecutionRawHistoryV2(ctx,
 		&historyservice.GetWorkflowExecutionRawHistoryV2Request{
 			NamespaceId: namespaceID.String(),
@@ -6125,7 +6124,7 @@ func (s *engineSuite) Test_GetWorkflowExecutionRawHistory_FailedOnNamespaceCache
 
 	ctx := context.Background()
 	namespaceID := namespace.ID(uuid.NewString())
-	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, fmt.Errorf("test"))
+	s.mockNamespaceCache.EXPECT().GetNamespaceByID(namespaceID).Return(nil, errors.New("test"))
 	_, err = engine.GetWorkflowExecutionRawHistory(ctx,
 		&historyservice.GetWorkflowExecutionRawHistoryRequest{
 			NamespaceId: namespaceID.String(),

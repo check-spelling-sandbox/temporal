@@ -3,6 +3,7 @@ package encryption
 import (
 	"crypto/tls"
 	"crypto/x509"
+	"errors"
 	"fmt"
 	"sync"
 	"time"
@@ -383,7 +384,7 @@ func newClientTLSConfig(
 			}
 
 			if cert == nil {
-				return nil, fmt.Errorf("client auth required, but no certificate provided")
+				return nil, errors.New("client auth required, but no certificate provided")
 			}
 			return cert, nil
 		}

@@ -2,6 +2,7 @@ package respondworkflowtaskcompleted
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"math/rand"
 	"testing"
@@ -187,7 +188,7 @@ func TestCommandProtocolMessage(t *testing.T) {
 
 		// mock a failed event creation.
 		event := &historypb.HistoryEvent{}
-		tc.ms.EXPECT().AddCompletedWorkflowEvent(tc.handler.workflowTaskCompletedID, completeWorkflowExecutionCommandAttributes, "").MaxTimes(1).Return(event, fmt.Errorf("FAIL"))
+		tc.ms.EXPECT().AddCompletedWorkflowEvent(tc.handler.workflowTaskCompletedID, completeWorkflowExecutionCommandAttributes, "").MaxTimes(1).Return(event, errors.New("FAIL"))
 		tc.ms.EXPECT().GetExecutionInfo().AnyTimes().Return(&persistencespb.WorkflowExecutionInfo{})
 		tc.ms.EXPECT().GetExecutionState().AnyTimes().Return(&persistencespb.WorkflowExecutionState{})
 		tc.ms.EXPECT().IsWorkflowExecutionRunning().AnyTimes().Return(true)
@@ -196,7 +197,7 @@ func TestCommandProtocolMessage(t *testing.T) {
 		_, err := tc.handler.handleCommand(context.Background(), command, newMsgList())
 		require.Error(t, err)
 
-		// Verify that the event is discarded anduser metadata is not attached to the event.
+		// Verify that the event is discarded and user metadata is not attached to the event.
 		require.Nil(t, event.UserMetadata)
 	})
 
@@ -367,7 +368,7 @@ func TestCommandProtocolMessage(t *testing.T) {
 
 		_, err = tc.handler.handleCommand(context.Background(), command, msgs)
 		require.NoError(t, err,
-			"delivering a acceptance message to an update in the sent state should succeed")
+			"delivering an acceptance message to an update in the sent state should succeed")
 		require.Nil(t, tc.handler.workflowTaskFailedCause)
 	})
 }

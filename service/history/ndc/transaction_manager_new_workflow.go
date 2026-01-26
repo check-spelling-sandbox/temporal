@@ -75,7 +75,7 @@ func (r *nDCTransactionMgrForNewWorkflowImpl) dispatchForNewWorkflow(
 	}
 
 	if currentRunID == "" {
-		// current record does not exists
+		// current record doesn't exist
 		return r.executeTransaction(
 			ctx,
 			nDCTransactionPolicyCreateAsCurrent,
@@ -167,7 +167,7 @@ func (r *nDCTransactionMgrForNewWorkflowImpl) createAsCurrent(
 		)
 	}
 
-	// current workflow does not exists, create as brand new
+	// current workflow doesn't exist, create as brand new
 	createMode := persistence.CreateWorkflowModeBrandNew
 	prevRunID := ""
 	prevLastWriteVersion := int64(0)

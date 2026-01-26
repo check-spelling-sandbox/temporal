@@ -107,7 +107,7 @@ func (m *sqlExecutionStore) createWorkflowExecutionTx(
 	switch request.Mode {
 	case p.CreateWorkflowModeBrandNew:
 		if currentRow == nil {
-			// current row does not exists, suits the create mode
+			// current row doesn't exist, suits the create mode
 		} else {
 			if currentRow.RunID.String() != request.PreviousRunID {
 				return nil, m.extractCurrentWorkflowConflictError(

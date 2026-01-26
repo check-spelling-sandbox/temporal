@@ -12,7 +12,7 @@ import (
 
 var (
 	// ErrInvalidMembershipExpiry is used when upserting new cluster membership with an invalid duration
-	ErrInvalidMembershipExpiry = errors.New("membershipExpiry duration should be atleast 1 second")
+	ErrInvalidMembershipExpiry = errors.New("membershipExpiry duration should be at least 1 second")
 
 	// ErrIncompleteMembershipUpsert is used when upserting new cluster membership with missing fields
 	ErrIncompleteMembershipUpsert = errors.New("membership upserts require all fields")

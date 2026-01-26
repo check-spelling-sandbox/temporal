@@ -181,7 +181,7 @@ func (t *taskPQ) Pop() any {
 }
 
 // Calls pred on each task. If it returns true, call post on the task and remove it
-// from the queue, otherwise keep it.
+// from the queue; otherwise, keep it.
 // pred and post must not make any other calls on taskPQ until ForEachTask returns!
 func (t *taskPQ) ForEachTask(pred func(*internalTask) bool, post func(*internalTask)) {
 	t.heap = slices.DeleteFunc(t.heap, func(task *internalTask) bool {
@@ -339,7 +339,7 @@ func (d *matcherData) MatchTaskImmediately(task *internalTask) (canSyncMatch, go
 	if !d.isBacklogNegligible() {
 		// To ensure better dispatch ordering, we block sync match when a significant backlog is present.
 		// Note that this check does not make a noticeable difference for history tasks, as they do not wait for a
-		// poller to become available. In presence of a backlog the chance of a poller being available when sync match
+		// poller to become available. In presence of a backlog, the chance of a poller being available when sync match
 		// request comes is almost zero.
 		// This check is mostly effective for the sync match requests that come from child partitions for spooled tasks.
 		return false, false
@@ -414,7 +414,7 @@ func (d *matcherData) findMatch(allowForwarding bool) (*internalTask, *waitingPo
 				continue
 			} else if mp := poller.minPriority(); mp > 0 && task.effectivePriority > effectivePriorityFactor*mp {
 				// Note the ">" above: "min" priority is a numeric max.
-				// Also note: this condition will be false for draining tasks since we artifically boost
+				// Also note: this condition will be false for draining tasks since we artificially boost
 				// their priority above "1". that's inaccurate but it's just a temporary situation.
 				continue
 			}

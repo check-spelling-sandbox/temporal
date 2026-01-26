@@ -94,7 +94,7 @@ type (
 		GetCurrentExecution(ctx context.Context, request *persistence.GetCurrentExecutionRequest) (*persistence.GetCurrentExecutionResponse, error)
 		GetWorkflowExecution(ctx context.Context, request *persistence.GetWorkflowExecutionRequest) (*persistence.GetWorkflowExecutionResponse, error)
 		// DeleteWorkflowExecution add task to delete visibility, current workflow execution, and deletes workflow execution.
-		// If branchToken != nil, then delete history also, otherwise leave history.
+		// If branchToken != nil, then delete history also; otherwise, leave history.
 		DeleteWorkflowExecution(ctx context.Context, workflowKey definition.WorkflowKey, archetypeID chasm.ArchetypeID, branchToken []byte, closeExecutionVisibilityTaskID int64, workflowCloseTime time.Time, stage *tasks.DeleteWorkflowExecutionStage) error
 
 		GetCachedWorkflowContext(ctx context.Context, namespaceID namespace.ID, execution *commonpb.WorkflowExecution, lockPriority locks.Priority) (WorkflowContext, ReleaseWorkflowContextFunc, error)

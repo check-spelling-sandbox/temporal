@@ -1556,7 +1556,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestWorkflowRunTimeout_Fire() {
 
 	persistenceMutableState := s.createPersistenceMutableState(mutableState, completionEvent.GetEventId(), completionEvent.GetVersion())
 
-	for _, currrentTime := range []time.Time{
+	for _, currentTime := range []time.Time{
 		s.now.Add(expirationTime - 1*time.Second),
 		s.now.Add(expirationTime + 1*time.Second),
 	} {
@@ -1564,7 +1564,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestWorkflowRunTimeout_Fire() {
 		s.mockExecutionMgr.EXPECT().GetWorkflowExecution(gomock.Any(), gomock.Any()).Return(getWorkflowExecutionResponse, nil)
 		s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).Return(tests.UpdateWorkflowExecutionResponse, nil)
 
-		s.timeSource.Update(currrentTime)
+		s.timeSource.Update(currentTime)
 		resp := s.timerQueueActiveTaskExecutor.Execute(context.Background(), s.newTaskExecutable(timerTask))
 		s.NoError(resp.ExecutionErr)
 
@@ -1867,7 +1867,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestWorkflowExecutionTimeout_Noop() 
 	timerTask := &tasks.WorkflowExecutionTimeoutTask{
 		NamespaceID:         s.namespaceID.String(),
 		WorkflowID:          execution.GetWorkflowId(),
-		FirstRunID:          uuid.NewString(), // does not match the firsrt runID of the execution
+		FirstRunID:          uuid.NewString(), // does not match the first runID of the execution
 		VisibilityTimestamp: s.now,
 		TaskID:              s.mustGenerateTaskID(),
 	}
@@ -2203,7 +2203,7 @@ func (s *timerQueueActiveTaskExecutorSuite) TestExecuteStateMachineTimerTask_Exe
 		Version:             2,
 	}
 
-	// change now to a value earilier than task's visibility timestamp to test the case where system wall clock go backwards.
+	// change now to a value earlier than task's visibility timestamp to test the case where system wall clock go backwards.
 	s.timeSource.Update(s.now.Add(-30 * time.Minute))
 
 	//nolint:revive // unchecked-type-assertion

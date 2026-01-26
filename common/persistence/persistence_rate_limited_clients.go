@@ -828,7 +828,7 @@ func (p *executionRateLimitedPersistenceClient) ReadRawHistoryBranch(
 	return response, err
 }
 
-// ForkHistoryBranch forks a new branch from a old branch
+// ForkHistoryBranch forks a new branch from an old branch
 func (p *executionRateLimitedPersistenceClient) ForkHistoryBranch(
 	ctx context.Context,
 	request *ForkHistoryBranchRequest,

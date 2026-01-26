@@ -3,6 +3,7 @@ package tdbg
 import (
 	"encoding/base64"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -57,7 +58,7 @@ func AdminDecodeProto(c *cli.Context) error {
 	}
 
 	if protoData == nil {
-		return fmt.Errorf("missing required parameter data flag")
+		return errors.New("missing required parameter data flag")
 	}
 
 	messageType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(protoType))
@@ -98,7 +99,7 @@ func AdminDecodeBase64(c *cli.Context) error {
 	}
 
 	if base64Data == "" {
-		return fmt.Errorf("no data flag is specified")
+		return errors.New("no data flag is specified")
 	}
 
 	data, err := base64.StdEncoding.DecodeString(base64Data)

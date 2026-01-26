@@ -33,7 +33,7 @@ var (
 
 var _ ExecutionManager = (*executionManagerImpl)(nil)
 
-// ForkHistoryBranch forks a new branch from a old branch
+// ForkHistoryBranch forks a new branch from an old branch
 func (m *executionManagerImpl) ForkHistoryBranch(
 	ctx context.Context,
 	request *ForkHistoryBranchRequest,
@@ -54,7 +54,7 @@ func (m *executionManagerImpl) ForkHistoryBranch(
 
 	beginNodeID := GetBeginNodeID(forkBranch)
 	if beginNodeID >= request.ForkNodeID {
-		// this is the case that new branch's ancestors doesn't include the forking branch
+		// when the new branch's ancestors doesn't include the forking branch
 		for _, br := range forkBranch.Ancestors {
 			if br.GetEndNodeId() >= request.ForkNodeID {
 				newAncestors = append(newAncestors, &persistencespb.HistoryBranchRange{
@@ -68,7 +68,7 @@ func (m *executionManagerImpl) ForkHistoryBranch(
 			}
 		}
 	} else {
-		// this is the case the new branch will inherit all ancestors from forking branch
+		// when the new branch will inherit all ancestors from forking branch
 		newAncestors = forkBranch.Ancestors
 		newAncestors = append(newAncestors, &persistencespb.HistoryBranchRange{
 			BranchId:    forkBranch.GetBranchId(),
@@ -146,7 +146,7 @@ func (m *executionManagerImpl) DeleteHistoryBranch(
 		BeginNodeId: GetBeginNodeID(branch),
 	})
 
-	// Get the history tree containing the branch to be delelted,
+	// Get the history tree containing the branch to be deleted,
 	// so we know if any part of the target branch is referenced by other branches.
 	historyTreeResp, err := m.persistence.GetHistoryTreeContainingBranch(ctx, &InternalGetHistoryTreeContainingBranchRequest{
 		BranchToken: request.BranchToken,
@@ -353,7 +353,7 @@ func (m *executionManagerImpl) serializeAppendHistoryNodesRequest(
 		}
 		if e.EventId != lastID+1 {
 			return nil, &InvalidPersistenceRequestError{
-				Msg: "event ID must be continous",
+				Msg: "event ID must be continuous",
 			}
 		}
 		lastID++

@@ -69,7 +69,7 @@ func validateFairnessWeightUpdate(
 		}
 		if err := priorities.ValidateFairnessWeight(w); err != nil {
 			return serviceerror.NewInvalidArgumentf(
-				"invalid fairness weight weight for key %q: %v", k, err,
+				"invalid fairness weight for key %q: %v", k, err,
 			)
 		}
 	}

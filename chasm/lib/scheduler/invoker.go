@@ -27,7 +27,7 @@ func (i *Invoker) LifecycleState(ctx chasm.Context) chasm.LifecycleState {
 	return chasm.LifecycleStateRunning
 }
 
-// NewInvoker returns an intialized Invoker component, which should
+// NewInvoker returns an initialized Invoker component, which should
 // be parented under a Scheduler root component.
 func NewInvoker(ctx chasm.MutableContext) *Invoker {
 	return &Invoker{
@@ -55,7 +55,7 @@ type processBufferResult struct {
 	// Number of buffered starts dropped due to overlap policy during processing.
 	overlapSkipped int64
 
-	// Nunmber of buffered starts dropped from missing the catchup window.
+	// Number of buffered starts dropped from missing the catchup window.
 	missedCatchupWindow int64
 }
 

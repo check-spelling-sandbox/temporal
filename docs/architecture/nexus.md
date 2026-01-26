@@ -74,7 +74,7 @@ To enable Nexus in your deployment:
     component.nexusoperations.callback.endpoint.template:
       # The URL must be publicly accessible if the callback is meant to be called by external services.
       # When using Nexus for cross namespace calls, the URL's host is irrelevant as the address is resolved using
-      # membership. The URL is a Go template that interpolates the `NamepaceName` and `NamespaceID` variables.
+      # membership. The URL is a Go template that interpolates the `NamespaceName` and `NamespaceID` variables.
       - value: https://$PUBLIC_URL:7243/namespaces/{{.NamespaceName}}/nexus/callback
     component.callbacks.allowedAddresses:
       # This list is a security mechanism for limiting which callback URLs are accepted by the server.
@@ -134,7 +134,7 @@ setups. Replication will be implemented at a later time.⚠️
 
 ## Outbound Task Queue
 
-The outbound task queue is a task queue that is internal to the history service. Similarly to the the [transfer task
+The outbound task queue is a task queue that is internal to the history service. Similarly to the [transfer task
 queue](./history-service.md#transfer-task-queue), the outbound queue is a sharded "immediate" queue. The difference
 between the transfer queue and the outbound queue is that outbound tasks target external destinations, meaning that
 tasks are allowed to make long running (typically up to 10 seconds) external requests. The outbound queue groups tasks
@@ -156,7 +156,7 @@ The outbound queue reader can be disabled dynamically by setting `history.outbou
 
 ### Scheduler
 
-The outound queue processor uses the [`GroupByScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/group_by_scheduler.go#L49) to group tasks into a per source namespace and destination [`DynamicWorkerPoolScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/dynamic_worker_pool_scheduler.go#L47).
+The outbound queue processor uses the [`GroupByScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/group_by_scheduler.go#L49) to group tasks into a per source namespace and destination [`DynamicWorkerPoolScheduler`](https://github.com/temporalio/temporal/blob/a8799ae43286f7dddf3147439bc2129f25065456/common/tasks/dynamic_worker_pool_scheduler.go#L47).
 
 Each task within its group goes through an in-memory buffer, a concurrency limiter, a rate limiter, and a circuit breaker.
 
@@ -210,7 +210,7 @@ The per-group rate limiter kicks in as soon as a task starts executing. The rate
 
 **Relevant metrics**:
 
-- `rate_limited_task_runnable_wait_time` - a histogram representing the time a task spends waiting for the rate limiter
+- `rate_limited_task_runnable_wait_time` - a histogram representing the time that a task spends waiting for the rate limiter
 
 #### Circuit Breaker
 
@@ -251,7 +251,7 @@ Machine framework (docs TBD).
 
 The
 [Operation](https://github.com/temporalio/temporal/blob/a0fdea5319be5f1631d7e2b0f6f06c38dae3d413/components/nexusoperations/statemachine.go#L65)
-state machine manages the lifetime of an Operation the StartOperation request.
+state machine manages the lifetime of an Operation for the StartOperation request.
 
 The state machine transitions between these states (as defined in code):
 
@@ -312,7 +312,7 @@ stateDiagram-v2
     Failed --> [*]
 ```
 
-Cancelations are continously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
+Cancellations are continuously retried using a [configurable retry policy][nexus-retry-policy] until they succeed,
 permanently fail, or the operation times out.
 
 ### Task Executors
@@ -350,7 +350,7 @@ retried or continues-as-new.
 Similarly to Nexus Operations, callbacks are implemented via a hierarchical state machine and a set of executors, which
 are located in [the components directory](../../components/callbacks).
 
-Callbacks are continously retried using a [configurable retry policy][callback-retry-policy] until they succeed,
+Callbacks are continuously retried using a [configurable retry policy][callback-retry-policy] until they succeed,
 permanently fail, or the workflow's retention period expires.
 
 The timeout for making a single callback HTTP call is configurable via: `component.callbacks.request.timeout`

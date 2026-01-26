@@ -460,7 +460,7 @@ func (s *taskRefresherSuite) TestRefreshWorkflowTaskTasks() {
 	}
 }
 
-// This test asserts that the workflow tasks tasks are not refreshed when the workflow status is paused.
+// This test asserts that the workflow tasks are not refreshed when the workflow status is paused.
 func (s *taskRefresherSuite) TestRefreshWorkflowTaskTasks_WhenPaused() {
 	mutableStateRecord := &persistencespb.WorkflowMutableState{
 		ExecutionInfo: &persistencespb.WorkflowExecutionInfo{

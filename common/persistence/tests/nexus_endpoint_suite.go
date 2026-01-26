@@ -301,7 +301,7 @@ func testDeleteNexusEndpointExpectedErrors(t *testing.T, store persistence.Nexus
 		})
 		require.ErrorContains(t, err, "nexus endpoints table version mismatch")
 
-		// Delete non-existent endpoint
+		// Delete nonexistent endpoint
 		err = store.DeleteNexusEndpoint(ctx, &persistence.DeleteNexusEndpointRequest{
 			ID:                    uuid.NewString(),
 			LastKnownTableVersion: tableVersion.Load(),

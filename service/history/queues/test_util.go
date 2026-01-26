@@ -27,7 +27,7 @@ func NewRandomKeyInRange(
 	r Range,
 ) tasks.Key {
 	if r.IsEmpty() {
-		panic("can not create key in range for an empty range")
+		panic("cannot create key in range for an empty range")
 	}
 
 	minFireTimeUnixNano := r.InclusiveMin.FireTime.UnixNano()

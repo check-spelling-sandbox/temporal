@@ -72,7 +72,7 @@ s3://<bucket-name>/<namespace-id>/
                 closeTimeout/2020-01-21T16:16:11Z/<run-id>
 ```
 
-Enable AWS SDK Logging with config parameter `logLevel`. For example enable debug logging with `logLevel: 4096`. Possbile Values:
+Enable AWS SDK Logging with config parameter `logLevel`. For example enable debug logging with `logLevel: 4096`. Possible Values:
 * LogOff = 0 = 0x0
 * LogDebug = 4096 = 0x1000
 * LogDebugWithSigning = 4097 = 0x1001
@@ -92,8 +92,8 @@ Your s3 user must have at least the following permissions:
 * s3:PutObject
 
 ## Using localstack for local development
-1. Install awscli from [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-2. Install localstack from [here](https://github.com/localstack/localstack#installing)
+1. Install [awscli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+2. Install [localstack](https://github.com/localstack/localstack#installing)
 3. Launch localstack with `SERVICES=s3 localstack start`
 4. Create a bucket using `aws --endpoint-url=http://localhost:4566 s3 mb s3://temporal-development` 
 5. Launch the server with the localstack s3 environment config`--env development-cass-s3 start`

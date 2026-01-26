@@ -2387,10 +2387,10 @@ func convertClusterReplicationConfigToProto(
 }
 
 func convertFailoverHistoryToReplicationProto(
-	failoverHistoy []*persistencespb.FailoverStatus,
+	failoverHistory []*persistencespb.FailoverStatus,
 ) []*replicationpb.FailoverStatus {
 	var replicationProto []*replicationpb.FailoverStatus
-	for _, failoverStatus := range failoverHistoy {
+	for _, failoverStatus := range failoverHistory {
 		replicationProto = append(replicationProto, &replicationpb.FailoverStatus{
 			FailoverTime:    failoverStatus.GetFailoverTime(),
 			FailoverVersion: failoverStatus.GetFailoverVersion(),

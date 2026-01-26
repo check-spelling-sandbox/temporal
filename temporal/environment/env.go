@@ -43,7 +43,7 @@ func lookupLocalhostIP(domain string) string {
 	// unless there are only ipv6 addresses available
 	ips, err := net.LookupIP(domain)
 	if err != nil || len(ips) == 0 {
-		// fallback to default instead of error
+		// fall back to default instead of error
 		return localhostIPDefault
 	}
 	for _, ip := range ips {

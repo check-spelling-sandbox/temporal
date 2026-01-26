@@ -5,7 +5,6 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	enumspb "go.temporal.io/api/enums/v1"
 	"go.temporal.io/api/serviceerror"
@@ -46,7 +45,7 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 			PageSize:      1,
 			NextPageToken: []byte("some invalid token"),
 		})
-		assert.ErrorIs(t, err, persistence.ErrInvalidReadQueueMessagesNextPageToken)
+		require.ErrorIs(t, err, persistence.ErrInvalidReadQueueMessagesNextPageToken)
 	})
 	t.Run("TestNonPositivePageSize", func(t *testing.T) {
 		t.Parallel()
@@ -57,18 +56,18 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 			PageSize:      0,
 			NextPageToken: nil,
 		})
-		assert.ErrorIs(t, err, persistence.ErrNonPositiveReadQueueMessagesPageSize)
+		require.ErrorIs(t, err, persistence.ErrNonPositiveReadQueueMessagesPageSize)
 	})
 	t.Run("TestEnqueueMessageToNonExistentQueue", func(t *testing.T) {
 		t.Parallel()
 
 		_, err := q.EnqueueMessage(ctx, &persistence.InternalEnqueueMessageRequest{
 			QueueType: queueType,
-			QueueName: "non-existent-queue",
+			QueueName: "nonexistent-queue",
 		})
-		assert.ErrorAs(t, err, new(*serviceerror.NotFound))
-		assert.ErrorContains(t, err, "non-existent-queue")
-		assert.ErrorContains(t, err, strconv.Itoa(int(queueType)))
+		require.ErrorAs(t, err, new(*serviceerror.NotFound))
+		require.ErrorContains(t, err, "nonexistent-queue")
+		require.ErrorContains(t, err, strconv.Itoa(int(queueType)))
 	})
 	t.Run("TestCreateQueueTwice", func(t *testing.T) {
 		t.Parallel()
@@ -78,9 +77,9 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 			QueueName: queueName,
 		})
 		require.Error(t, err)
-		assert.ErrorIs(t, err, persistence.ErrQueueAlreadyExists)
-		assert.ErrorContains(t, err, strconv.Itoa(int(queueType)))
-		assert.ErrorContains(t, err, queueName)
+		require.ErrorIs(t, err, persistence.ErrQueueAlreadyExists)
+		require.ErrorContains(t, err, strconv.Itoa(int(queueType)))
+		require.ErrorContains(t, err, queueName)
 	})
 	t.Run("InvalidEncodingForQueueMessage", func(t *testing.T) {
 		queueType := persistence.QueueTypeHistoryNormal
@@ -100,7 +99,7 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 			PageSize:  10,
 		})
 		require.Error(t, err)
-		assert.ErrorAs(t, err, new(*serialization.UnknownEncodingTypeError))
+		require.ErrorAs(t, err, new(*serialization.UnknownEncodingTypeError))
 	})
 	t.Run("InvalidEncodingForQueueMetadata", func(t *testing.T) {
 		queueType := persistence.QueueTypeHistoryNormal
@@ -120,7 +119,7 @@ func RunQueueV2TestSuite(t *testing.T, q persistence.QueueV2) {
 			PageSize:  10,
 		})
 		require.Error(t, err)
-		assert.ErrorAs(t, err, new(*serialization.UnknownEncodingTypeError))
+		require.ErrorAs(t, err, new(*serialization.UnknownEncodingTypeError))
 	})
 	t.Run("TestRangeDeleteMessages", func(t *testing.T) {
 		t.Parallel()
@@ -146,7 +145,7 @@ func testHappyPath(
 		NextPageToken: nil,
 	})
 	require.NoError(t, err)
-	assert.Equal(t, 0, len(response.Messages))
+	require.Empty(t, response.Messages)
 
 	encodingType := enumspb.ENCODING_TYPE_JSON
 	_, err = persistencetest.EnqueueMessage(ctx, queue, queueType, queueName)
@@ -165,10 +164,10 @@ func testHappyPath(
 	})
 	require.NoError(t, err)
 	require.Len(t, response.Messages, 1)
-	assert.Equal(t, int64(persistence.FirstQueueMessageID), response.Messages[0].MetaData.ID)
-	assert.Equal(t, []byte("1"), response.Messages[0].Data.Data)
-	assert.Equal(t, encodingType, response.Messages[0].Data.EncodingType)
-	assert.NotNil(t, response.NextPageToken)
+	require.Equal(t, int64(persistence.FirstQueueMessageID), response.Messages[0].MetaData.ID)
+	require.Equal(t, []byte("1"), response.Messages[0].Data.Data)
+	require.Equal(t, encodingType, response.Messages[0].Data.EncodingType)
+	require.NotNil(t, response.NextPageToken)
 
 	response, err = queue.ReadMessages(ctx, &persistence.InternalReadMessagesRequest{
 		QueueType:     queueType,
@@ -178,9 +177,9 @@ func testHappyPath(
 	})
 	require.NoError(t, err)
 	require.Len(t, response.Messages, 1)
-	assert.Equal(t, int64(persistence.FirstQueueMessageID+1), response.Messages[0].MetaData.ID)
-	assert.Equal(t, []byte("2"), response.Messages[0].Data.Data)
-	assert.Equal(t, encodingType, response.Messages[0].Data.EncodingType)
+	require.Equal(t, int64(persistence.FirstQueueMessageID+1), response.Messages[0].MetaData.ID)
+	require.Equal(t, []byte("2"), response.Messages[0].Data.Data)
+	require.Equal(t, encodingType, response.Messages[0].Data.EncodingType)
 
 	response, err = queue.ReadMessages(ctx, &persistence.InternalReadMessagesRequest{
 		QueueType:     queueType,
@@ -189,8 +188,8 @@ func testHappyPath(
 		NextPageToken: response.NextPageToken,
 	})
 	require.NoError(t, err)
-	assert.Empty(t, response.Messages)
-	assert.Nil(t, response.NextPageToken)
+	require.Empty(t, response.Messages)
+	require.Nil(t, response.NextPageToken)
 }
 
 func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistence.QueueV2) {
@@ -205,7 +204,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 			QueueType: queueType,
 			QueueName: queueName,
 		})
-		assert.ErrorAs(t, err, new(*serviceerror.NotFound))
+		require.ErrorAs(t, err, new(*serviceerror.NotFound))
 	})
 
 	t.Run("InvalidMaxMessageID", func(t *testing.T) {
@@ -226,9 +225,9 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 			},
 		})
 		require.Error(t, err)
-		assert.ErrorIs(t, err, persistence.ErrInvalidQueueRangeDeleteMaxMessageID)
-		assert.ErrorContains(t, err, strconv.Itoa(persistence.FirstQueueMessageID-1))
-		assert.ErrorContains(t, err, strconv.Itoa(persistence.FirstQueueMessageID))
+		require.ErrorIs(t, err, persistence.ErrInvalidQueueRangeDeleteMaxMessageID)
+		require.ErrorContains(t, err, strconv.Itoa(persistence.FirstQueueMessageID-1))
+		require.ErrorContains(t, err, strconv.Itoa(persistence.FirstQueueMessageID))
 	})
 
 	t.Run("HappyPath", func(t *testing.T) {
@@ -253,7 +252,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 			},
 		})
 		require.NoError(t, err)
-		assert.Equal(t, int64(2), resp.MessagesDeleted)
+		require.Equal(t, int64(2), resp.MessagesDeleted)
 		response, err := queue.ReadMessages(ctx, &persistence.InternalReadMessagesRequest{
 			QueueType: queueType,
 			QueueName: queueName,
@@ -261,7 +260,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 		})
 		require.NoError(t, err)
 		require.Len(t, response.Messages, 1)
-		assert.Equal(t, int64(persistence.FirstQueueMessageID+2), response.Messages[0].MetaData.ID)
+		require.Equal(t, int64(persistence.FirstQueueMessageID+2), response.Messages[0].MetaData.ID)
 	})
 
 	t.Run("DeleteAllAndReEnqueue", func(t *testing.T) {
@@ -276,7 +275,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 		require.NoError(t, err)
 		msg, err := persistencetest.EnqueueMessage(ctx, queue, queueType, queueName)
 		require.NoError(t, err)
-		assert.Equal(t, int64(persistence.FirstQueueMessageID), msg.Metadata.ID)
+		require.Equal(t, int64(persistence.FirstQueueMessageID), msg.Metadata.ID)
 		resp, err := queue.RangeDeleteMessages(ctx, &persistence.InternalRangeDeleteMessagesRequest{
 			QueueType: queueType,
 			QueueName: queueName,
@@ -285,10 +284,10 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 			},
 		})
 		require.NoError(t, err)
-		assert.Equal(t, int64(1), resp.MessagesDeleted)
+		require.Equal(t, int64(1), resp.MessagesDeleted)
 		msg, err = persistencetest.EnqueueMessage(ctx, queue, queueType, queueName)
 		require.NoError(t, err)
-		assert.Equal(t, int64(persistence.FirstQueueMessageID+1), msg.Metadata.ID, "Even though all"+
+		require.Equal(t, int64(persistence.FirstQueueMessageID+1), msg.Metadata.ID, "Even though all"+
 			" messages are deleted, the next message ID should still be incremented")
 	})
 
@@ -305,7 +304,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 		for i := 0; i < 3; i++ {
 			msg, err := persistencetest.EnqueueMessage(ctx, queue, queueType, queueName)
 			require.NoError(t, err)
-			assert.Equal(t, int64(persistence.FirstQueueMessageID+i), msg.Metadata.ID)
+			require.Equal(t, int64(persistence.FirstQueueMessageID+i), msg.Metadata.ID)
 		}
 		resp, err := queue.RangeDeleteMessages(ctx, &persistence.InternalRangeDeleteMessagesRequest{
 			QueueType: queueType,
@@ -370,7 +369,7 @@ func testRangeDeleteMessages(ctx context.Context, t *testing.T, queue persistenc
 		})
 		require.NoError(t, err)
 		require.Len(t, response.Messages, 1)
-		assert.Equal(t, int64(persistence.FirstQueueMessageID+1), response.Messages[0].MetaData.ID)
+		require.Equal(t, int64(persistence.FirstQueueMessageID+1), response.Messages[0].MetaData.ID)
 	})
 }
 
@@ -517,7 +516,7 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(0), queue.MessageCount)
+				require.Equal(t, int64(0), queue.MessageCount)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -534,8 +533,8 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(1), queue.MessageCount)
-				assert.Equal(t, int64(0), queue.LastMessageID)
+				require.Equal(t, int64(1), queue.MessageCount)
+				require.Equal(t, int64(0), queue.LastMessageID)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -552,8 +551,8 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(2), queue.MessageCount)
-				assert.Equal(t, int64(1), queue.LastMessageID)
+				require.Equal(t, int64(2), queue.MessageCount)
+				require.Equal(t, int64(1), queue.LastMessageID)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -576,8 +575,8 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(1), queue.MessageCount)
-				assert.Equal(t, int64(1), queue.LastMessageID)
+				require.Equal(t, int64(1), queue.MessageCount)
+				require.Equal(t, int64(1), queue.LastMessageID)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -600,8 +599,8 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(0), queue.MessageCount)
-				assert.Equal(t, int64(1), queue.LastMessageID)
+				require.Equal(t, int64(0), queue.MessageCount)
+				require.Equal(t, int64(1), queue.LastMessageID)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -618,7 +617,7 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 		for _, queue := range response.Queues {
 			queueNames = append(queueNames, queue.QueueName)
 			if queue.QueueName == queueName {
-				assert.Equal(t, int64(1), queue.MessageCount)
+				require.Equal(t, int64(1), queue.MessageCount)
 			}
 		}
 		require.Contains(t, queueNames, queueName)
@@ -643,6 +642,6 @@ func testListQueues(ctx context.Context, t *testing.T, queue persistence.QueueV2
 			PageSize:      1,
 			NextPageToken: []byte("some invalid token"),
 		})
-		assert.Error(t, err)
+		require.Error(t, err)
 	})
 }

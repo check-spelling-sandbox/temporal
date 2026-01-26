@@ -136,7 +136,7 @@ func (s *workflowSuite) TestHappensAfter_SameVersion_SmallerTaskID() {
 	))
 }
 
-func (s *workflowSuite) TestHappensAfter_SameVersion_LatrgerTaskID() {
+func (s *workflowSuite) TestHappensAfter_SameVersion_LargerTaskID() {
 	thisLastWriteVersion := int64(0)
 	thisLastRunningClock := int64(100)
 	thatLastWriteVersion := thisLastWriteVersion

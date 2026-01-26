@@ -20,7 +20,7 @@ to create schema in your `cassandra` instance.
 - You should see an executable `temporal-cassandra-tool`
 
 ### Do one time database creation and schema setup for a new cluster
-This uses Cassandra's SimpleStratagey for replication. For production, we recommend using a replication factor of 3 with NetworkTopologyStrategy.
+This uses Cassandra's SimpleStrategy for replication. For production, we recommend using a replication factor of 3 with NetworkTopologyStrategy.
 
 ```
 temporal-cassandra-tool --ep $CASSANDRA_SEEDS create -k $KEYSPACE --rf $RF

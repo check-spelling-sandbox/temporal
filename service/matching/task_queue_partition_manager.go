@@ -40,7 +40,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-var errDefaultQueueNotInit = serviceerror.NewInternal("defaultQueue is not initializaed")
+var errDefaultQueueNotInit = serviceerror.NewInternal("defaultQueue is not initialized")
 
 const (
 	defaultTaskDispatchRPS    = 100000.0
@@ -476,7 +476,7 @@ func (pm *taskQueuePartitionManagerImpl) PollTask(
 				}
 			}
 
-			// use version set if found, otherwise assume user is using new API
+			// use version set if found; otherwise, assume user is using new API
 			if versionSet != "" {
 				versionSetUsed = true
 				dbq, err = pm.getVersionedQueue(ctx, versionSet, "", nil, true)
@@ -1702,7 +1702,7 @@ func (pm *taskQueuePartitionManagerImpl) getPhysicalQueuesForAdd(
 	var versionSet string
 	switch dir := directive.GetBuildId().(type) {
 	case *taskqueuespb.TaskVersionDirective_UseAssignmentRules:
-		// Need to assign build ID. Assignment rules take precedence, fallback to version sets if no matching rule is found
+		// Need to assign build ID. Assignment rules take precedence, fall back to version sets if no matching rule is found
 		if len(data.GetAssignmentRules()) > 0 {
 			buildId = FindAssignmentBuildId(data.GetAssignmentRules(), runId)
 		}

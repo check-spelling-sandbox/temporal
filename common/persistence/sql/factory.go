@@ -192,7 +192,7 @@ func (c *DbConn) Get() (sqlplugin.DB, error) {
 	return c, nil
 }
 
-// ForceClose ignores reference counts and shutsdown the underlying connection pool
+// ForceClose ignores reference counts and shuts down the underlying connection pool
 func (c *DbConn) ForceClose() {
 	c.Lock()
 	defer c.Unlock()

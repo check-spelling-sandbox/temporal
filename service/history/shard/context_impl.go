@@ -1769,7 +1769,7 @@ func (s *ContextImpl) updateHandoverNamespacePendingTaskID() {
 func (s *ContextImpl) notifyReplicationQueueProcessor(taskID int64) {
 	// Replication ack level won't exceed the max taskID it received via task notification.
 	// Since here we want it's ack level to advance to at least the input taskID, we need to
-	// trigger an fake notification.
+	// trigger a fake notification.
 
 	cancelledCtx, cancel := context.WithCancel(context.Background())
 	cancel()
@@ -1993,7 +1993,7 @@ func (s *ContextImpl) acquireShard() {
 
 		// NOTE: engine is created & started before setting shard state to acquired.
 		// -> namespace handover callback is registered & called before shard is able to serve traffic
-		// -> information for handover namespace is recorded before shard can servce traffic
+		// -> information for handover namespace is recorded before shard can service traffic
 		// -> upon shard reload, no history api or task can go through for ns in handover state
 		err = s.transition(contextRequestAcquired{engine: engine})
 
@@ -2038,7 +2038,7 @@ func (s *ContextImpl) acquireShard() {
 	}
 	err := backoff.ThrottleRetry(op, policy, acquireShardRetryable)
 	if err != nil {
-		// We got an non-retryable error, e.g. ShardOwnershipLostError
+		// We got a non-retryable error, e.g. ShardOwnershipLostError
 		s.contextTaggedLogger.Error("Couldn't acquire shard", tag.Error(err))
 
 		reason := stopReasonUnspecified
@@ -2153,7 +2153,7 @@ func newContext(
 func (s *ContextImpl) initLastUpdatesTime() {
 	// We need to set lastUpdate time to "now" - "wait between shard updates time" +  "first update interval".
 	// This is done to make sure that first shard update` will happen around "first update interval" after "now".
-	// The idea is to allow queue to persist even in the case of (relativly) constantly
+	// The idea is to allow queue to persist even in the case of (relatively) constantly
 	// moving shards between hosts.
 	// Note: it still may prevent queue from progressing if shard moving rate is too high
 	lastUpdated := s.timeSource.Now()

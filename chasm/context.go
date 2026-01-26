@@ -17,7 +17,7 @@ type Context interface {
 	// Now returns the current time in the context of the given component.
 	// In a context of a transaction, this time must be used to allow for framework support of pause and time skipping.
 	Now(Component) time.Time
-	// ExecutionKey returns the execution key for the execution the context is operating on.
+	// ExecutionKey returns the execution key for the execution on which the context is operating.
 	ExecutionKey() ExecutionKey
 	// StateTransitionCount returns the number of create/update transactions in the history of this execution.
 	StateTransitionCount() int64

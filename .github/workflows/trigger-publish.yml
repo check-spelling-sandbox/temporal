@@ -30,7 +30,7 @@ jobs:
           app_id: ${{ secrets.TEMPORAL_CICD_APP_ID }}
           private_key: ${{ secrets.TEMPORAL_CICD_PRIVATE_KEY }}
 
-      - name: Dispatch docker builds Github Action
+      - name: Dispatch docker builds GitHub Action
         if: ${{ vars.SHOULD_TRIGGER_DOCKER_BUILD == 'true' }}
         env:
           PAT: ${{ steps.generate_token.outputs.token }}

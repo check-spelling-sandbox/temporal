@@ -109,7 +109,7 @@ func (tm *TaskMatcher) Offer(ctx context.Context, task *internalTask) (bool, err
 	if !tm.isBacklogNegligible() {
 		// To ensure better dispatch ordering, we block sync match when a significant backlog is present.
 		// Note that this check does not make a noticeable difference for history tasks, as they do not wait for a
-		// poller to become available. In presence of a backlog the chance of a poller being available when sync match
+		// poller to become available. In presence of a backlog, the chance of a poller being available when sync match
 		// request comes is almost zero.
 		// This check is mostly effective for the sync match requests that come from child partitions for spooled tasks.
 		return false, nil
@@ -255,7 +255,7 @@ func (tm *TaskMatcher) OfferQuery(ctx context.Context, task *internalTask) (*mat
 	return syncOfferTask(ctx, tm, task, tm.queryTaskC, tm.fwdr.ForwardQueryTask, true)
 }
 
-// OfferNexusTask either matchs a task to a local poller or forwards it if no local pollers available.
+// OfferNexusTask either matches a task to a local poller or forwards it if no local pollers available.
 // Local match is always attempted before forwarding. If local match occurs response and error are both nil, if
 // forwarding occurs then response or error is returned.
 func (tm *TaskMatcher) OfferNexusTask(ctx context.Context, task *internalTask) (*matchingservice.DispatchNexusTaskResponse, error) {
@@ -536,7 +536,7 @@ func (tm *TaskMatcher) isForwardingAllowed() bool {
 }
 
 // isBacklogNegligible returns true of the age of backlog is less than the threshold. Note that this relies on
-// MustOffer being called when there is a backlog, otherwise we'd not know.
+// MustOffer being called when there is a backlog; otherwise, we'd not know.
 func (tm *TaskMatcher) isBacklogNegligible() bool {
 	return tm.getBacklogAge() < tm.config.BacklogNegligibleAge()
 }

@@ -20,7 +20,7 @@ import (
 const (
 	// archivalQueuePersistenceMaxRPSRatio is the hard-coded ratio of archival queue persistence max RPS to the total
 	// persistence max RPS.
-	// In this case, the archival queue may not send requests at a rate higher than 15% of the global persistence max
+	// In this case, the archival queue may not send requests at a rate greater than 15% of the global persistence max
 	// RPS.
 	archivalQueuePersistenceMaxRPSRatio = 0.15
 )

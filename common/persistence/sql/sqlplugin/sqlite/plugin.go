@@ -69,7 +69,7 @@ func (p *plugin) CreateDB(
 	return db, nil
 }
 
-// createDBConnection creates a returns a reference to a logical connection to the
+// createDBConnection creates and returns a reference to a logical connection to the
 // underlying SQL database. The returned object is tied to a single
 // SQL database and the object can be used to perform CRUD operations on
 // the tables in the database.
@@ -109,7 +109,7 @@ func (p *plugin) createDBConnection(
 			_ = db.Close()
 			return nil, err
 		}
-	case cfg.ConnectAttributes["setup"] == "true": // file mode, optional setting to setup the schema
+	case cfg.ConnectAttributes["setup"] == "true": // file mode, optional setting to set up the schema
 		if err := p.setupSQLiteDatabase(cfg, db, logger); err != nil && !isTableExistsError(err) { // benign error indicating tables already exist
 			_ = db.Close()
 			return nil, err

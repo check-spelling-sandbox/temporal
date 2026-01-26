@@ -252,7 +252,7 @@ type (
 
 		ArchetypeID chasm.ArchetypeID
 
-		// workflow to be resetted
+		// workflow to be reset
 		ResetWorkflowSnapshot WorkflowSnapshot
 		ResetWorkflowEvents   []*WorkflowEvents
 
@@ -923,7 +923,7 @@ type (
 	CompleteForkBranchRequest struct {
 		// the new branch returned from ForkHistoryBranchRequest
 		BranchToken []byte
-		// true means the fork is success, will update the flag, otherwise will delete the new branch
+		// true means the fork is success, will update the flag; otherwise, will delete the new branch
 		Success bool
 		// The shard to update history branch data
 		ShardID *int
@@ -1157,7 +1157,7 @@ type (
 		// ReadRawHistoryBranch returns history node raw data for a branch ByBatch
 		// NOTE: this API should only be used by 3+DC
 		ReadRawHistoryBranch(ctx context.Context, request *ReadHistoryBranchRequest) (*ReadRawHistoryBranchResponse, error)
-		// ForkHistoryBranch forks a new branch from a old branch
+		// ForkHistoryBranch forks a new branch from an old branch
 		ForkHistoryBranch(ctx context.Context, request *ForkHistoryBranchRequest) (*ForkHistoryBranchResponse, error)
 		// DeleteHistoryBranch removes a branch
 		// If this is the last branch to delete, it will also remove the root node

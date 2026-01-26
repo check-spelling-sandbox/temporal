@@ -147,7 +147,7 @@ func buildCLI() *cli.App {
 				}
 
 				if c.IsSet("config-file") && (c.IsSet("config") || c.IsSet("env") || c.IsSet("zone") || c.IsSet("root")) {
-					return cli.Exit("ERROR: can not use --config, --env, --zone, or --root with --config-file", 1)
+					return cli.Exit("ERROR: cannot use --config, --env, --zone, or --root with --config-file", 1)
 				}
 				return nil
 			},

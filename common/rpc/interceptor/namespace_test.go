@@ -152,9 +152,9 @@ func (s *namespaceSuite) TestHistoryAPIMetrics() {
 func (s *namespaceSuite) TestGetNamespace() {
 	register := namespace.NewMockRegistry(gomock.NewController(s.T()))
 	register.EXPECT().GetNamespace(namespace.Name("exist")).Return(nil, nil)
-	register.EXPECT().GetNamespace(namespace.Name("nonexist")).Return(nil, errors.New("not found"))
+	register.EXPECT().GetNamespace(namespace.Name("nonexistent")).Return(nil, errors.New("not found"))
 	register.EXPECT().GetNamespaceName(namespace.ID("exist")).Return(namespace.Name("exist"), nil)
-	register.EXPECT().GetNamespaceName(namespace.ID("nonexist")).Return(namespace.EmptyName, errors.New("not found"))
+	register.EXPECT().GetNamespaceName(namespace.ID("nonexistent")).Return(namespace.EmptyName, errors.New("not found"))
 	testCases := []struct {
 		method        interface{}
 		namespaceName namespace.Name
@@ -164,7 +164,7 @@ func (s *namespaceSuite) TestGetNamespace() {
 			namespace.Name("exist"),
 		},
 		{
-			&workflowservice.DescribeNamespaceRequest{Namespace: "nonexist"},
+			&workflowservice.DescribeNamespaceRequest{Namespace: "nonexistent"},
 			namespace.EmptyName,
 		},
 		{
@@ -172,7 +172,7 @@ func (s *namespaceSuite) TestGetNamespace() {
 			namespace.Name("exist"),
 		},
 		{
-			&historyservice.DescribeMutableStateRequest{NamespaceId: "nonexist"},
+			&historyservice.DescribeMutableStateRequest{NamespaceId: "nonexistent"},
 			namespace.EmptyName,
 		},
 	}

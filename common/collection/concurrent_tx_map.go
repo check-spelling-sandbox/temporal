@@ -43,7 +43,7 @@ type (
 // NewShardedConcurrentTxMap returns an instance of ShardedConcurrentMap
 //
 // ShardedConcurrentMap is a thread safe map that maintains upto nShards
-// number of maps internally to allow nShards writers to be acive at the
+// number of maps internally to allow nShards writers to be active at the
 // same time. This map *does not* use re-entrant locks, so access to the
 // map during iterator can cause a dead lock.
 //
@@ -140,7 +140,7 @@ func (cmap *ShardedConcurrentTxMap) GetAndDo(key interface{}, fn ActionFunc) (in
 	return value, ok, err
 }
 
-// PutOrDo put the key value in the map, if key does not exists, otherwise, call fn with existing key and value
+// PutOrDo put the key value in the map, if key doesn't exist, otherwise, call fn with existing key and value
 // return (value, fn evaluated or not, error when evaluation fn)
 func (cmap *ShardedConcurrentTxMap) PutOrDo(key interface{}, value interface{}, fn ActionFunc) (interface{}, bool, error) {
 	shard := cmap.getShard(key)

@@ -24,7 +24,7 @@ func AdminListTaskQueueTasks(c *cli.Context, clientFactory ClientFactory) error 
 	}
 	tqType := enumspb.TaskQueueType(tlTypeInt)
 	if tqType == enumspb.TASK_QUEUE_TYPE_UNSPECIFIED {
-		return fmt.Errorf("missing Task Queue type")
+		return errors.New("missing Task Queue type")
 	}
 	minTaskID := c.Int64(FlagMinTaskID)
 	maxTaskID := c.Int64(FlagMaxTaskID)

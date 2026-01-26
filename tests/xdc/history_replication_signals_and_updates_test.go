@@ -38,7 +38,7 @@ import (
 )
 
 // This suite contains tests of scenarios in which conflicting histories arise during history replication. To do that we
-// need to create "split-brain" sitauations in which both clusters believe they are active, and to do that, we need to
+// need to create "split-brain" situations in which both clusters believe they are active, and to do that, we need to
 // control when history and namespace event replication tasks are executed. This is achieved using injection approaches
 // based on those in tests/xdc/history_replication_dlq_test.go.
 
@@ -1101,7 +1101,7 @@ func joinHandlers[T any](handlers ...func(task *workflowservice.PollWorkflowTask
 }
 
 // TestConflictResolutionGetResult creates a split-brain scenario in which both clusters believe they are active.
-// The test confirms that the workflow result can be retrievved if conflict resolution happens (CurrentBranchChange).
+// The test confirms that the workflow result can be retrieved if conflict resolution happens (CurrentBranchChange).
 func (s *hrsuTestSuite) TestConflictResolutionGetResult() {
 	t, ctx, cancel := s.startHrsuTest()
 	defer cancel()
@@ -1166,7 +1166,7 @@ func (s *hrsuTestSuite) TestConflictResolutionGetResult() {
 	t.cluster1.executeHistoryReplicationTasksUntil(enumspb.EVENT_TYPE_WORKFLOW_EXECUTION_SIGNALED)
 	s.EqualValues(t.cluster1.getHistory(ctx), t.cluster2.getHistory(ctx))
 
-	// Complete the workflow in cluster2. This will cause the workflow result to be sent to cluste1.
+	// Complete the workflow in cluster2. This will cause the workflow result to be sent to cluster1.
 	task, err := t.cluster2.testCluster.FrontendClient().PollWorkflowTaskQueue(ctx, &workflowservice.PollWorkflowTaskQueueRequest{
 		Namespace: t.tv.NamespaceName().String(),
 		TaskQueue: t.tv.TaskQueue(),

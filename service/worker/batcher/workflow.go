@@ -92,7 +92,7 @@ type (
 	taskResponse struct {
 		// the error result from processing the task (nil for success)
 		err error
-		// reference to the page the completed task belonged to
+		// reference to the page to which the completed task belonged
 		page *page
 	}
 )

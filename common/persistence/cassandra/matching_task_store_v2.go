@@ -126,7 +126,7 @@ func (d *matchingTaskStoreV2) GetTasks(
 		return nil, serviceerror.NewInternal("invalid GetTasks request on fair queue: ExclusiveMaxTaskID is not supported")
 	}
 
-	// Reading taskqueue tasks need to be quorum level consistent, otherwise we could lose tasks
+	// Reading taskqueue tasks need to be quorum level consistent; otherwise, we could lose tasks
 	var query gocql.Query
 	if request.UseLimit {
 		query = d.Session.Query(templateGetTasksQuery_v2_limit,

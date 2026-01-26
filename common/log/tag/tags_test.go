@@ -2,7 +2,6 @@ package tag
 
 import (
 	"errors"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,7 +15,7 @@ func TestErrorType(t *testing.T) {
 	}{
 		{serviceerror.NewInvalidArgument(""), "serviceerror.InvalidArgument"},
 		{errors.New("test"), "errors.errorString"},
-		{fmt.Errorf("test"), "errors.errorString"},
+		{errors.New("test"), "errors.errorString"},
 	}
 
 	for id, data := range testData {

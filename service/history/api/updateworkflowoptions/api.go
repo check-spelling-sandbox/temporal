@@ -59,10 +59,10 @@ func Invoke(
 			if requestedOptions.GetVersioningOverride().GetPinned().GetBehavior() != workflowpb.VersioningOverride_PINNED_OVERRIDE_BEHAVIOR_UNSPECIFIED &&
 				requestedOptions.GetVersioningOverride().GetPinned().GetVersion() == nil {
 				currentVersion := worker_versioning.ExternalWorkerDeploymentVersionFromDeployment(workflow.GetEffectiveDeployment(mutableState.GetExecutionInfo().GetVersioningInfo()))
-				if effectiveBevior := workflow.GetEffectiveVersioningBehavior(mutableState.GetExecutionInfo().GetVersioningInfo()); effectiveBevior != enumspb.VERSIONING_BEHAVIOR_PINNED {
+				if effectiveBehavior := workflow.GetEffectiveVersioningBehavior(mutableState.GetExecutionInfo().GetVersioningInfo()); effectiveBehavior != enumspb.VERSIONING_BEHAVIOR_PINNED {
 					return nil, serviceerror.NewFailedPreconditionf("must specify a specific pinned override version because workflow with id %v has behavior %s and is not yet pinned to any version",
 						mutableState.GetExecutionInfo().GetWorkflowId(),
-						effectiveBevior.String(),
+						effectiveBehavior.String(),
 					)
 				}
 				var ok bool

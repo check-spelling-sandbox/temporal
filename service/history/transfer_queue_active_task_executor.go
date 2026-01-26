@@ -971,8 +971,8 @@ func (t *transferQueueActiveTaskExecutor) processStartChildExecution(
 		}
 	}
 
-	// Note: childStarted flag above is computed from the parent's history. When this is TRUE it's guaranteed that the child was succesfully started.
-	// But if it's FALSE then the child *may or maynot* be started (ex: we failed to record ChildExecutionStarted event previously.)
+	// Note: childStarted flag above is computed from the parent's history. When this is TRUE it's guaranteed that the child was successfully started.
+	// But if it's FALSE then the child *may or may not* be started (ex: we failed to record ChildExecutionStarted event previously.)
 	// Hence we need to check the child workflow ID and attempt to reconnect before proceeding to start a new instance of the child.
 	// This path is usually taken when the parent is being reset and the reset point (i.e baseWorkflowInfo.LowestCommonAncestorEventId) is after the child was initiated.
 	shouldTerminateAndStartChild := false
@@ -1201,7 +1201,7 @@ func (t *transferQueueActiveTaskExecutor) processResetWorkflow(
 	)
 
 	if !currentMutableState.IsWorkflowExecutionRunning() {
-		// it means this this might not be current anymore, we need to check
+		// it means this might not be current anymore, we need to check
 		var resp *persistence.GetCurrentExecutionResponse
 		resp, err = t.shardContext.GetCurrentExecution(ctx, &persistence.GetCurrentExecutionRequest{
 			ShardID:     t.shardContext.GetShardID(),

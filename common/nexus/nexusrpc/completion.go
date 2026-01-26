@@ -47,9 +47,9 @@ type OperationCompletionSuccessful struct {
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
 	OperationToken string
-	// StartTime is the time the operation started. Used when a completion callback is received before a started response.
+	// StartTime is when the operation started. Used when a completion callback is received before a started response.
 	StartTime time.Time
-	// CloseTime is the time the operation completed. Used when a completion callback is received before a started response.
+	// CloseTime is when the operation completed. Used when a completion callback is received before a started response.
 	CloseTime time.Time
 	// Links are used to link back to the operation when a completion callback is received before a started response.
 	Links []nexus.Link
@@ -63,9 +63,9 @@ type OperationCompletionSuccessfulOptions struct {
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
 	OperationToken string
-	// StartTime is the time the operation started. Used when a completion callback is received before a started response.
+	// StartTime is when the operation started. Used when a completion callback is received before a started response.
 	StartTime time.Time
-	// CloseTime is the time the operation completed. Used when a completion callback is received before a started response.
+	// CloseTime is when the operation completed. Used when a completion callback is received before a started response.
 	CloseTime time.Time
 	// Links are used to link back to the operation when a completion callback is received before a started response.
 	Links []nexus.Link
@@ -151,9 +151,9 @@ type OperationCompletionUnsuccessful struct {
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
 	OperationToken string
-	// StartTime is the time the operation started. Used when a completion callback is received before a started response.
+	// StartTime is when the operation started. Used when a completion callback is received before a started response.
 	StartTime time.Time
-	// CloseTime is the time the operation completed. This may be different from the time the completion callback is delivered.
+	// CloseTime is when the operation completed. This may be different from when the completion callback is delivered.
 	CloseTime time.Time
 	// Links are used to link back to the operation when a completion callback is received before a started response.
 	Links []nexus.Link
@@ -168,14 +168,14 @@ type OperationCompletionUnsuccessfulOptions struct {
 	FailureConverter nexus.FailureConverter
 	// OperationID is the unique ID for this operation. Used when a completion callback is received before a started response.
 	//
-	// Deprecated: Use OperatonToken instead.
+	// Deprecated: Use OperationToken instead.
 	OperationID string
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
 	OperationToken string
-	// StartTime is the time the operation started. Used when a completion callback is received before a started response.
+	// StartTime is when the operation started. Used when a completion callback is received before a started response.
 	StartTime time.Time
-	// CloseTime is the time the operation completed. This may be different from the time the completion callback is delivered.
+	// CloseTime is when the operation completed. This may be different from when the completion callback is delivered.
 	CloseTime time.Time
 	// Links are used to link back to the operation when a completion callback is received before a started response.
 	Links []nexus.Link
@@ -242,9 +242,9 @@ type CompletionRequest struct {
 	// OperationToken is the unique token for this operation. Used when a completion callback is received before a
 	// started response.
 	OperationToken string
-	// StartTime is the time the operation started. Used when a completion callback is received before a started response.
+	// StartTime is when the operation started. Used when a completion callback is received before a started response.
 	StartTime time.Time
-	// CloseTime is the time the operation completed. This may be different from the time the completion callback is delivered.
+	// CloseTime is when the operation completed. This may be different from when the completion callback is delivered.
 	CloseTime time.Time
 	// Links are used to link back to the operation when a completion callback is received before a started response.
 	Links []nexus.Link
@@ -264,7 +264,7 @@ type CompletionHandler interface {
 type CompletionHandlerOptions struct {
 	// Handler for completion requests.
 	Handler CompletionHandler
-	// A stuctured logging handler.
+	// A structured logging handler.
 	// Defaults to slog.Default().
 	Logger *slog.Logger
 	// A [Serializer] to customize handler serialization behavior.

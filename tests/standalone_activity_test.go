@@ -2251,18 +2251,18 @@ func (s *standaloneActivityTestSuite) TestPollActivityExecution_NotFound() {
 		{
 			name: "NonExistentNamespace",
 			request: &workflowservice.PollActivityExecutionRequest{
-				Namespace:  "non-existent-namespace",
+				Namespace:  "nonexistent-namespace",
 				ActivityId: existingActivityID,
 				RunId:      existingRunID,
 			},
 			expectedErr:    namespaceNotFoundErr,
-			expectedErrMsg: "Namespace non-existent-namespace is not found.",
+			expectedErrMsg: "Namespace nonexistent-namespace is not found.",
 		},
 		{
 			name: "NonExistentActivityID",
 			request: &workflowservice.PollActivityExecutionRequest{
 				Namespace:  existingNamespace,
-				ActivityId: "non-existent-activity",
+				ActivityId: "nonexistent-activity",
 				RunId:      existingRunID,
 			},
 			expectedErr:    notFoundErr,
@@ -2480,7 +2480,7 @@ func (s *standaloneActivityTestSuite) TestListActivityExecutions() {
 
 	t.Run("NamespaceNotFound", func(t *testing.T) {
 		_, err := s.FrontendClient().ListActivityExecutions(ctx, &workflowservice.ListActivityExecutionsRequest{
-			Namespace: "non-existent-namespace",
+			Namespace: "nonexistent-namespace",
 			PageSize:  10,
 			Query:     "",
 		})
@@ -2710,7 +2710,7 @@ func (s *standaloneActivityTestSuite) TestCountActivityExecutions() {
 
 	t.Run("NamespaceNotFound", func(t *testing.T) {
 		_, err := s.FrontendClient().CountActivityExecutions(ctx, &workflowservice.CountActivityExecutionsRequest{
-			Namespace: "non-existent-namespace",
+			Namespace: "nonexistent-namespace",
 			Query:     "",
 		})
 		s.ErrorAs(err, new(*serviceerror.NamespaceNotFound))
@@ -2763,7 +2763,7 @@ func (s *standaloneActivityTestSuite) TestDescribeActivityExecution_DeadlineExce
 	})
 
 	// Case 2: caller does not set a deadline. In practice this is equivalent to them setting a 30s
-	// deadline since that is what Histry receives. In this case History times out the wait at
+	// deadline since that is what History receives. In this case History times out the wait at
 	// LongPollTimeout and the caller gets an empty response.
 	t.Run("NoCallerDeadline", func(t *testing.T) {
 		// The caller sets no deadline. However, the ctx received by the history service handler
@@ -2813,18 +2813,18 @@ func (s *standaloneActivityTestSuite) TestDescribeActivityExecution_NotFound() {
 		{
 			name: "NonExistentNamespace",
 			request: &workflowservice.DescribeActivityExecutionRequest{
-				Namespace:  "non-existent-namespace",
+				Namespace:  "nonexistent-namespace",
 				ActivityId: existingActivityID,
 				RunId:      existingRunID,
 			},
 			expectedErr:    namespaceNotFoundErr,
-			expectedErrMsg: "Namespace non-existent-namespace is not found.",
+			expectedErrMsg: "Namespace nonexistent-namespace is not found.",
 		},
 		{
 			name: "NonExistentActivityID",
 			request: &workflowservice.DescribeActivityExecutionRequest{
 				Namespace:  existingNamespace,
-				ActivityId: "non-existent-activity",
+				ActivityId: "nonexistent-activity",
 				RunId:      existingRunID,
 			},
 			expectedErr:    notFoundErr,
@@ -2859,10 +2859,10 @@ func (s *standaloneActivityTestSuite) TestDescribeActivityExecution_NotFound() {
 		})
 		require.NoError(t, err)
 
-		// Use the token with a non-existent activity
+		// Use the token with a nonexistent activity
 		_, err = s.FrontendClient().DescribeActivityExecution(ctx, &workflowservice.DescribeActivityExecutionRequest{
 			Namespace:     existingNamespace,
-			ActivityId:    "non-existent-activity",
+			ActivityId:    "nonexistent-activity",
 			RunId:         existingRunID,
 			LongPollToken: validPollResp.LongPollToken,
 		})

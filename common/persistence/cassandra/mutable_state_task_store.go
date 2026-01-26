@@ -286,7 +286,7 @@ func (d *MutableStateTaskStore) getTransferTasks(
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
 
-	// Reading transfer tasks need to be quorum level consistent, otherwise we could lose task
+	// Reading transfer tasks need to be quorum level consistent; otherwise, we could lose task
 	query := d.Session.Query(templateGetTransferTasksQuery,
 		request.ShardID,
 		rowTypeTransferTask,
@@ -366,7 +366,7 @@ func (d *MutableStateTaskStore) getTimerTasks(
 	ctx context.Context,
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
-	// Reading timer tasks need to be quorum level consistent, otherwise we could lose tasks
+	// Reading timer tasks need to be quorum level consistent; otherwise, we could lose tasks
 	minTimestamp := p.UnixMilliseconds(request.InclusiveMinTaskKey.FireTime)
 	maxTimestamp := p.UnixMilliseconds(request.ExclusiveMaxTaskKey.FireTime)
 	query := d.Session.Query(templateGetTimerTasksQuery,
@@ -452,7 +452,7 @@ func (d *MutableStateTaskStore) getReplicationTasks(
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
 
-	// Reading replication tasks need to be quorum level consistent, otherwise we could lose task
+	// Reading replication tasks need to be quorum level consistent; otherwise, we could lose task
 	query := d.Session.Query(templateGetReplicationTasksQuery,
 		request.ShardID,
 		rowTypeReplicationTask,
@@ -539,7 +539,7 @@ func (d *MutableStateTaskStore) GetReplicationTasksFromDLQ(
 	ctx context.Context,
 	request *p.GetReplicationTasksFromDLQRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
-	// Reading replication tasks need to be quorum level consistent, otherwise we could lose tasks
+	// Reading replication tasks need to be quorum level consistent; otherwise, we could lose tasks
 	query := d.Session.Query(templateGetReplicationTasksQuery,
 		request.ShardID,
 		rowTypeDLQ,
@@ -622,7 +622,7 @@ func (d *MutableStateTaskStore) getVisibilityTasks(
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
 
-	// Reading Visibility tasks need to be quorum level consistent, otherwise we could lose task
+	// Reading Visibility tasks need to be quorum level consistent; otherwise, we could lose task
 	query := d.Session.Query(templateGetVisibilityTasksQuery,
 		request.ShardID,
 		rowTypeVisibilityTask,
@@ -736,7 +736,7 @@ func (d *MutableStateTaskStore) getHistoryTasks(
 ) (*p.InternalGetHistoryTasksResponse, error) {
 	switch request.TaskCategory.Type() {
 	case tasks.CategoryTypeImmediate:
-		return d.getHistoryImmedidateTasks(ctx, request)
+		return d.getHistoryImmediateTasks(ctx, request)
 	case tasks.CategoryTypeScheduled:
 		return d.getHistoryScheduledTasks(ctx, request)
 	default:
@@ -744,12 +744,12 @@ func (d *MutableStateTaskStore) getHistoryTasks(
 	}
 }
 
-func (d *MutableStateTaskStore) getHistoryImmedidateTasks(
+func (d *MutableStateTaskStore) getHistoryImmediateTasks(
 	ctx context.Context,
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
 	// execution manager should already validated the request
-	// Reading history tasks need to be quorum level consistent, otherwise we could lose task
+	// Reading history tasks need to be quorum level consistent; otherwise, we could lose task
 
 	query := d.Session.Query(templateGetHistoryImmediateTasksQuery,
 		request.ShardID,
@@ -795,7 +795,7 @@ func (d *MutableStateTaskStore) getHistoryScheduledTasks(
 	request *p.GetHistoryTasksRequest,
 ) (*p.InternalGetHistoryTasksResponse, error) {
 	// execution manager should already validated the request
-	// Reading history tasks need to be quorum level consistent, otherwise we could lose task
+	// Reading history tasks need to be quorum level consistent; otherwise, we could lose task
 
 	minTimestamp := p.UnixMilliseconds(request.InclusiveMinTaskKey.FireTime)
 	maxTimestamp := p.UnixMilliseconds(request.ExclusiveMaxTaskKey.FireTime)

@@ -236,7 +236,7 @@ version for new Workflows and let existing Workflows finish in their own version
 Activities, Child Workflows and Continue-as-New executions have the option to inherit the 
 Build ID of their parent/previous Workflow or use the latest Assignment rules to independently 
 select a Build ID. This is specified by the parent/previous Workflow using VersioningIntent.
-We recommend that you allow Continued-as-New workflows to be assigned new versions, otherwise your
+We recommend that you allow Continued-as-New workflows to be assigned new versions; otherwise, your
 workflow may become like a long-running workflow that gets stuck on the old build.
 
 Unless there's a redirect rule for it, the task will be dispatched to Workers of the Build ID determined by the Assignment rules (or inherited).
@@ -283,7 +283,7 @@ rules), or there MAY be open workflows or backlogged activities assigned to it.
 - **CLOSED_WORKFLOWS_ONLY:** Build ID does not have open workflows and is not reachable
 by new workflows, but MAY have closed workflows within the namespace retention period. 
 Not applicable to activity-only task queues.
-- **UNREACHABLE:** Build ID is not used for new executions, nor it has been used by 
+- **UNREACHABLE:** Build ID is not used for new executions, nor has it been used by
 any existing execution within the retention period.
 - **UNSPECIFIED:** Task reachability is not reported
 

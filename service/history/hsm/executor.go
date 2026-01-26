@@ -45,7 +45,7 @@ const (
 
 // Executor environment.
 type Environment interface {
-	// Wall clock. Backed by a the shard's time source.
+	// Wall clock. Backed by the shard's time source.
 	Now() time.Time
 	// Access a state machine Node for the given ref.
 	//

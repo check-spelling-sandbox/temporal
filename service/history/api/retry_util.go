@@ -31,17 +31,17 @@ func IsHistoryEventOnCurrentBranch(
 		return true, nil
 	}
 
-	versionHistoryies := mutableState.GetExecutionInfo().GetVersionHistories()
+	versionHistories := mutableState.GetExecutionInfo().GetVersionHistories()
 	versionHistoryItem := versionhistory.NewVersionHistoryItem(eventID, eventVersion)
 	if _, err := versionhistory.FindFirstVersionHistoryIndexByVersionHistoryItem(
-		versionHistoryies,
+		versionHistories,
 		versionHistoryItem,
 	); err != nil {
 		return false, &serviceerror.NotFound{Message: "History event not found"}
 	}
 
 	// check if on current branch
-	currentVersionHistory, err := versionhistory.GetCurrentVersionHistory(versionHistoryies)
+	currentVersionHistory, err := versionhistory.GetCurrentVersionHistory(versionHistories)
 	if err != nil {
 		return false, err
 	}

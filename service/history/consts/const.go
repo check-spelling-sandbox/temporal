@@ -59,14 +59,14 @@ var (
 	ErrDeserializingToken = serviceerror.NewInvalidArgument("error deserializing task token")
 	// ErrSignalsLimitExceeded is the error indicating limit reached for maximum number of signal events
 	ErrSignalsLimitExceeded = serviceerror.NewInvalidArgument("exceeded workflow execution limit for signal events")
-	// ErrWorkflowClosing is the error indicating requests to workflow can not be applied as workflow is closing
+	// ErrWorkflowClosing is the error indicating requests to workflow cannot be applied as workflow is closing
 	ErrWorkflowClosing = &serviceerror.ResourceExhausted{
 		Cause:   enumspb.RESOURCE_EXHAUSTED_CAUSE_BUSY_WORKFLOW,
 		Scope:   enumspb.RESOURCE_EXHAUSTED_SCOPE_NAMESPACE,
-		Message: "workflow operation can not be applied because workflow is closing",
+		Message: "workflow operation cannot be applied because workflow is closing",
 	}
-	// ErrEventsAterWorkflowFinish is the error indicating server error trying to write events after workflow finish event
-	ErrEventsAterWorkflowFinish = serviceerror.NewInternal("error validating last event being workflow finish event")
+	// ErrEventsAfterWorkflowFinish is the error indicating server error trying to write events after workflow finish event
+	ErrEventsAfterWorkflowFinish = serviceerror.NewInternal("error validating last event being workflow finish event")
 	// ErrQueryEnteredInvalidState is error indicating query entered invalid state
 	ErrQueryEnteredInvalidState = serviceerror.NewInvalidArgument("query entered invalid state, this should be impossible")
 	// ErrConsistentQueryBufferExceeded is error indicating that too many consistent queries have been buffered and until buffered queries are finished new consistent queries cannot be buffered

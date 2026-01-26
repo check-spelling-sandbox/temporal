@@ -20,7 +20,7 @@ type Marshaler interface {
 }
 
 // GenerateCRC32 generates an IEEE crc32 checksum on the
-// serilized byte array of the given thrift object. The
+// serialized byte array of the given thrift object. The
 // serialization proto used will be of type thriftRW
 func GenerateCRC32(
 	payload Marshaler,

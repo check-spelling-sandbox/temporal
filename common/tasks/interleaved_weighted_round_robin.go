@@ -146,7 +146,7 @@ func (s *InterleavedWeightedRoundRobinScheduler[T, K]) Submit(
 		return
 	}
 
-	// there are tasks pending dispatching, need to respect round roubin weight
+	// there are tasks pending dispatching, need to respect round robin weight
 	// or currently unable to submit to fifo scheduler, either due to buffer is full
 	// or exceeding rate limit
 	channel, releaseFn := s.getOrCreateTaskChannel(s.options.TaskChannelKeyFn(task))
@@ -163,7 +163,7 @@ func (s *InterleavedWeightedRoundRobinScheduler[T, K]) TrySubmit(
 		return true
 	}
 
-	// there are tasks pending dispatching, need to respect round roubin weight
+	// there are tasks pending dispatching, need to respect round robin weight
 	channel, releaseFn := s.getOrCreateTaskChannel(s.options.TaskChannelKeyFn(task))
 	defer releaseFn()
 	select {

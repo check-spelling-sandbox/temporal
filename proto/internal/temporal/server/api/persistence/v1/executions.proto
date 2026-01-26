@@ -173,7 +173,7 @@ message WorkflowExecutionInfo {
     // for this execution. Assigned build ID is selected by matching based on Worker Versioning Assignment Rules
     // when the first workflow task of the execution is scheduled. If the first workflow task fails and is scheduled
     // again, the assigned build ID may change according to the latest versioning rules.
-    // Assigned build ID can also change in the middle of a execution if Compatible Redirect Rules are applied to
+    // Assigned build ID can also change in the middle of an execution if Compatible Redirect Rules are applied to
     // this execution.
     // Deprecated. Clean up with versioning-2. [cleanup-old-wv]
     string assigned_build_id = 85;
@@ -215,7 +215,7 @@ message WorkflowExecutionInfo {
     // To maintain backward compatibility, we need to track if the execution timer task is created
     // for a workflow chain since later workflows in the chain also need to create the execution
     // timer task if it is not created yet.
-    // NOTE: Task status is clsuter specific information, so when replicating mutable state, this
+    // NOTE: Task status is cluster specific information, so when replicating mutable state, this
     // field need to be sanitized.
     int32 workflow_execution_timer_task_status = 82;
 
@@ -232,7 +232,7 @@ message WorkflowExecutionInfo {
     // sanitized.
     repeated StateMachineTimerGroup state_machine_timers = 90;
 
-    // The shard clock's timestamp at the time the first valid task was created for this mutable state (either for a new
+    // The shard clock's timestamp when the first valid task was created for this mutable state (either for a new
     // mutable state or when rebuilding from events). The field should be updated whenever we refresh tasks, marking
     // older generation tasks obsolete.
     // This field is used for task staleness checks when mutable state is rebuilt.

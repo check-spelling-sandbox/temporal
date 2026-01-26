@@ -1747,7 +1747,7 @@ BackfillLoop:
 		}
 
 		if isStateBased {
-			// If backfill suceeds but later event reapply fails, during task's next retry,
+			// If backfill succeeds but later event reapply fails, during task's next retry,
 			// we still need to reapply events that have been stored in local DB.
 			events, err := r.historySerializer.DeserializeEvents(historyBlob.rawHistory)
 			if err != nil {
@@ -1787,7 +1787,7 @@ BackfillLoop:
 				branchID = currentAncestor.GetBranchId()
 				if historyBlob.nodeID < currentAncestor.GetBeginNodeId() || historyBlob.nodeID >= currentAncestor.GetEndNodeId() {
 					return serviceerror.NewInternalf(
-						"The backfill history blob node id %d is not in acestoer range [%d, %d]",
+						"The backfill history blob node id %d is not in ancestor range [%d, %d]",
 						historyBlob.nodeID,
 						currentAncestor.GetBeginNodeId(),
 						currentAncestor.GetEndNodeId(),

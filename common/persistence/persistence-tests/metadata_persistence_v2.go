@@ -831,7 +831,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateNamespace() {
 	updatedState := enumspb.NAMESPACE_STATE_DEPRECATED
 	updatedDescription := "description-updated"
 	updatedOwner := "owner-updated"
-	// This will overriding the previous key-value pair
+	// This will override the previous key-value pair
 	updatedData := map[string]string{"k1": "v2"}
 	updatedRetention := timestamp.DurationFromDays(20)
 	updatedHistoryArchivalState := enumspb.ARCHIVAL_STATE_DISABLED
@@ -2041,7 +2041,7 @@ func (m *MetadataPersistenceSuiteV2) TestDeleteNamespaceIdempotency() {
 		100*time.Millisecond,
 	)
 
-	// Delete again - This should NOT error (deleting a non-existent namespace is a no-op)
+	// Delete again - This should NOT error (deleting a nonexistent namespace is a no-op)
 	err5 := m.DeleteNamespace(id, "")
 	m.NoError(err5, "Delete should be idempotent")
 
@@ -2050,10 +2050,10 @@ func (m *MetadataPersistenceSuiteV2) TestDeleteNamespaceIdempotency() {
 	m.NoError(err6, "Delete by name should be idempotent")
 }
 
-// TestUpdateNamespaceNotFound tests updating a non-existent namespace
+// TestUpdateNamespaceNotFound tests updating a nonexistent namespace
 func (m *MetadataPersistenceSuiteV2) TestUpdateNamespaceNotFound() {
 	nonExistentID := uuid.NewString()
-	name := "non-existent-namespace"
+	name := "nonexistent-namespace"
 	state := enumspb.NAMESPACE_STATE_REGISTERED
 	description := "test-description"
 	owner := "test-owner"
@@ -2070,7 +2070,7 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateNamespaceNotFound() {
 	m.NoError(err)
 	notificationVersion := metadata.NotificationVersion
 
-	// Try to update a non-existent namespace
+	// Try to update a nonexistent namespace
 	_ = m.UpdateNamespace(
 		&persistencespb.NamespaceInfo{
 			Id:          nonExistentID,
@@ -2095,17 +2095,17 @@ func (m *MetadataPersistenceSuiteV2) TestUpdateNamespaceNotFound() {
 		isGlobalNamespace,
 	)
 
-	// Update operations may silently succeed on non-existent namespaces (no-op)
+	// Update operations may silently succeed on nonexistent namespaces (no-op)
 	// or may fail depending on implementation. For now, we just verify the operation completes.
 	// The key test is that after the update, the namespace still doesn't exist.
 	_, err3 := m.GetNamespace(nonExistentID, "")
 	m.ErrorAs(err3, new(*serviceerror.NamespaceNotFound))
 }
 
-// TestRenameNamespaceNotFound tests renaming a non-existent namespace
+// TestRenameNamespaceNotFound tests renaming a nonexistent namespace
 func (m *MetadataPersistenceSuiteV2) TestRenameNamespaceNotFound() {
-	nonExistentName := "non-existent-namespace-" + uuid.NewString()
-	newName := "new-name-for-non-existent"
+	nonExistentName := "nonexistent-namespace-" + uuid.NewString()
+	newName := "new-name-for-nonexistent"
 
 	err := m.MetadataManager.RenameNamespace(m.ctx, &p.RenameNamespaceRequest{
 		PreviousName: nonExistentName,

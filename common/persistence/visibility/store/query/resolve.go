@@ -75,7 +75,7 @@ func tryVisibilityMapper(
 	// Mapper successfully resolved the field name, now check if it exists in the type map
 	fieldType, err := saTypeMap.GetType(fieldName)
 	if err != nil {
-		// If the mapped field doesn't exist in type map, allow fallback to direct/prefixed lookup.
+		// If the mapped field doesn't exist in type map, allow falling back to direct/prefixed lookup.
 		return "", enumspb.INDEXED_VALUE_TYPE_UNSPECIFIED
 	}
 

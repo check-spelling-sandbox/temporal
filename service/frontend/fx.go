@@ -257,7 +257,7 @@ func GrpcServerOptionsProvider(
 		interceptor.ServiceErrorInterceptor,
 		interceptor.NewFrontendServiceErrorInterceptor(logger),
 		namespaceValidatorInterceptor.NamespaceValidateIntercept,
-		namespaceLogInterceptor.Intercept, // TODO: Deprecate this with a outer custom interceptor
+		namespaceLogInterceptor.Intercept, // TODO: Deprecate this with an outer custom interceptor
 		metrics.NewServerMetricsContextInjectorInterceptor(),
 		authInterceptor.Intercept,
 		// Handover interceptor has to above redirection because the request will route to the correct cluster after handover completed.
@@ -279,7 +279,7 @@ func GrpcServerOptionsProvider(
 		chasmRequestVisibilityInterceptor.Intercept,
 	}
 	if len(customInterceptors) > 0 {
-		// TODO: Deprecate WithChainedFrontendGrpcInterceptors and provide a inner custom interceptor
+		// TODO: Deprecate WithChainedFrontendGrpcInterceptors and provide an inner custom interceptor
 		unaryInterceptors = append(unaryInterceptors, customInterceptors...)
 	}
 	// retry interceptor should be the most inner interceptor
